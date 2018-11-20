@@ -1,0 +1,16 @@
+name: Psyc 73800
+navbar:
+  title: Psyc 73800
+  left:
+  - text: Home
+    href: index.html
+  - text: Syllabus
+    href: Syllabus.html
+  - text: Schedule
+    href: Schedule.html
+output_dir: docs
+output:
+  html_document:
+    lib_dir: site_libs
+    self_contained: no
+

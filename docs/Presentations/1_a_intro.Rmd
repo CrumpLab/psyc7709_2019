@@ -1,0 +1,338 @@
+---
+title: "PSYC 73800 Cognitive Psychology"
+subtitle: "Overview"
+author: "Matthew Crump"
+date: "2018/07/20 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    css: ["defaultb.css", "metropolisb.css", "metropolis-fontsb.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(echo = FALSE,message=FALSE,warning=FALSE, cache = TRUE)
+```
+
+class: pink, center, middle, clear
+
+# Course Overview
+
+---
+
+# Course Website
+
+[https://crumplab.github.io/psyc73800/](https://crumplab.github.io/psyc73800/)
+
+- schedule
+- syllabus
+- assignment info
+
+---
+
+# What to expect
+
+1. Two week modules, each led by a different CCP faculty member
+     a. Each module covers a general area in cognition
+     b. Week 1 is typically foundational papers
+     c. Week 2 is could be more current work, perhaps related to the instructors research
+
+2. Seminar Style: Read the papers each week and be prepared to discuss them in class
+
+---
+
+# Module assignments
+
+1. You will be given short assignments each week by your instructor for that week.
+2. Assignments will vary. Instructions will be given to you by each instructor
+
+---
+
+# Review assignment
+
+There is a mid-term assignment to complete a "peer-review" style review of a journal article.
+
+---
+
+# Final Paper
+
+Bulk of the grade is a final paper on a topic in Cognitive Psychology (more info about this in syllabus, and throughout the course)
+
+---
+
+class: pink, center, middle, clear
+
+# An overview of Cognitive Psychology
+
+## Is basically impossible, it's too big
+
+---
+
+# Domains in Cognition (a short list)
+
+- Perception
+- Memory
+- Attention
+- Learning
+- Judgment
+- Decision-Making
+- Thinking
+- Reasoning
+- Categorization & Concept-formation
+- Social Cognition
+- Animal Cognition
+- Computational modeling
+
+---
+
+# Neisser's definition
+
+The term “cognitive psychology” was first used in 1967 by American psychologist Ulric Neisser in his book Cognitive Psychology. 
+
+Neisser defined cognition as:  “all processes by which the sensory input is transformed, reduced, elaborated, stored, recovered, and used.”
+
+---
+
+# Cognition as the algorithms of...
+
+- Perception
+- Memory
+- Attention
+- Learning
+- Judgment
+- Decision-Making
+- Thinking
+- Reasoning
+- Categorization & Concept-formation
+- Social behavior
+- Animal behavior
+
+---
+
+class: pink, center, middle, clear
+
+# A brief history
+
+---
+
+# Ebbinghaus & Forgetting
+
+```{r, fig.align='center'}
+knitr::include_graphics('figs/Ebbinghaus.png')
+```
+
+---
+
+# Ebbinghaus & Forgetting
+
+Ebbinhaus studied lists of nonsense syllables until he could recite the entire list perfectly:
+
+kem, vuk, xuk, jup, buw, lin...
+
+Then, he waited different amounts of time, and measured how well he could recite the lists from memory.
+
+Provided empirical evidence of forgetting over time.
+
+---
+
+# Ebbinghaus & Forgetting (1885)
+
+```{r, fig.align='center'}
+knitr::include_graphics('figs/ebbinghauscurve.png')
+```
+
+---
+
+# Bartlett & Remembering (1932)
+
+```{r, fig.align='center', out.width="400px"}
+knitr::include_graphics('figs/Bartlett-Frederic.png')
+```
+
+---
+
+# Memory as a reconstructive process
+
+Method of serial reproduction. Subjects see first face on day 1, then redraw the face day after day from memory. Drawings become more prototypical over time.
+
+```{r, fig.align='center', out.width="400px"}
+knitr::include_graphics('figs/reconface.png')
+```
+
+---
+
+# Behaviorism (early 1920-50s)
+
+The suggestion that psychology can only be understood in terms of measurable inputs (stimuli) and outputs (behavior), and that intervening mechanisms and process of cognition that "transform the inputs to outputs" can not be understood (the so called dark-ages, where "cognition" as a science wasn't allowed)
+
+- at the same time lots of "cognitive" work was happening
+
+---
+
+# Associationism
+
+1. The big idea that intelligent behavior emerges from a process that learns about associations between events in the environment
+
+2. The associative learning literature is very well developed, but partly sidelined in Cognition because of it's association with behaviorism
+
+3. Many modern formal theories in cognition rely heavily on associative principles
+
+---
+
+# Tolman & Cognitive maps (30s)
+
+```{r, fig.align='center', out.width="600px"}
+knitr::include_graphics('figs/tolman.png')
+```
+
+---
+
+# The cognitive revolution (50s 60s)
+
+The idea that the psychological processes involved in representing, transforming, and processing information can be understood becomes more well accepted in the scientific community
+
+Stimulus -> **Cognition** -> Response
+
+---
+
+# Information theory
+
+We'll learn more about this next week...
+
+Shannon, C. E., Weaver, W., & Burks, A. W. (1951). The mathematical theory of communication.
+
+```{r, fig.align='center', out.width="500px"}
+knitr::include_graphics('figs/shannon.png')
+```
+
+---
+
+# George Miller
+
+Miller, G. A. (1956). The magical number seven, plus or minus two: Some limits on our capacity for processing information. Psychological review, 63(2), 81.
+
+```{r, fig.align='center', out.width="400px"}
+knitr::include_graphics('figs/miller.png')
+```
+
+---
+
+# Noam Chomsky
+
+Language and generative grammar
+
+```{r, fig.align='center', out.width="300px"}
+knitr::include_graphics('figs/chomsky.png')
+```
+
+
+---
+
+# Stage models of cognition
+
+Atkinson, R. C., & Shiffrin, R. M. (1968). Human memory: A proposed system and its control processes1. In Psychology of learning and motivation (Vol. 2, pp. 89-195). Academic Press.
+
+---
+
+# Stage models of cognition
+
+```{r, fig.align='center', out.width="400px"}
+knitr::include_graphics('figs/modal.png')
+```
+
+---
+
+# Search for principles
+
+- Tulving's Encoding Specificity Principle
+
+- Craik & Lockhart's Levels of Processing
+
+- Bransford & Frank's Transfer Appropriate Processing Principle
+
+---
+
+# Search for Dichotomies
+
+- Automatic vs. controlled processing
+
+- Bottom-up vs. top-down
+
+- Parallel vs. serial
+
+- Semantic vs. episodic
+
+- General vs. specific processing mechanisms
+
+---
+
+# Taxonomical Frameworks
+
+Squire
+
+```{r, fig.align='center', out.width="700px"}
+knitr::include_graphics('figs/squire.png')
+```
+
+---
+
+# Too many dissociations? (Roediger)
+
+```{r, fig.align='center', out.width="375px"}
+knitr::include_graphics('figs/Roediger.png')
+```
+
+---
+
+# Formal Computational models
+
+- Go beyond a box and a label for a putative process
+- Describes the information processing algorithms inside the box
+- e.g., describes the form of representations, how they are stored, retrieved, updated, modified, etc.
+- Make specific, deductible from first principles, predictions for behaviour
+- falsifiable, extendible, and productive
+
+---
+
+# Paradigms
+
+Stroop, Task-switching, Priming, Negative Priming, Production Effect, 
+Inhibition of Return, Flanker, Simon, Serial Position, 
+Recency, Primacy, Working Memory, Visual Short-term working memory, 
+Visual Search, Attention capture, Novel pop-out, delay-discounting, 
+Framing, Alternative uses task, Imagination inflation, Generation effect,
+Gratton effect...
+
+The list goes on and on and on and on -- Journey
+
+---
+
+# Pluralism in Practice
+
+1. Many labs and researchers, each often in their own lane studying a specific phenomena of interest, each with their own model or account
+
+2. Some, but few and far between, attempts at unified theories
+
+---
+
+# Opportunity Space
+
+1. There are many unanswered questions, lots of room to develop new questions and tools
+
+2. There are lots of well-developed tools and methods available for use.
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+---
+title: "Schedule"
+output: html_document
+---
+
+```{r, cache=FALSE, warning=FALSE, message=FALSE, echo=FALSE, eval=TRUE}
+library(googlesheets)
+#gs_ls()
+web_df <- gs_title("Cognitive Psychology Fall 2018")
+ss_df <- gs_read(ss=web_df, ws = 2, skip=0)
+knitr::kable(ss_df)
+
+```
+

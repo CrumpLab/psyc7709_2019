@@ -1,0 +1,44 @@
+---
+title: "Psyc 73800"
+output: html_document
+---
+
+<style type="text/css">
+.title {
+  display: none;
+}
+
+#getting-started img {
+  margin-right: 10px;
+}
+
+</style>
+
+<div class="row" style="padding-top: 30px;">
+<div class="col-sm-6">
+
+# **Psyc 73800**
+
+### *Cognitive Psychology* {style="padding-top: 0px;"}
+
+This is the course website for Psyc 73800: Cognitive Psychology (Fall 2018), offered through the Cognition and Comparative Psychology (CCP) training area, Department of Psychology, Graduate Center of CUNY.
+
+Course Coordinator: Matthew Crump [mcrump@brooklyn.cuny.edu](mcrump@brooklyn.cuny.edu)
+
+This course is co-taught by several faculty from CCP, who will each lead a 2-week module on various topics in Cognitive Psychology.
+
+1. Matthew Crump: Foundations
+2. Andrew Delamater: Learning
+3. Virginia Valian: Language
+4. Sandeep Prasada: Concepts
+5. Timothy Ricker: Attention/Memory
+6. Frank Grasso: Comparative Cognition
+
+</div>
+<div class="col-sm-6">
+
+![](images/cognitive_science.png)
+
+</div>
+</div>
+

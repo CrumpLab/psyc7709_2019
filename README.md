@@ -1,2 +1,2 @@
-# psyc7709
-Course website for PSYC 7709  - Using R for Reproducible Research (taught by Matt Crump)
+# psyc73800
+Course website for Psyc 73800 Cognitive Psychology @ GC of CUNY
