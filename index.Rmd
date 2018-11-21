@@ -17,7 +17,7 @@ output: html_document
 <div class="row" style="padding-top: 30px;">
 <div class="col-sm-6">
 
-# **Psyc 73800**
+# **Psyc 7709**
 
 ### *Using R for Reproducible research* {style="padding-top: 0px;"}
 
