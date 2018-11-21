@@ -3,7 +3,7 @@ title: "Schedule"
 output: html_document
 ---
 
-```{r, cache=FALSE, warning=FALSE, message=FALSE, echo=FALSE, eval=TRUE}
+```{r, cache=FALSE, warning=FALSE, message=FALSE, echo=FALSE, eval=FALSE}
 library(googlesheets)
 #gs_ls()
 web_df <- gs_title("Cognitive Psychology Fall 2018")

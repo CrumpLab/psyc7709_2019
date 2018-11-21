@@ -3,41 +3,36 @@ title: "Syllabus"
 output: html_document
 ---
 
-PSYC 73800 – Cognitive Psychology
+PSYC 7709 – Using R for Reproducible Psychological Research (Special Topics)
 
-Fall 2018, Fridays 11:45pm – 1:45pm;
+Spring 2019, TBD
 
-The Graduate Center, 365 5th Ave, Room 3212
+Location: TBD
 
-Course Organizer:  Matthew Crump, [mcrump@brooklyn.cuny.edu](mcrump@brooklyn.cuny.edu)
-
+Instructor:  Matthew Crump, [mcrump@brooklyn.cuny.edu](mcrump@brooklyn.cuny.edu)
 
 
 ## General Course Description and Objectives
 
-The course will cover foundational and current theoretical issues, paradigms, and methods, and empirical findings across a broad section of topics in cognitive psychology.  Students will acquire an understanding of the fundamental concepts and methods in cognitive psychology and the present-day questions and issues that are related to those fundamental concepts and methods.  An important goal of the course is to help students think like researchers in cognitive psychology and, where relevant, to consider the applied implications of basic research findings.
+Practical and skill-focused introduction to using open-source programming software (R, R-studio, and R Markdown) in several aspects of Psychological Research. Course covers basic scripting/coding in R, data-wrangling, advanced graphing and data animation, using R for creating reproducible manuscripts, slide presentations, websites, and web-books for communicating research.
 
-**6 course objectives**: in this course you will:
+Special Prerequisites: NONE
 
-- Acquire a grounding in the basic issues and controversies in cognitive psychology
-- Learn the basic experimental procedures for addressing those issues and controversies
-- Learn how to analyze research papers
-- Design a study, resolve a theoretical disagreement, or demonstrate your knowledge of cognitive psychology through an original contribution
-- Practice organizing and delivering a talk with peers
-- Appreciate the range of cognitive psychology through the modules organized by different faculty within cognition
+*Course objectives**: in this course you will learn:
+
+1.	Basic scripting in R: use of variables, logic, loops, functions, intrinsics, packages, workspaces 
+2.	Data transformation: processing data-files into a desired form for a desired analysis
+3.	Data visualization: advanced plotting and graphing of data, creation of journal-quality figures in R.
+4.	Data Simulation: how to create statistical models of data sets for advanced sample-size planning, as well as evaluating existing findings in the literature.
+5.	Communicating research: how to use R Markdown scripts to create APA style manuscripts, websites, web-books, and web-based presentations for communicating research.
+6.	Reproducible research: principles of open-science, including tools for data-sharing, manuscript sharing, pre-registration of research designs, method-sharing, pre-print sharing, and use of online repository services for disseminating shared materials.
 
 
 ## Course Structure
 
-The course is team-taught by 6 faculty:  6 module leaders, including the organizer. 
+We meet once per week in a computer lab. Each class will involve a small amount of lecturing on R concepts, and a large amount of time for students to complete coding and analysis problems assigned each week. The general goal of the course is to c
 
-Topic areas cover a broad range of issues in cognition and highlight current research interests of the faculty teaching the modules.
 
-Topic areas are covered in two week modules. Generally, within a module, week 1 will cover foundational papers and week 2 will cover current issues in a domain.  Week 1 will typically have a combined lecture-seminar format, with students actively participating in a discussion of the readings.  Although readings are also important in week 2, week 2 may take a variety of forms, depending on the module leader:  seminar format; short student presentations focused on a topic; discussion between faculty members working in that field, and so on.  The design of week 2 is up to the faculty leader.
-
-There is no textbook.  All readings are available in electronic format, and will be posted on the schedule page of this website
-
-**Faculty may substitute, add, or subtract readings; make sure you have the most recent information for each module.**
 
 ## Assignments and Grading
 

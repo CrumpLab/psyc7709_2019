@@ -1,5 +1,5 @@
 ---
-title: "Psyc 73800"
+title: "Psyc 7709"
 output: html_document
 ---
 
@@ -19,25 +19,17 @@ output: html_document
 
 # **Psyc 73800**
 
-### *Cognitive Psychology* {style="padding-top: 0px;"}
+### *Using R for Reproducible research* {style="padding-top: 0px;"}
 
-This is the course website for Psyc 73800: Cognitive Psychology (Fall 2018), offered through the Cognition and Comparative Psychology (CCP) training area, Department of Psychology, Graduate Center of CUNY.
+This is the course website for Psyc 7709: Using R for Reproducible research (Spring 2019), offered through the Experimental Psychology Master's program, Department of Psychology, Brooklyn College of CUNY.
 
-Course Coordinator: Matthew Crump [mcrump@brooklyn.cuny.edu](mcrump@brooklyn.cuny.edu)
+Instructor: Matthew Crump [mcrump@brooklyn.cuny.edu](mcrump@brooklyn.cuny.edu)
 
-This course is co-taught by several faculty from CCP, who will each lead a 2-week module on various topics in Cognitive Psychology.
-
-1. Matthew Crump: Foundations
-2. Andrew Delamater: Learning
-3. Virginia Valian: Language
-4. Sandeep Prasada: Concepts
-5. Timothy Ricker: Attention/Memory
-6. Frank Grasso: Comparative Cognition
 
 </div>
 <div class="col-sm-6">
 
-![](images/cognitive_science.png)
+![](images/RStudio.png)
 
 </div>
 </div>
