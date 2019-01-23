@@ -10,7 +10,7 @@ output:
 ---
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=FALSE, eval=FALSE}
 #library(data.table)
 library(readxl)
 Lectures <- read_excel("Schedule.xlsx", sheet = 1, col_names = TRUE, col_types = NULL, na = "", skip = 0)

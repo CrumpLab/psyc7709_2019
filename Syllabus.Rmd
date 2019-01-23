@@ -11,9 +11,10 @@ output:
 
 ### PSYC 7709 – Using R for Reproducible Psychological Research (Special Topics)
 
-Spring 2019, TBD
+Spring 2019
 
-Location: TBD
+Location: 5201 James Hall
+Time: Monday 3:40pm-6:25pm
 
 Instructor:  Matthew Crump, [mcrump@brooklyn.cuny.edu](mcrump@brooklyn.cuny.edu)
 
