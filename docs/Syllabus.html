@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -96,6 +99,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -110,7 +116,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -130,6 +135,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -151,19 +193,173 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
 <!-- code folding -->
 
 
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -189,6 +385,9 @@ $(document).ready(function () {
 <li>
   <a href="Schedule.html">Schedule</a>
 </li>
+<li>
+  <a href="Resources.html">Resources</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -206,12 +405,14 @@ $(document).ready(function () {
 </div>
 
 
-<p>PSYC 7709 – Using R for Reproducible Psychological Research (Special Topics)</p>
+<div id="psyc-7709-using-r-for-reproducible-psychological-research-special-topics" class="section level3">
+<h3>PSYC 7709 – Using R for Reproducible Psychological Research (Special Topics)</h3>
 <p>Spring 2019, TBD</p>
 <p>Location: TBD</p>
-<p>Instructor: Matthew Crump, <a href="mcrump@brooklyn.cuny.edu" class="uri">mcrump@brooklyn.cuny.edu</a></p>
-<div id="general-course-description-and-objectives" class="section level2">
-<h2>General Course Description and Objectives</h2>
+<p>Instructor: Matthew Crump, <a href="mcrump@brooklyn.cuny.edu">mcrump@brooklyn.cuny.edu</a></p>
+</div>
+<div id="general-course-description-and-objectives" class="section level3">
+<h3>General Course Description and Objectives</h3>
 <p>Practical and skill-focused introduction to using open-source programming software (R, R-studio, and R Markdown) in several aspects of Psychological Research. Course covers basic scripting/coding in R, data-wrangling, advanced graphing and data animation, using R for creating reproducible manuscripts, slide presentations, websites, and web-books for communicating research.</p>
 <p>Special Prerequisites: NONE</p>
 <p>*Course objectives**: in this course you will learn:</p>
@@ -224,16 +425,111 @@ $(document).ready(function () {
 <li>Reproducible research: principles of open-science, including tools for data-sharing, manuscript sharing, pre-registration of research designs, method-sharing, pre-print sharing, and use of online repository services for disseminating shared materials.</li>
 </ol>
 </div>
-<div id="course-structure" class="section level2">
-<h2>Course Structure</h2>
+<div id="course-structure" class="section level3">
+<h3>Course Structure</h3>
 <p>We meet once per week in a computer lab. Each class will involve a small amount of lecturing on R concepts, and a large amount of time for students to complete coding and analysis problems assigned each week. The general goal of the course is to c</p>
 </div>
-<div id="assignments-and-grading" class="section level2">
-<h2>Assignments and Grading</h2>
-<p>The course will have a total of 100 points. Except for medical emergencies, late work will not be accepted. Students will be expected to attend each class, read the assigned articles, and participate in discussion. To ensure that students read the articles with a purpose, and to ensure that the entire course grade does not depend on the final assignment, students will produce a short assignment for each module, due at the beginning of the second session of each module. Each instructor will assign their own.</p>
-<p>The default short assignment is about 2 pages in length. Depending on the instructor it could be a (critical) commentary on one of the readings; a description of an experiment to test a hypothesis presented in one of the readings; a comparison of two readings; a thought piece on why a particular problem is intractable or cannot be answered as posed; a summary of a controversy in the literature. Each of those assignments will be worth 3 points, for a total of 18 points. Students will be graded primarily on the thought and effort they put into the assignments. Some assignments may have peer assessment.</p>
-<p>The mid-term, a journal article review (22 points), is designed to help you think like a reviewer by having you critically analyze a recent (published no earlier than 2007) journal article related to one of the topics in the first half of the course. The review will be approximately 5-10 double-spaced pages with 12-point type (Times New Roman preferred) and 1-inch margins. It may seem that published papers have already been so well-reviewed that their methods and conclusions are beyond reproach. By reading an article in depth, you will discover that that is not necessarily the case. Try to choose an article that stimulates your thinking and could be the basis for designing a new study or developing a new analysis. Clear your choice of article first. Students are encouraged to collaborate on the review, but should turn in individual papers.</p>
-<p>The final is a written paper (60 points). The various possibilities include: an integrative paper that combines issues discussed across two modules, a proposal-type paper that links the student’s current research interests with foundational issues discussed in one of the modules, an expansion of any of the module commentaries, or any other agreed-upon format.</p>
+<div id="lecture-schedule" class="section level3">
+<h3>Lecture Schedule</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Week</th>
+<th align="left">Date</th>
+<th align="left">Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">Before class</td>
+<td align="left"><a href="">Getting Started</a></td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">M Jan 28</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/why-statistics.html">Introduction to R Markdown</a></td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">M Feb 4</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/DescribingData.html">Basic Programming in R I</a></td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">M Feb 11</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/Correlation.html">Basic Programming in R II</a></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><strong>M Feb 18</strong></td>
+<td align="left">No Class</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">M Feb 25</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/probability-sampling-and-estimation.html">Data-Wrangling</a></td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">M Mar 4</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/foundations-for-inference.html">Data-Visualization</a></td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">M Mar 11</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/t-tests.html">Common inferential tests</a></td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">M Mar 18</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/thinking-about-answering-questions-with-data.html">Data Simulation</a></td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">M Mar 25</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/anova.html">Shiny Web Apps</a></td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">M Apr 1</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/repeated-measures-anova.html">Optimizing R Scripts</a></td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">M Apr 8</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/factorial-anova.html">Open Science</a></td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="left">M Apr 15</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/more-on-factorial-designs.html">APA Papers with papaja</a></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">M Apr 22</td>
+<td align="left">Spring Recess</td>
+</tr>
+<tr class="odd">
+<td align="left">12</td>
+<td align="left">M Apr 29</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/more-on-factorial-designs.html">R Markdown Presentations</a></td>
+</tr>
+<tr class="even">
+<td align="left">13</td>
+<td align="left">M May 6</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/more-on-factorial-designs.html">Bookdown</a></td>
+</tr>
+<tr class="odd">
+<td align="left">14</td>
+<td align="left">M May 13</td>
+<td align="left"><a href="https://crumplab.github.io/statistics/more-on-factorial-designs.html">Final Project Presentations</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="assignments-and-grading" class="section level3">
+<h3>Assignments and Grading</h3>
 <table>
 <thead>
 <tr class="header">
@@ -245,20 +541,15 @@ $(document).ready(function () {
 <tbody>
 <tr class="odd">
 <td align="left">weekly assignments</td>
-<td align="right">3 each</td>
-<td align="right">18</td>
+<td align="right">5</td>
+<td align="right">70</td>
 </tr>
 <tr class="even">
-<td align="left">journal review</td>
-<td align="right">22</td>
-<td align="right">22</td>
+<td align="left">final project</td>
+<td align="right">30</td>
+<td align="right">30</td>
 </tr>
 <tr class="odd">
-<td align="left">final paper</td>
-<td align="right">60</td>
-<td align="right">60</td>
-</tr>
-<tr class="even">
 <td align="left"></td>
 <td align="right"></td>
 <td align="right">100</td>
@@ -266,24 +557,48 @@ $(document).ready(function () {
 </tbody>
 </table>
 </div>
-<div id="policy-on-academic-integrity" class="section level2">
-<h2>Policy on Academic Integrity</h2>
-<p>CUNY regards acts of academic dishonesty (e.g. plagiarism, cheating on examinations, obtaining unfair advantage, and falsification of records and official documents) as serious offenses against the values of intellectual honesty. It is committed to enforcing the CUNY Policy on Academic Integrity and will pursue cases of academic dishonesty according to its Academic Integrity Procedures. For the full CUNY policy, please consult: web.cuny.edu/academics/info-central/policies/academic-integrity.pdf.<br />
-For full guidelines on avoiding and detecting academic honesty, please read the online publication provided by the CUNY Provost’s office (especially SECTION I: FOR THE STUDENT, pp 3-17). Go to: <a href="https://www.gc.cuny.edu/About-the-GC/Governance,-Policies,-Procedures/Detail?id=4827" class="uri">https://www.gc.cuny.edu/About-the-GC/Governance,-Policies,-Procedures/Detail?id=4827</a> and click on Plagiarism Avoiding and Detecting.</p>
-<p>Be sure you understand what academic dishonesty is so that you do not accidentally commit it. Remember that it is better to over-cite than under-cite. Whether you intend to be dishonest or not, any dishonesty will be considered a serious breach of academic values. You will be teaching undergraduate students about academic honesty, so it is especially important that you understand why honesty is important and how to avoid dishonesty.</p>
+<div id="universitys-policy-on-academic-integrity" class="section level3">
+<h3>University’s policy on Academic Integrity</h3>
+<p>The faculty and administration of Brooklyn College support an environment free from cheating and plagiarism. As a student, <strong>you are personally responsible for being aware of what constitutes cheating, and plagiarism; and, for avoiding both</strong>. You can view the complete text of the CUNY Academic Integrity Policy here: <a href="http://www.brooklyn.cuny.edu/bc/policies">http://www.brooklyn.cuny.edu/bc/policies</a> <strong>If a faculty member suspects a violation of academic integrity, and upon investigation, confirms that violation, or if the student admits the violation, the faculty member MUST report the violation</strong>.</p>
+<hr />
 </div>
-<div id="students-with-disabilities" class="section level2">
-<h2>Students with Disabilities</h2>
-<p>Quoted from <a href="https://www.gc.cuny.edu/Prospective-Current-Students/Student-Life/Resources" class="uri">https://www.gc.cuny.edu/Prospective-Current-Students/Student-Life/Resources</a> “A disability is any physical or mental impairment that substantially limits one or more major life activities. A person is considered to be a person with a disability if he/she has the disability, has a record of the disability, or is regarded as having the disability. Under the Americans with Disabilities Act of 1990 and Section 504 of the Rehabilitation Act of 1973, qualified persons with disabilities are entitled to reasonable accommodations to achieve non-discriminatory access to programs, services, and activities of the GC. Some examples of covered disabilities are visual and hearing impairments, mobility impairments, impairment of hand function, and such “hidden” disabilities as AIDS/HIV, learning disabilities, ADD and ADHD, heart conditions, chronic fatigue syndrome, and being in recovery from substance abuse. The Graduate Center does not discriminate on the basis of disability in the admission and retention of students. To ensure equal access for persons with disabilities to all academic and other programs, services, and activities of the GC, as required by law, appropriate accommodations will be made. These may include auxiliary aids and services for students with visual impairments (readers/library assistants and such technology as adaptive computer software and hardware, etc.); qualified sign-language interpreters; scribes; extended or divided time on examinations for students with learning disabilities or reduced physical stamina; adjustments in course load when appropriate; voice-recognition software; use of a computer for exams; and taping classes.</p>
-<p>“Adaptive equipment and computer software are available at the Graduate Center. Computer users have access to screen-character enlargement, text-to-speech, and optical-character-recognition scan-and-read software, a closed-circuit television and voice-recognition software. For students with hearing impairments, the Graduate Center has available a personal FM listening system (for use on an individual basis for classes and meetings). The auditoriums are equipped with infrared equipment to assist those with hearing impairments. Contact Ms. Lerner or Miss Perram in Student Affairs to request accommodation and for additional information about facilities and services available to students with disabilities.</p>
-<p>“The Mina Rees Library can provide students with disabilities with such services as staff assistance in catalog searches and location of books and journals. Students with disabilities should register with Security and Public Safety (Room 9117; Telephone:1-212-817-7761) so that provision may be made for their safety should an emergency arise.</p>
-<p>“Users of TDD (Telecommunications Devices for the Deaf) within New York state should call the Telecommunications Service at 711 or at 1-800-662-1220. Users of TDD outside New York state should call their local Telecommunications Service.</p>
-<p>“The Vice President for Student Affairs is the 504/ADA Coordinator (Room 7301; 817-7400). For more information (with confidentiality) contact Sharon Lerner or Elise Perram (212-817-7400 or <a href="mailto:disabilityservices@gc.cuny.edu">disabilityservices@gc.cuny.edu</a>) and consult the Graduate Center Student Handbook.”</p>
-<p>CUNY’s policies and procedures on equal opportunity, non-discrimination, and against sexual harassment: <a href="http://www.cuny.edu/about/administration/offices/ohrm/policies-procedures/finalnondeiscrimpolicy121213.pdf" class="uri">http://www.cuny.edu/about/administration/offices/ohrm/policies-procedures/finalnondeiscrimpolicy121213.pdf</a></p>
+<div id="missing-an-exam-or-class" class="section level3">
+<h3>Missing an Exam or class</h3>
+<p>Make-up exams will be given only when there is a “good” reason for having missed an exam. For example, if a sudden illness causes you to miss an exam, then you should be prepared to provide me with a brief note signed by your physician. Contact me before an exam in the event that you anticipate missing one. In the event of an emergency, contact me as soon as possible. If you are missing a class for religious reasons refer to the state law regarding non-attendance because of religious beliefs (p. 64 in the Undergraduate Bulletin or p. 40 of the Graduate Bulletin).</p>
+<p>WARNING: This is not the kind of course for which you do not need to come to class, and read the textbook at the last minute and expect to do well on tests and papers. The material in this course builds in complexity across classes, and doing well in this course will require a constant moderate level of effort. If you join the course later or are unsure about anything please ask.</p>
+<hr />
+</div>
+<div id="accessibility" class="section level3">
+<h3>Accessibility</h3>
+<p>It is important to me that the course be accessible to all students. In order to receive disability-related academic accommodations students must first be registered with the Center for Student Disability Services. Students who have a documented disability or suspect they may have a disability are invited to set up an appointment with the Director of the Center for Student Disability Services, Ms. Valerie Stewart-Lovell at 718-951-5538. If you have already registered with the Center for Student Disability Services please provide me with the course accommodation form so we may discuss your specific accommodation. A guide and more information can be found here <a href="http://catsweb.cuny.edu">http://catsweb.cuny.edu</a></p>
+<hr />
+</div>
+<div id="class-citizenshiprules-of-conduct" class="section level3">
+<h3>Class Citizenship/Rules of Conduct</h3>
+<div id="cell-phones" class="section level4">
+<h4>Cell phones</h4>
+<p>Your cell phone, PDA or other device must be turned off during class. If you are a habitual offender in this respect (i.e. it happens more than twice during the semester), you will be asked to leave the classroom. If you absolutely need to have your phone on during class—talk to me at the beginning of the semester.</p>
+</div>
+<div id="keep-the-room-clean" class="section level4">
+<h4>Keep the room clean</h4>
+<p>Please pick up after yourself. Absolutely no food is allowed in the lecture and lab rooms.</p>
+<hr />
+</div>
+</div>
+<div id="email-correspondence" class="section level3">
+<h3>Email Correspondence</h3>
+<p>I will regularly use e-mail to send out announcements, changes in the syllabus, reminders about tests or due dates etc. It is your responsibility to check e-mail regularly to keep up-to-date with these announcements. I will use the e-mail address you have listed with the College. Therefore, please make sure that this is indeed the correct address.</p>
+<div id="general-help-with-research-and-writing" class="section level4">
+<h4>General Help with Research and Writing</h4>
+<p>The Library maintains a collection of links to sites that can assist you with proper citation format and paraphrasing and quoting other authors at <a href="https://library.brooklyn.cuny.edu/resources/?service=research-help">Research &amp; Writing Help</a>. The Learning Center has writing tutors available to help you with your writing <a href="http://lc.brooklyn.cuny.edu/">http://lc.brooklyn.cuny.edu/</a>.</p>
+<p>The best learning is done in conversation with others, whether they are people—classmates, teachers, friends—or texts—books, articles, essays, poems, films etc. It should not be a solitary process. However, the assignments that you hand in for this course must be done on your own, should represent your own thinking, and should be original work that you have done for this particular course. A good way to balance these two seemingly contradictory approaches (collaborative learning and original individually-produced work) without knowingly—or, even unwittingly—resorting to plagiarism or other forms of academic misconduct is to learn and meticulously observe the rules for citing the work of others (this could be the great point your roommate made that you used in your paper, it could be a well-turned phrase from an academic essay, or it could be anything in between). It is your responsibility to learn what constitutes plagiarism and the correct rules for citing sources—read the information on the following website carefully: <a href="http://www.brooklyn.cuny.edu/bc/policies/">http://www.brooklyn.cuny.edu/bc/policies/</a>. The bottom line is: passing off anyone’s words or ideas as your own for any reason whatsoever is plagiarism.</p>
+</div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 

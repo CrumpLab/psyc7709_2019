@@ -1,0 +1,103 @@
+---
+title: "Data-wrangling"
+author: "Matt"
+date: "12/14/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# data source
+
+[https://osf.io/uzrge/](https://osf.io/uzrge/)
+
+# Load data
+
+```{r}
+library(data.table)
+stroop_data <- fread("data/stroopDataV2.csv")
+
+```
+
+# run analysis
+
+```{r}
+library(dplyr)
+subject_means <- stroop_data %>%
+                 filter(acc==1) %>%
+                 group_by(pNo,condition,congruency) %>%
+                 summarize(mean_rt = mean(rt,na.rm=TRUE))
+
+subject_means$pNo<-as.factor(subject_means$pNo)
+subject_means$condition<-as.factor(subject_means$condition)
+subject_means$congruency<-as.factor(subject_means$congruency)
+
+aov_out <- aov(mean_rt ~ condition*congruency +
+                 Error(pNo/(condition*congruency)),
+               subject_means)
+
+summary(aov_out)
+
+library(ggplot2)
+
+plot_df <- subject_means %>%
+            group_by(condition,congruency) %>%
+            summarize(all_mean_rt = mean(mean_rt),
+                      SEM = sd(mean_rt)/sqrt(length(mean_rt)))
+
+ggplot(plot_df, aes(x=condition, y=all_mean_rt, group=congruency))+
+  geom_line()+
+  geom_point()+
+  geom_errorbar(aes(ymin=all_mean_rt-SEM,
+                    ymax=all_mean_rt+SEM),
+                width=.2)+
+  theme_classic()
+
+```
+
+
+# pre-processing
+
+# are their weird rts
+```{r}
+hist(stroop_data$rt)
+length(stroop_data$rt[stroop_data$rt>2000])
+max(stroop_data$rt)
+```
+
+# include < 2000
+
+```{r}
+library(Crump)
+subject_means <- stroop_data %>%
+                 filter(acc==1,
+                        rt <=10000) %>%
+                 group_by(pNo,condition,congruency) %>%
+                 summarize(mean_rt = mean(modified_recursive_moving(rt)$restricted))
+
+subject_means$pNo<-as.factor(subject_means$pNo)
+subject_means$condition<-as.factor(subject_means$condition)
+subject_means$congruency<-as.factor(subject_means$congruency)
+
+aov_out <- aov(mean_rt ~ condition*congruency +
+                 Error(pNo/(condition*congruency)),
+               subject_means)
+
+summary(aov_out)
+
+plot_df <- subject_means %>%
+            group_by(condition,congruency) %>%
+            summarize(all_mean_rt = mean(mean_rt),
+                      SEM = sd(mean_rt)/sqrt(length(mean_rt)))
+
+ggplot(plot_df, aes(x=condition, y=all_mean_rt, group=congruency))+
+  geom_line()+
+  geom_point()+
+  geom_errorbar(aes(ymin=all_mean_rt-SEM,
+                    ymax=all_mean_rt+SEM),
+                width=.2)+
+  theme_classic()
+
+```

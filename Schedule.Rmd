@@ -1,14 +1,237 @@
 ---
 title: "Schedule"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
 ---
 
-```{r, cache=FALSE, warning=FALSE, message=FALSE, echo=FALSE, eval=FALSE}
-library(googlesheets)
-#gs_ls()
-web_df <- gs_title("Cognitive Psychology Fall 2018")
-ss_df <- gs_read(ss=web_df, ws = 2, skip=0)
-knitr::kable(ss_df)
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+#library(data.table)
+library(readxl)
+Lectures <- read_excel("Schedule.xlsx", sheet = 1, col_names = TRUE, col_types = NULL, na = "", skip = 0)
+Lectures[is.na(Lectures)]<- " "
+#Lectures <- fread("Lectures.csv")
+knitr::kable(Lectures)
 
 ```
+
+### Getting Started
+
+Before we meet for our first class there are few things you should try at home to get started.
+
+1. Download and install R on your computer. This is the R website [https://www.r-project.org](https://www.r-project.org)
+2. Download and install R-studio. You must download and install R first before installing R-studio. The R-studio website is [https://www.rstudio.com](https://www.rstudio.com)
+3. Create a free github account. The github website is [https://github.com](https://github.com)
+4. At this point you should have downloaded R and R-studio to your own computer. This will allow you to run R and R-studio locally. It is also possible to run R-studio in the cloud through your web-browser. To do this you need to create an account with R-studio cloud. Create an account here [https://rstudio.cloud](https://rstudio.cloud). **Note:** In class we will be using a computer lab wit R-studio installed on the computers. You will have the option of using the lab computer, or bringing your own laptop, and/or using R-studio through the cloud. 
+
+Don't worry if you ran into issues with these first steps, we will address them in class on Monday. 
+
+If you have R-studio working is there anything else you can do before we meet for the first time on Monday? Yes, you can get started with some of the readings, and you can begin messing around in R. Here are some things to read:
+
+1. [Programming for Psychologists, Chapter 1](https://crumplab.github.io/programmingforpsych/fundamentals-of-computer-programming-languages.html)
+2. [Programming for Psychologists, Chapter 2](https://crumplab.github.io/programmingforpsych/programming-in-r.html)
+3. [Navarros' Section 1: Core Toolkit](https://compcogscisydney.org/psyr/)
+
+We will be spending the first few weeks of the course working on solving different kinds of coding problems in R. These problems will help you learn the ins and outs of coding in R. You can get a head start by trying to solve the problems in this [list of programming challenges](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). 
+
+
+
+### 1. R, R Markdown, Websites, & Github
+
+**Overview**: 
+
+- Getting set-up with R, R-studio, using R-studio cloud, and Github.
+- Follow a tutorial to create a free Github account, and then create a webpage using R Markdown and host it for free on Github. Students will use their personal website throughout the course as a mechanism for submitting assignments and to document their progress learning R.
+- Introduction to basic programming concepts in R (variables, loops, logic, functions)
+
+**Readings and Resources**:
+
+1. [Programming for Psychologists, Chapter 1](https://crumplab.github.io/programmingforpsych/fundamentals-of-computer-programming-languages.html)
+2. [Programming for Psychologists, Chapter 2](https://crumplab.github.io/programmingforpsych/programming-in-r.html)
+3. [Navarros' Section 1: Core Toolkit](https://compcogscisydney.org/psyr/)
+
+**1: Assignment**
+
+a. Create a website using R Markdown and host it on Github pages, then submit the link to your website on Blackboard for Assignment 1
+b. Begin working through the list of [programming challenges](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). 
+
+### 2. Basic Programming in R I
+
+**Overview**: 
+
+- Continue working on solving programming challenges
+- Zoom in on variable types in R, and using loops and logic to create simple algorithms.
+- Overview of useful intrinsic functions in R
+
+**Readings and Resources**:
+
+1. [Programming for Psychologists, Chapter 1](https://crumplab.github.io/programmingforpsych/fundamentals-of-computer-programming-languages.html)
+2. [Programming for Psychologists, Chapter 2](https://crumplab.github.io/programmingforpsych/programming-in-r.html)
+3. [Navarros' Section 1: Core Toolkit](https://compcogscisydney.org/psyr/)
+
+**2: Assignment**
+
+a. Document progress in solving [programming challenges](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). Upload link to website showing progress. Students to should attempt all of the simple programming challenges, and begin working on the harder problems
+
+### 3. Basic Programming in R II
+
+
+**Overview**: 
+
+- Continue working on solving programming challenges
+- Writing functions in R
+
+**Readings and Resources**:
+
+1. [Programming for Psychologists, Chapter 1](https://crumplab.github.io/programmingforpsych/fundamentals-of-computer-programming-languages.html)
+2. [Programming for Psychologists, Chapter 2](https://crumplab.github.io/programmingforpsych/programming-in-r.html)
+3. [Navarros' Section 1: Core Toolkit](https://compcogscisydney.org/psyr/)
+
+**2: Assignment**
+
+a. Document progress in solving [programming challenges](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). Upload link to website showing progress. Students should attempt and solve as many of the harder problems as they can.
+
+### 4. Data-Wrangling
+
+**Overview**:
+
+- Loading Data into R
+- Data formatting (dataframes and data.tables)
+- Introduction to the dplyr package for filtering, selecting, augmenting, and summarizing data sets (and more).
+
+**Readings and Resources**:
+
+1. [Dplyr tutorial](https://dplyr.tidyverse.org)
+2. [Hadley Wickham's, R for Data Science, Chapter 5 Data transformation](http://r4ds.had.co.nz/transform.html)
+
+**Assignment:**
+
+a. 
+
+
+### 5. Data-Visualization
+
+
+**Overview**:
+
+- Introduction to the grammar of graphics ggplot2 package for data-visualization
+
+**Readings and Resources**:
+
+1. [ggplot2 reference website](https://ggplot2.tidyverse.org)
+
+**Assignment:**
+
+### 6. Common inferential tests
+
+**Overview**:
+
+- t-tests, anovas, and linear regresssion in R
+
+**Readings and Resources**:
+
+1. [Matthew Crump's, Programming for Psychologists, chapter 5](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html)
+
+**Assignment:**
+
+
+### 7. Data simulation
+
+**Overview**:
+
+- Simulating data from scratch, and using monte-carlo methods for power analysis and sample-size planning.
+
+**Readings and Resources**:
+
+1. [Matthew Crump's, Programming for Psychologists, chapter 5](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html)
+
+**Assignment:**
+
+### 8. Shiny Web Apps
+
+**Overview**:
+
+- Introduction to R Shiny for building interactive web-applications
+
+**Readings and Resources**:
+
+1. [R shiny tutorials](https://shiny.rstudio.com/tutorial/#written-tutorials)
+
+**Assignment:**
+
+### 9. Optimizing R scripts
+
+**Overview**:
+
+- Principles of scripting for efficient memory management, including using profiles packages for determining which parts of a script can be further optimized. Discussion of vectorization in R.
+
+**Readings and Resources**:
+
+1. [Hadley Wickham's, Advanced R, profiling chapter](http://adv-r.had.co.nz/Profiling.html)
+
+
+**Assignment:**
+
+### 10. Open science and Final Project planning
+
+**Overview**:
+
+- Open science and transparency. 
+
+**Readings and Resources**:
+
+1. [Hadley Wickham's, Advanced R, profiling chapter](http://adv-r.had.co.nz/Profiling.html)
+
+**Assignment**:
+
+
+### 11. APA papers using Papaja
+
+**Overview**:
+
+- Introduction to creating reproducible APA manuscripts using the papaja package. Students learn how to use the template for writing an APA report in R Markdown, which allows them to embed their R-scripts for data-analysis into the manuscript, allowing others to reproduce their analysis.
+
+**Readings and Resources**:
+
+1. [Frederick Aust & Marius Barth's papaja package: Reproducible APA manuscripts with R Markdown](https://crsh.github.io/papaja_man/)
+
+
+**Assignment**:
+
+
+### 12. R Markdown Presentations
+
+**Overview**:
+
+- Using R Markdown and the xaringan package to compile R Markdown documents into slide presentations for the web.
+
+**Readings and Resources**:
+
+1. [R markdown slide presentations tutorial](https://rmarkdown.rstudio.com/lesson-11.html)
+2. [Yihui Xie, J. J. Allaire, & Garrett Grolemund's "R Markdown: The Definitive guide", Chapter 7](https://bookdown.org/yihui/rmarkdown/xaringan.html)
+
+
+**Assignment**:
+
+### 13. R Markdown books
+
+**Overview**:
+
+- Introduction to using the R Markdown format to compile documents into web-books, .pdf's, and epubs using the bookdown package.
+
+**Readings and Resources**:
+
+1. [Yihui Xie, J. J. Allaire, & Garrett Grolemund's "R Markdown: The Definitive guide", Chapter 12](https://bookdown.org/yihui/rmarkdown/books.html)
+
+
+### 14. Presentations
+
+**Overview**:
+
+- Final Project individual presentations
 

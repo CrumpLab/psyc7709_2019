@@ -1,9 +1,15 @@
 ---
 title: "Syllabus"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
 ---
 
-PSYC 7709 – Using R for Reproducible Psychological Research (Special Topics)
+### PSYC 7709 – Using R for Reproducible Psychological Research (Special Topics)
 
 Spring 2019, TBD
 
@@ -12,7 +18,7 @@ Location: TBD
 Instructor:  Matthew Crump, [mcrump@brooklyn.cuny.edu](mcrump@brooklyn.cuny.edu)
 
 
-## General Course Description and Objectives
+### General Course Description and Objectives
 
 Practical and skill-focused introduction to using open-source programming software (R, R-studio, and R Markdown) in several aspects of Psychological Research. Course covers basic scripting/coding in R, data-wrangling, advanced graphing and data animation, using R for creating reproducible manuscripts, slide presentations, websites, and web-books for communicating research.
 
@@ -28,54 +34,75 @@ Special Prerequisites: NONE
 6.	Reproducible research: principles of open-science, including tools for data-sharing, manuscript sharing, pre-registration of research designs, method-sharing, pre-print sharing, and use of online repository services for disseminating shared materials.
 
 
-## Course Structure
+### Course Structure
 
 We meet once per week in a computer lab. Each class will involve a small amount of lecturing on R concepts, and a large amount of time for students to complete coding and analysis problems assigned each week. The general goal of the course is to c
 
 
+### Lecture Schedule
 
-## Assignments and Grading
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+#library(data.table)
+library(readxl)
+Lectures <- read_excel("Schedule.xlsx", sheet = 1, col_names = TRUE, col_types = NULL, na = "", skip = 0)
+Lectures[is.na(Lectures)]<- " "
+#Lectures <- fread("Lectures.csv")
+knitr::kable(Lectures)
 
-The course will have a total of 100 points.  Except for medical emergencies, late work will not be accepted.  Students will be expected to attend each class, read the assigned articles, and participate in discussion.  To ensure that students read the articles with a purpose, and to ensure that the entire course grade does not depend on the final assignment, students will produce a short assignment for each module, due at the beginning of the second session of each module.  Each instructor will assign their own.
+```
 
-The default short assignment is about 2 pages in length. Depending on the instructor it could be a (critical) commentary on one of the readings; a description of an experiment to test a hypothesis presented in one of the readings; a comparison of two readings; a thought piece on why a particular problem is intractable or cannot be answered as posed; a summary of a controversy in the literature.  Each of those assignments will be worth 3 points, for a total of 18 points.  Students will be graded primarily on the thought and effort they put into the assignments.  Some assignments may have peer assessment.
 
-The mid-term, a journal article review (22 points), is designed to help you think like a reviewer by having you critically analyze a recent (published no earlier than 2007) journal article related to one of the topics in the first half of the course.  The review will be approximately 5-10 double-spaced pages with 12-point type (Times New Roman preferred) and 1-inch margins.  It may seem that published papers have already been so well-reviewed that their methods and conclusions are beyond reproach.  By reading an article in depth, you will discover that that is not necessarily the case.  Try to choose an article that stimulates your thinking and could be the basis for designing a new study or developing a new analysis.  Clear your choice of article first.  Students are encouraged to collaborate on the review, but should turn in individual papers.
 
-The final is a written paper (60 points).  The various possibilities include:  an integrative paper that combines issues discussed across two modules, a proposal-type paper that links the student's current research interests with foundational issues discussed in one of the modules, an expansion of any of the module commentaries, or any other agreed-upon format.
+### Assignments and Grading
 
 | Assignment |  Points| Total|
 |:----------|--------:|-------:|
-| weekly assignments| 3 each | 18|
-| journal review  |  22 | 22|
-|final paper| 60 | 60|
+| weekly assignments| 5 | 70|
+|final project| 30 | 30|
 |||100|
 
-## Policy on Academic Integrity
+### University’s policy on Academic Integrity
 
-CUNY regards acts of academic dishonesty (e.g. plagiarism, cheating on examinations, obtaining unfair advantage, and falsification of records and official documents) as serious offenses against the values of intellectual honesty. It is committed to enforcing the CUNY Policy on Academic Integrity and will pursue cases of academic dishonesty according to its Academic Integrity Procedures.  For the full CUNY policy, please consult:  web.cuny.edu/academics/info-central/policies/academic-integrity.pdf.  
-For full guidelines on avoiding and detecting academic honesty, please read the online publication provided by the CUNY Provost’s office (especially SECTION I: FOR THE STUDENT, pp 3-17).  Go to:  https://www.gc.cuny.edu/About-the-GC/Governance,-Policies,-Procedures/Detail?id=4827 and click on Plagiarism Avoiding and Detecting.  
+The faculty and administration of Brooklyn College support an environment free from cheating and plagiarism. As a student, **you are personally responsible for being aware of what constitutes cheating, and plagiarism; and, for avoiding both**. You can view the complete text of the CUNY Academic Integrity Policy here:
+[http://www.brooklyn.cuny.edu/bc/policies](http://www.brooklyn.cuny.edu/bc/policies)
+**If a faculty member suspects a violation of academic integrity, and upon investigation, confirms that violation, or if the student admits the violation, the faculty member MUST report the violation**.
 
-Be sure you understand what academic dishonesty is so that you do not accidentally commit it. Remember that it is better to over-cite than under-cite.  Whether you intend to be dishonest or not, any dishonesty will be considered a serious breach of academic values.  You will be teaching undergraduate students about academic honesty, so it is especially important that you understand why honesty is important and how to avoid dishonesty.
+---
 
+### Missing an Exam or class
 
-## Students with Disabilities
+Make-up exams will be given only when there is a “good” reason for having missed an exam. For example, if a sudden illness causes you to miss an exam, then you should be prepared to provide me with a brief note signed by your physician. Contact me before an exam in the event that you anticipate missing one. In the event of an emergency, contact me as soon as possible. If you are missing a class for religious reasons refer to the state law regarding non-attendance because of religious beliefs (p. 64 in the Undergraduate Bulletin or p. 40 of the Graduate Bulletin).
 
-Quoted from https://www.gc.cuny.edu/Prospective-Current-Students/Student-Life/Resources 
-"A disability is any physical or mental impairment that substantially limits one or more major life activities. A person is considered to be a person with a disability if he/she has the disability, has a record of the disability, or is regarded as having the disability. Under the Americans with Disabilities Act of 1990 and Section 504 of the Rehabilitation Act of 1973, qualified persons with disabilities are entitled to reasonable accommodations to achieve non-discriminatory access to programs, services, and activities of the GC. Some examples of covered disabilities are visual and hearing impairments, mobility impairments, impairment of hand function, and such “hidden” disabilities as AIDS/HIV, learning disabilities, ADD and ADHD, heart conditions, chronic fatigue syndrome, and being in recovery from substance abuse. The Graduate Center does not discriminate on the basis of disability in the admission and retention of students. To ensure equal access for persons with disabilities to all academic and other programs, services, and activities of the GC, as required by law, appropriate accommodations will be made. These may include auxiliary aids and services for students with visual impairments (readers/library assistants and such technology as adaptive computer software and hardware, etc.); qualified sign-language interpreters; scribes; extended or divided time on examinations for students with learning disabilities or reduced physical stamina; adjustments in course load when appropriate; voice-recognition software; use of a computer for exams; and taping classes.
+WARNING: This is not the kind of course for which you do not need to come to class, and read the textbook at the last minute and expect to do well on tests and papers. The material in this course builds in complexity across classes, and doing well in this course will require a constant moderate level of effort. If you join the course later or are unsure about anything please ask.
 
-"Adaptive equipment and computer software are available at the Graduate Center. Computer users have access to screen-character enlargement, text-to-speech, and optical-character-recognition scan-and-read software, a closed-circuit television and voice-recognition software. For students with hearing impairments, the Graduate Center has available a personal FM listening system (for use on an individual basis for classes and meetings). The auditoriums are equipped with infrared equipment to assist those with hearing impairments. Contact Ms. Lerner or Miss Perram in Student Affairs to request accommodation and for additional information about facilities and services available to students with disabilities.
+---
 
-"The Mina Rees Library can provide students with disabilities with such services as staff assistance in catalog searches and location of books and journals.
-Students with disabilities should register with Security and Public Safety (Room 9117; Telephone:1-212-817-7761) so that provision may be made for their safety should an emergency arise.
+### Accessibility
 
-"Users of TDD (Telecommunications Devices for the Deaf) within New York state should call the Telecommunications Service at 711 or at 1-800-662-1220. Users of TDD outside New York state should call their local Telecommunications Service.
+It is important to me that the course be accessible to all students. In order to receive disability-related academic accommodations students must first be registered with the Center for Student Disability Services. Students who have a documented disability or suspect they may have a disability are invited to set up an appointment with the Director of the Center for Student Disability Services, Ms. Valerie Stewart-Lovell at 718-951-5538. If you have already registered with the Center for Student Disability Services please provide me with the course accommodation form so we may discuss your specific accommodation. A guide and more information can be found here [http://catsweb.cuny.edu](http://catsweb.cuny.edu)
 
-"The Vice President for Student Affairs is the 504/ADA Coordinator (Room 7301; 817-7400). For more information (with confidentiality) contact Sharon Lerner or Elise Perram (212-817-7400 or disabilityservices@gc.cuny.edu) and consult the Graduate Center Student Handbook."
+---
 
-CUNY's policies and procedures on equal opportunity, non-discrimination, and against sexual harassment:  http://www.cuny.edu/about/administration/offices/ohrm/policies-procedures/finalnondeiscrimpolicy121213.pdf
+### Class Citizenship/Rules of Conduct
 
+#### Cell phones
 
+Your cell phone, PDA or other device must be turned off during class. If you are a habitual offender in this respect (i.e. it happens more than twice during the semester), you will be asked to leave the classroom. If you absolutely need to have your phone on during class—talk to me at the beginning of the semester.
 
+#### Keep the room clean
+
+Please pick up after yourself. Absolutely no food is allowed in the lecture and lab rooms.
+
+--- 
+
+### Email Correspondence
+
+I will regularly use e-mail to send out announcements, changes in the syllabus, reminders about tests or due dates etc. It is your responsibility to check e-mail regularly to keep up-to-date with these announcements. I will use the e-mail address you have listed with the College. Therefore, please make sure that this is indeed the correct address.
+
+#### General Help with Research and Writing
+
+The Library maintains a collection of links to sites that can assist you with proper citation format and paraphrasing and quoting other authors at [Research & Writing Help](https://library.brooklyn.cuny.edu/resources/?service=research-help).  The Learning Center has writing tutors available to help you with your writing [http://lc.brooklyn.cuny.edu/](http://lc.brooklyn.cuny.edu/).
+
+The best learning is done in conversation with others, whether they are people—classmates, teachers, friends—or texts—books, articles, essays, poems, films etc. It should not be a solitary process. However, the assignments that you hand in for this course must be done on your own, should represent your own thinking, and should be original work that you have done for this particular course. A good way to balance these two seemingly contradictory approaches (collaborative learning and original individually-produced work) without knowingly—or, even unwittingly—resorting to plagiarism or other forms of academic misconduct is to learn and meticulously observe the rules for citing the work of others (this could be the great point your roommate made that you used in your paper, it could be a well-turned phrase from an academic essay, or it could be anything in between). It is your responsibility to learn what constitutes plagiarism and the correct rules for citing sources—read the information on the following website carefully: [http://www.brooklyn.cuny.edu/bc/policies/](http://www.brooklyn.cuny.edu/bc/policies/). The bottom line is: passing off anyone’s words or ideas as your own for any reason whatsoever is plagiarism.
 
 

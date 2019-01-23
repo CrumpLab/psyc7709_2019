@@ -8,6 +8,8 @@ navbar:
     href: Syllabus.html
   - text: Schedule
     href: Schedule.html
+  - text: Resources
+    href: Resources.html
 output_dir: docs
 output:
   html_document:
