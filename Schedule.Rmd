@@ -152,7 +152,20 @@ a.
 
 **Assignment:**
 
-### 8. Shiny Web Apps
+### 8. APA papers using Papaja
+
+**Overview**:
+
+- Introduction to creating reproducible APA manuscripts using the papaja package. Students learn how to use the template for writing an APA report in R Markdown, which allows them to embed their R-scripts for data-analysis into the manuscript, allowing others to reproduce their analysis.
+
+**Readings and Resources**:
+
+1. [Frederick Aust & Marius Barth's papaja package: Reproducible APA manuscripts with R Markdown](https://crsh.github.io/papaja_man/)
+
+
+**Assignment**:
+
+### 9. Shiny Web Apps
 
 **Overview**:
 
@@ -164,7 +177,7 @@ a.
 
 **Assignment:**
 
-### 9. Optimizing R scripts
+### 10. Optimizing R scripts
 
 **Overview**:
 
@@ -177,7 +190,7 @@ a.
 
 **Assignment:**
 
-### 10. Open science and Final Project planning
+### 11. Open science and Final Project planning
 
 **Overview**:
 
@@ -190,18 +203,7 @@ a.
 **Assignment**:
 
 
-### 11. APA papers using Papaja
 
-**Overview**:
-
-- Introduction to creating reproducible APA manuscripts using the papaja package. Students learn how to use the template for writing an APA report in R Markdown, which allows them to embed their R-scripts for data-analysis into the manuscript, allowing others to reproduce their analysis.
-
-**Readings and Resources**:
-
-1. [Frederick Aust & Marius Barth's papaja package: Reproducible APA manuscripts with R Markdown](https://crsh.github.io/papaja_man/)
-
-
-**Assignment**:
 
 
 ### 12. R Markdown Presentations
@@ -234,4 +236,8 @@ a.
 **Overview**:
 
 - Final Project individual presentations
+
+### 15. Final project
+
+**Overview**:
 
