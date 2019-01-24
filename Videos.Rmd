@@ -1,0 +1,27 @@
+---
+title: "Videos"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### R markdown website and github pages
+
+A quick example of forking a repository with code to run an R markdown website to your github account. Then cloning the repo to your local computer, making a few changes, and pushing the changes back to Github so you can update your website
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nc7XhQrasCM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Quick look at R and R-studio
+
+Shows the difference between R (which just loads a console), and R-studio. Brief discussion of the different panels of R-studio, creating a new .R file, running a bit of code, and creating and knitting an R Markdown file.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HTJ-bTD70oE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+

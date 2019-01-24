@@ -32,7 +32,9 @@ Before we meet for our first class there are few things you should try at home t
 
 Don't worry if you ran into issues with these first steps, we will address them in class on Monday. 
 
-If you have R-studio working is there anything else you can do before we meet for the first time on Monday? Yes, you can get started with some of the readings, and you can begin messing around in R. Here are some things to read:
+If you have R-studio working is there anything else you can do before we meet for the first time on Monday? Yes.
+
+You can follow the video tutorial on creating an R markdown website with github pages on the video page. And, you can get started with some of the readings, and you can begin messing around in R. Here are some things to read:
 
 1. [Programming for Psychologists, Chapter 1](https://crumplab.github.io/programmingforpsych/fundamentals-of-computer-programming-languages.html)
 2. [Programming for Psychologists, Chapter 2](https://crumplab.github.io/programmingforpsych/programming-in-r.html)
