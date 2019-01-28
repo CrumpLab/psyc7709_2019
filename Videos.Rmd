@@ -32,4 +32,11 @@ Discussion of the basic R markdown template in R-studio.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PyEkQo9URi8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
+### Solving basic programming problems
+
+The assignment for the first few weeks of the course is to document your progress solving some programming problems in R. You will be editing an .rmd file on your webpage, and submitting the link to your page each week. Here is a brief tutorial showing you how to get started.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/25uuRq-4oFM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 
