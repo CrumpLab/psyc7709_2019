@@ -1,0 +1,222 @@
+---
+title: "BuildingBlocks"
+author: "Matt"
+date: "1/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This .rmd goes along with the building blocks screencast. Basic coding in R involves creating variables to store information, and then systematically manipulating the contents of variables to solve particular problems. Some of the basic coding building blocks are **variables**, **logic**, and **loops**. These three elements are combined together to produce an algorithm (set of steps) to solve a problem.
+
+# Variables
+
+Below is code block contains 1 line that does a bunch of things. 
+
+1. It creates a variable with the name `variable_name`
+2. It stores the number 1 inside the variable using the assignment operator `<-`, which looks like an arrow (think: a 1 goes into the variable)
+3. The hashtag allows us to comment the line to say what is happening. Anything after the comment turns green, and R does not attempt to run this part as code. Comments can be useful for helping other people read the code
+4. When you run this line, you will see a new variable listed in the Environment pane in R-studio
+
+```{r}
+variable_name <- 1 #comment, this line stores a 1 in variable_name
+```
+
+Variables can have most any name, but they can't start with a number, special character or contain a space.
+
+```{r, eval=FALSE}
+# neither of these lines work, they will throw an error
+1s <- 3
+my variable <- 1
+!s <- 1
+```
+
+It is good practice to use descriptive variable names that tell you and anyone else reading the code what the variable is storing. Let's say you want to create three variables for storing your first name, last name, and favorite color. Here are good and bad examples:
+
+```{r}
+# good examples
+first_name <- "Matt"
+last_name <- "Crump"
+favorite_color <- "hot pink"
+
+# bad examples
+a <- "Matt"
+temp_var <- "Crump"
+cl <- "hot pink"
+```
+
+## Style guide
+
+It is a good idea to learn how to write good-looking code. This makes your code easier to read and easier for you and others to understand. There are different opinions about the style you should adopt. I recommend that you adopt the conventions in the tidyverse style guide, [https://style.tidyverse.org](https://style.tidyverse.org). And, I will try to follow that style guide in examples that I make.
+
+## Double-checking your variable works
+
+As mentioned previously, if you have made a new variable, you should be able to see it listed in the Environment tab. You can also type the name of the variable into the console and press enter. If the variable exists, the console will print the contents of the variable. 
+
+```{r}
+# Writing the variable name will cause R to print out it's contents
+first_name
+```
+
+You can also use the `print()` function to accomplish the same goal.
+
+```{r}
+print(first_name)
+```
+
+## Changing the contents of a variable
+
+Any time you assign `<-` something new into an existing variable, the contents of the variable will change. 
+
+Below we have three lines of code. By running this code block, R will follow the instructions in order. It will run the first line, then the second line, then the third line. 
+
+```{r}
+first_name <- "Matt"
+first_name <- "A"
+first_name <- "B"
+```
+
+What is the final contents of the variable `first_name`? It will be the last thing that was put into that variable, in this case a B.
+
+We can check that by printing out `first_name`.
+
+```{r}
+first_name
+```
+
+## Properties of variables
+
+As we go along we will learn about different kinds of variables in R. Each of them allow you to store different kinds of information in different formats. To illustrate the idea of different formats let's look at these two variables.
+
+```{r}
+a_number <- 1
+a_character <- "1"
+```
+
+You can use the `class()` function to find out information about variables in R. 
+
+```{r}
+class(a_number)
+```
+
+Notice that `a_number` has the class `numeric`. This means that R will treat the contents as a number.
+
+```{r}
+class(a_character)
+```
+
+However, `a_character` has a the class `character`. This means that R will treat the contents as text.
+
+If two variables contain numbers, then you can do math using the variables
+```{r}
+a <- 1
+b <- 2
+a+b
+```
+
+If the variables contain text, then math won't work
+
+```{r, eval=FALSE}
+a <- "1"
+b <- "2"
+a+b
+```
+
+## Converting between numeric and character
+
+In some cases R will allow you to convert variable classes. For example, if you have a numeric variable, you can convert it to a character. Below, we put a 1 into `a`, then show it is a numeric. Afterward, we use the `as.character()` function to convert `a` into a character, and then show that `a` is now a character, rather than a number
+
+```{r}
+a <- 1
+class(a)
+a <- as.character(a)
+class(a)
+```
+
+# converting between character and numeric
+
+`as.numeric` can convert text into numbers, but the text needs to be a numeral in order for this to work
+
+```{r}
+a <- "1" 
+class(a)
+a <- as.numeric(1)
+class(a)
+```
+
+This won't work. R doesn't know that "one" means 1. So, it will return NA, which stands for not available.
+
+```{r, eval=FALSE}
+a <- "one"
+a <- as.numeric(a)
+```
+
+
+## Vectors
+
+You will often want to store more than one thing inside a variable. One way to do this is using a vector. A vector can contain multiple elements, all of the same class.
+
+Create a vector using the `c()` function.
+
+```{r}
+some_numbers <- c(4,5,3,7,8,2,1,4,5,6,4)
+```
+
+If we print `some_numbers`, we can see it contains all the numbers we put into it.
+
+```{r}
+some_numbers
+```
+
+### indexing
+
+Once you have some numbers inside a vector, you may want to access individual elements. R uses square brackets `[]` for indexing particular slots in the vector (e.g., the number in a particular position from first to last in the vector)
+
+```{r}
+some_numbers[1] # returns first number
+some_numbers[2] # returns second number
+some_numbers[1:3] # returns the first three numbers
+```
+
+R has really powerful indexing abilities. For example, consider the following:
+
+```{r}
+some_numbers[c(2,4)]
+```
+
+We have put a vector `c(2,4)` inside the square brackets. This will allow us to return the contents in slot 2, and 4 of the vector. 
+
+What about this one?
+
+```{r}
+some_numbers[c(1,1,1)]
+```
+
+We have put a vector `c(1,1,1)` inside the square brackets. This will allow us to return the contents in slot 1 three times.
+
+We haven't covered logic statements yet, but it is worth pointing out that you can use logical indexing in R. For example, the following will return elements in the vector that are larger than a particular value.
+
+```{r}
+some_numbers[some_numbers > 4]
+```
+
+### assignment and indexing
+
+You can replace the contents of a vector at particular position using indexing.
+
+Here we remind ourselves of the original list of numbers inside `some_numbers`. Then we replace the number in position 1 with a 9, and print the variable to check that the replacement worked.
+
+```{r}
+some_numbers <- c(4,5,3,7,8,2,1,4,5,6,4)
+some_numbers[1] <- 9
+some_numbers
+```
+
+
+
+### c is for combine
+
+The `c()` function stands for combine. We are telling R to combine all of the elements inside the function into a vector. 
+

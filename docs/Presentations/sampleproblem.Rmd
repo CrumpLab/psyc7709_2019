@@ -1,0 +1,170 @@
+---
+title: "SampleProblem"
+author: "Matt"
+date: "1/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Sample problem
+
+1. Create 100 random numbers from the range 0 to 100
+2. Add up only the numbers that are larger than 50
+
+# Goals of this tutorial
+
+To show use of variables, logic, and looping to create an algorithm that solves a particular problem in R
+
+## create 100 random numbers
+
+```{r}
+some_numbers <- runif(100, min = 0, max =100)
+# some_numbers <- runif(100, 0, 100)
+```
+
+## add up only number greater than 50
+
+```{r}
+for(i in 1:10){
+  print(i) #gets run each iteration of the loop
+}
+
+some_numbers[4] # get a specific number at it's position in the vector
+some_numbers[1:3]
+
+for(i in 1:10){
+  print(i)
+  print(some_numbers[i])
+}
+
+for(i in 1:10){
+  if(some_numbers[i] > 50){
+    print(i)
+    print(some_numbers[i])
+    print("TRUE")
+  } else {
+    print(i)
+    print(some_numbers[i])
+    print("FALSE")
+  }
+}
+
+saved_numbers <- c()
+for(i in 1:10){
+  if(some_numbers[i] > 50){
+    saved_numbers <- c(saved_numbers,some_numbers[i])
+  } else {
+    # don't need to do anything here
+  }
+}
+
+a <- c() # create empty variable
+b <- 1
+d <- c(1,2,3)
+
+c(d,b)
+a <- c(d,b)
+
+# adding on to an existing variable
+a <- c(a,2)
+
+
+saved_numbers <- c()
+for(i in 1:10){
+  print(i)
+  print(saved_numbers)
+  if(some_numbers[i] > 50){
+    saved_numbers <- c(saved_numbers,some_numbers[i])
+  } else {
+    # don't need to do anything here
+  }
+}
+
+saved_numbers <- c()
+counter <- 0 
+for(i in 1:10){
+  if(some_numbers[i] > 50){
+    counter <- counter+1
+    saved_numbers[counter] <- some_numbers[i]
+  } else {
+    # don't need to do anything here
+  }
+}
+
+
+
+```
+
+
+```{r}
+# create numbers
+some_numbers <- runif(100, min = 0, max =100)
+
+# evaluate which ones are greater than 50
+saved_numbers <- c()
+counter <- 0 
+for(i in 1:100){
+  if(some_numbers[i] > 50){
+    counter <- counter+1
+    saved_numbers[counter] <- some_numbers[i]
+  } else {
+    # don't need to do anything here
+  }
+}
+
+# add up the numbers
+sum(saved_numbers)
+
+sum(1,2,3)
+sum(c(1,2,3))
+a<-c(1,2,3,4,5)
+sum(a)
+
+```
+
+```{r}
+# create numbers
+some_numbers <- runif(100, min = 0, max =100)
+
+some_numbers[some_numbers > 50]
+sum(some_numbers[some_numbers > 50])
+
+```
+
+## functions
+
+```{r}
+# runif()
+# sum()
+# c()
+
+
+my_function <- function(x){
+  a <- x+50
+  return(a)
+}
+
+my_function(100)
+
+
+sum_random_numbers <- function(n,
+                               smallest,
+                               largest,
+                               cutoff){
+                                  some_numbers <- runif(n, 
+                                                        min = smallest,
+                                                        max =largest)
+                                  return(sum(some_numbers[some_numbers > cutoff]))
+}
+
+sum_random_numbers(100,0,100,90)
+
+```
+
+
+
+
+
