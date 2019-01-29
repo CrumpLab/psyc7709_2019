@@ -23,4 +23,6 @@ We will be adding to this page as we go through the course.
 
 1. [https://cran.r-project.org/doc/contrib/Short-refcard.pdf](https://cran.r-project.org/doc/contrib/Short-refcard.pdf) This link takes you to a reference card, that shows a big long list of intrinsic r functions.
 
+2. A really great and really long list of resources for R! [https://paulvanderlaken.com/2017/08/10/r-resources-cheatsheets-tutorials-books/](https://paulvanderlaken.com/2017/08/10/r-resources-cheatsheets-tutorials-books/)
+
 
