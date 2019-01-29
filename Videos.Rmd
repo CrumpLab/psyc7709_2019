@@ -38,7 +38,7 @@ The assignment for the first few weeks of the course is to document your progres
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/25uuRq-4oFM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-# Another sample problem
+### Another sample problem
 
 In this screen cast we solve the following problem: Generate 100 random numbers between 1 to 100. Find only the numbers that are greater than 50, then add up those selected numbers. The general goal is to see some examples of using variables, logic, and loops to write a script, and finally to put the algorithm into a more general function.
 
