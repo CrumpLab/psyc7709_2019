@@ -46,5 +46,13 @@ The .rmd for this tutorial is here: [https://crumplab.github.io/psyc7709/Present
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RhVZy1vw2iQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+### find the longest word
+
+We solve the following problem: Given a sentence find and return the longest word in the sentence. 
+
+The .rmd for this tutorial is here: [https://crumplab.github.io/psyc7709/Presentations/LongestWord.html](https://crumplab.github.io/psyc7709/Presentations/LongestWord.html)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qNJNQH1nAlg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
 

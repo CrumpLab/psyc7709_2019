@@ -1,0 +1,113 @@
+---
+title: "LongestWord"
+author: "Matt"
+date: "1/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Find the longest word
+
+Given a sentence, create a function to return the longest word (most letters) in the sentence. If there are multiple words with the same length, return the first one in the list.
+
+```{r}
+
+sentence <- "a dog went on a walk to the circus"
+
+# splitting a character vector in r
+
+first_split <- strsplit(sentence, split = " ")
+
+first_split[1]
+class(first_split)
+first_split[[1]][2]
+
+unlisted_sentence <- unlist(first_split)
+unlisted_sentence[3]
+
+# split the sentence
+sentence <- "a dog went on a walk to the circus"
+split_sentence <- unlist(strsplit(sentence, split = " "))
+
+for(i in split_sentence){
+  print(i)
+}
+
+length(split_sentence[4])
+a <- c(1,2,3,4)
+length(a)
+length(split_sentence)
+
+split_sentence[2]
+length(unlist(strsplit(split_sentence[2],split="")))
+
+count_letters <- function(x){
+  return(length(unlist(strsplit(x,split=""))))
+}
+
+count_letters("dog")
+
+count_lettersb <- function(x){
+  temp_split   <- strsplit(x,split="")
+  unlist_split <- unlist(temp_split)
+  find_length  <- length(unlist_split)
+  return(find_length)
+}
+
+count_lettersb("dbb")
+
+```
+
+
+```{r}
+sentence <- "a dog went on a walk to the circus"
+
+count_letters <- function(x){
+  return(length(unlist(strsplit(x,split=""))))
+}
+
+split_sentence <- unlist(strsplit(sentence,split=" "))
+
+for(i in split_sentence){
+  print(i)
+  print(count_letters(i))
+}
+
+a <- c(1,4,3,5,4,6,5,6,7,8)
+max(a)
+
+word_lengths <- c()
+counter <- 0
+for(i in split_sentence){
+  counter <- counter+1
+  word_lengths[counter] <- count_letters(i)
+}
+
+max(word_lengths)
+position_of_largest_word <- which.max(word_lengths)
+
+split_sentence[position_of_largest_word]
+
+```
+
+
+```{r}
+find_largest_word <- function(x){
+  split_sentence <- unlist(strsplit(x,split=" "))
+  word_lengths <- c()
+  counter <- 0
+  for(i in split_sentence){
+    counter <- counter+1
+    word_lengths[counter] <- count_letters(i)
+  }
+  position_of_largest_word <- which.max(word_lengths)
+  return(split_sentence[position_of_largest_word])
+}
+
+find_largest_word("some sentence in here")
+find_largest_word("cat dog to")
+```
+
