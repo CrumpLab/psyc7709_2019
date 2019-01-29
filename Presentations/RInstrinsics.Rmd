@@ -1,0 +1,212 @@
+---
+title: "R Intrinsics"
+author: "Matt"
+date: "1/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+R is a programming language that gives you the basic ingredients to write your own functions. It is also an open-source language, and many other people have written and shared their own functions for solving a variety of problems. Learning to code in R will involve both learning to write your own code, and just as often learning how to use code written by other people.
+
+For example, let's say you wanted to find the mean of a bunch of numbers. You could use R's basic programming tools to write your own function to compute the mean of some numbers, or you could use R's built-in function. Here's an example of both approaches:
+
+```{r}
+#write your own mean function
+my_mean <- function(x){
+  total_sum <-0
+  for(i in x){
+    total_sum <- total_sum+i
+  }
+  return(total_sum/length(x))
+}
+
+my_mean(c(1,2,3))
+
+# use R's mean function
+mean(c(1,2,3))
+```
+
+# Learning about existing functions
+
+The purpose of this assignment is to help you become aware of the existing functions that R has to offer. As you become aware of these tools, you will be able to use them in your own code.
+
+This assignment contains a list of names of functions that are worth knowing about. Your job is to demonstrate that you know what the function does. You will do this in two ways, by briefly describing in plain language what the function does, and then writing some sample code showing that you can use the function.
+
+## Which functions should you learn about?
+
+Before we get started, it's worth mentioning that there are lots of functions. When you install R for the first time, you will receive what are called base R functions. These are just the functions that come pre-installed. 
+
+There are many more functions available to you that can be installed using the Packages tab in R-Studio. If you know the name of a package that you want to install, just click the install button, type in the name of package, and then install it. It's usually a good idea to have the "install dependencies" option clicked on. This will usually make sure that if your package requires other packages that you don't have, the install process will install all of the necessary packages.
+
+I found two helpful resources that will guide your process of discovering R functions that you can use. 
+
+1. [https://cran.r-project.org/doc/contrib/Short-refcard.pdf](https://cran.r-project.org/doc/contrib/Short-refcard.pdf) This link takes you to a reference card, that shows a big long list of intrinsic r functions.
+
+2. [https://towardsdatascience.com/top-100-most-used-r-functions-on-github-9caf2b81b314](https://towardsdatascience.com/top-100-most-used-r-functions-on-github-9caf2b81b314) This blog post looks at the most used r functions. There is even a github repository containing a list of the 2000 most used functions and the 100 most used packages [https://github.com/v-kozhevnikov/GitHub_R_commands](https://github.com/v-kozhevnikov/GitHub_R_commands)... check out the data folder for those lists.
+
+## The assignment
+
+I've selected numerous functions from the above two sources, and I am listing them below under different categories. Your job is to create an .rmd file to add to your webpage. In this file you will copy the list of function names below. For each one, give a brief description of what it does, and then write a code-chunk demonstrating that you can use the function.
+
+## List of functions
+
+### General bits
+
+1. help(topic) 
+2. ?topic
+3. ls()
+4. dir()
+5. list.files()
+
+
+### Input and output
+
+1. save()
+2. load()
+3. data()
+4. library()
+5. read.table()
+6. read.csv()
+7. scan()
+8. print()
+9. cat()
+10. write.table()
+
+### Data Creation
+
+1. c()
+2. from:to (where from and to are replaced with numbers, e.g. 1:10)
+3. seq()
+4. rep()
+5. data.frame()
+6. list()
+7. matrix()
+8. factor()
+9. rbind()
+10. cbind()
+
+### Slicing and extracting data
+
+#### indexing vectors
+
+1. x[n] nth element
+2. x[-n] all but nth element
+3. x[1:n] first n elements
+4. x[-(1:n)] elements from n+1 to the end
+5. x[c(1,4,2)] specific elements
+6. x["name"] elements named "name"
+7. x[x>3] all elements greater than 3
+8. x[x > 3 & x < 5] all elements between 3 and 5
+9. x[x %in% c("a","and","the")] all elements in given set
+
+#### Indexing lists
+1. x[n] list with elements n
+2. x[[n]] nt h element of the list
+3. x[["name"]] element of the list named "name"
+4. x$name id.
+
+#### Indexing matrices
+1. x[i,j] element at row i, column j
+2. x[i,] row i
+3. x[,j] column j
+4. x[,c(1,3)] columns 1 and 3
+5. x["name",] row named "name"
+
+#### Indexing data frames (matrix indexing plus the following) 
+1. x[["name"]] column named "name"
+2. x$nameid.
+
+### Variable conversion
+
+1. as.data.frame(x)
+2. as.numeric(x)
+3. as.logical(x)
+4. as.character(x)
+
+### Variable information
+1. is.na(x)
+2. is.null(x)
+3. is.data.frame(x)
+4. is.numeric(x)
+5. is.character(x)
+6. length(x)
+7. dim(x)
+8. dimnames(x)
+9. nrow(x)
+10. ncol(x)
+11. class()
+12. attributes()
+
+### Data selection and manipulation
+1. which.max()
+2. which.min()
+3. which()
+4. sort()
+5. unique()
+6. table()
+7. sample()
+
+### Math
+1. max()
+2. min()
+3. range()
+4. sum()
+5. mean()
+6. median()
+7. var()
+8. sd()
+9. cor()
+10. round()
+11. abs()
+
+### Matrices
+1. t()
+2. diag()
+3. rowSums()
+4. colSums()
+5. rowMeans()
+6. colMeans()
+
+### Advanced Data processing
+1. apply()
+2. aggregate()
+
+### Strings
+1. paste()
+2. strsplit()
+3. tolower()
+4. toupper
+
+### Plotting
+1. hist()
+2. plot()
+
+### Distributions
+1. rnorm()
+2. runif()
+
+### Programming
+1. show that you can define a function
+2. show that you can write a for loop
+3. show that you can write a while loop
+4. show that you can write an if else statement
+5. Explain what return() does inside a function, show you can use it
+6. Explain what break() does, show you can use it
+
+## Installing some packages
+
+Use the packages tab in R-studio to install these packages. You will need to be connected to the internet when you do this. If you are installing on your laptop, or on R-studio Cloud, then these packages will not need to installed again. 
+
+1. ggplot2
+2. dplyr
+3. shiny
+4. data.table
+5. reshape2
+6. stringr
+
+
+
+
