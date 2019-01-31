@@ -1,0 +1,32 @@
+---
+title: "DataWrangling"
+author: "Matt"
+date: "1/31/2019"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Data-wrangling text
+
+Obtain a reasonably sized piece of text (at least 250 words or more) and load into R as a string variable
+
+**Pre-processing**
+
+ - convert all characters to lowercase, remove all punctuation, special characters,and numbers so the only characters left are the letters from a-z
+ 
+**Analysis questions**
+
+ - create a table with a letter frequency distribution (a count of how many times each letter appears in the text)
+ - Letters appear in different positions of words. Create a table with letter frequency distrbibutions as a function of letter position in a word. For example, you will have a distribution for all first position letters, all 2nd position letters, and so on. Don't worry about going past 9 positions.
+
+

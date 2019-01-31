@@ -1,0 +1,83 @@
+---
+title: "DataWrangling"
+author: "Matt"
+date: "1/31/2019"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Skills checklist
+
+- can input files in .txt, .csv, and .xlsx into data.frames or data.tables
+- can rename columns
+- can convert columns into desired class (e.g., a factor vs not a factor)
+- 
+
+### wide to long
+
+Rosenbaum, Mama, Algom, (2017) investigated whether Stroop effects change depending on whether subjects are sitting or standing. A tutorial on this dataset is [https://crumplab.github.io/statisticsLab/lab-10-factorial-anova.html#does-standing-up-make-you-focus-more](https://crumplab.github.io/statisticsLab/lab-10-factorial-anova.html#does-standing-up-make-you-focus-more).
+
+The data file contains 4 columns. Each row is for one subject. Each row contains 4 means, for the incongruent and congruent stroop conditions, both when subjects were sitting and standing
+
+**pre-processing**
+
+ - load the data
+ - convert from wide format to long format (each row should only contain one dependent measure per subject)
+
+```{r}
+library(data.table)
+all_data <- fread("https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/stroop_stand.csv")
+```
+
+**Analysis questions**
+
+  - use dplyr to calculate the means for congruent vs. incongruent, collapsing over the sitting/standing variable
+  - use dplyr to calculate the standard error for congruent vs. incongruent, collapsing over the sitting/standing variable
+  - use dplyr to calculate the means for sitting/standing variable collapsing over congruency
+  - use dplyr to calculate the standard error for sitting/standing variable collasping over congruency
+  - use dplyr to calculate the condition means for each cell in the 2x2 design.
+  - use dplyr to calculate the condition standard errors for each cell in the 2x2 design.
+  - According to the means, was the average Stroop effect different depending on whether subjects were sitting or standing?
+
+-----
+
+### Means at multiple levels
+
+```{r}
+all_data <- fread("https://github.com/CrumpLab/statisticsLab/raw/master/data/exp1_BehmerCrumpAPP.csv")
+```
+
+**Analysis Questions**
+
+a. Which subject had the worst overall accuracy?
+b. How many subjects had an overall accuracy worse than 80%?
+c. How many subjects had an accuracy of less than 80% in any one of the six conditions?
+d. Create a scatterplot showing each subjects mean overall accuracy and mean overall IKSI (interkeystroke interval)
+
+
+
+-----
+
+### Data-wrangling text
+
+Obtain a reasonably sized piece of text (at least 250 words or more) and load into R as a string variable
+
+**Pre-processing**
+
+ - convert all characters to lowercase, remove all punctuation, special characters,and numbers so the only characters left are the letters from a-z
+ 
+**Analysis questions**
+
+ - create a table with a letter frequency distribution (a count of how many times each letter appears in the text)
+ - Letters appear in different positions of words. Create a table with letter frequency distrbibutions as a function of letter position in a word. For example, you will have a distribution for all first position letters, all 2nd position letters, and so on. Don't worry about going past 9 positions.
+
+
