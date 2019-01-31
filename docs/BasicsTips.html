@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>R Basics Tips</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Psyc 7709</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Syllabus.html">Syllabus</a>
+</li>
+<li>
+  <a href="Schedule.html">Schedule</a>
+</li>
+<li>
+  <a href="Videos.html">Videos</a>
+</li>
+<li>
+  <a href="Resources.html">Resources</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">R Basics Tips</h1>
+
+</div>
+
+
+<div id="easier-problems" class="section level2">
+<h2>Easier Problems</h2>
+<ol style="list-style-type: decimal">
+<li>Do simple math with numbers, addition, subtraction, multiplication, division</li>
+<li>Put numbers into variables, do simple math on the variables</li>
+<li>Write code that will place the numbers 1 to 100 separately into a variable using for loop. Then, again using the seq function.</li>
+<li>Find the sum of all the integer numbers from 1 to 100.</li>
+</ol>
+<ul>
+<li>you can use the <code>sum()</code> function on a vector of numbers</li>
+<li>How would you do this without using the sum function? For example, how could you use a for loop to accomplish this task?</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>Write a function to find the sum of all integers between any two values.</li>
+</ol>
+<pre class="r"><code># syntax for writing a function
+
+function_name &lt;- function(input_name){
+  #body where you modify input
+  return(name_of_output)
+}
+
+# running the function
+function_name(some_input)</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>List all of the odd numbers from 1 to 100.</li>
+</ol>
+<ul>
+<li>you could use the <code>seq()</code> function</li>
+<li>How could you do this without using the <code>seq()</code> function? Consider using the mod function <code>%%</code>, which evaluates whether or not there is a remainder when dividing one number by another.</li>
+</ul>
+<pre class="r"><code># four divided by two gives no remainder
+# the mod function shows 0
+4%%2</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code># 5 divided by two gives a remainder
+# the mod function shows 1
+5%%2</code></pre>
+<pre><code>## [1] 1</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>List all of the prime numbers from 1 to 1000.</li>
+<li>Generate 100 random numbers</li>
+</ol>
+<ul>
+<li>check out the <code>runif</code> function</li>
+<li>to look at the help file run <code>?runif</code> in the console. In general <code>?function_name</code> will show the help file for any function in R.</li>
+</ul>
+<ol start="9" style="list-style-type: decimal">
+<li>Generate 100 random numbers within a specific range</li>
+</ol>
+<ul>
+<li><code>runif</code> can do this</li>
+</ul>
+<ol start="10" style="list-style-type: decimal">
+<li>Write your own functions to give descriptive statistics for a vector variable storing multiple numbers. Write functions for the following without using R intrinsics: mean, mode, median, range, standard deviation</li>
+</ol>
+<ul>
+<li>It’s ok to use <code>sum()</code> and <code>length()</code></li>
+<li>be creative and see if you can find multiple solutions. Here is an example for two ways to compute the mean.</li>
+</ul>
+<pre class="r"><code># using sum and length
+mean_A &lt;- function(x){
+  return(sum(x)/length(x))
+}
+
+some_numbers &lt;- c(1,2,3,4,5)
+mean_A(some_numbers)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code># no intrinsics
+mean_B &lt;- function(x){
+  counter &lt;- 0
+  total_sum &lt;-0
+  for(i in x){
+    total_sum &lt;- total_sum+i
+    counter&lt;-counter+1
+  }
+  return(total_sum/counter)
+}
+
+mean_B(some_numbers)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<ol start="11" style="list-style-type: decimal">
+<li>Count the number of characters in a string variable</li>
+</ol>
+<ul>
+<li>use <code>strsplit()</code> to split a character vector</li>
+</ul>
+<pre class="r"><code>a &lt;- &quot;adskfjhkadsjfh&quot;
+strsplit(a,split=&quot;&quot;)</code></pre>
+<pre><code>## [[1]]
+##  [1] &quot;a&quot; &quot;d&quot; &quot;s&quot; &quot;k&quot; &quot;f&quot; &quot;j&quot; &quot;h&quot; &quot;k&quot; &quot;a&quot; &quot;d&quot; &quot;s&quot; &quot;j&quot; &quot;f&quot; &quot;h&quot;</code></pre>
+<pre class="r"><code># note that strsplit returns it&#39;s result in a list
+b &lt;-strsplit(a,split=&quot;&quot;)
+b[[1]] # access all elements in list 1</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;d&quot; &quot;s&quot; &quot;k&quot; &quot;f&quot; &quot;j&quot; &quot;h&quot; &quot;k&quot; &quot;a&quot; &quot;d&quot; &quot;s&quot; &quot;j&quot; &quot;f&quot; &quot;h&quot;</code></pre>
+<pre class="r"><code>b[[1]][1] # access first element of list 1</code></pre>
+<pre><code>## [1] &quot;a&quot;</code></pre>
+<pre class="r"><code># lists can be unlisted
+d &lt;- unlist(strsplit(a,split=&quot;&quot;))
+d  # all elements in character vector</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;d&quot; &quot;s&quot; &quot;k&quot; &quot;f&quot; &quot;j&quot; &quot;h&quot; &quot;k&quot; &quot;a&quot; &quot;d&quot; &quot;s&quot; &quot;j&quot; &quot;f&quot; &quot;h&quot;</code></pre>
+<pre class="r"><code>d[1] #first element</code></pre>
+<pre><code>## [1] &quot;a&quot;</code></pre>
+<ol start="12" style="list-style-type: decimal">
+<li>Count the number of words in a string variable</li>
+</ol>
+<ul>
+<li>use <code>strsplit</code></li>
+</ul>
+<pre class="r"><code>a &lt;- &quot;this is a sentence&quot;
+strsplit(a,split=&quot; &quot;) # use a space as the splitting character</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;this&quot;     &quot;is&quot;       &quot;a&quot;        &quot;sentence&quot;</code></pre>
+<ol start="13" style="list-style-type: decimal">
+<li>Count the number of sentences in a string variable</li>
+</ol>
+<ul>
+<li>consider splitting by the <code>.</code> character</li>
+</ul>
+<ol start="14" style="list-style-type: decimal">
+<li>Count the number of times a specific character occurs in a string variable</li>
+</ol>
+<ul>
+<li><code>table()</code> function can help count individual occurences</li>
+</ul>
+<pre class="r"><code>a &lt;- c(1,3,2,3,2,3,2,3,4,5,4,3,4,3,4,5,6,7)
+table(a)</code></pre>
+<pre><code>## a
+## 1 2 3 4 5 6 7 
+## 1 3 6 4 2 1 1</code></pre>
+<ul>
+<li>How would you do this without the table function?</li>
+</ul>
+<ol start="15" style="list-style-type: decimal">
+<li>Do a logical test to see if one word is found within the text of another string variable.</li>
+</ol>
+<ul>
+<li>For example given the word hello, can you run a test to see if it is contained in the test sentence?</li>
+</ul>
+<pre class="r"><code>test_word &lt;- &quot;hello&quot;
+test_sentence &lt;-&quot;is the word hello in this sentence&quot;</code></pre>
+<ul>
+<li>consider using <code>%in%</code></li>
+</ul>
+<pre class="r"><code>a &lt;- c(1,2,3,4,5)
+b &lt;- 5
+d &lt;- 8
+
+# question is b in a?
+b%in%a</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># is d in a?
+d%in%a</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<ol start="16" style="list-style-type: decimal">
+<li>Put the current computer time in milliseconds into a variable</li>
+</ol>
+<pre class="r"><code>print(as.numeric(Sys.time())*1000, digits=15)</code></pre>
+<pre><code>## [1] 1548956874284.66</code></pre>
+<ol start="17" style="list-style-type: decimal">
+<li><p>Measure how long a piece of code takes to run by measuring the time before the code is run, and after the code is run, and taking the difference to find the total time</p></li>
+<li>Read a .txt file or .csv file into a variable</li>
+</ol>
+<ul>
+<li><code>scan()</code> is a general purpose text input function</li>
+<li><code>read.csv()</code> will read .csv files</li>
+</ul>
+<ol start="19" style="list-style-type: decimal">
+<li>Output the contents of a variable to a .txt file</li>
+</ol>
+<ul>
+<li><code>write.csv()</code></li>
+</ul>
+<ol start="20" style="list-style-type: decimal">
+<li>Create a variable that stores a 20x20 matrix of random numbers</li>
+</ol>
+<ul>
+<li>here’s how you make a matrix full of 0s</li>
+</ul>
+<pre class="r"><code>a &lt;- matrix(0, ncol=20,nrow=20)</code></pre>
+<ol start="21" style="list-style-type: decimal">
+<li>Output any matrix to a txt file using commas or tabs to separate column values, and new lines to separate row values</li>
+</ol>
+<ul>
+<li><code>write.csv()</code></li>
+</ul>
+</div>
+<div id="harder-problems" class="section level2">
+<h2>Harder Problems</h2>
+<ol style="list-style-type: decimal">
+<li><strong>The FizzBuzz Problem.</strong> List the numbers from 1 to 100 with the following constraints. If the number can be divided by three evenly, then print Fizz instead of the number. If the number can be divided by five evenly, then print Buzz instead of the number. Finally, if the number can be divided by three and five evenly, then print FizzBuzz instead of the number. The answer could look something like this:</li>
+</ol>
+<p>1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16, 17, Fizz, 19, Buzz, Fizz, 22, 23, Fizz, Buzz, 26, Fizz, 28, 29, FizzBuzz, 31, 32, Fizz, 34, Buzz, Fizz, 37, 38, Fizz, Buzz, 41, Fizz, 43, 44, FizzBuzz, 46, 47, Fizz, 49, Buzz, Fizz, 52, 53, Fizz, Buzz, 56, Fizz, 58, 59, FizzBuzz, 61, 62, Fizz, 64, Buzz, Fizz, 67, 68, Fizz, Buzz, 71, Fizz, 73, 74, FizzBuzz, 76, 77, Fizz, 79, Buzz, Fizz, 82, 83, Fizz, Buzz, 86, Fizz, 88, 89, FizzBuzz, 91, 92, Fizz, 94, Buzz, Fizz, 97, 98, Fizz, Buzz</p>
+<ul>
+<li>Here a few bits that might be useful</li>
+</ul>
+<pre class="r"><code># a number mod three will return 0 if it divides evenly
+6%%3</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code># a number mod five will return 0 if it divides evenly
+10%%5</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code># examples of replacing elements of a vector
+a&lt;-c(1,2,3,4,5)
+a[3]&lt;-&quot;Fizz&quot;
+a</code></pre>
+<pre><code>## [1] &quot;1&quot;    &quot;2&quot;    &quot;Fizz&quot; &quot;4&quot;    &quot;5&quot;</code></pre>
+<pre class="r"><code># notice that a starts as a numeric vector
+# but changes to an all character vector after &quot;Fizz&quot; is added</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Frequency Counts</strong> Take text as input, and be able to produce a table that shows the counts for each character in the text. This problem is related to the earlier easy problem asking you to count the number of times that a single letter appears in a text. The slightly harder problem is the more general version: count the frequencies of all unique characters in a text.</li>
+</ol>
+<ul>
+<li>here’s the easy way to do this</li>
+</ul>
+<pre class="r"><code>a&lt;-&quot;some text that has some letters&quot;
+table(unlist(strsplit(a,split=&quot;&quot;)))</code></pre>
+<pre><code>## 
+##   a e h l m o r s t x 
+## 5 2 5 2 1 2 2 1 4 6 1</code></pre>
+<ul>
+<li>Can you do this without using table? Attempt this problem using <code>data.frame</code>. Here are some more tips</li>
+</ul>
+<pre class="r"><code># data.frame is data format that produces named columns of data
+
+# creates two vectors
+numbers &lt;-c(1,2,3,4,5)
+letters &lt;-c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;)
+
+# make a data.frame from two vectors
+new_df &lt;- data.frame(numbers,letters)
+print(new_df)</code></pre>
+<pre><code>##   numbers letters
+## 1       1       a
+## 2       2       b
+## 3       3       c
+## 4       4       d
+## 5       5       e</code></pre>
+<pre class="r"><code># access individual columns of dataframe
+new_df$numbers</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre class="r"><code>new_df$letters</code></pre>
+<pre><code>## [1] a b c d e
+## Levels: a b c d e</code></pre>
+<pre class="r"><code># get names of data.frame
+names(new_df)</code></pre>
+<pre><code>## [1] &quot;numbers&quot; &quot;letters&quot;</code></pre>
+<pre class="r"><code># break the problem into steps
+# first part of problem is to identify all unique character in the string
+a&lt;-c(1,2,3,4,5,2,2,3,2,3)
+unique(a)</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre class="r"><code>b&lt;-&quot;a string with some letters&quot;
+unique(unlist(strsplit(b,split=&quot;&quot;)))</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot; &quot; &quot;s&quot; &quot;t&quot; &quot;r&quot; &quot;i&quot; &quot;n&quot; &quot;g&quot; &quot;w&quot; &quot;h&quot; &quot;o&quot; &quot;m&quot; &quot;e&quot; &quot;l&quot;</code></pre>
+<pre class="r"><code># second part is to go through each of the unique letters in the list of unique letters, and for each count the number of times they appear in the original text
+# store the results in a data.frame with two columns, one with the letter names, and another with the counts</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Test the Random Number Generator</strong> Test the random number generator for a flat distribution. Generate a few million random numbers between 0 and 100. Count the number of 0s, 1s, 2s, 3s, etc. all the way up to 100. Look at the counts for each of the numbers and determine if they are relatively equal. For example, you could plot the counts in Excel to make a histogram. If all of the bars are close to being flat, then each number had an equal chance of being selected, and the random number generator is working without bias.</li>
+</ol>
+<div class="margintnote">
+<div class="figure">
+<img src="figures/Fig8_randomNumber.png" alt="Histogram showing sampled data from a uniform distribution" width="1272" />
+<p class="caption">
+Histogram showing sampled data from a uniform distribution
+</p>
+</div>
+</div>
+<pre class="r"><code>a&lt;-runif(100,0,100)
+hist(a)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Create a multiplication table</strong> Generate a matrix for a multiplication table. For example, the labels for the columns could be the numbers 1 to 10, and the labels for the rows could be the numbers 1 to 10. The contents of each of the cells in the matrix should be correct answer for multiplying the column value by the row value.</li>
+</ol>
+<pre class="r"><code># you can multiply all numbers in a vector in one go
+a&lt;-c(1,2,3,4,5,6,7,8,9,10)
+a*2</code></pre>
+<pre><code>##  [1]  2  4  6  8 10 12 14 16 18 20</code></pre>
+<pre class="r"><code># you can nest loops
+for(i in 1:3){
+  for(j in 1:3){
+    print(i*j)
+  }
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 2
+## [1] 4
+## [1] 6
+## [1] 3
+## [1] 6
+## [1] 9</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Encrypt and Decrypt the Alphabet</strong> Turn any normal english text into an encrypted version of the text, and be able to turn any decrypted text back into normal english text. A simple encryption would be to scramble the alphabet such that each letter corresponds to a new randomly chosen (but unique) letter.</li>
+</ol>
+<ul>
+<li>The following code shows an example using numbers</li>
+</ul>
+<pre class="r"><code>original_sequence &lt;- c(1,2,3,4,5,2,2,3,2,4,5,2)
+numbers &lt;- unique(original_sequence)
+scrambled_numbers &lt;- sample(numbers)
+encryption_key &lt;- data.frame(numbers,scrambled_numbers)
+
+encrypt_numbers &lt;-function(input_sequence,key){
+  encrypted_sequence&lt;-c()
+  for(i in 1:length(input_sequence)){
+    original_number &lt;- input_sequence[i]
+    new_number &lt;- key[key$numbers==original_number,]$scrambled_numbers
+    encrypted_sequence[i] &lt;- new_number
+  }
+  return(encrypted_sequence)
+}
+
+encrypt_numbers(original_sequence,encryption_key)</code></pre>
+<pre><code>##  [1] 5 3 4 2 1 3 3 4 3 2 1 3</code></pre>
+<ul>
+<li>here is a different approach making use of the <code>factor()</code> function</li>
+</ul>
+<pre class="r"><code>original_sequence &lt;- c(1,2,3,4,5,2,2,3,2,4,5,2)
+original_sequence &lt;- as.factor(original_sequence)
+levels(original_sequence) # show names of levels in factor</code></pre>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</code></pre>
+<pre class="r"><code>new_sequence &lt;- original_sequence # copy
+levels(new_sequence)&lt;-c(5,4,3,2,1) # rename the levels
+new_sequence # all elements are now changed</code></pre>
+<pre><code>##  [1] 5 4 3 2 1 4 4 3 4 2 1 4
+## Levels: 5 4 3 2 1</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li><strong>Snakes and Ladders</strong></li>
+</ol>
+<p><img src="figures/SnakesLadders.png" width="130" /></p>
+<p>Your task here is to write an algorithm that can simulate playing the above depicted Snakes and Ladders board. You should assume that each roll of the dice produces a random number between 1 and 6. After you are able to simulate one played game, you will then write a loop to simulate 1000 games, and estimate the average number of dice rolls needed to successfully complete the game.</p>
+<pre class="r"><code># rolling a dice with sample
+sample(c(1,2,3,4,5,6),1)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>sample(c(1,2,3,4,5,6),1)</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre class="r"><code>sample(c(1,2,3,4,5,6),1)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>-tip: consider a simpler version of the problem. How many times do you need to roll a dice so that all of the dice rolls add up to 25 or greater?</p>
+<pre class="r"><code># try one simulation
+total_sum&lt;-0
+number_of_rolls&lt;-0
+while(total_sum &lt; 25){
+  number_of_rolls &lt;- number_of_rolls+1
+  total_sum &lt;-total_sum+sample(c(1,2,3,4,5,6),1)
+}
+number_of_rolls</code></pre>
+<pre><code>## [1] 7</code></pre>
+<pre class="r"><code># record the results from multiple simulations
+
+save_rolls &lt;- c()
+for(sims in 1:100){
+  total_sum&lt;-0
+  number_of_rolls&lt;-0
+  while(total_sum &lt; 25){
+    number_of_rolls &lt;- number_of_rolls+1
+    total_sum &lt;-total_sum+sample(c(1,2,3,4,5,6),1)
+  }
+  save_rolls[sims] &lt;- number_of_rolls
+}
+mean(save_rolls)</code></pre>
+<pre><code>## [1] 7.84</code></pre>
+<ul>
+<li>how do you add in a representaion of the board, so that you change which square the player is on depending on whether they land on a ladder or snake.</li>
+</ul>
+<ol start="7" style="list-style-type: decimal">
+<li><p><strong>Dice-rolling simulations.</strong> Assume that a pair of dice are rolled. Using monte carlo-simulation, compute the probabilities of rolling a 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, and 12, respectively.</p></li>
+<li><p><strong>Monte Hall problem.</strong> The monte-hall problem is as follows. A contestant in a game show is presented with three closed doors. They are told that a prize is behind one door, and two goats are behind the other two doors. They are asked to choose which door contains the prize. After making their choice the game show host opens one of the remaining two doors (not chosen by the contestant), and reveals a goat. There are now two door remaining. The contestant is asked if they would like to switch their choice to the other door, or keep their initial choice. The correct answer is that the participant should switch their initial choice, and choose the other door. This will increase their odds of winning. Demonstrate by monte-carlo simulation that the odds of winning is higher if the participant switches than if the participants keeps their original choice.</p></li>
+<li><p><strong>100 doors problem.</strong> Problem: You have 100 doors in a row that are all initially closed. You make 100 passes by the doors. The first time through, you visit every door and toggle the door (if the door is closed, you open it; if it is open, you close it). The second time you only visit every 2nd door (door 2, 4, 6, etc.). The third time, every 3rd door (door 3, 6, 9, etc.), etc, until you only visit the 100th door.</p></li>
+</ol>
+<p>Question: What state are the doors in after the last pass? Which are open, which are closed?</p>
+<ol start="10" style="list-style-type: decimal">
+<li><strong>99 Bottles of Beer Problem</strong> In this puzzle, write code to print out the entire “99 bottles of beer on the wall”" song. For those who do not know the song, the lyrics follow this form:</li>
+</ol>
+<p>X bottles of beer on the wall X bottles of beer Take one down, pass it around X-1 bottles of beer on the wall</p>
+<p>Where X and X-1 are replaced by numbers of course, from 99 all the way down to 0.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

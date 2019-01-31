@@ -117,26 +117,7 @@ a. Document progress in solving [programming challenges](https://crumplab.github
 
 ---
 
-### 4. Data-Wrangling
-
-#### Overview
-
-- Loading Data into R
-- Data formatting (dataframes and data.tables)
-- Introduction to the dplyr package for filtering, selecting, augmenting, and summarizing data sets (and more).
-
-#### Readings and Resources
-
-1. [Dplyr tutorial](https://dplyr.tidyverse.org)
-2. [Hadley Wickham's, R for Data Science, Chapter 5 Data transformation](http://r4ds.had.co.nz/transform.html)
-
-#### Assignment 4 (Data-Wrangling)
-
-Due date: M Mar 4th
-
----
-
-### 5. Data-Visualization
+### 4. Data-Visualization
 
 
 #### Overview
@@ -146,8 +127,31 @@ Due date: M Mar 4th
 #### Readings and Resources
 
 1. [ggplot2 reference website](https://ggplot2.tidyverse.org)
+2. [Hadley Wickham's, R for Data Science, Chapter 3 Data visualization](https://r4ds.had.co.nz/data-visualisation.html)
+3. [ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 
-#### Assignment 5 (Data-Vis)
+#### Assignment 4 (Data-Vis)
+
+Your assignment is to practice making graphs in ggplot2. [Click this link to see the assignment instructions](https://crumplab.github.io/psyc7709/Presentations/DataVis.html). You will be making a new R markdown page documenting your code for making graphs in the assignment. Load this page onto your website, then submit the link to the page on blackboard.
+
+Due date: M Mar 4th
+
+---
+
+### 5. Data-Wrangling
+
+#### Overview
+
+- Loading Data into R
+- Data formatting (dataframes and data.tables)
+- Introduction to the dplyr package for filtering, selecting, augmenting, and summarizing data sets (and more).
+
+#### Readings and Resources
+
+1. [Dplyr reference](https://dplyr.tidyverse.org)
+2. [Hadley Wickham's, R for Data Science, Chapter 5 Data transformation](http://r4ds.had.co.nz/transform.html)
+
+#### Assignment 5 (Data-Wrangling)
 
 Due date: M Mar 11th
 
