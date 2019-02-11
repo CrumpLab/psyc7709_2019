@@ -1,0 +1,76 @@
+---
+title: "R Packages"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Assignment
+
+Your assignment is to create an R package containing at least two functions. You will also be uploading your R package to a new github repository, and learning how to share R packages through Github.
+
+**Steps**
+
+1. Create a new R project in a new directory. Choose the option to create an R package.
+2. The R folder contains an example `hello()` function in a `.r` file. Add two new `.r` files, each containing one of your two functions.
+3. The `man` folder contains an `.Rd` file that provides an example for writing help documentation for the `hello()` function. Create two more `.Rd` files and write help documentation for your two new functions
+4. Build and load your package to make sure it is working locally.
+5. Create a new github repository on your github account. Do this online first. After you have created the new empty repository wait a couple seconds. You should then able to view the new repository in github desktop. Clone the repository to your local computer. Copy all of the R package files that you created into the github folder and push to the cloud.
+6. Edit the readme file on the github repository to give instructions about how someone can download and install the package. For an example, see the following github repository, which shows how a github repo containing an R package can be downloaded and installed using the console
+
+[https://github.com/CrumpLab/crumplabr](https://github.com/CrumpLab/crumplabr)
+
+You can put any two (or more) functions into your R package. If you can't think of something to do, then I suggest you write a standard deviation function, and a variance function, both for the population, not a sample. The `sd()` and `var()` functions in base R both use n-1 in the denominator by default. You would need to right your own functions that divide by N for the population standard deviation and variance.
+
+## Reference
+
+[https://support.rstudio.com/hc/en-us/articles/200486488?version=1.0.143&mode=desktop](https://support.rstudio.com/hc/en-us/articles/200486488?version=1.0.143&mode=desktop)
+
+## Background
+
+R is free open-source software. Many people have contributed to the development of R by creating a distributing packages. Packages are a way to collect and share R functions with other people. 
+
+### About R packages
+
+R-studio has a tab called **Packages** in the lower right panel. If you click on the packages tab you can see all of the packages that are currently installed.
+
+#### Viewing package contents
+
+You can click the package name in blue to view the contents of the package. You should see some links to documentation, and a list of individual functions, this will show up in the help menu. You can click individual functions to view their help document.
+
+#### Loading a package
+
+In order to use the functions in a package, you need to load the package using the `library()` function.
+
+For example, if you have the ggplot2 library installed, you can load it using:
+
+```{r}
+library(ggplot2)
+```
+
+#### Installing a package from CRAN
+
+You must first install packages before the library command will load the package. Ensure you are connected to the internet. Then, click install under the Packages tab. Generally, you will be installing from CRAN. This is an online repository of R packages. Type the name of the package, and if it is available, you should see the name begin to autocomplete. It is generally a good idea to click "install dependencies", this will install additional packages that may be required. 
+
+#### Other tidbits
+
+1. The R packages you install are stored with your version of R. Remember that R is a separate program from R-studio. R-studio runs on top of R, and acts as a GUI (graphic user interface) for R. As a result, if you delete or re-install R (something you should do once in a while especially to upgrade your version of R), then all of the previous packages you had installed will be deleted, and you will have to re-install them.
+
+2. The `library()` function loads the package into R's memory. You can check the package is loaded by looking at the list of packages. You should see a checkmark indicating the package is loaded. You can also load a package directly without using library, just by clicking the box next to the package.
+
+
+
+
+
+
+
+
+
