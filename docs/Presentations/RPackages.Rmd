@@ -66,6 +66,145 @@ You must first install packages before the library command will load the package
 
 2. The `library()` function loads the package into R's memory. You can check the package is loaded by looking at the list of packages. You should see a checkmark indicating the package is loaded. You can also load a package directly without using library, just by clicking the box next to the package.
 
+## Writing Functions help
+
+In this assignment you will be asked to write two custom functions. They can do whatever you want them to do. Here are some reminders about writing functions in R
+
+### Basic function syntax
+
+```{r,eval=FALSE}
+my_function <- function(input){
+  #body of code
+  return(output)
+}
+```
+
+`my_function` is the name of the function. R knows you are writing a function because the `function(){}` command is called. Inputs to the function fo inside the `()`. The body of the function is placed between `{}`. The `return()` function is used inside in order to output the results of the function.
+
+#### example, add 1 to an input
+
+```{r}
+
+# write the function
+add_one <- function(x){
+  return(x+1)
+}
+
+# test the function
+add_one(5)
+
+```
+
+Notice the body of the function only contains one line. This is a simple function, so we can return the answer without much additional work. Here is the same function with some extra commenting and steps.
+
+```{r, eval=FALSE}
+add_one <- function(x){
+  # add one to x, and save the output
+  save_result <- x+1
+  # output the contents of save_result
+  return(save_result)
+}
+```
+
+It is also possible to write everything on one line. Intriguingly, the `{}` are not necessary here:
+
+```{r}
+add_one <- function(x) return(x+1)
+```
+
+It is good practice to write functions so they are clear and easy to read. Use comments when necessary, but if the code is self-explanatory, then don't use them
+
+### no inputs
+
+Functions don't need inputs to return outputs. For example, let's say you wanted a custom function to roll a dice, and get a random number from one to 6.
+
+```{r}
+# the following code returns a randomly sampled value from 1 to 6
+sample(1:6,1)
+
+# we can put this in a function
+roll_dice <- function(){
+  return(sample(1:6,1))
+}
+
+# run the function with no input
+roll_dice()
+```
+
+
+### What is wrong with this function?
+
+Let's say you have some numbers, and you want to write a function to get the sum. What is wrong with the function below?
+
+```{r}
+my_numbers <- c(1,4,3,4,5,6)
+
+my_sum <- function(x){
+  get_sum <- sum(my_numbers)
+  return(get_sum)
+}
+```
+
+### multiple inputs
+
+Functions can take multiple inputs. Let's say you want to find the mean of numbers between a range (a minimum and maximum value). You will need three inputs one to define the input of numbers, and then two to define a min and max.
+
+```{r}
+ranged_mean <- function(x, min_val, max_val){
+  restricted_values <- x[x>min_val &
+                           x < max_val]
+  return(mean(restricted_values))
+}
+
+some_numbers<-c(3,4,3,2,3,4,5,6,7,8,8,8,9,8)
+ranged_mean(some_numbers,2,4)
+
+```
+
+### multiple outputs
+
+A function can output multiple values and variables. From the above, let's say you wanted to output three kinds of information. 
+
+1. The origingal set of numbers
+2. The restricted set of numbers that are within the range
+3. The mean of the restricted set of numbers
+
+Inside our function we can collect all of this information in a list, and the return the list
+
+```{r}
+ranged_mean2 <- function(x, min_val, max_val){
+  restricted_values <- x[x>min_val &
+                           x < max_val]
+  outputs <- list(original_values = x,
+                  restricted_values = restricted_values,
+                  restricted_mean = mean(restricted_values))
+  return(outputs)
+}
+
+some_numbers<-c(3,4,3,2,3,4,5,6,7,8,8,8,9,8)
+ranged_mean2(some_numbers,2,4)
+
+# putting the results into a separate value, and accessing the parts
+
+stored_answer <- ranged_mean2(some_numbers,2,4)
+
+# return everything
+stored_answer
+
+# return original values
+stored_answer$original_values
+
+# return restricted values
+stored_answer$restricted_values
+
+# return restricted mean
+stored_answer$restricted_mean
+
+```
+
+
+
+
 
 
 

@@ -1588,6 +1588,129 @@ div.tocify {
 </div>
 </div>
 </div>
+<div id="writing-functions-help" class="section level2">
+<h2>Writing Functions help</h2>
+<p>In this assignment you will be asked to write two custom functions. They can do whatever you want them to do. Here are some reminders about writing functions in R</p>
+<div id="basic-function-syntax" class="section level3">
+<h3>Basic function syntax</h3>
+<pre class="r"><code>my_function &lt;- function(input){
+  #body of code
+  return(output)
+}</code></pre>
+<p><code>my_function</code> is the name of the function. R knows you are writing a function because the <code>function(){}</code> command is called. Inputs to the function fo inside the <code>()</code>. The body of the function is placed between <code>{}</code>. The <code>return()</code> function is used inside in order to output the results of the function.</p>
+<div id="example-add-1-to-an-input" class="section level4">
+<h4>example, add 1 to an input</h4>
+<pre class="r"><code># write the function
+add_one &lt;- function(x){
+  return(x+1)
+}
+
+# test the function
+add_one(5)</code></pre>
+<pre><code>## [1] 6</code></pre>
+<p>Notice the body of the function only contains one line. This is a simple function, so we can return the answer without much additional work. Here is the same function with some extra commenting and steps.</p>
+<pre class="r"><code>add_one &lt;- function(x){
+  # add one to x, and save the output
+  save_result &lt;- x+1
+  # output the contents of save_result
+  return(save_result)
+}</code></pre>
+<p>It is also possible to write everything on one line. Intriguingly, the <code>{}</code> are not necessary here:</p>
+<pre class="r"><code>add_one &lt;- function(x) return(x+1)</code></pre>
+<p>It is good practice to write functions so they are clear and easy to read. Use comments when necessary, but if the code is self-explanatory, then don’t use them</p>
+</div>
+</div>
+<div id="no-inputs" class="section level3">
+<h3>no inputs</h3>
+<p>Functions don’t need inputs to return outputs. For example, let’s say you wanted a custom function to roll a dice, and get a random number from one to 6.</p>
+<pre class="r"><code># the following code returns a randomly sampled value from 1 to 6
+sample(1:6,1)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code># we can put this in a function
+roll_dice &lt;- function(){
+  return(sample(1:6,1))
+}
+
+# run the function with no input
+roll_dice()</code></pre>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="what-is-wrong-with-this-function" class="section level3">
+<h3>What is wrong with this function?</h3>
+<p>Let’s say you have some numbers, and you want to write a function to get the sum. What is wrong with the function below?</p>
+<pre class="r"><code>my_numbers &lt;- c(1,4,3,4,5,6)
+
+my_sum &lt;- function(x){
+  get_sum &lt;- sum(my_numbers)
+  return(get_sum)
+}</code></pre>
+</div>
+<div id="multiple-inputs" class="section level3">
+<h3>multiple inputs</h3>
+<p>Functions can take multiple inputs. Let’s say you want to find the mean of numbers between a range (a minimum and maximum value). You will need three inputs one to define the input of numbers, and then two to define a min and max.</p>
+<pre class="r"><code>ranged_mean &lt;- function(x, min_val, max_val){
+  restricted_values &lt;- x[x&gt;min_val &amp;
+                           x &lt; max_val]
+  return(mean(restricted_values))
+}
+
+some_numbers&lt;-c(3,4,3,2,3,4,5,6,7,8,8,8,9,8)
+ranged_mean(some_numbers,2,4)</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="multiple-outputs" class="section level3">
+<h3>multiple outputs</h3>
+<p>A function can output multiple values and variables. From the above, let’s say you wanted to output three kinds of information.</p>
+<ol style="list-style-type: decimal">
+<li>The origingal set of numbers</li>
+<li>The restricted set of numbers that are within the range</li>
+<li>The mean of the restricted set of numbers</li>
+</ol>
+<p>Inside our function we can collect all of this information in a list, and the return the list</p>
+<pre class="r"><code>ranged_mean2 &lt;- function(x, min_val, max_val){
+  restricted_values &lt;- x[x&gt;min_val &amp;
+                           x &lt; max_val]
+  outputs &lt;- list(original_values = x,
+                  restricted_values = restricted_values,
+                  restricted_mean = mean(restricted_values))
+  return(outputs)
+}
+
+some_numbers&lt;-c(3,4,3,2,3,4,5,6,7,8,8,8,9,8)
+ranged_mean2(some_numbers,2,4)</code></pre>
+<pre><code>## $original_values
+##  [1] 3 4 3 2 3 4 5 6 7 8 8 8 9 8
+## 
+## $restricted_values
+## [1] 3 3 3
+## 
+## $restricted_mean
+## [1] 3</code></pre>
+<pre class="r"><code># putting the results into a separate value, and accessing the parts
+
+stored_answer &lt;- ranged_mean2(some_numbers,2,4)
+
+# return everything
+stored_answer</code></pre>
+<pre><code>## $original_values
+##  [1] 3 4 3 2 3 4 5 6 7 8 8 8 9 8
+## 
+## $restricted_values
+## [1] 3 3 3
+## 
+## $restricted_mean
+## [1] 3</code></pre>
+<pre class="r"><code># return original values
+stored_answer$original_values</code></pre>
+<pre><code>##  [1] 3 4 3 2 3 4 5 6 7 8 8 8 9 8</code></pre>
+<pre class="r"><code># return restricted values
+stored_answer$restricted_values</code></pre>
+<pre><code>## [1] 3 3 3</code></pre>
+<pre class="r"><code># return restricted mean
+stored_answer$restricted_mean</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+</div>
 
 
 
