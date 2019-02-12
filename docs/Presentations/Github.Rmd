@@ -1,5 +1,5 @@
 ---
-title: "Github"
+title: "Github Assignment"
 output: 
   html_document:
     toc: true
@@ -12,6 +12,38 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## Assignment
+
+**Purpose:** To gain experience collaborating using github.com.
+
+I created a repository on my CrumpLab account called 7709Rproblems. The link to the repository is:
+
+[https://github.com/CrumpLab/7709Rproblems](https://github.com/CrumpLab/7709Rproblems)
+
+This repository contains two .rmd files. One for the fizzbuzz problem, and one for the snakes and ladders problem. The goal of this assignment is for the class to contribute their solutions for each problem to these documents. Along the way you learn about using github for collaboration.
+
+### Video tutorial
+
+I created a video tutorial you can follow that outlines all the steps.
+
+[Forking and making a pull request](https://crumplab.github.io/psyc7709/Videos.html#fork_a_repo_and_make_a_pull_request)
+
+### Outline of steps
+
+1. Login to you github account
+2. go to [https://github.com/CrumpLab/7709Rproblems](https://github.com/CrumpLab/7709Rproblems)
+3. Fork this repo to your github account using the little fork button (top-right)
+4. Open github desktop, click add, choose clone, then clone the 7709Rproblems repo to your computer
+5. Open the new repository on your computer, and then open the .Rproj file to load this as a new R-studio project
+6. Edit the fizzbuzz.Rmd file to include your name and the code you wrote to solve this problem. Then knit the file.
+7. Edit the snakesladders.Rmd file and do the same
+8. If you don't yet have working code that's ok, make a spot with your name, and leave comment that say's working on it.
+9. Commit your changes using github desktop, then push the changes to your github account
+10. Go to your github account, go to your copy of 7709Rproblems and submit a pull-request (see video)
+11. That's it!
+
+
 
 ## Overview
 
@@ -133,6 +165,8 @@ Github desktop is a program that allows you to link up github.com repositories w
   4. If you did this, you might have problems trying to use the clone option.
   5. **Solution**: Delete the repository that you just added to github desktop (e.g., delete it from github desktop). Then try cloning from github.com using previous instructions.
   
+<!--
+
 ## Using Github.com for collaboration
 
 Github is commonly used for collaborative software development. We will use it for a similar purpose to collaborate on R code. 
@@ -173,6 +207,7 @@ You do not need to wait until you have solved both problems to do this. If you h
 6. Knit the .Rmd file to update the html file
 7. 
 
+-->
 
 
 

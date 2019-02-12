@@ -68,4 +68,8 @@ Follow these steps to create a new package in R-studio, save it is a git reposit
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XbSwdHBiO4E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
+### Fork a repo and make a pull request
 
+As part of the assignment due Feb 25th, you will be forking a repository to your github account, cloning it to your computer, adding some code to the .Rmd files in the repository, then pushing those changes back to your version of the repository, and finally making a pull-request that those changes be incoporated into the original repository. Here is a screencast showing how to do these steps.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oGKpO_Zy0vo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
