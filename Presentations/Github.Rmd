@@ -43,9 +43,11 @@ I created a video tutorial you can follow that outlines all the steps.
 10. Go to your github account, go to your copy of 7709Rproblems and submit a pull-request (see video)
 11. That's it!
 
+------
 
+Github can be complicated and confusing. Below are some notes about creating Github repositories that might be helpful as reference.
 
-## Overview
+## Tips
 
 This tutorial has two goals.
 
