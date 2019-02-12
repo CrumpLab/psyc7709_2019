@@ -121,6 +121,8 @@ tips: I added a video showing how to [create a new R package and publish it to g
 
 c. **NEW** this an addition to your assignment not discussed in class. The assignment instructions are in the [github assignment](https://crumplab.github.io/psyc7709/Presentations/Github.html) document. This assignment gives you more practice using github features. You will be forking a repo, adding to the code, then making a pull-request to have your new changes be incorporated into the master repository. Also, you will be able to see other students solutions to two of the harder programming problems.
 
+tips: I added a video showing how to [fork and make a pull request](https://crumplab.github.io/psyc7709/Videos.html#fork_a_repo_and_make_a_pull_request)
+
 ---
 
 ### 4. Data-Visualization
