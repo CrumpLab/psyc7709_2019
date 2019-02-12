@@ -1,0 +1,183 @@
+---
+title: "Github"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+This tutorial has two goals.
+
+1. To allow our class to create a database of coding solutions for a few of the harder problems. For example, after each student has completed the fizzbuzz problem, they will use the process described here to upload their code to a github repository. The repository will contain multiple solutions for each problem. This can be used as a resource for students to view and learn about different ways to solve the coding problems. 
+
+2. To become competent in basic github operations, including:
+    a. Creating a new repository on the github website
+    b. Cloning the repository to your local computer
+    c. Making changes to the repository
+    d. Uploading the changes (pushing changes)
+    e. Cloning a repository from someones existing repository to your local computer
+    f. making changes to the cloned repository
+    g. making a pull request to the owner of the cloned repository, so that your new additions are included.
+  
+## Github Repo basics  
+  
+### How to create a new repository on Github.com
+
+**Create the repository on the website first, then clone it to your local computer using github desktop**
+
+**Step 1: Create a repository on Github**
+
+1. Go to your github account, and find your list of repositories. One way to do this is to login, then click on your user icon (top right). You should see a list of options, choose "Your repositories".
+2. Click the green "New" button
+3. Give your repository a name
+4. Give your repository a brief description
+5. Choose public
+6. Click the option to "Initialize this repository with a readme"
+7. You have now created a new repository that is on the cloud. You should be able to see this repository listed in your list of repositories. This is basically a file folder on the cloud that contains a single file in it, the readme file. The contents of the readme file are always displays below the list of files in the repository. This is useful for visitors who can read your a description of the purpose/contents of the repository
+
+**Step 2: Clone the repository to your local computer**
+
+1. Open github desktop, make sure your user account information is correct so that github desktop logs in to your github account
+2. It can take some time to get used to what you are seeing when you open github desktop. You may be "inside" one of your repositories, or you may be looking at a list of repositories.  Go to the list of your current repositories: choose "view" from the menu, and choose "Repository List".
+3. You should see the option to "add" appear as a button in the top left. Click "add"
+4. Choose the "Clone repository..." option
+5. You should now see a list of repositories that are on the Github.com website. Included in this list should be the name of the new repository that you just made on the Github website. Select the new repository
+6. You will be making a copy of the github repository in a new folder on your computer. You have to choose where you will save this file on your computer.
+    a. **BE CAREFUL:** I recommend that you have folder on your computer for storing github repositories. For example, on my computer I have a folder called "Repos". Whenever I clone a repository from github, I put that repository in the "Repos" folder. That way I know where all of my cloned repositories are on my local computer. 
+    b. It is not a good idea to put a github repository inside another github repository. For example, you already have a cloned github repository for your website code. Do not put a new repository inside this folder. 
+7. After you have set the path where you will save your repository, click clone
+8. You should now have a cloned copy of the github repository on your local computer
+
+### Make a new repository on your local computer, then publish it on github.com
+
+This is another way to create a github.com repository that is connected to a local copy. There is no need to first create a new repository on github.com
+
+1. Open github desktop
+2. View repository list
+3. Choose add "Create New Repository"
+4. Give it a name
+5. Choose where to store the new repository on your computer
+6. choose initialize with readme
+7. choose "create repository"
+8. You now have a new git folder on your computer
+9. If you want to "publish" to github.com, then choose the publish option that appears in the right-hand side of github desktop. 
+10. unclick "keep this code private" (for this course)
+11. click "pubish repository"
+12. After publishing you should see a new repository appear on github.com. Any changes you make to your local copy can now be pushed to the github.com copy.
+
+### Making changes to a cloned folder
+
+Whenever you add files to your cloned folder on your computer, or whenever you make changes to existing files in that folder, those new changes will be logged in github desktop.
+
+1. You can test this by opening the readme file and making an edit, then saving the document. To verify that github is recording the changes do the following:
+    a. Open github desktop
+    b. Make sure you are "inside" the relevant repository. If you are not already there, go to the list of repositories, then click on the one you want to look at
+    c. When you have opened the repository, you will see the name of your repository appear in the top left drop down "current repository".
+    d. You should see a count of the number of changes that have been made
+
+### Pushing changes to github.com
+
+**tip: this is a two stage process: commit, then push**
+
+1. If you have made changes, the first step is to "commit" them. The option to commit is in the bottom left corner. Give a brief description of the changes (this description is saved as a note for your reference, and giving a description is required). Press commit.
+    a. **Note:** At the commit stage your changes are still on your local computer, they have not been sent to the cloud.
+2. After you have committed the changes, then press the "push" button on the right-hand side. You have now pushed your changes to the github.com repository (you must be connected to the internet to do this)
+3. You can verify that the push worked by going to your repository on github.com. You should be able to see the changes in your files there.
+
+### Common issues
+
+It is easy to run into problems when creating and using github repositories. For example, you might have created a repository in github desktop that you think is linked to github.com, but then you found it is not linked. The following is an attempt to help you understand basic github ideas so you can identify the problem you may be having. We will focus mainly on different kinds of repositories, and their locations.
+
+The first two repository types are github.com repositories, and cloned local copies of github.com repositories. These are the two kinds of repositories we will be using in this course. You will run into issues if you are not using these two kinds of repositories. 
+
+1. A Github.com repository. You create these on github.com in your github account using the new repository button. 
+  - **Where is it?** On github.com
+  - **Is it on my computer?** No
+  - **Can it be cloned to my computer?** Yes, and when you do this, you know have two repositories. One on github.com, and a local version that is connected to the one on github.com (you can push changes from your local copy to github.com using github desktop)
+  
+2. A cloned repository from github.com on your local computer. You create the clone from github.com using the process described above.
+  - **Where is it?** on your computer
+  - **Is it on my computer?** yes
+  - **Is this copy connected to github.com?** It should be if you followed the above steps using github desktop to make the clone.
+  
+When you set-up a cloned copy of a github.com repository on your local computer you are making a two-way street between the folders, allowing changes to be sent back and forth. If you make a change to the files on your local computer (and as a result they become different from the files on github.com) then you can push those changes to github.com so that both folders become "equal". It is also possible to edit files on github.com. If you make a change to a file on github.com, then the files there will be "ahead of" or different from the files on your local clone. In github desktop you can "fetch origin", and then "pull" the changes from github.com into your clone. This will also make the two folders equal again (e.g., all files the same).
+
+#### Other kinds of git repositories
+
+Github desktop is a program that allows you to link up github.com repositories with local copies (clones) on your computer, and pass changes between them. It also allows you to create git repositories on your local computer that **are not linked up with github.com repositories**. If you accidentally create one of these local repositories, then it will not allow you to send changes back and forth between a github.com repository.
+
+3. "Create new repository": You will see that github desktop gives you an option to "create new repository" when clicking the add button. This creates a new git repository on your local computer.
+  - **Where is it?** on your computer
+  - **Is this copy connected to github.com?** No
+  - **What kind of folder is this?** This is a git folder. It has similar functionality to clones from github.com, but it is not connected to any repository on github.com. It is just a local folder with version control. If you make changes to files in this folder, the changes will be tracked. You can still commit changes. But they won't be pushed to github.com, because this folder only exists on your local computer.
+  - **Example problem** You choose "create new repository" and give it the same name as a repository that exists on your github.com account. The new repository will be created on your local computer, but it will not be connected to the one on github.com. Follow the earlier steps about cloning a github.com repo to your local computer to connect your local repo to the github.com repo.
+  - **Is it possible to connect this repository to github.com** Yes, you can use the publish repository option in github desktop.
+  
+4. "Add existing repository" is another option that github desktop gives you. This option allows you to bring in a git folder that you may have on your computer, and allow it to be managed by the github desktop program. When you do this, github desktop will begin tracking the changes in the git folder that you added. 
+  - **Where is it?** on your computer
+  - **Is this copy connected to github.com?** No
+  
+**Example problem**
+  1. You notice that you can download an entire repository from github.com using the download .zip button, then you download the repository to your local computer, and unzip the repository. Now you have the files copied to your computer
+  2. You use github desktop to add this folder as a repository.
+  3. If the adding works, the new local copy will not be connected to github.com
+  4. If you did this, you might have problems trying to use the clone option.
+  5. **Solution**: Delete the repository that you just added to github desktop (e.g., delete it from github desktop). Then try cloning from github.com using previous instructions.
+  
+## Using Github.com for collaboration
+
+Github is commonly used for collaborative software development. We will use it for a similar purpose to collaborate on R code. 
+
+Consider the typical use case. There is a team of coders working on some code. One person creates some initial working code and makes a github repository. Then other people start working on changes to make improvements. The changes can create bugs that cause the initial working code to break. The team wants a way to track the changes, and make sure they always have a working version of the code to share with the public. Github helps with this problem. In a nutshell, here is an example:
+
+1. Somebody creates a github.com repository with some working code. They are the owner of this main repository.
+2. Members of the team want to contribute changes to the code. They clone the repository from github.com to their local computer. Then they make new additions.
+3. A team member can make a pull-request with their new additions. This goes to the person who is the owner of the main repository. The owner verifies the new changes work properly, then they accept the pull-request, and "pull" the new code from the team member into the main repository.
+4. Using this same process, multiple team members can update their local copies with the newest approved changes to the main repository, and they can all contribute new changes going through the same process as above. 
+5. Github keeps track of all the changes and versions, along with who made the changes. The team is able to keep a working version of the code in the main repository, while collaborating and making new changes as they go.
+
+## Class assignment
+
+**Purpose:** To gain experience collaborating using github.com.
+
+I created a repository called 7709Rproblems. The link to the repository is:
+
+[https://github.com/CrumpLab/7709Rproblems](https://github.com/CrumpLab/7709Rproblems)
+
+This repository contains two .rmd files. One for the fizzbuzz problem, and one for the snakes and ladders problem.
+
+Your assignment is to add your R code solutions for each of these problems to the documents in this repository using a **pull-request**.
+
+1. You will edit each .rmd file to include your solution
+2. You will knit each .rmd file to update the html output
+3. Submit a pull-request to merge your changes with the main repository.
+
+You do not need to wait until you have solved both problems to do this. If you have solved fizzbuzz first, then you can try this right away. If your code does not work, then you can add your non-working code (make sure to set eval=FALSE so that you can knit the document).
+
+### How to make a pull request
+
+1. Log in to your github.com account
+2. Go to the repository [https://github.com/CrumpLab/7709Rproblems](https://github.com/CrumpLab/7709Rproblems)
+3. You should see an option to "fork" the repository. Do this. Now you have a clone of the repository in your github.com account (it is still only in the cloud)
+4. Make a clone of the forked repository on your local computer using github desktop
+5. Edit the .Rmd files that are in your local folder to add your coding solutions (follow the example in the document)
+6. Knit the .Rmd file to update the html file
+7. 
+
+
+
+
+
+
+
+
+

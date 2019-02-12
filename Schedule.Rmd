@@ -117,6 +117,8 @@ a. Last week to document progress in solving [programming challenges](https://cr
 
 b. Create and share an R package containing custom functions on github. Follow the instructions in the [R package assignment](https://crumplab.github.io/psyc7709/Presentations/RPackages.html) that we will discuss in class. Upload the link to your new github repository containing your R package to blackboard.
 
+tips: I added a video showing how to [create a new R package and publish it to github.com](https://crumplab.github.io/psyc7709/Videos.html#publish_r_package_to_github)
+
 ---
 
 ### 4. Data-Visualization

@@ -73,10 +73,13 @@ In this assignment you will be asked to write two custom functions. They can do 
 ### Basic function syntax
 
 ```{r,eval=FALSE}
+
 my_function <- function(input){
   #body of code
   return(output)
 }
+
+
 ```
 
 `my_function` is the name of the function. R knows you are writing a function because the `function(){}` command is called. Inputs to the function fo inside the `()`. The body of the function is placed between `{}`. The `return()` function is used inside in order to output the results of the function.
