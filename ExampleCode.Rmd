@@ -1,0 +1,225 @@
+---
+title: "Example Code"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+```
+
+## Loops
+
+Check R help for on Control Flow `?Control`.
+
+`for(){}`
+`for(loop control){do something each iteration}`
+
+```{r, eval=F}
+for(iterator in vector){
+  #do something
+}
+```
+
+Loop control is defined in between the parentheses. The name of the iterator is placed on the left of `in`(can be assigned any name you want, does not need to be declared in advance). During the execution of the loop, the iterator takes on the values inside the vector which is placed on the right side of `in`. Specifically, the following is happening.
+
+Loop steps: 
+  1. iterator <- vector[1]
+  2. iterator <- vector[2]
+  3. iterator <- vector[3]
+  4. etc.
+  
+The loop will automatically stop once it reaches the last item in the vector. The loop can be stopped before that using the `break` command.
+
+```{r}
+# Make a loop do something 10 times
+# i is the iterator
+# 1:5 creates a vector with 5 numbers in it, 1, 2, 3, 4, 5
+# the loop will run 5 times, because there are five things to assign to i
+for(i in 1:5){
+  print(5)
+}
+```
+
+```{r}
+# show the value of i each step of the loop
+for(i in 1:5){
+  print(i)
+}
+
+```
+
+```{r}
+# define the vector to loop over in advance
+my_sequence <- 1:5
+for(i in my_sequence){
+  print(i)
+}
+```
+
+```{r}
+# Reminder that i becomes the next value in the vector
+# your vector can have any order 
+my_sequence <- c(1,5,2,3,4)
+for(i in my_sequence){
+  print(i)
+}
+```
+
+```{r}
+# index vector does not need to be numbers
+my_things <- c("A","B","C","D")
+for(i in my_things){
+  print(i)
+}
+```
+
+### Breaking a loop
+
+`break` stops a loop. Used with logical statements to define the conditions necessary to cause the break.
+
+```{r}
+for(i in 1:10){
+  if(i <5){
+    print(i)
+  } else{
+    break
+  }
+}
+```
+
+### While loops
+
+While loops run until a logical condition is met. Here there is no iterator, just a logic statement that needs to be met. 
+
+This one prints i while i is less than 6. As soon as i becomes "not less than 6", then the loop stops. Critically, inside the loop, the value of i increases each iteration. 
+
+```{r}
+i <- 1 # create an variable
+while (i < 6) {
+  print(i)
+  i = i+1 #add one eachs step of the loop
+}
+```
+
+### Repeat loops
+
+Similar to while, but let's do things until a condition is met.
+
+```{r}
+i<-0
+repeat{
+  i<-i+1
+  print(i)
+  if(i==5){
+    break
+  }
+}
+```
+
+
+### Examples
+
+Braces are not needed on one line
+
+```{r}
+for(i in 1:5) print(i)
+```
+
+Using the value of the iterator to assign in values systematically to another variable.
+
+```{r}
+# put 1 into the first five positions of x
+x <- c() # create empty vector
+for(i in 1:5){
+  x[i] <- 1  # assign 1 to the ith slot in x
+}
+x
+
+# put the numbers 1-5 in the first 5 positions of x
+x <-c()
+for(i in 1:5){
+  x[i] <- i
+}
+x
+```
+
+Make your own counter, when you need one
+
+```{r}
+a <- c(1,4,3,5,7,6,8,2)
+odd <- c()
+counter <- 0
+for(i in a){  # i will the values of a in each position
+  counter <- counter+1
+  if(i%%2 != 0){
+    odd[counter] <- "odd"
+  } else {
+    odd[counter] <- "even"
+  }
+}
+odd
+
+# An alternative strategy
+
+a <- c(1,4,3,5,7,6,8,2)
+odd <- c()
+# 1:length(a) creates a sequence from 1 to length
+for(i in 1:length(a)){  
+  if(a[i]%%2 != 0){
+    odd[i] <- "odd"
+  } else {
+    odd[i] <- "even"
+  }
+}
+odd
+
+```
+
+Nesting loops
+
+```{r}
+sum_of_i_j <- c()
+counter <- 0
+for(i in 1:5){
+  for(j in 1:5){
+    counter <- counter+1
+    sum_of_i_j[counter] <- i+j
+  }
+}
+sum_of_i_j
+```
+
+break exits out of the immediate loop
+
+```{r}
+# the inside loop stops when i+j is greater than 5
+# the outside loop keeps going
+
+sum_of_i_j <- c()
+counter <- 0
+for(i in 1:5){
+  for(j in 1:5){
+    counter <- counter+1
+    sum_of_i_j[counter] <- i+j
+    if(i+j > 5){
+      break
+    }
+  }
+}
+sum_of_i_j
+```
+
+
+
+
+
+
+
+
+

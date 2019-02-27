@@ -12,6 +12,8 @@ navbar:
     href: Videos.html
   - text: Resources
     href: Resources.html
+  - text: ExampleCode
+    href: ExampleCode.html
 output_dir: docs
 output:
   html_document:

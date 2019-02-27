@@ -1,0 +1,67 @@
+---
+title: "Snakes and Ladders"
+author: "Matt"
+date: "2/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A few examples of code to solve snakes and ladders
+
+### Example 1
+
+```{r}
+sl_board <- c(1,2,11,4,5,17,7,8,18,12,11,12,13,4,15,16,17,18,
+              8,20,21,20,23,16,25,26,27,28,29,30,31,32)
+game_outcomes <-c()
+for(sims in 1:10000){
+  count <- 0 # number of rolls
+  position <- 1
+  while(position < 25){
+    count <- count+1
+    roll <- sample(seq(1,6),1)
+    position <- sl_board[position+roll]
+  }
+game_outcomes[sims] <- count
+}
+mean(game_outcomes)
+```
+
+### Example 2
+
+Create a run_game function that outputs the roll count for single game. Then use `replicate()` to run the game 10,000 times.
+
+```{r}
+
+sl_board <- c(1,2,11,4,5,17,7,8,18,12,11,12,13,4,15,16,17,18,
+              8,20,21,20,23,16,25,26,27,28,29,30,31,32)
+
+run_game <- function(a_board){
+  count <- 0
+  position <- 1
+  while(position < 25){
+    count <- count+1
+    position <- a_board[position+sample(seq(1,6),1)]
+  }
+  return(count)
+}
+
+mean(replicate(10000,run_game(sl_board)))
+```
+
+### Example 3
+Same as above only re-factored a bit to make it 5 lines.
+
+```{r}
+sl_board <- c(1,2,11,4,5,17,7,8,18,12,11,12,13,4,15,16,17,18,8,20,21,20,23,16,25,26,27,28,29,30,31,32)
+run_game <- function(a_board){markers <-c(0,1) #count,position
+  while(markers[2] < 25) markers <- c(markers[1]+1,a_board[markers[2]+sample(seq(1,6),1)])
+  return(markers[1])}
+mean(replicate(10000,run_game(sl_board)))
+```
+
+
+

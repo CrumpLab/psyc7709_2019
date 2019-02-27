@@ -120,4 +120,84 @@ Rprof()
 summaryRprof(tmp)
 
 
+# number of states
+
+
+  for(t1 in 1:9){
+    board <-matrix(0,nrow=3,ncol=3)
+    board[t1]<-1
+    board1 <- board
+    for(t2 in 1:9){
+      board <- board1
+      if(t2 != t1) board[t2]<- -1
+      print(board)
+    }
+  }
+
+t1 <- 9
+t2 <- t1*8
+t3 <- t2*7
+t4 <- t3*6
+t5 <- t4*5
+t6 <- t5*4
+t7 <- t6*3
+t8 <- t7*2
+t9 <- t8
+
+
+bigram_probs <- matrix(0,nrow=26,ncol=26)
+for(i in 1:26){
+  rnums<-runif(26,0,1)
+  bigram_probs[i,]<-rnums/sum(rnums)
+}
+
+row.names(bigram_probs)<-unlist(strsplit("abcdefghijklmnopqrstuvwxyz",split=""))
+colnames(bigram_probs)<-unlist(strsplit("abcdefghijklmnopqrstuvwxyz",split=""))
+
+sample_word <- "cat"
+letters <- unlist(strsplit(sample_word,split=""))
+probs<-c()
+for(i in 1:length(letters)-1){
+  probs[i] <- bigram_probs[letters[i],letters[i+1]]
+}
+prod(probs)
+
+
+
+a <- c(1,2,3,4,5)
+b <- c(-1,2,3,4,6)
+plot(a,b) #a=x axis, b=y axis
+cor(a,b)  # pearson's r
+cor(a,b)^2  # r^2 amount of variance explained
+df<-data.frame(a,b)
+
+plot(a,b)
+coef(lm(b~a, data=df))
+plot(b,a)
+coef(lm(b~a, data=df))
+
+library(ggplot2)
+ggplot(df, aes(x=a,y=b))+
+  geom_point()+
+  geom_vline(xintercept=0)+
+  geom_hline(yintercept=0)+
+  geom_smooth(method="lm",se=FALSE)+
+  coord_cartesian(xlim=c(-2,10),ylim=c(-2,10))
+
+ggplot(df, aes(x=b,y=a))+
+  geom_point()+
+  geom_vline(xintercept=0)+
+  geom_hline(yintercept=0)+
+  geom_smooth(method="lm",se=FALSE)+
+  coord_cartesian(xlim=c(-2,10),ylim=c(-2,10))+
+  scale_x_continuous(breaks=-2:10)+
+  scale_y_continuous(breaks=-2:10)+
+  theme(text = element_text(size=20))
+
+coef(lm(a~b))
+
+b=5
+
+(5*.59) +1.32
+
 

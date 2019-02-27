@@ -1,0 +1,11 @@
+base
+ggplot2
+ggrepel
+extrafont
+sysfonts
+showtextdb
+showtext
+dplyr
+bindrcpp
+magrittr
+ggpubr

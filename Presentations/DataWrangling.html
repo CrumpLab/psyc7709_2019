@@ -1542,6 +1542,232 @@ div.tocify {
 </div>
 
 
+<div id="what-is-data-wrangling" class="section level2">
+<h2>What is Data-wrangling</h2>
+<p>Data-wrangling is the general process of organizing and transforming data into various formats. For example, loading data into R, pre-processing it to get rid of things you don’t want and keep the things you want, add new things you might want that, arranging the data in different ways to accomplish different kinds of tasks, grouping the data, and summarizing the data, are all common data-wrangling activities. Real-world data often has many imperfections, so data-wrangling is necessary to get the data into a state that is readily analyzable.</p>
+<p>We will mainly go over the <code>dplyr</code> package, which has a number of fantastic and relatively easy to use tools for data-wrangling. At the same time, it worth developigng your basic programming skills (using loops and logic), as they are also indispensable for solving unusual data-wrangling problems.</p>
+</div>
+<div id="dplyr-basics" class="section level2">
+<h2>dplyr basics</h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://dplyr.tidyverse.org">Dplyr reference</a></li>
+<li><a href="http://r4ds.had.co.nz/transform.html">Hadley Wickham’s, R for Data Science, Chapter 5 Data transformation</a></li>
+</ol>
+<pre class="r"><code>library(dplyr) #load the package (make sure it is installed first)
+df &lt;- starwars # dplyr comes with a data.frame called starwars</code></pre>
+<p>Take a look at that data in df, what do you see? It lists various characters from starwars, along with many columns that code for different properties of each character</p>
+</div>
+<div id="basic-dataframe-stuff-without-dplyr" class="section level2">
+<h2>basic dataframe stuff without dplyr</h2>
+<pre class="r"><code># addressing specific columns
+df$name 
+df$height
+df$mass
+
+# addressing columns and rows without names
+df[1,] # row 1
+df[,1] # column 1
+df[1:4,] # all of the data in rows 1:4
+df[,4:5] # all of the data in columns 4:5
+df[1:3,6:7] # the data in rows 1 to 3, for column 6 and 7 only
+
+# finding a row(s) with specific info
+df[df$name==&quot;Luke Skywalker&quot;,]
+df[df$height &gt; 180,]
+df[df$height &lt; 180 &amp; df$height &gt; 70,]
+
+#replace a particular value
+df[1,2] &lt;- 173 #changes the cell in row 1 column 2
+
+# size of dataframe
+dim(df) #c(number of rows, number of columns)
+
+# cbind to add a column to a data.frame
+df &lt;- cbind(df, random_number=runif(dim(df)[1],0,1))
+
+# rbind to add rows
+# this creates a new data frame, binding together the rows 1-2, and 5-6
+# note: all of the columns need to be the same
+new_df &lt;- rbind(df[1:2,],df[5:6,]) 
+
+# convert a character vector to a factor
+df$species &lt;- as.factor(df$species)
+levels(df$species)
+levels(df$species)[3] &lt;- &quot;hello&quot; # renames the third level, which get&#39;s applied to all listings in the df</code></pre>
+</div>
+<div id="a-couple-questions" class="section level2">
+<h2>A couple questions:</h2>
+<ol style="list-style-type: decimal">
+<li>What are the names of all the characters who are taller than 80, shorter than 140, and are female?</li>
+</ol>
+<pre class="r"><code>df[df$height &gt; 80 &amp;
+     df$height &lt; 170 &amp;
+     df$gender == &quot;female&quot;, ]$name</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>How many characters have Tatooine for their homeworld?</li>
+</ol>
+<pre class="r"><code>df[df$homeworld==&quot;Tatooine&quot;,]
+dim(df[df$homeworld==&quot;Tatooine&quot;,])[1] # counts the NAs
+
+tatooine &lt;- df[df$homeworld==&quot;Tatooine&quot;,]
+tatooine[is.na(tatooine$name)==FALSE,]
+dim(tatooine[is.na(tatooine$name)==FALSE,])[1]</code></pre>
+</div>
+<div id="dplyr-style" class="section level2">
+<h2>dplyr style</h2>
+<p>We now look at dplyr and pipes. The idea here is that we start with a dataframe, then systematically transform one step at a time. At each step we pass the data in it’s new state to the next step. The passing is called piping the data. There is a special operator for this <code>%&gt;%</code></p>
+<div id="quick-example" class="section level3">
+<h3>quick example</h3>
+<p>We start with the entire dataframe <code>df</code>. Then we select only the rows where the height is taller than 100. Then we group by homeworld, and compute the mean birth year. What we get is a new data.frame, showing the mean birth years for each homeworld.</p>
+<p>This is a common refrain:</p>
+<p>Dataframe %&gt;% filter %&gt;% group_by %&gt;% summarise</p>
+<pre class="r"><code>new_df &lt;- df %&gt;%
+            filter(height &gt; 100) %&gt;%
+            group_by(homeworld) %&gt;%
+            summarise(mean_birth_year = mean(birth_year,na.rm=TRUE))</code></pre>
+</div>
+<div id="filter" class="section level3">
+<h3>filter</h3>
+<p>We can filter the data by properties of particular columns</p>
+<pre class="r"><code># make a new dataframe that only include rows where the height is greater than 120
+new_df &lt;- df %&gt;%
+        filter(height &gt; 120)
+
+# multiple filters are seperated by a comma
+new_df &lt;- df %&gt;%
+        filter(height &gt; 120,
+               height &lt; 180,
+               birth_year &gt; 20)
+
+# more examples of differen logical operators
+new_df &lt;- df %&gt;%
+        filter(gender == &quot;male&quot;) # == equals identity (same as)
+
+new_df &lt;- df %&gt;%
+        filter(gender != &quot;male&quot;) # != not equal to
+
+new_df &lt;- df %&gt;%
+        filter(eye_color %in% c(&quot;blue&quot;,&quot;yellow&quot;) == TRUE) # looks for matches to blue and yellow
+
+# &lt;= less than or equal to
+# &gt;= greater than or equal to
+new_df &lt;- df %&gt;%
+        filter(height &gt;= 120,
+               height &lt;= 180) 
+
+new_df &lt;- df %&gt;%
+        filter(height &gt; 120 &amp; height &lt; 180) # &amp;  AND
+
+new_df &lt;- df %&gt;%
+        filter(skin_color == &quot;fair&quot; | skin_color == &quot;gold&quot;) # | OR</code></pre>
+</div>
+<div id="group_by-and-summarise" class="section level3">
+<h3>group_by and summarise</h3>
+<p><code>group_by()</code> let’s us grab parts of the data based on the levels in the column</p>
+<p><code>summarise()</code> applies a function to each of the groups that are created</p>
+<pre class="r"><code># counts the number of names, for each hair color
+new_df &lt;- df %&gt;%
+          group_by(hair_color) %&gt;%
+          summarise(counts=length(name))
+
+# counts names, for each combination of hair and eye color
+new_df &lt;- df %&gt;%
+          group_by(hair_color,eye_color) %&gt;%
+          summarise(counts=length(name))</code></pre>
+</div>
+<div id="focus-on-summarise" class="section level3">
+<h3>focus on summarise</h3>
+<p><code>summarise</code> is very powerful. Using summarise we can apply any function we want to each of the groups. This includes intrinsic R functions, and functions of our own design. And, we can add as many as we want. What we get back are new dataframes with columns for each group, and new columns with variables containing the data we want from the analysis</p>
+<pre class="r"><code>new_df &lt;- df %&gt;%
+          group_by(hair_color,eye_color) %&gt;%
+          summarise(mean_years = mean(birth_year,na.rm=TRUE),
+                    sd_years = sd(birth_year,na.rm=TRUE),
+                    counts = length(name))</code></pre>
+</div>
+<div id="mutate" class="section level3">
+<h3>Mutate</h3>
+<p>Use mutate to change or add a column</p>
+<pre class="r"><code># change numbers in the height column by subtracting 100
+new_df &lt;- df %&gt;%
+            mutate(height=height-100)
+
+# make a new column dividing height by mass
+new_df &lt;- df %&gt;%
+            mutate(hm_ratio = height/mass)</code></pre>
+</div>
+<div id="select" class="section level3">
+<h3>Select</h3>
+<p>Use select to select columns of interest and return a dataframe only with those columns</p>
+<pre class="r"><code>new_df &lt;- df %&gt;%
+            select(name,height,mass)</code></pre>
+</div>
+<div id="star-wars-questions-and-answers" class="section level3">
+<h3>Star wars questions and answers</h3>
+<ol style="list-style-type: decimal">
+<li>use dplyr to find how many movies each character appeared in. Return a table that lists the names, and the number of films</li>
+</ol>
+<pre class="r"><code># two ways to do the same thing
+new_df &lt;- df %&gt;% 
+            select(name,films) %&gt;%
+            group_by(name) %&gt;%
+            mutate(films = length(unlist(films)))
+
+new_df &lt;- df %&gt;% 
+            select(name,films) %&gt;%
+            group_by(name) %&gt;%
+            summarise(films = length(unlist(films)))</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>How many characters are in each movie?</li>
+</ol>
+<ul>
+<li>dplyr isn’t always necessary for every question</li>
+</ul>
+<pre class="r"><code>table(unlist(df$films))</code></pre>
+<pre><code>## 
+##              A New Hope    Attack of the Clones      Return of the Jedi 
+##                      18                      40                      20 
+##     Revenge of the Sith The Empire Strikes Back       The Force Awakens 
+##                      34                      16                      11 
+##      The Phantom Menace 
+##                      34</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>What is the mean height and mass of characters with blue eyes?</li>
+</ol>
+<pre class="r"><code>new_df &lt;- df %&gt;%
+            filter(eye_color==&quot;blue&quot;) %&gt;%
+            summarise(mean_height = mean(height,na.rm=TRUE),
+                      mean_mass = mean(mass,na.rm=TRUE))</code></pre>
+</div>
+</div>
+<div id="data-input" class="section level2">
+<h2>Data input</h2>
+<p>Before we wrangle with data, we need to get it into R. There are many ways to do that.</p>
+<p>All of the following examples assume you have a data folder in your workspace that contains all the data files we will be using. Download this .zip file <a href="https://github.com/CrumpLab/statisticsLab/raw/master/RstudioCloud.zip">https://github.com/CrumpLab/statisticsLab/raw/master/RstudioCloud.zip</a>. Unzip the file. Then copy the data folder into your R markdown project folder.</p>
+<p><strong>WARNING:</strong> loading files requires you to tell R exactly where the file is on your computer. This can involve specifying the entire file path (the drive, all of the folder, and then the filename). These examples avoid this complete filename nonsense by putting the files in a data folder in your R project folder. Then, we just need to specify the folder and the filename. In this case, the folder will always be data. In general, R by default attempts to load files from the current working directory, which is automatically set to your project folder when you are working in an R-studio project.</p>
+<pre class="r"><code># loading a csv file using read.csv
+hsq &lt;- read.csv(&quot;data/hsq.csv&quot;)
+
+# alternative using fread
+library(data.table)
+hsq &lt;- fread(&quot;data/hsq.csv&quot;) # creates a data.table, similar to a data.frame
+
+# loading an SPSS sav file
+library(foreign)
+spss &lt;- read.spss(&quot;data/02_NYC_Salary_City_2016.sav&quot;,
+                  to.data.frame=TRUE)</code></pre>
+<div id="other-helpful-libraries-for-reading-in-files" class="section level3">
+<h3>Other helpful libraries for reading in files</h3>
+<ol style="list-style-type: decimal">
+<li>libary <code>readxl</code> let’s you read in excel files</li>
+<li>library <code>googlesheets</code> let’s you read in google spreadsheets</li>
+<li>function <code>scan</code> is a powerful and all purpose text input function, often helpful in very messy situations where you want to read in line-by-line</li>
+<li><code>load</code> for R data files</li>
+<li>there are several <code>read.</code> functions for specific situations.</li>
+<li>library <code>jsonlite</code> for json data structures</li>
+<li>and many more, this is really something that you will learn more about on a case-by-case basis as you have to deal with particular data formats.</li>
+</ol>
+</div>
+</div>
 <div id="skills-checklist" class="section level2">
 <h2>Skills checklist</h2>
 <ul>
@@ -1556,16 +1782,15 @@ div.tocify {
 <p>The data file contains 4 columns. Each row is for one subject. Each row contains 4 means, for the incongruent and congruent stroop conditions, both when subjects were sitting and standing</p>
 <p><strong>pre-processing</strong></p>
 <ul>
-<li>load the data</li>
+<li>load the data (t’s in wide format to begin with)</li>
 <li>convert from wide format to long format (each row should only contain one dependent measure per subject)</li>
 </ul>
-<pre class="r"><code>library(data.table)</code></pre>
-<pre><code>## Warning: package &#39;data.table&#39; was built under R version 3.4.4</code></pre>
-<pre class="r"><code>all_data &lt;- fread(&quot;https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/stroop_stand.csv&quot;)</code></pre>
+<pre class="r"><code>library(data.table)
+all_data &lt;- fread(&quot;https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/stroop_stand.csv&quot;)</code></pre>
 <p><strong>Analysis questions</strong></p>
 <ul>
-<li>use dplyr to calculate the means for congruent vs. incongruent, collapsing over the sitting/standing variable</li>
-<li>use dplyr to calculate the standard error for congruent vs. incongruent, collapsing over the sitting/standing variable</li>
+<li>use dplyr to calculate the overall means for congruent vs. incongruent (note: need to get congruent and incongruent mean for each subject, and then get the mean of those means for congruent and incongruent)</li>
+<li>use dplyr to calculate the standard error of the mean for congruent vs. incongruent (same requirement as above, first get the means for each subject, then get the standard error of those means)</li>
 <li>use dplyr to calculate the means for sitting/standing variable collapsing over congruency</li>
 <li>use dplyr to calculate the standard error for sitting/standing variable collasping over congruency</li>
 <li>use dplyr to calculate the condition means for each cell in the 2x2 design.</li>

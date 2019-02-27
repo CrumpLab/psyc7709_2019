@@ -31,11 +31,68 @@ By the end of this exercise you will become much more familiar with how ggplot2 
 Calcutt, S. E., Proctor, D., & Berman, S. M. (2019). Chimpanzees (Pan troglodytes) Are More Averse to Social Than Nonsocial Risk. Psychological Science, 30, 105–115.
 
 ```{r, echo=FALSE}
+library(ggplot2)
+library(ggrepel)
 knitr::include_graphics("datavis_figs/Calcutt1.png")
+
+chimps<-rep(c("Dara","Rita","Liza","Katie","Azalea","Barbi","Rowena","Fiona"), each=2)
+MF <- c(59,60,51,57,48,33,3,4,23,43,1,42,3,38,0,10)
+Condition <- rep(c("Social Condition","Nonsocial Condition"),8)
+Aversity <- rep(c("Not Averse","Averse"),each=8)
+
+plot_df <- data.frame(chimps,
+                      MF,
+                      Condition,
+                      Aversity,
+                      chimps2=chimps)
+
+plot_df$chimps2[c(2,4,6,8,9,11,13,15)]<-""
+
+plot_df$Condition <- factor(plot_df$Condition, levels = c("Social Condition","Nonsocial Condition"))
+
+
+#note the commented code shows an example of using text repel to make the labels non overlapping.
+
+ggplot(plot_df, aes(x=Condition, 
+                    y=MF, 
+                    linetype=Aversity,
+                    group=chimps,
+                    label=chimps2))+
+  geom_line()+
+  theme_classic(base_size=12)+
+  xlab("")+
+  ylab("Mean Frequency of Risky Choice")+
+  theme(legend.position="none") +
+  #geom_text_repel(size=3,aes(label=chimps2))+
+  annotate("text", x = .8, y = 60, label = "Dara")+
+  annotate("text", x = .8, y = 53, label = "Rita")+
+  annotate("text", x = .8, y = 47, label = "Liza")+
+  annotate("text", x = .8, y = 3, label = "Katie")+
+  annotate("text", x = 2.2, y = 45, label = "Azalea")+
+  annotate("text", x = 2.2, y = 41, label = "Barbi")+
+  annotate("text", x = 2.2, y = 35, label = "Rowena")+
+  annotate("text", x = 2.2, y = 10, label = "Fiona")
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.width=2, fig.height=2}
 knitr::include_graphics("datavis_figs/Calcutt2.png")
+
+NS_risk<-c(0,1,3,4,25,45,52,59)
+S_risk<-c(12,47,4,41,48,35,55,60)
+plot_df<-data.frame(NS_risk,S_risk)
+
+ggplot(plot_df, aes(x=NS_risk,y=S_risk))+
+  geom_point(shape=18, fill="black")+
+  geom_smooth(method="lm",se=FALSE, color="black")+
+  theme_classic(base_size=12)+
+  xlab("Average Frequency of Nonsocial Risk")+
+  ylab("Average Frequency of Social Risk")+
+  coord_cartesian(xlim=c(0,70), ylim=c(0,70))+
+  scale_x_continuous(breaks=seq(0,70,10), expand=c(0,0))+
+  scale_y_continuous(breaks=seq(0,70,10), expand=c(0,0))
+  
+  
+
 ```
 
 
@@ -137,6 +194,24 @@ If you are confident that you can accomplish the items below, then you are well 
 7. re-order categorical factor levels
 
 ## Example code
+
+### Data frames
+
+Many libraries and functions in R use data.frames. As you will discover throughout the course, a common workflow will be to
+
+1. Get the data into R, then make it into a data.frame
+2. Manipulate the data.frame so it contains the information you want (this is the topic of data wrangling we cover next week)
+2. Use the data.frame as input to another function (to make a graph, or run an analysis)
+
+The bottom line is that once you format the data using a data.frame, many things become immediately possible without having to further reformat the data
+
+A data frame is like a table, it can have named columns and rows. 
+
+```{r}
+
+
+```
+
 
 Make sure you load ggplot2 before you try to use it  in your rmd file.
 
