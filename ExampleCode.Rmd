@@ -389,5 +389,94 @@ for(i in a){
 
 ```
 
+## Functions
+
+This section discusses the syntax for writing custom functions in R.
+
+### function syntax
+
+```{r, eval=FALSE}
+function_name <- function(input1,input2){
+  #code here
+  return(something)
+}
+```
+
+### example functions
+
+This function has no input between the `()`. Whenever you run this function, it will simply return whatever is placed inside the `return` statement.
+
+```{r}
+# define the function
+print_hello_world <- function(){
+  return(print("hello world"))
+}
+
+# use the function
+print_hello_world()
+```
+
+This function simply takes an input, and then returns the input without modifying it. 
+
+```{r}
+return_input <- function(input){
+  return(input)
+}
+
+# the variable input is assigned a 1
+# then we return(input), which will result in a 1
+# because the function internally assigns 1 to the input
+return_input(1)
+
+a <- "something"
+return_input(a)
+```
+
+This function takes an input, then creates an internal variable called temp and assigns input+1. Then the contents of temp is returned. Note there, is no checking of the input, so it will return an erro if you input a character (can't add one to a character in R)
+
+```{r, error=TRUE}
+add_one <- function(input){
+  temp <- input+1
+  return(temp)
+}
+
+add_one(1)
+add_one("a")
+```
+
+This function adds some input checking. We only add one if the input is a numeric type. Otheriwse, we use `stop()` to return an error message to the console
+
+```{r, error=TRUE}
+add_one <- function(input){
+  if(class(input) == "numeric"){
+    temp <- input+1
+    return(temp)
+  } else {
+    return(stop("input must be numeric"))
+  }
+}
+
+add_one(1)
+add_one("a")
+```
+
+A function with three inputs
+
+```{r}
+add_multiply <- function(input, x_plus,x_times){
+  temp <- (input+x_plus)*x_times
+  return(temp)
+}
+
+# input is 1
+# x_plus <- 2
+# x_times <- 3
+# will return (1+2)*3 = 9
+add_multiply(1,2,3)
+
+
+```
+
+
 
 

@@ -803,6 +803,78 @@ for(i in a){
 ## [1] &quot;I&#39;m not any of the above&quot;
 ## [1] &quot;I&#39;m a 1&quot;</code></pre>
 </div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p>This section discusses the syntax for writing custom functions in R.</p>
+<div id="function-syntax" class="section level3">
+<h3>function syntax</h3>
+<pre class="r"><code>function_name &lt;- function(input1,input2){
+  #code here
+  return(something)
+}</code></pre>
+</div>
+<div id="example-functions" class="section level3">
+<h3>example functions</h3>
+<p>This function has no input between the <code>()</code>. Whenever you run this function, it will simply return whatever is placed inside the <code>return</code> statement.</p>
+<pre class="r"><code># define the function
+print_hello_world &lt;- function(){
+  return(print(&quot;hello world&quot;))
+}
+
+# use the function
+print_hello_world()</code></pre>
+<pre><code>## [1] &quot;hello world&quot;</code></pre>
+<p>This function simply takes an input, and then returns the input without modifying it.</p>
+<pre class="r"><code>return_input &lt;- function(input){
+  return(input)
+}
+
+# the variable input is assigned a 1
+# then we return(input), which will result in a 1
+# because the function internally assigns 1 to the input
+return_input(1)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>a &lt;- &quot;something&quot;
+return_input(a)</code></pre>
+<pre><code>## [1] &quot;something&quot;</code></pre>
+<p>This function takes an input, then creates an internal variable called temp and assigns input+1. Then the contents of temp is returned. Note there, is no checking of the input, so it will return an erro if you input a character (can’t add one to a character in R)</p>
+<pre class="r"><code>add_one &lt;- function(input){
+  temp &lt;- input+1
+  return(temp)
+}
+
+add_one(1)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>add_one(&quot;a&quot;)</code></pre>
+<pre><code>## Error in input + 1: non-numeric argument to binary operator</code></pre>
+<p>This function adds some input checking. We only add one if the input is a numeric type. Otheriwse, we use <code>stop()</code> to return an error message to the console</p>
+<pre class="r"><code>add_one &lt;- function(input){
+  if(class(input) == &quot;numeric&quot;){
+    temp &lt;- input+1
+    return(temp)
+  } else {
+    return(stop(&quot;input must be numeric&quot;))
+  }
+}
+
+add_one(1)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>add_one(&quot;a&quot;)</code></pre>
+<pre><code>## Error in add_one(&quot;a&quot;): input must be numeric</code></pre>
+<p>A function with three inputs</p>
+<pre class="r"><code>add_multiply &lt;- function(input, x_plus,x_times){
+  temp &lt;- (input+x_plus)*x_times
+  return(temp)
+}
+
+# input is 1
+# x_plus &lt;- 2
+# x_times &lt;- 3
+# will return (1+2)*3 = 9
+add_multiply(1,2,3)</code></pre>
+<pre><code>## [1] 9</code></pre>
+</div>
+</div>
 
 
 
