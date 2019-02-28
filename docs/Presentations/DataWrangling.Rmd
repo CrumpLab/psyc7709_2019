@@ -312,6 +312,8 @@ all_data <- fread("https://raw.githubusercontent.com/CrumpLab/statisticsLab/mast
   - use dplyr to calculate the condition means for each cell in the 2x2 design.
   - use dplyr to calculate the condition standard errors for each cell in the 2x2 design.
   - According to the means, was the average Stroop effect different depending on whether subjects were sitting or standing?
+  
+  
 
 -----
 
@@ -328,8 +330,6 @@ b. How many subjects had an overall accuracy worse than 80%?
 c. How many subjects had an accuracy of less than 80% in any one of the six conditions?
 d. Create a scatterplot showing each subjects mean overall accuracy and mean overall IKSI (interkeystroke interval)
 
-
-
 -----
 
 ### Data-wrangling text
@@ -344,5 +344,14 @@ Obtain a reasonably sized piece of text (at least 250 words or more) and load in
 
  - create a table with a letter frequency distribution (a count of how many times each letter appears in the text)
  - Letters appear in different positions of words. Create a table with letter frequency distrbibutions as a function of letter position in a word. For example, you will have a distribution for all first position letters, all 2nd position letters, and so on. Don't worry about going past 9 positions.
+ 
+### Assignment
+
+1. Input the data: combine all of the individual text files into a single, long-format data frame
+2. Pre-Processing & checks:
+3. Analysis:
+  a. What is the main effect of Congruency (congruentv. incongruent), output a table
+  b. Display the means for the Congruency Factor in a graph using ggplot2, include the standard error of the means for the error bars
+  c. Sequence Analysis, report the means in a table, show the means in a graph.
 
 

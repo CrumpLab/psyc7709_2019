@@ -1,0 +1,51 @@
+---
+title: "Graph Output"
+author: "Matt"
+date: "1/31/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
+                      fig.path = "myfigs/",
+                      dev = c("pdf", "png"))
+```
+
+
+```{r fig1, fig.height=3.5, fig.width=3.5}
+library(ggplot2)
+A <- rexp(200)
+B <- rnorm(200,3,sd=1)
+C <- rnorm(200,3,sd=1)
+D <- rnorm(200,3,sd=1)
+DV <- c(A,B,C,D)
+studies <- rep(c("Doctor \n Study 1 \n N = 199",
+             "Butcher \n Study 2 \n n = 199",
+             "Firefighter \n Study 2 \n n = 200",
+             "Construction \n Worker \n Study 2 \n n = 205"), each=200)
+
+plot_df <-data.frame(DV,studies)
+
+plot_df$studies <- factor(plot_df$studies, 
+                         levels = c("Doctor \n Study 1 \n N = 199",
+             "Butcher \n Study 2 \n n = 199",
+             "Firefighter \n Study 2 \n n = 200",
+             "Construction \n Worker \n Study 2 \n n = 205"))
+
+library(dplyr)
+means_df <- plot_df %>%
+              group_by(studies) %>%
+              summarise(M=mean(DV),
+                        CI_lower = t.test(DV)$conf.int[1],
+                        CI_upper = t.test(DV)$conf.int[2])
+
+ggplot(means_df, aes(x=studies,y=M))+
+  geom_violin(data=plot_df, aes(x=studies,y=DV),fill="grey")+
+  theme_classic(base_size=10)+
+  xlab("")+
+  ylab("Evaluation of Person X")+
+  scale_y_continuous(breaks=seq(0,7,1))+
+  coord_cartesian(ylim=c(0,7))+
+  geom_point()+
+  geom_errorbar(aes(ymin=CI_lower,ymax=CI_upper), width=.2)
+```

@@ -1,0 +1,104 @@
+---
+title: "Advanced"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+```
+
+For each topic that we cover every week, there are numerous additional packages and techniques that we won't have time to cover directly. This is a short list of some of those packages and techniques. I will add to this list as we go, if you have something to add to the list, let me know, or fork this repo and make a pull-request.
+
+## ggplot2
+
+### Add-on packages
+
+- [https://www.ggplot2-exts.org](https://www.ggplot2-exts.org) A repository of 50+ add on packages for ggplot2
+- [https://gganimate.com](https://gganimate.com)
+  - allows you to create animated .gifs of ggplots
+  - I made a bunch of animated gifs for a statistics textbook. They are all here along with the code [https://crumplab.github.io/statistics/gifs.html](https://crumplab.github.io/statistics/gifs.html)
+- [ggrepel](https://github.com/slowkow/ggrepel]) allows you to repel overlapping text labels away from each other.
+- [esquisse](https://github.com/dreamRs/esquisse) a GUI (graphic user interface) that allows you make ggplot graphs using drag-drop, and clickable options
+- [ggedit](https://github.com/metrumresearchgroup/ggedit) similar to above, clickable editing of ggplot graphs
+- [plotly](https://plot.ly/r/) a package similar to ggplot, makes a whole variety of graphs, mainly for use in websites. Allows interactive graphs.
+  - As an example, I used plotly on my publications website, if you hover over the dots, info pops up [https://crumplab.github.io/Publications.html](https://crumplab.github.io/Publications.html).
+- **ggpubr** (install from CRAN), many useful things, including the `ggarrange` function which allows you to knit multiple plots together
+- **ggthemes** extra themes, scales, and geoms
+
+### Figure Output tips
+
+How do you control the size (width/height) of the figure, and where can you can get a file, like a .pdf or a .png of the figure? 
+
+I use knitr options to solve these problems. 
+
+## knitr options
+
+When you create a new R Markdown document you will see the following code chunk underneath the yaml, at the beginning of the document. It usually looks like this:
+
+````markdown
+`r ''````{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+````
+
+This chunk is named setup, it is not printed in your output, but **it controls the global setup options** for the whole document. Any option you set here applies to all of the remaining code chunks you create. It's a way of setting defaults. 
+
+Here are some helpful defaults you can add. You turn the option on with `TRUE`, and turn it off with `FALSE`.
+
+- `echo=TRUE` sets the default to print all remaining code blocks to the output, `FALSE` sets the default to not print the code blocks
+- `warning = FALSE` turns off printing of warnings
+- `message = FALSE` turns off printing of messages, these commonly occur when you load a package, where you receive a message that the package was loaded
+- `eval = FALSE` sets the default to **NOT** evaluate the code chunk as R Code. This will not run the code block, but the code block will still print if `echo=TRUE`
+- `error=TRUE` normally the knit fails when there is an error in the code. If you set `error=TRUE` the knit will complete, and return an error message for code blocks with errors.
+
+````markdown
+`r ''````{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE, 
+                      eval = FALSE,
+                      error = TRUE)
+```
+````
+
+### knitr figure output defaults
+
+The following setup options are useful for figure output.
+
+- `fig.width = 3` sets the default width in inches for all figures
+- `fig.height = 3` sets the default height in inches for all figures
+- `fig.path = "myfigs/"` defines folder where figure files will be saved. This will be relative to your current working directoy
+- `dev = c("pdf", "png")` tells knitr to output both .png, and .pdf versions of the figure. The .pdf contains vector graphics, meaning the figure can be resized without pixelization.
+
+````markdown
+`r ''````{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      fig.width = 3,
+                      fig.height = 3,
+                      fig.path = "myfigs/",
+                      dev = c("pdf", "png"))
+```
+````
+
+### figure output per code block
+
+You can set the options for remaining code blocks individually. These will overrule the default options that you specify in the setup chunk.
+
+
+````markdown
+`r ''````{r figurename, fig.width =5, fig.height =7}
+
+# some code that generates a figure
+
+```
+````
+
+
+
+

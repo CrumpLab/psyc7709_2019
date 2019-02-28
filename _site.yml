@@ -14,6 +14,8 @@ navbar:
     href: Resources.html
   - text: ExampleCode
     href: ExampleCode.html
+  - text: Advanced
+    href: Advanced.html
 output_dir: docs
 output:
   html_document:

@@ -158,6 +158,7 @@ Due date: M Mar 4th
 
 1. [Dplyr reference](https://dplyr.tidyverse.org)
 2. [Hadley Wickham's, R for Data Science, Chapter 5 Data transformation](http://r4ds.had.co.nz/transform.html)
+3. [Data import Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/data-import-cheat-sheet)
 
 #### Assignment 5 (Data-Wrangling)
 
