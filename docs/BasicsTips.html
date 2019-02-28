@@ -392,7 +392,7 @@ div.tocify {
   <a href="Resources.html">Resources</a>
 </li>
 <li>
-  <a href="Resources.html">ExampleCode</a>
+  <a href="ExampleCode.html">ExampleCode</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -569,7 +569,7 @@ d%in%a</code></pre>
 <li>Put the current computer time in milliseconds into a variable</li>
 </ol>
 <pre class="r"><code>print(as.numeric(Sys.time())*1000, digits=15)</code></pre>
-<pre><code>## [1] 1551274631582.45</code></pre>
+<pre><code>## [1] 1551310488483.3</code></pre>
 <ol start="17" style="list-style-type: decimal">
 <li><p>Measure how long a piece of code takes to run by measuring the time before the code is run, and after the code is run, and taking the difference to find the total time</p></li>
 <li>Read a .txt file or .csv file into a variable</li>
@@ -725,7 +725,7 @@ encrypt_numbers &lt;-function(input_sequence,key){
 }
 
 encrypt_numbers(original_sequence,encryption_key)</code></pre>
-<pre><code>##  [1] 3 2 1 5 4 2 2 1 2 5 4 2</code></pre>
+<pre><code>##  [1] 5 1 3 2 4 1 1 3 1 2 4 1</code></pre>
 <ul>
 <li>here is a different approach making use of the <code>factor()</code> function</li>
 </ul>
@@ -745,11 +745,11 @@ new_sequence # all elements are now changed</code></pre>
 <p>Your task here is to write an algorithm that can simulate playing the above depicted Snakes and Ladders board. You should assume that each roll of the dice produces a random number between 1 and 6. After you are able to simulate one played game, you will then write a loop to simulate 1000 games, and estimate the average number of dice rolls needed to successfully complete the game.</p>
 <pre class="r"><code># rolling a dice with sample
 sample(c(1,2,3,4,5,6),1)</code></pre>
-<pre><code>## [1] 2</code></pre>
+<pre><code>## [1] 3</code></pre>
 <pre class="r"><code>sample(c(1,2,3,4,5,6),1)</code></pre>
-<pre><code>## [1] 6</code></pre>
+<pre><code>## [1] 5</code></pre>
 <pre class="r"><code>sample(c(1,2,3,4,5,6),1)</code></pre>
-<pre><code>## [1] 4</code></pre>
+<pre><code>## [1] 3</code></pre>
 <p>-tip: consider a simpler version of the problem. How many times do you need to roll a dice so that all of the dice rolls add up to 25 or greater?</p>
 <pre class="r"><code># try one simulation
 total_sum&lt;-0
@@ -759,7 +759,7 @@ while(total_sum &lt; 25){
   total_sum &lt;-total_sum+sample(c(1,2,3,4,5,6),1)
 }
 number_of_rolls</code></pre>
-<pre><code>## [1] 9</code></pre>
+<pre><code>## [1] 6</code></pre>
 <pre class="r"><code># record the results from multiple simulations
 
 save_rolls &lt;- c()
@@ -773,7 +773,7 @@ for(sims in 1:100){
   save_rolls[sims] &lt;- number_of_rolls
 }
 mean(save_rolls)</code></pre>
-<pre><code>## [1] 7.65</code></pre>
+<pre><code>## [1] 7.74</code></pre>
 <ul>
 <li>how do you add in a representaion of the board, so that you change which square the player is on depending on whether they land on a ladder or snake.</li>
 </ul>
