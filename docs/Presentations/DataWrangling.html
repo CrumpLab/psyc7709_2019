@@ -1768,63 +1768,6 @@ spss &lt;- read.spss(&quot;data/02_NYC_Salary_City_2016.sav&quot;,
 </ol>
 </div>
 </div>
-<div id="skills-checklist" class="section level2">
-<h2>Skills checklist</h2>
-<ul>
-<li>can input files in .txt, .csv, and .xlsx into data.frames or data.tables</li>
-<li>can rename columns</li>
-<li>can convert columns into desired class (e.g., a factor vs not a factor)</li>
-<li></li>
-</ul>
-<div id="wide-to-long" class="section level3">
-<h3>wide to long</h3>
-<p>Rosenbaum, Mama, Algom, (2017) investigated whether Stroop effects change depending on whether subjects are sitting or standing. A tutorial on this dataset is <a href="https://crumplab.github.io/statisticsLab/lab-10-factorial-anova.html#does-standing-up-make-you-focus-more">https://crumplab.github.io/statisticsLab/lab-10-factorial-anova.html#does-standing-up-make-you-focus-more</a>.</p>
-<p>The data file contains 4 columns. Each row is for one subject. Each row contains 4 means, for the incongruent and congruent stroop conditions, both when subjects were sitting and standing</p>
-<p><strong>pre-processing</strong></p>
-<ul>
-<li>load the data (t’s in wide format to begin with)</li>
-<li>convert from wide format to long format (each row should only contain one dependent measure per subject)</li>
-</ul>
-<pre class="r"><code>library(data.table)
-all_data &lt;- fread(&quot;https://raw.githubusercontent.com/CrumpLab/statisticsLab/master/data/stroop_stand.csv&quot;)</code></pre>
-<p><strong>Analysis questions</strong></p>
-<ul>
-<li>use dplyr to calculate the overall means for congruent vs. incongruent (note: need to get congruent and incongruent mean for each subject, and then get the mean of those means for congruent and incongruent)</li>
-<li>use dplyr to calculate the standard error of the mean for congruent vs. incongruent (same requirement as above, first get the means for each subject, then get the standard error of those means)</li>
-<li>use dplyr to calculate the means for sitting/standing variable collapsing over congruency</li>
-<li>use dplyr to calculate the standard error for sitting/standing variable collasping over congruency</li>
-<li>use dplyr to calculate the condition means for each cell in the 2x2 design.</li>
-<li>use dplyr to calculate the condition standard errors for each cell in the 2x2 design.</li>
-<li>According to the means, was the average Stroop effect different depending on whether subjects were sitting or standing?</li>
-</ul>
-<hr />
-</div>
-<div id="means-at-multiple-levels" class="section level3">
-<h3>Means at multiple levels</h3>
-<pre class="r"><code>all_data &lt;- fread(&quot;https://github.com/CrumpLab/statisticsLab/raw/master/data/exp1_BehmerCrumpAPP.csv&quot;)</code></pre>
-<p><strong>Analysis Questions</strong></p>
-<ol style="list-style-type: lower-alpha">
-<li>Which subject had the worst overall accuracy?</li>
-<li>How many subjects had an overall accuracy worse than 80%?</li>
-<li>How many subjects had an accuracy of less than 80% in any one of the six conditions?</li>
-<li>Create a scatterplot showing each subjects mean overall accuracy and mean overall IKSI (interkeystroke interval)</li>
-</ol>
-<hr />
-</div>
-<div id="data-wrangling-text" class="section level3">
-<h3>Data-wrangling text</h3>
-<p>Obtain a reasonably sized piece of text (at least 250 words or more) and load into R as a string variable</p>
-<p><strong>Pre-processing</strong></p>
-<ul>
-<li>convert all characters to lowercase, remove all punctuation, special characters,and numbers so the only characters left are the letters from a-z</li>
-</ul>
-<p><strong>Analysis questions</strong></p>
-<ul>
-<li>create a table with a letter frequency distribution (a count of how many times each letter appears in the text)</li>
-<li>Letters appear in different positions of words. Create a table with letter frequency distrbibutions as a function of letter position in a word. For example, you will have a distribution for all first position letters, all 2nd position letters, and so on. Don’t worry about going past 9 positions.</li>
-</ul>
-</div>
-</div>
 
 
 

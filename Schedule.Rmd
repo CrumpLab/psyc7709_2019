@@ -154,13 +154,18 @@ Due date: M Mar 4th
 - Data formatting (dataframes and data.tables)
 - Introduction to the dplyr package for filtering, selecting, augmenting, and summarizing data sets (and more).
 
-#### Readings and Resources
+#### Resources
 
 1. [Dplyr reference](https://dplyr.tidyverse.org)
 2. [Hadley Wickham's, R for Data Science, Chapter 5 Data transformation](http://r4ds.had.co.nz/transform.html)
 3. [Data import Cheatsheet](https://resources.rstudio.com/rstudio-cheatsheets/data-import-cheat-sheet)
 
 #### Assignment 5 (Data-Wrangling)
+
+1. [Class notes on Data-wrangling](https://crumplab.github.io/psyc7709/Presentations/DataWrangling.html)
+2. [Example R Markdown analysis report](https://crumplab.github.io/psyc7709/Presentations/DataWrangleExampleStroop.html)
+3. [Your Rmarkdown Assignment](https://crumplab.github.io/psyc7709/Presentations/DataWrangleFlanker_student.Rmd) This links to the .rmd file, that you can use as a template to complete the assignment. Using this template file, create a new page on your website, and submit the link
+4. [Answer sheet for assignment](https://crumplab.github.io/psyc7709/Presentations/DataWrangleFlanker.html) You can use this to check your work. If you don't get the same numbers, then one of us did something wrong.
 
 Due date: M Mar 11th
 

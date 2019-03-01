@@ -15,6 +15,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
 ```
 
+This example is taken from [https://crumplab.github.io/statisticsLab/lab-10-factorial-anova.html#r-10](https://crumplab.github.io/statisticsLab/lab-10-factorial-anova.html#r-10). The data file is `stroop_stand.csv`, and can be found here [https://github.com/CrumpLab/statisticsLab/tree/master/data](https://github.com/CrumpLab/statisticsLab/tree/master/data)
+
 ## Load the data and libraries you will use
 
 ```{r}

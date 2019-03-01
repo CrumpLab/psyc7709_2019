@@ -1,0 +1,146 @@
+---
+title: "Flanker Analysis"
+author: "Matt"
+date: "1/31/2019"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+```
+
+## Load the data and libraries you will use
+
+I will help you with some sample code that compiles all of the text files in a single long format data frame.
+
+```{r}
+library(data.table)
+library(dplyr)
+library(ggplot2)
+
+
+# get the file names
+file_names <- list.files(path="FlankerData")
+
+# create headers for each column
+the_headers <- c("stimulus","congruency","proportion",
+                 "block","condition","dualtask","unknown",
+                 "stimulus_onset","response_time","response","subject")
+# Load data
+# create empty dataframe
+all_data<-data.frame()
+
+# loop to add each file to the dataframe
+for(i in file_names){
+  one_subject <- fread(paste("FlankerData/",i, sep=""))
+  names(one_subject) <- the_headers
+  one_subject$subject <- rep(i,dim(one_subject)[1])
+  one_subject <- cbind(one_subject, trial= 1:dim(one_subject)[1])
+  all_data <- rbind(all_data,one_subject)
+}
+
+```
+
+## Pre-processing
+
+### get accuracy for each trial
+
+A correct response occurs when the letter in the response column is the same as the letter in the middle position of item in the stimulus column. Create an accuracy column that codes whether the response was correct or incorrect on each trial (coding can be TRUE/FALSE, 0/1, or some other coding scheme that identifies correct vs incorrect)
+
+```{r}
+
+
+```
+
+### Get Reaction time on each trial
+
+The stimulus_onset column gives a computer timestamp in milliseconds indicating when the stimulus was presented. The response_time column is a timestamp in milliseconds for the response. The difference between the two (response_time  - stimulus_onset) is the reaction time in milliseconds. Add a column that calculates the reaction time on each trial.
+
+**tip:** notice that the numbers in response_time and stimulus_onset have the class integer64. Unfortunately, ggplot does not play nice with integers in this format. you will need to make sure your RT column is in the class integer or numeric.
+
+```{r}
+
+```
+
+
+## Checks
+
+Check how many trials each subject completed in the congruent and incongruent conditions, the mean accuracy for each subject in each congruency condition, and the mean RT for each subject in each congruency condition.
+
+```{r}
+
+
+```
+
+
+
+### Exclusion
+
+It is common to exclude Reaction times that are very slow. There are many methods and procedures for excluding outlying reaction times. To keep it simple, exclude all RTs that are longer than 2000 ms
+
+```{r}
+
+```
+
+## Analysis
+
+### Reaction Time analysis
+
+1. Get the individual subject mean reaction times for **correct** congruent and incongruent trials.
+
+```{r}
+
+```
+
+2. Get the overall mean RTs and SEMs (standard errors of the mean) for the congruent and incongruent condition. Make a table and graph.
+
+```{r}
+
+  
+  
+```
+
+3. Compute the flanker effect for each subject, taking the difference between their mean incongruent and congruent RT. Then plot the mean flanker effect, along with the SEM of the mean flanker effect
+
+**tip:** Not all problems have an easy solution in dplyr, this is one them. You may have an easier time using logical indexing of the dataframe to solve this part.
+
+```{r}
+
+  
+```
+
+
+### Exploratory analysis
+
+Multiple questions may often be asked of data, especially questions that may not have been of original interest to the researchers. 
+
+In flanker experiments, like this one, it is well known that the flanker effect is modulated by the nature of the previous trial. Specifically, the flanker effect on trial n (the current trial), is larger when the previous trial (trial n-1) involved a congruent item, compared to an incongruent item. 
+
+Transform the data to conduct a sequence analysis. The dataframe should already include a factor (column) for the congruency level of trial n. Make another column that codes for the congruency level of trial n-1 (the previous trial). This creates a 2x2 design with trial n congruency x trial n-1 congruency. 
+
+First get teh subject means for each condition, then create a table and plot for teh overall means and SEMs in each condition. This should include:
+
+1. trial n congruent : trial n-1 congruent
+2. trial n incongruent : trial n-1 congruent
+3. trial n congruent : trial n-1 incongruent
+4. trial n incongruent : trial n-1 incongruent
+
+**tip:** be careful, note that the first trial in each experiment can not be included, because it had no preceding trial
+
+```{r}
+
+
+```
+
+
+
+
+
+
+
