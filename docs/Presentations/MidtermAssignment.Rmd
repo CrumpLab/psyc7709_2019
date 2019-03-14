@@ -1,0 +1,96 @@
+---
+title: "Midterm Assignment: Reproducible Report"
+author: "Matt"
+date: "1/31/2019"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+```
+
+Your midterm assignment is due Monday April 8th. The midterm assignment involves a few different parts, that build on each other.
+
+**Part 1 (Due March 25th)**
+
+1. Make a new github repository for your midterm project. Put your work in this repository
+2. Find a psych paper with open data (publically accesible and downloadable)
+3. Load the data into R
+4. Re-analyse the data to see if you can reproduce the results from the original paper
+5. Write up your findings in a reproducible report (i.e., put everything in an .rmd file)
+
+**Part 2 (Due April 1)**
+
+1. Convert your reproducible report into an APA style research report using the papaja package
+
+**Part 3 (Due April 8th)**
+
+1. Add a section following the results where you conduct and report a simulation based power analysis
+
+
+## Part 1: Reproducible report
+
+### Finding a paper with data
+
+Here are a few tips for finding a psych paper with open data. **Most important**, for this assignment you do not need to re-analyze **all of the data** from a particular paper. Many papers have multiple experiments, and multiple analyses, including analyses you may not be familiar with. You can restrict your re-analysis to a portion of the paper. For example, you might only re-analyse the results from one experiment, and perhaps only the results relevant to one of the tests (e.g., one ANOVA with post-hoc tests). **You might choose a paper where you already know something about the statistical test that was run**. 
+
+1. [https://osf.io](https://osf.io) The open science framework contains many repositories of open data that are part of published papers
+2. Some journals, including Psychological Science, put badges on papers with open data. Look for the blue open-data badge. You will usually find the link to the open-data in the paper.
+3. [https://crumplab.github.io/statisticsLab/](https://crumplab.github.io/statisticsLab/) This is a lab manual I use for teaching R to undergraduates. Labs 6 - 11 go from t-tests, to one-way ANOVAS, to Factorial ANOVAs. Each lab involves a paper from Psych science with open-data. The lab shows how to import the data, and then conduct a re-analysis of some aspect of the results. Feel free to use one of these papers, and to use the lab manual to help you with writing the code to conduct the re-analysis.
+
+### Loading the data into R
+
+The data you find could be in many different formats. It should be possible to load it into R. Use the github issues tab if you run into problems
+
+### Re-analysis of original data
+
+Focus in a single analysis that was relevant to one of the research questions. For example, if the analysis involved a one-factor ANOVA, then you might do the following:
+
+1. Conduct the same ANOVA, report the ANOVA table
+2. Report a table of means
+3. Report a graph of the means
+4. Conduct and report any planned or post-hoc comparisons
+
+### Write a reproducible report
+
+The concept of a reproducible report is that someone else could exactly reproduce your analysis given your report. It is easy to make reproducible reports using R markdown. If you write your report in an .Rmd file, and that file includes your scripts for loading and analyzing the data, then by sharing your .rmd file, other people can exactly reproduce your report.
+
+Your report should include:
+
+1. A brief description of the research question and experiment (with citation to the paper, and link to find the data)
+
+2. The scripts necessary to complete the re-analysis
+
+3. The re-analysis (see above)
+
+4. A brief discussion of whether you were succesful or not.
+
+## Part 2: APA paper in R markdown
+
+### Papaja
+
+In part 2, you will learn how to use the papaja package to create APA style manuscripts using R markdown. We will discuss how to use papaja in class. You will create a new .rmd file using the papaja template, and then transfer your reproducible report into this format. You will write very brief sections for:
+
+1. abstract (50-100 words)
+2. introduction (1 or two paragraphs)
+3. methods (1 paragraph)
+4. results (Your re-analysis results)
+5. discussion (very brief, 1 paragraph)
+6. references (cite the paper, and anything else you want to cite)
+
+Again, the purpose here is not to write an APA paper for the midterm, but to get some experience with using the papaja package.
+
+## Part 3: Power analysis
+
+### Simulation based power analysis
+
+In part 3 you will add a simulation-based power analysis to your APA-style manuscript. We will discuss how to conduct simulation based power analyses in class.
+
+
+

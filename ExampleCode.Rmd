@@ -481,6 +481,67 @@ add_multiply(1,2,3)
 
 Loops are a common tool for doing something many times. R can accomplish the goal of "doing something many times" without loops, using a vectorized approach. 
 
+### Basic examples
+
+Let's take a close look at some very basic differences between using a loop, and using R's vectorized approach
+
+Consider the problem of adding a single number to all of the numbers in a vector.
+
+```{r}
+nums <- c(1,2,3,4)
+
+# vectorized approach
+# R automatically adds 1 to all of the numbers
+nums+1
+
+# loop approach
+# much longer to write out
+for(i in 1:length(nums)){
+  nums[i] <- nums[i]+1
+}
+nums
+```
+
+How about adding two vectors together, so we add the first two numbers together, then the second two numbers etc.
+
+```{r}
+A <- c(1,2,3,4)
+B <- c(1,2,3,4)
+
+# vectorized approach
+A+B
+
+# loop approach
+the_sum <-c()
+for(i in 1:length(A)){
+  the_sum[i] <- A[i]+B[i]
+}
+the_sum
+```
+
+How about comparing the identity of the elements in two vectors to see if they are the same or not?
+
+```{r}
+A <- c("c","e","f","g")
+B <- c("d","e","f","g")
+
+#vectorized approach
+A==B
+
+# loop approach
+compared <-c()
+for(i in 1:length(A)){
+  if(A[i]==B[i]){
+    compared[i] <- TRUE
+  } else {
+    compared[i] <- FALSE
+  }
+}
+compared
+```
+
+
+
 ### Replicate
 
 `replicate(n, expr)` allows you to repeat a function many times, and return the answer in a vector

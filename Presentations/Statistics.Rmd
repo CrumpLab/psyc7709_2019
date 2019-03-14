@@ -280,3 +280,88 @@ binom.test(x=number_of_successes, n=trials, p = 0.5,
            conf.level = 0.95)
 ```
 
+## Post-hoc tests
+
+Many kinds of post-hoc tests can be done in R using base R functions, or functions from other packages. 
+
+At the same time, it is common for post-hoc comparison functions to be limited and specific in their functionality. So, if you can't find an existing function to complete the analysis you want, you may have to modify, extend, or write your own function to do the job. 
+
+### pairwise t-tests
+
+Performs all possible t-tests between the levels of a grouping factor. Can implement different corrections for multiple comparisons.
+
+```{r}
+df <- airquality #loads the airquality data from base R
+df$Month <- as.factor(df$Month)
+
+# default uses holm correction
+pairwise.t.test(df$Ozone,df$Month)
+
+# use bonferroni correction
+pairwise.t.test(df$Ozone,df$Month, p.adj="bonf")
+```
+
+### tukey HSD test
+
+notes: the warpbreaks data.frame should be available in base R, you do not need to load it to be able to use it.
+
+Doesn't work with repeated measures ANOVAs.
+
+```{r}
+summary(fm1 <- aov(breaks ~ wool + tension, data = warpbreaks))
+
+TukeyHSD(fm1, "tension", ordered = TRUE)
+```
+
+### Fishers LSD
+
+Explanation of Fisher's least significant difference test.
+[https://www.utd.edu/~herve/abdi-LSD2010-pretty.pdf](https://www.utd.edu/~herve/abdi-LSD2010-pretty.pdf)
+
+```{r}
+library(agricolae)
+
+data(sweetpotato)
+model <- aov(yield~virus, data=sweetpotato)
+out   <- LSD.test(model,"virus", p.adj="bonferroni")
+
+```
+
+## Linear Contrasts
+
+```{r}
+# Create data for a one-way BW subjects, 4 groups
+A <- rnorm(n=10, mean=100, sd=25)
+B <- rnorm(n=10, mean=120, sd=25)
+C <- rnorm(n=10, mean=140, sd=25)
+D <- rnorm(n=10, mean=80, sd=25)
+
+DV <- c(A,B,C,D)
+Conditions <- as.factor(rep(c("A","B","C","D"), each=10))
+df <- data.frame(DV,Conditions)
+
+# one-way ANOVA
+aov_out <- aov(DV~Conditions, df)
+summary(aov_out)
+
+# look at the order of levels
+levels(df$Conditions)
+
+# set up linear contrasts
+c1 <- c(.5, -.5, -.5, .5) # AD vs. BC
+c2 <- c(0, 0, 1, -1) # C vs. D
+c3 <- c(0, -1, 1, 0) # B vs. C
+
+# create a contrast matrix
+mat <- cbind(c1,c2,c3)
+
+# assign the contrasts to the group
+contrasts(df$Conditions) <- mat
+
+# run the ANOVA
+aov_out <- aov(DV~Conditions, df)
+
+# print the contrasts, add names for the contrasts
+summary.aov(aov_out, split=list(Conditions=list("AD vs. BC"=1, "C vs. D" = 2, "B vs. C"=3))) 
+```
+
