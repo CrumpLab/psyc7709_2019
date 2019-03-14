@@ -107,6 +107,7 @@ This is a common refrain:
 Dataframe %>% filter %>% group_by %>% summarise
 
 ```{r}
+library(dplyr)
 
 new_df <- df %>%
             filter(height > 100) %>%

@@ -1,0 +1,130 @@
+---
+title: "StatisticsProblems"
+author: "Matt"
+date: "1/31/2019"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+```
+
+
+## Null distribution of mean differences
+
+If you take two random samples from the same distribution they can be different because of random sampling. This question asks you to construct a null-distribution using simulation.
+
+1. Assume your samples come from a normal distribution with mean =0, sd =1.
+2. Assume sample size for each sample is n =10
+3. Create the null-distribution: Run a simulation 10,000 times that finds the difference between means of sample A and B. You should have a vector of 10,000 difference scores
+4. Assume an alpha criteria of p<.05 for a directional test.  What is the critical value for a positive mean difference? In other words, how large must a positive mean difference be in order to occur less than 5% of the time under the null?
+5. Assume an alpha criteria of p<.05 for a non-directional test. What is the critical value for the absolute value of the mean difference. In other words, how large must the absolute value of the mean difference be in order to occur less than 5% of the time under the null?
+
+```{r}
+null <- replicate(10000,mean(rnorm(10,0,1)-mean(rnorm(10,0,1))))
+
+#directional positive
+sorted_null <- sort(null)
+sorted_null[9500]
+
+#nondirectional
+sorted_null <- sort(abs(null))
+sorted_null[9500]
+```
+
+
+## t-distribution
+
+Show that the properties of a simulated t-distribution are the same as the properties of the analytic t-distribution. Assume df = 9.
+
+1. For example, what are the probabilities of t(9) >= .5, 1, 1.5, 2, and 2.5? These p-values can be obtained using the `qt()` function. 
+
+2. Create a simulated t-distribution for the null hypothesis with df=9. Here, the model situation involves taking samples of size n=10 from a normal distribution. The t-value is computed for each sample (sample mean - 0)/SEM. The process is repeated 10,000 times, and each t-value is saved. The resulting 10,000 t-values are the simulated t-distribution. 
+
+3. Using the simulated t-distribution, find the probability of t(9) >= .5, 1, 1.5, 2, and 2.5
+
+4. Compare the two sets of probabilites to show that the difference is small. What happens to the difference if the simulation is repeated fewer times (e.g., 100) vs. more times (e.g., 100,000)
+
+```{r}
+
+t_dist <- replicate(10000,t.test(rnorm(10,0,1))$statistic)
+
+ts <- c(.5,1,2,2.5)
+sim_t <- c()
+for(i in ts){
+  sim_t <- c(sim_t,length(t_dist[t_dist >= i])/10000)
+}
+  
+sim_t-(1-pt(ts,9))
+
+```
+
+
+## Correlation
+
+Sample A and Sample B both have 10 observations randomly sampled from the same normal distribution with mean = 0, and sd =1. The expected correlation between A and B is 0, because both samples are taken randomly. 
+
+1. Generate the distribution of correlations (pearson r values) that could be obtained by chance (simulate 10,000 times)
+
+2. Find the critical value such that the absolute value of the correlation occurs less than 5% of the time by chance.
+
+3. Find the critical value when the sample-size is increased to 100
+
+```{r}
+null <- replicate(10000,cor(rnorm(10,0,1),rnorm(10,0,1)))
+sorted_null <- sort(abs(null))
+sorted_null[9500]
+
+null <- replicate(10000,cor(rnorm(100,0,1),rnorm(100,0,1)))
+sorted_null <- sort(abs(null))
+sorted_null[9500]
+
+```
+
+## F-values
+
+There are three groups of different subjects. The means for each subject in each group are below. Calculate the F-value for the main effect of group.
+
+```{r}
+A <- c(1,2,3,4)
+B <- c(3,4,5,6)
+C <- c(5,6,7,8)
+```
+
+## F simulation
+
+Assume that there are three groups of different subjects. Each group has four subjects. The subject means for all subjects are sampled randomly from  normal distribution with mean =0 and sd =1.
+
+1. Run a simulation 10,000 times to construct the simulated F-distribution. On each run, sample new numbers into the three groups, then compute F and save it.
+
+2. Using the simulated F-distribution, what is the critical value of F for alpha set at, p<.05
+
+3. Compare your answer from above to the answer obtained using `qf`, that can compute the critical value directly.
+
+```{r}
+sim_F <- function(){
+A <- rnorm(4,0,1)
+B <- rnorm(4,0,1)
+C <- rnorm(4,0,1)
+df <- data.frame(group = as.factor(rep(c("A","B","C"), each =4)),
+                 DV = c(A,B,C))
+aov_sum<-summary(aov(DV~group,df))
+my_F <- aov_sum[[1]]$`F value`[1]
+return(my_F)
+}
+
+sim_fs <- replicate(1000,sim_F())
+sort_fs<-sort(sim_fs)
+sort_fs[950]
+
+qf(.05,2,9, lower.tail=FALSE)
+
+```
+
+

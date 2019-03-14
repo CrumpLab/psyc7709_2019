@@ -221,6 +221,38 @@ ggplot(sequence_means, aes(x=n1_congruency, y=mean_RT,
 
 
 
+### try randomization test
+
+```{r}
+all_data$subject<-as.factor(all_data$subject)
+all_data$congruency<-as.factor(all_data$congruency)
+
+rand_ANOVA <- function(){
+r_df <- all_data %>%
+  group_by(subject)%>%
+  mutate(r_RT = sample(RT)) %>%
+  group_by(subject,congruency) %>%
+  summarise(meanRT = mean(r_RT))
+
+aov_sum<-summary(aov(meanRT~congruency+Error(subject/congruency),r_df))
+r_F <- aov_sum$`Error: subject:congruency`[[1]]$`F value`[1]
+return(r_F)
+}
+
+sim_Fs<-replicate(1000,rand_ANOVA())
+
+# actual
+
+sub_means <- all_data %>%
+              group_by(subject,congruency) %>%
+              summarise(meanRT = mean(RT))
+
+aov_sum<-summary(aov(meanRT~congruency+Error(subject/congruency),sub_means))
+o_F <- aov_sum$`Error: subject:congruency`[[1]]$`F value`[1]
+
+sim_Fs[sim_Fs>15.25888]
+
+```
 
 
 
