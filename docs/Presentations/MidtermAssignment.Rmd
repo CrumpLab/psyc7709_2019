@@ -20,7 +20,7 @@ Your midterm assignment is due Monday April 8th. The midterm assignment involves
 **Part 1 (Due March 25th)**
 
 1. Make a new github repository for your midterm project. Put your work in this repository
-2. Find a psych paper with open data (publically accesible and downloadable)
+2. Find a psych paper with open data (publicly accessible and downloadable)
 3. Load the data into R
 4. Re-analyse the data to see if you can reproduce the results from the original paper
 5. Write up your findings in a reproducible report (i.e., put everything in an .rmd file)
@@ -69,7 +69,7 @@ Your report should include:
 
 3. The re-analysis (see above)
 
-4. A brief discussion of whether you were succesful or not.
+4. A brief discussion of whether you were successful or not.
 
 ## Part 2: APA paper in R markdown
 

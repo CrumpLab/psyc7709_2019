@@ -15,6 +15,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
 ```
 
+**The most important thing about choosing statistics, is being able to justify the statistics that you choose.**
+
+There are many tools in the toolbox. There are many recommendations about what to do or not to do. It is a good idea to understand the statistics that you use, so that you can justify why you are using them for your analysis.
+
 ## t-tests
 
 ### one sample t-test
@@ -188,6 +192,16 @@ knitr::kable(xtable(summary(aov_out)))
 print(model.tables(aov_out,"means"), format="markdown")
 ```
 
+### papaja
+
+```{r}
+library(papaja)
+
+apa_stuff <- apa_print.aov(aov_out)
+```
+
+The main effect for factor 1 was, `r apa_stuff$statistic$Factor1`. The main effect for factor 2 was, `r apa_stuff$statistic$Factor2`. The interaction was, `r apa_stuff$statistic$Factor1_Factor2`
+
 ## Linear Regression
 
 ```{r}
@@ -207,15 +221,7 @@ summary(lm(DV~Factor1*Factor2, all_data))
 
 
 
-### papaja
 
-```{r}
-library(papaja)
-
-apa_stuff <- apa_print.aov(aov_out)
-```
-
-The main effect for factor 1 was, `r apa_stuff$statistic$Factor1`. The main effect for factor 2 was, `r apa_stuff$statistic$Factor2`. The interaction was, `r apa_stuff$statistic$Factor1_Factor2`
 
 ## Randomization Test
 

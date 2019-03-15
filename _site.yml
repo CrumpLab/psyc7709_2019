@@ -2,8 +2,6 @@ name: Psyc 7709
 navbar:
   title: Psyc 7709
   left:
-  - text: Home
-    href: index.html
   - text: Syllabus
     href: Syllabus.html
   - text: Schedule
@@ -14,7 +12,7 @@ navbar:
     href: Resources.html
   - text: ExampleCode
     href: ExampleCode.html
-  - text: Advanced
+  - text: Package Notes
     href: Advanced.html
 output_dir: docs
 output:

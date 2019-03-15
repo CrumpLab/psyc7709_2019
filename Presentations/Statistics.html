@@ -1542,6 +1542,8 @@ div.tocify {
 </div>
 
 
+<p><strong>The most important thing about choosing statistics, is being able to justify the statistics that you choose.</strong></p>
+<p>There are many tools in the toolbox. There are many recommendations about what to do or not to do. It is a good idea to understand the statistics that you use, so that you can justify why you are using them for your analysis.</p>
 <div id="t-tests" class="section level2">
 <h2>t-tests</h2>
 <div id="one-sample-t-test" class="section level3">
@@ -1797,8 +1799,8 @@ aov_out &lt;- aov(DV~Factor1, all_data)
 # summary
 summary(aov_out)</code></pre>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Factor1      1   0.26  0.2551   0.302  0.586
-## Residuals   38  32.12  0.8452</code></pre>
+## Factor1      1   0.45  0.4467   0.386  0.538
+## Residuals   38  44.01  1.1581</code></pre>
 <pre class="r"><code># kable xtable printing
 library(xtable)
 knitr::kable(xtable(summary(aov_out)))</code></pre>
@@ -1817,16 +1819,16 @@ knitr::kable(xtable(summary(aov_out)))</code></pre>
 <tr class="odd">
 <td>Factor1</td>
 <td align="right">1</td>
-<td align="right">0.2551051</td>
-<td align="right">0.2551051</td>
-<td align="right">0.3018284</td>
-<td align="right">0.5859528</td>
+<td align="right">0.44674</td>
+<td align="right">0.446740</td>
+<td align="right">0.385746</td>
+<td align="right">0.538252</td>
 </tr>
 <tr class="even">
 <td>Residuals</td>
 <td align="right">38</td>
-<td align="right">32.1175657</td>
-<td align="right">0.8451991</td>
+<td align="right">44.00854</td>
+<td align="right">1.158119</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
@@ -1836,13 +1838,13 @@ knitr::kable(xtable(summary(aov_out)))</code></pre>
 print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</code></pre>
 <pre><code>## Tables of means
 ## Grand mean
-##            
-## -0.0817411 
+##           
+## 0.1031354 
 ## 
 ##  Factor1 
 ## Factor1
 ##        A        B 
-## -0.16160 -0.00188</code></pre>
+## -0.00255  0.20882</code></pre>
 </div>
 <div id="between-subjects-2-factor" class="section level3">
 <h3>between-subjects 2 factor</h3>
@@ -1852,10 +1854,10 @@ aov_out &lt;- aov(DV~Factor1*Factor2, all_data)
 # summary
 summary(aov_out)</code></pre>
 <pre><code>##                 Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Factor1          1  0.255  0.2551   0.293  0.592
-## Factor2          1  0.425  0.4246   0.488  0.489
-## Factor1:Factor2  1  0.349  0.3488   0.401  0.531
-## Residuals       36 31.344  0.8707</code></pre>
+## Factor1          1   0.45  0.4467   0.383  0.540
+## Factor2          1   0.13  0.1340   0.115  0.737
+## Factor1:Factor2  1   1.86  1.8601   1.594  0.215
+## Residuals       36  42.01  1.1671</code></pre>
 <pre class="r"><code># kable xtable printing
 library(xtable)
 knitr::kable(xtable(summary(aov_out)))</code></pre>
@@ -1874,32 +1876,32 @@ knitr::kable(xtable(summary(aov_out)))</code></pre>
 <tr class="odd">
 <td>Factor1</td>
 <td align="right">1</td>
-<td align="right">0.2551051</td>
-<td align="right">0.2551051</td>
-<td align="right">0.2929980</td>
-<td align="right">0.5916400</td>
+<td align="right">0.4467400</td>
+<td align="right">0.4467400</td>
+<td align="right">0.3827886</td>
+<td align="right">0.5400100</td>
 </tr>
 <tr class="even">
 <td>Factor2</td>
 <td align="right">1</td>
-<td align="right">0.4245745</td>
-<td align="right">0.4245745</td>
-<td align="right">0.4876402</td>
-<td align="right">0.4894684</td>
+<td align="right">0.1340183</td>
+<td align="right">0.1340183</td>
+<td align="right">0.1148335</td>
+<td align="right">0.7366757</td>
 </tr>
 <tr class="odd">
 <td>Factor1:Factor2</td>
 <td align="right">1</td>
-<td align="right">0.3488077</td>
-<td align="right">0.3488077</td>
-<td align="right">0.4006190</td>
-<td align="right">0.5307701</td>
+<td align="right">1.8601091</td>
+<td align="right">1.8601091</td>
+<td align="right">1.5938323</td>
+<td align="right">0.2148966</td>
 </tr>
 <tr class="even">
 <td>Residuals</td>
 <td align="right">36</td>
-<td align="right">31.3441835</td>
-<td align="right">0.8706718</td>
+<td align="right">42.0144124</td>
+<td align="right">1.1670670</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
@@ -1909,24 +1911,24 @@ knitr::kable(xtable(summary(aov_out)))</code></pre>
 print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</code></pre>
 <pre><code>## Tables of means
 ## Grand mean
-##            
-## -0.0817411 
+##           
+## 0.1031354 
 ## 
 ##  Factor1 
 ## Factor1
 ##        A        B 
-## -0.16160 -0.00188 
+## -0.00255  0.20882 
 ## 
 ##  Factor2 
 ## Factor2
-##        1        2 
-##  0.02128 -0.18477 
+##       1       2 
+## 0.16102 0.04525 
 ## 
 ##  Factor1:Factor2 
 ##        Factor2
-## Factor1 1        2       
-##       A -0.15196 -0.17125
-##       B  0.19453 -0.19829</code></pre>
+## Factor1 1       2      
+##       A  0.2710 -0.2761
+##       B  0.0511  0.3666</code></pre>
 </div>
 <div id="repeated-measures-1-factor" class="section level3">
 <h3>repeated-measures 1 factor</h3>
@@ -1938,16 +1940,16 @@ summary(aov_out)</code></pre>
 <pre><code>## 
 ## Error: Subjects
 ##           Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Residuals  9  4.105  0.4561               
+## Residuals  9  15.45   1.716               
 ## 
 ## Error: Subjects:Factor1
 ##           Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Factor1    1  0.255  0.2551   0.563  0.472
-## Residuals  9  4.081  0.4535               
+## Factor1    1  0.447  0.4467   0.242  0.635
+## Residuals  9 16.640  1.8489               
 ## 
 ## Error: Within
 ##           Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Residuals 20  23.93   1.197</code></pre>
+## Residuals 20  11.92  0.5961</code></pre>
 <pre class="r"><code># kable xtable printing
 library(xtable)
 knitr::kable(xtable(summary(aov_out)))</code></pre>
@@ -1966,32 +1968,32 @@ knitr::kable(xtable(summary(aov_out)))</code></pre>
 <tr class="odd">
 <td>Residuals</td>
 <td align="right">9</td>
-<td align="right">4.1051188</td>
-<td align="right">0.4561243</td>
+<td align="right">15.44616</td>
+<td align="right">1.7162404</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td>Factor1</td>
 <td align="right">1</td>
-<td align="right">0.2551051</td>
-<td align="right">0.2551051</td>
-<td align="right">0.562587</td>
-<td align="right">0.4723712</td>
+<td align="right">0.44674</td>
+<td align="right">0.4467400</td>
+<td align="right">0.2416261</td>
+<td align="right">0.6347993</td>
 </tr>
 <tr class="odd">
 <td>Residuals1</td>
 <td align="right">9</td>
-<td align="right">4.0810506</td>
-<td align="right">0.4534501</td>
+<td align="right">16.64000</td>
+<td align="right">1.8488893</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td>Residuals2</td>
 <td align="right">20</td>
-<td align="right">23.9313963</td>
-<td align="right">1.1965698</td>
+<td align="right">11.92237</td>
+<td align="right">0.5961186</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
@@ -2001,13 +2003,13 @@ knitr::kable(xtable(summary(aov_out)))</code></pre>
 print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</code></pre>
 <pre><code>## Tables of means
 ## Grand mean
-##            
-## -0.0817411 
+##           
+## 0.1031354 
 ## 
 ##  Factor1 
 ## Factor1
 ##        A        B 
-## -0.16160 -0.00188</code></pre>
+## -0.00255  0.20882</code></pre>
 </div>
 <div id="repeated-measures-2-factor" class="section level3">
 <h3>repeated-measures 2 factor</h3>
@@ -2019,22 +2021,22 @@ summary(aov_out)</code></pre>
 <pre><code>## 
 ## Error: Subjects
 ##           Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Residuals  9  4.105  0.4561               
+## Residuals  9  15.45   1.716               
 ## 
 ## Error: Subjects:Factor1
 ##           Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Factor1    1  0.255  0.2551   0.563  0.472
-## Residuals  9  4.081  0.4535               
+## Factor1    1  0.447  0.4467   0.242  0.635
+## Residuals  9 16.640  1.8489               
 ## 
 ## Error: Subjects:Factor2
 ##           Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Factor2    1  0.425  0.4246   0.284  0.607
-## Residuals  9 13.448  1.4943               
+## Factor2    1  0.134  0.1340   0.527  0.486
+## Residuals  9  2.290  0.2544               
 ## 
 ## Error: Subjects:Factor1:Factor2
 ##                 Df Sum Sq Mean Sq F value Pr(&gt;F)
-## Factor1:Factor2  1  0.349  0.3488   0.323  0.584
-## Residuals        9  9.710  1.0789</code></pre>
+## Factor1:Factor2  1  1.860  1.8601   2.192  0.173
+## Residuals        9  7.639  0.8487</code></pre>
 <pre class="r"><code># kable xtable printing
 library(xtable)
 knitr::kable(xtable(summary(aov_out)))</code></pre>
@@ -2053,56 +2055,56 @@ knitr::kable(xtable(summary(aov_out)))</code></pre>
 <tr class="odd">
 <td>Residuals</td>
 <td align="right">9</td>
-<td align="right">4.1051188</td>
-<td align="right">0.4561243</td>
+<td align="right">15.4461637</td>
+<td align="right">1.7162404</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td>Factor1</td>
 <td align="right">1</td>
-<td align="right">0.2551051</td>
-<td align="right">0.2551051</td>
-<td align="right">0.5625870</td>
-<td align="right">0.4723712</td>
+<td align="right">0.4467400</td>
+<td align="right">0.4467400</td>
+<td align="right">0.2416261</td>
+<td align="right">0.6347993</td>
 </tr>
 <tr class="odd">
 <td>Residuals1</td>
 <td align="right">9</td>
-<td align="right">4.0810506</td>
-<td align="right">0.4534501</td>
+<td align="right">16.6400035</td>
+<td align="right">1.8488893</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td>Factor2</td>
 <td align="right">1</td>
-<td align="right">0.4245745</td>
-<td align="right">0.4245745</td>
-<td align="right">0.2841377</td>
-<td align="right">0.6069115</td>
+<td align="right">0.1340183</td>
+<td align="right">0.1340183</td>
+<td align="right">0.5267850</td>
+<td align="right">0.4864057</td>
 </tr>
 <tr class="odd">
 <td>Residuals2</td>
 <td align="right">9</td>
-<td align="right">13.4483055</td>
-<td align="right">1.4942562</td>
+<td align="right">2.2896723</td>
+<td align="right">0.2544080</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td>Factor1:Factor2</td>
 <td align="right">1</td>
-<td align="right">0.3488077</td>
-<td align="right">0.3488077</td>
-<td align="right">0.3233124</td>
-<td align="right">0.5835312</td>
+<td align="right">1.8601091</td>
+<td align="right">1.8601091</td>
+<td align="right">2.1916373</td>
+<td align="right">0.1728958</td>
 </tr>
 <tr class="odd">
 <td>Residuals</td>
 <td align="right">9</td>
-<td align="right">9.7097087</td>
-<td align="right">1.0788565</td>
+<td align="right">7.6385729</td>
+<td align="right">0.8487303</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
@@ -2112,24 +2114,31 @@ knitr::kable(xtable(summary(aov_out)))</code></pre>
 print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</code></pre>
 <pre><code>## Tables of means
 ## Grand mean
-##            
-## -0.0817411 
+##           
+## 0.1031354 
 ## 
 ##  Factor1 
 ## Factor1
 ##        A        B 
-## -0.16160 -0.00188 
+## -0.00255  0.20882 
 ## 
 ##  Factor2 
 ## Factor2
-##        1        2 
-##  0.02128 -0.18477 
+##       1       2 
+## 0.16102 0.04525 
 ## 
 ##  Factor1:Factor2 
 ##        Factor2
-## Factor1 1        2       
-##       A -0.15196 -0.17125
-##       B  0.19453 -0.19829</code></pre>
+## Factor1 1       2      
+##       A  0.2710 -0.2761
+##       B  0.0511  0.3666</code></pre>
+</div>
+<div id="papaja" class="section level3">
+<h3>papaja</h3>
+<pre class="r"><code>library(papaja)
+
+apa_stuff &lt;- apa_print.aov(aov_out)</code></pre>
+<p>The main effect for factor 1 was, <span class="math inline">\(F(1, 9) = 0.24\)</span>, <span class="math inline">\(\mathit{MSE} = 1.85\)</span>, <span class="math inline">\(p = .635\)</span>. The main effect for factor 2 was, <span class="math inline">\(F(1, 9) = 0.53\)</span>, <span class="math inline">\(\mathit{MSE} = 0.25\)</span>, <span class="math inline">\(p = .486\)</span>. The interaction was, <span class="math inline">\(F(1, 9) = 2.19\)</span>, <span class="math inline">\(\mathit{MSE} = 0.85\)</span>, <span class="math inline">\(p = .173\)</span></p>
 </div>
 </div>
 <div id="linear-regression" class="section level2">
@@ -2141,7 +2150,7 @@ print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</cod
 ## 
 ## Coefficients:
 ## (Intercept)     Factor1B  
-##     -0.1616       0.1597</code></pre>
+##   -0.002546     0.211362</code></pre>
 <pre class="r"><code>summary(lm(DV~Factor1, all_data))</code></pre>
 <pre><code>## 
 ## Call:
@@ -2149,16 +2158,16 @@ print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</cod
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -1.53084 -0.67401  0.03575  0.46533  2.01812 
+## -2.56677 -0.52568 -0.01787  0.70304  2.19385 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  -0.1616     0.2056  -0.786    0.437
-## Factor1B      0.1597     0.2907   0.549    0.586
+##              Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) -0.002546   0.240637  -0.011    0.992
+## Factor1B     0.211362   0.340312   0.621    0.538
 ## 
-## Residual standard error: 0.9193 on 38 degrees of freedom
-## Multiple R-squared:  0.00788,    Adjusted R-squared:  -0.01823 
-## F-statistic: 0.3018 on 1 and 38 DF,  p-value: 0.586</code></pre>
+## Residual standard error: 1.076 on 38 degrees of freedom
+## Multiple R-squared:  0.01005,    Adjusted R-squared:  -0.016 
+## F-statistic: 0.3857 on 1 and 38 DF,  p-value: 0.5383</code></pre>
 <pre class="r"><code>lm(DV~Factor1+Factor2, all_data)</code></pre>
 <pre><code>## 
 ## Call:
@@ -2166,7 +2175,7 @@ print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</cod
 ## 
 ## Coefficients:
 ## (Intercept)     Factor1B     Factor22  
-##    -0.05858      0.15972     -0.20605</code></pre>
+##     0.05534      0.21136     -0.11577</code></pre>
 <pre class="r"><code>summary(lm(DV~Factor1+Factor2, all_data))</code></pre>
 <pre><code>## 
 ## Call:
@@ -2174,17 +2183,17 @@ print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</cod
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -1.62220 -0.70018 -0.05468  0.53345  2.12115 
+## -2.50889 -0.53309 -0.00142  0.70919  2.17161 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) -0.05858    0.25346  -0.231    0.819
-## Factor1B     0.15972    0.29267   0.546    0.589
-## Factor22    -0.20605    0.29267  -0.704    0.486
+## (Intercept)  0.05534    0.29822   0.186    0.854
+## Factor1B     0.21136    0.34435   0.614    0.543
+## Factor22    -0.11577    0.34435  -0.336    0.739
 ## 
-## Residual standard error: 0.9255 on 37 degrees of freedom
-## Multiple R-squared:  0.021,  Adjusted R-squared:  -0.03192 
-## F-statistic: 0.3967 on 2 and 37 DF,  p-value: 0.6753</code></pre>
+## Residual standard error: 1.089 on 37 degrees of freedom
+## Multiple R-squared:  0.01306,    Adjusted R-squared:  -0.04028 
+## F-statistic: 0.2449 on 2 and 37 DF,  p-value: 0.7841</code></pre>
 <pre class="r"><code>lm(DV~Factor1*Factor2, all_data)</code></pre>
 <pre><code>## 
 ## Call:
@@ -2192,35 +2201,28 @@ print(model.tables(aov_out,&quot;means&quot;), format=&quot;markdown&quot;)</cod
 ## 
 ## Coefficients:
 ##       (Intercept)           Factor1B           Factor22  
-##          -0.15196            0.34648           -0.01929  
+##            0.2710            -0.2199            -0.5471  
 ## Factor1B:Factor22  
-##          -0.37353</code></pre>
+##            0.8626</code></pre>
 <pre class="r"><code>summary(lm(DV~Factor1*Factor2, all_data))</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = DV ~ Factor1 * Factor2, data = all_data)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.52882 -0.67255 -0.01271  0.54047  2.02777 
+##     Min      1Q  Median      3Q     Max 
+## -2.2932 -0.6123  0.1350  0.5750  1.9560 
 ## 
 ## Coefficients:
 ##                   Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)       -0.15196    0.29507  -0.515    0.610
-## Factor1B           0.34648    0.41729   0.830    0.412
-## Factor22          -0.01929    0.41729  -0.046    0.963
-## Factor1B:Factor22 -0.37353    0.59014  -0.633    0.531
+## (Intercept)         0.2710     0.3416   0.793    0.433
+## Factor1B           -0.2199     0.4831  -0.455    0.652
+## Factor22           -0.5471     0.4831  -1.132    0.265
+## Factor1B:Factor22   0.8626     0.6832   1.262    0.215
 ## 
-## Residual standard error: 0.9331 on 36 degrees of freedom
-## Multiple R-squared:  0.03177,    Adjusted R-squared:  -0.04892 
-## F-statistic: 0.3938 on 3 and 36 DF,  p-value: 0.7582</code></pre>
-<div id="papaja" class="section level3">
-<h3>papaja</h3>
-<pre class="r"><code>library(papaja)
-
-apa_stuff &lt;- apa_print.aov(aov_out)</code></pre>
-<p>The main effect for factor 1 was, <span class="math inline">\(F(1, 9) = 0.56\)</span>, <span class="math inline">\(\mathit{MSE} = 0.45\)</span>, <span class="math inline">\(p = .472\)</span>. The main effect for factor 2 was, <span class="math inline">\(F(1, 9) = 0.28\)</span>, <span class="math inline">\(\mathit{MSE} = 1.49\)</span>, <span class="math inline">\(p = .607\)</span>. The interaction was, <span class="math inline">\(F(1, 9) = 0.32\)</span>, <span class="math inline">\(\mathit{MSE} = 1.08\)</span>, <span class="math inline">\(p = .584\)</span></p>
-</div>
+## Residual standard error: 1.08 on 36 degrees of freedom
+## Multiple R-squared:  0.05491,    Adjusted R-squared:  -0.02385 
+## F-statistic: 0.6972 on 3 and 36 DF,  p-value: 0.5599</code></pre>
 </div>
 <div id="randomization-test" class="section level2">
 <h2>Randomization Test</h2>
@@ -2239,7 +2241,7 @@ for(i in 1:10000){
 
 observed &lt;- mean(B)-mean(A)
 length(mean_difference[mean_difference &gt;= observed])/10000</code></pre>
-<pre><code>## [1] 0.0138</code></pre>
+<pre><code>## [1] 0.0106</code></pre>
 <pre class="r"><code>library(EnvStats)
 
 twoSamplePermutationTestLocation(x=B, y=A, fcn = &quot;mean&quot;, 
@@ -2275,18 +2277,18 @@ twoSamplePermutationTestLocation(x=B, y=A, fcn = &quot;mean&quot;,
 ## 
 ## Test Statistic:                  mean.x - mean.y = 5.5
 ## 
-## P-value:                         0.0099</code></pre>
+## P-value:                         0.0122</code></pre>
 </div>
 <div id="correlation" class="section level2">
 <h2>Correlation</h2>
 <pre class="r"><code>x &lt;- rnorm(10,0,1)
 y &lt;- rnorm(10,0,1)
 cor(x,y)</code></pre>
-<pre><code>## [1] 0.04157749</code></pre>
+<pre><code>## [1] 0.01187039</code></pre>
 <pre class="r"><code>ranks1 &lt;- sample(1:10) 
 ranks2 &lt;- sample(1:10)
 cor(ranks1,ranks2, method = &quot;spearman&quot;)</code></pre>
-<pre><code>## [1] -0.1151515</code></pre>
+<pre><code>## [1] -0.430303</code></pre>
 </div>
 <div id="chi-square" class="section level2">
 <h2>Chi-square</h2>
@@ -2429,8 +2431,8 @@ df &lt;- data.frame(DV,Conditions)
 aov_out &lt;- aov(DV~Conditions, df)
 summary(aov_out)</code></pre>
 <pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-## Conditions   3  33472   11157   23.01 1.71e-08 ***
-## Residuals   36  17458     485                     
+## Conditions   3  26220    8740    19.5 1.12e-07 ***
+## Residuals   36  16137     448                     
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code># look at the order of levels
@@ -2453,11 +2455,11 @@ aov_out &lt;- aov(DV~Conditions, df)
 # print the contrasts, add names for the contrasts
 summary.aov(aov_out, split=list(Conditions=list(&quot;AD vs. BC&quot;=1, &quot;C vs. D&quot; = 2, &quot;B vs. C&quot;=3))) </code></pre>
 <pre><code>##                         Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-## Conditions               3  33472   11157  23.007 1.71e-08 ***
-##   Conditions: AD vs. BC  1  22490   22490  46.375 5.84e-08 ***
-##   Conditions: C vs. D    1  10910   10910  22.497 3.29e-05 ***
-##   Conditions: B vs. C    1     72      72   0.149    0.702    
-## Residuals               36  17458     485                     
+## Conditions               3  26220    8740  19.498 1.12e-07 ***
+##   Conditions: AD vs. BC  1  18961   18961  42.302 1.48e-07 ***
+##   Conditions: C vs. D    1   5745    5745  12.816  0.00101 ** 
+##   Conditions: B vs. C    1   1514    1514   3.377  0.07438 .  
+## Residuals               36  16137     448                     
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>

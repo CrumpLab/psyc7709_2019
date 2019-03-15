@@ -11,7 +11,7 @@
 
 
 
-<title>Advanced</title>
+<title>Package Notes</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,6 +25,7 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -377,9 +378,6 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
   <a href="Syllabus.html">Syllabus</a>
 </li>
 <li>
@@ -395,7 +393,7 @@ div.tocify {
   <a href="ExampleCode.html">ExampleCode</a>
 </li>
 <li>
-  <a href="Advanced.html">Advanced</a>
+  <a href="Advanced.html">Package Notes</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -409,7 +407,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Advanced</h1>
+<h1 class="title toc-ignore">Package Notes</h1>
 
 </div>
 
@@ -490,6 +488,199 @@ knitr::opts_chunk$set(echo = TRUE,
 # some code that generates a figure
 
 ```</code></pre>
+</div>
+</div>
+<div id="tables" class="section level2">
+<h2>tables</h2>
+<p>There are several useful (incredible even) packages for making tables in R. Here are a few:</p>
+<ul>
+<li><code>knitr</code> package and it’s <code>kable</code> function (Create tables in Latex, HTML, Markdown)</li>
+<li><code>xtable</code> package, lots of functions for tables. <a href="https://cran.r-project.org/web/packages/xtable/vignettes/xtableGallery.pdf">Here are some xtable examples xtable</a></li>
+<li><code>kableExtra</code> lots of additional table functionality</li>
+<li><code>tangram</code> a grammar of tables approach</li>
+<li><code>papaja</code> for apa-style tables</li>
+</ul>
+<div id="important-table-info" class="section level3">
+<h3>Important table info</h3>
+<p>Two things to note, tables can be difficult, and there are different output formats.</p>
+<ol style="list-style-type: decimal">
+<li><p>Tables in R can be difficult. For example, if you are comfortable with making tables in Excel, then R will be much more difficult by comparison. In Excel, it is easy to enter information in any cell, merge any cells, add any kind of formatting you want anywhere, just by clicking around and making the changes. In R, every detail of the table is specified by script. Some of the table packages make simple tables easy (hurray!), and some of them make complicated tables possible (also good), but not necessarilly easy.</p></li>
+<li><p>R can output tables in many formats including HTML for the web, Latex for .pdf, and other formats (e.g., word, markdown). Sometimes (depending on the functions you are using) you will run into issues with outputting tables in different formats. Or, you will have to take steps to ensure that you are outputting the table in the format that you want.</p></li>
+</ol>
+</div>
+<div id="knitrkable" class="section level3">
+<h3>knitr::kable</h3>
+<p><code>kable()</code> is a function inside the knitr package. To use it you need to load the knitr library, or you can use <code>knitr::kable()</code>, which tells R to find kable inside the knitr package if you haven’t loaded knitr using <code>library(knitr)</code>.</p>
+<p><code>kable()</code> is great for quickly rendering data frames as nice tables without much hassle.</p>
+<pre class="r"><code>df &lt;- data.frame(A=1,
+                 B=2,
+                 C=3,
+                 D=4)
+knitr::kable(df)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">A</th>
+<th align="right">B</th>
+<th align="right">C</th>
+<th align="right">D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="xtable" class="section level3">
+<h3>xtable</h3>
+<p>Look at the xtable examples document for more info. <a href="https://cran.r-project.org/web/packages/xtable/vignettes/xtableGallery.pdf">https://cran.r-project.org/web/packages/xtable/vignettes/xtableGallery.pdf</a></p>
+<pre class="r"><code>library(xtable) # load xtable
+data(tli) # loads a sample data frame
+
+# conduct an ANOVA
+ fm1 &lt;- aov(tlimth ~ sex + ethnicty + grade + disadvg, data = tli)
+ 
+# print the table for HTML using xtable and kable together
+knitr::kable(xtable(fm1))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sex</td>
+<td align="right">1</td>
+<td align="right">75.37255</td>
+<td align="right">75.37255</td>
+<td align="right">0.3751912</td>
+<td align="right">0.5416830</td>
+</tr>
+<tr class="even">
+<td>ethnicty</td>
+<td align="right">3</td>
+<td align="right">2572.14918</td>
+<td align="right">857.38306</td>
+<td align="right">4.2679008</td>
+<td align="right">0.0071831</td>
+</tr>
+<tr class="odd">
+<td>grade</td>
+<td align="right">1</td>
+<td align="right">36.30740</td>
+<td align="right">36.30740</td>
+<td align="right">0.1807318</td>
+<td align="right">0.6717271</td>
+</tr>
+<tr class="even">
+<td>disadvg</td>
+<td align="right">1</td>
+<td align="right">59.30338</td>
+<td align="right">59.30338</td>
+<td align="right">0.2952017</td>
+<td align="right">0.5882062</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">93</td>
+<td align="right">18682.86749</td>
+<td align="right">200.89105</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># Note this will print a table in latex for .pdf
+# xtable(fm1)</code></pre>
+</div>
+<div id="kableextra" class="section level3">
+<h3>kableExtra</h3>
+<p>There are many great things about <code>kableExtra</code>. One great thing is that <code>kableExtra</code> has unique table options for html and for formatting to .pdf through latex. For example, interactive tables are possible in html, but not in .pdf. Another great thing is the ability to add rows of headers on top of each other. For example, data.frames in R only have one row of headers for the columns, <code>kableExtra</code> can add more on top.</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">HTML info for kableExtra</a></li>
+<li><a href="http://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf">Latex info (pdf) for kableExtra</a></li>
+</ul>
+<pre class="r"><code>library(kableExtra)
+df &lt;- data.frame(A=1,
+                 B=2,
+                 C=3,
+                 D=4)
+kable(df) %&gt;%
+  kable_styling(&quot;striped&quot;) %&gt;%
+  add_header_above(c(&quot;Group 1&quot; = 2, &quot;Group 2&quot; = 2))</code></pre>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Group 1
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Group 2
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:right;">
+A
+</th>
+<th style="text-align:right;">
+B
+</th>
+<th style="text-align:right;">
+C
+</th>
+<th style="text-align:right;">
+D
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tangram" class="section level3">
+<h3>tangram</h3>
+<p>This package implements a grammar of tables. Similar to the concept behind <code>ggplot2</code>, which implements a grammar of graphics for figures.</p>
+<ul>
+<li><a href="https://github.com/spgarbet/tangram">tangram github</a></li>
+<li><a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/spgarbet/tangram/master/inst/doc/example.html">tangram html examples</a></li>
+</ul>
+</div>
+<div id="papaja" class="section level3">
+<h3>papaja</h3>
+<p><code>papaja</code> is a package for rendering APA-style manuscripts in pdf using R Markdown. We will learn more about <code>papaja</code> in class. One feature of <code>papaja</code> is that it supports APA-style tables.</p>
+<ul>
+<li><a href="https://crsh.github.io/papaja_man/">papaja documentation</a></li>
+<li><a href="https://crsh.github.io/papaja_man/reporting.html#tables">papaja APA tables</a></li>
+</ul>
 </div>
 </div>
 
