@@ -15,9 +15,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
 ```
 
-Your midterm assignment is due Monday April 8th. The midterm assignment involves a few different parts, that build on each other.
+Your midterm assignment is due Monday April 8th. The midterm assignment involves a few different parts, that build on each other. I'm giving suggested due dates for each part, but the main thing is to get the whole thing done by April 8th.
 
-**Part 1 (Due March 25th)**
+**Part 1 (Due April 1)**
 
 1. Make a new github repository for your midterm project. Put your work in this repository
 2. Find a psych paper with open data (publicly accessible and downloadable)
@@ -32,6 +32,18 @@ Your midterm assignment is due Monday April 8th. The midterm assignment involves
 **Part 3 (Due April 8th)**
 
 1. Add a section following the results where you conduct and report a simulation based power analysis
+
+## Example of completed midterm 
+
+To give you a better idea of what I am looking for I completed the midterm assignment myself. 
+
+My example midterm is located in this github repository [https://github.com/CrumpLab/7709midterm](https://github.com/CrumpLab/7709midterm).
+
+This repository contains:
+
+1. **Part 1**: An .rmd file that reproduces the analysis from Experiment 3 of Rosenbaum, Mama, Algom (2017)
+2. **Part 2**: an APA-style manuscript version of the reproducible report using papaja
+3. **Part 3**: a section at the end of the APA-style manuscript that conducts a simulation based power-analysis of the design.
 
 
 ## Part 1: Reproducible report
@@ -90,7 +102,7 @@ Again, the purpose here is not to write an APA paper for the midterm, but to get
 
 ### Simulation based power analysis
 
-In part 3 you will add a simulation-based power analysis to your APA-style manuscript. We will discuss how to conduct simulation based power analyses in class.
+In part 3 you will add a simulation-based power analysis to your APA-style manuscript. Specifically, you should report a graph showing a power-curve for the design. We will discuss how to conduct simulation based power analyses in class.
 
 
 

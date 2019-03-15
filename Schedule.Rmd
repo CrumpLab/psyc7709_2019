@@ -171,7 +171,7 @@ We had a snow day for this class. Here is a short video tutorial to help you get
 3. [Your Rmarkdown Assignment](https://crumplab.github.io/psyc7709/Presentations/DataWrangleFlanker_student.Rmd) This links to the .rmd file, that you can use as a template to complete the assignment. Using this template file, create a new page on your website, and submit the link
 4. [Answer sheet for assignment](https://crumplab.github.io/psyc7709/Presentations/DataWrangleFlanker.html) You can use this to check your work. If you don't get the same numbers, then one of us did something wrong.
 
-Due date: M Mar 11th
+Due date: M Mar 18th
 
 ---
 
@@ -179,19 +179,44 @@ Due date: M Mar 11th
 
 #### Overview
 
-- t-tests, anovas, and linear regresssion in R
+- t-tests, anovas, and linear regresssion, and more in R
+- Using R to simulate null-hypotheses
+- Overview and discussion of midterm project (three parts due over the next three weeks)
 
 #### Readings and Resources
 
-1. [Matthew Crump's, Programming for Psychologists, chapter 5](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html)
+1. [Class notes on Statistics](https://crumplab.github.io/psyc7709/Presentations/Statistics.html)
+2. [Matthew Crump's, Programming for Psychologists, chapter 5](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html)
 
 #### Assignment 6 (Stats)
 
-Due date: M Mar 18th
+- [Statistics Assignment](https://crumplab.github.io/psyc7709/Presentations/StatisticsAssignment.html), due M Mar 25th
+  - This assignment asks you to simulate the null hypothesis in various ways using R.
+- The [midterm project](https://crumplab.github.io/psyc7709/MidtermAssignment.html) begins this week (due aprill 8th)
 
 ---
 
-### 7. Data simulation
+### 7. APA papers using Papaja
+
+#### Overview
+
+- Introduction to creating reproducible APA manuscripts using the papaja package. Students learn how to use the template for writing an APA report in R Markdown, which allows them to embed their R-scripts for data-analysis into the manuscript, allowing others to reproduce their analysis.
+- Midterm project continued
+
+#### Readings and Resources
+
+1. [Frederick Aust & Marius Barth's papaja package: Reproducible APA manuscripts with R Markdown](https://crsh.github.io/papaja_man/)
+
+#### Midterm Assignment (due M April 8th)
+
+[midterm project](https://crumplab.github.io/psyc7709/MidtermAssignment.html)
+
+- part 1: Reproducible Report
+- part 2: Convert to APA-style report using papaja
+
+---
+
+### 8. Data simulation
 
 #### Overview
 
@@ -199,28 +224,14 @@ Due date: M Mar 18th
 
 #### Readings and Resources
 
-1. [Matthew Crump's, Programming for Psychologists, chapter 5](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html)
+1. [Class notes on simulation](https://crumplab.github.io/psyc7709/Presentations/Simulation.html)
+2. [Matthew Crump's, Programming for Psychologists, chapter 5](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html)
 
-#### Midterm Project
+#### Midterm Assignment (due M April 8th)
 
-Due date: M Apr 1st
+[midterm project](https://crumplab.github.io/psyc7709/MidtermAssignment.html)
 
----
-
-### 8. APA papers using Papaja
-
-#### Overview
-
-- Introduction to creating reproducible APA manuscripts using the papaja package. Students learn how to use the template for writing an APA report in R Markdown, which allows them to embed their R-scripts for data-analysis into the manuscript, allowing others to reproduce their analysis.
-
-#### Readings and Resources
-
-1. [Frederick Aust & Marius Barth's papaja package: Reproducible APA manuscripts with R Markdown](https://crsh.github.io/papaja_man/)
-
-
-#### Midterm Project
-
-Due date: M Apr 1st
+- part 3: Simulation based power anlaysis
 
 ---
 
@@ -236,7 +247,7 @@ Due date: M Apr 1st
 
 #### Assignment 7 (Shiny)
 
-Due date: M Apr 8th
+Due date: M Apr 15th
 
 ---
 
@@ -253,7 +264,7 @@ Due date: M Apr 8th
 
 #### Assignment 7 (Optimization)
 
-Due date: M Apr 15th
+Due date: M Apr 22nd
 
 ---
 
@@ -269,7 +280,7 @@ Due date: M Apr 15th
 
 #### Final Project
 
-Presentation due: M May 13th
+Presentation due: M May 15th
 Paper due date: M May 20th
 
 
@@ -289,7 +300,7 @@ Paper due date: M May 20th
 
 #### Final Project
 
-Presentation due: M May 13th
+Presentation due: M May 15th
 Paper due date: M May 20th
 
 ---
@@ -306,7 +317,7 @@ Paper due date: M May 20th
 
 #### Final Project
 
-Presentation due: M May 13th
+Presentation due: M May 15th
 Paper due date: M May 20th
 
 ---

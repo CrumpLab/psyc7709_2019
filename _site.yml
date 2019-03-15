@@ -14,6 +14,8 @@ navbar:
     href: ExampleCode.html
   - text: Package Notes
     href: Advanced.html
+  - text: Midterm
+    href: MidtermAssignment.html
 output_dir: docs
 output:
   html_document:
