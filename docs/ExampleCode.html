@@ -933,10 +933,10 @@ compared</code></pre>
 <p><code>replicate(n, expr)</code> allows you to repeat a function many times, and return the answer in a vector</p>
 <pre class="r"><code># returns 1 randomly sampled number from 1 to 10
 sample(1:10,1)</code></pre>
-<pre><code>## [1] 6</code></pre>
+<pre><code>## [1] 7</code></pre>
 <pre class="r"><code># let&#39;s repeat the above 10 times using replicate
 replicate(10,sample(1:10,1))</code></pre>
-<pre><code>##  [1]  8 10  1  2  6  3  6  6  5  4</code></pre>
+<pre><code>##  [1]  3  7  5  6  5  2  3  4 10  5</code></pre>
 <p>The next example shows how to write a function to do something, and then use the function inside replicate to repeat the function many times.</p>
 <p>For example, we write a function to run a one-sample t-test on a random sample drawn from a normal distribution</p>
 <pre class="r"><code>ttest_result &lt;- function(){
@@ -947,10 +947,10 @@ replicate(10,sample(1:10,1))</code></pre>
 
 # get 10 t-values from repeating the above 10 times
 replicate(10, ttest_result() )</code></pre>
-<pre><code>##           t           t           t           t           t           t 
-##  1.35004574 -0.77516387 -1.09839177  0.54911340  0.63048605  0.45124192 
-##           t           t           t           t 
-##  0.01923409 -1.05629232 -0.19280830  1.40238867</code></pre>
+<pre><code>##          t          t          t          t          t          t 
+## -0.8384866 -1.2218191 -1.8466923  0.6803323 -1.3924787 -0.3964300 
+##          t          t          t          t 
+##  0.1390545 -1.1417450 -0.7355078  0.5213033</code></pre>
 </div>
 <div id="apply-family" class="section level3">
 <h3>apply family</h3>
@@ -1016,12 +1016,12 @@ lapply(some_numbers, FUN = function(x){x+1})</code></pre>
 # applies the sum function to each row
 # 1 tells apply to go across rows
 apply(random_matrix,1,sum)</code></pre>
-<pre><code>## [1] 23 32 30 32 39</code></pre>
+<pre><code>## [1] 43 24 20 31 20</code></pre>
 <p>The sum of each column</p>
 <pre class="r"><code># applies the sum function to each column
 # 2 tells apply to go across columns
 apply(random_matrix, 2, sum)</code></pre>
-<pre><code>## [1] 33 31 35 38 19</code></pre>
+<pre><code>## [1] 20 34 35 28 21</code></pre>
 <p>Let’s say we have a matrix storing 3 samples. Each sample has 10 numbers. Each sample is stored in a column, and each row represents an observation.</p>
 <pre class="r"><code>sample_matrix &lt;- matrix(rnorm(30,0,1),ncol=3)</code></pre>
 <p>Let’s use apply to conduct 10 one-sample t-tests, one for each column. In this example, we can pass the <code>mu=0</code> parameter into the <code>t.test</code> function. However, we will return the entire ouput of each t-test in a list.</p>
@@ -1031,13 +1031,13 @@ apply(random_matrix, 2, sum)</code></pre>
 ##  One Sample t-test
 ## 
 ## data:  newX[, i]
-## t = -2.3312, df = 9, p-value = 0.04466
+## t = 3.0736, df = 9, p-value = 0.01328
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  -1.3409822 -0.0201684
+##  0.3273503 2.1525692
 ## sample estimates:
-##  mean of x 
-## -0.6805753 
+## mean of x 
+##   1.23996 
 ## 
 ## 
 ## [[2]]
@@ -1045,13 +1045,13 @@ apply(random_matrix, 2, sum)</code></pre>
 ##  One Sample t-test
 ## 
 ## data:  newX[, i]
-## t = 0.79978, df = 9, p-value = 0.4444
+## t = -0.53624, df = 9, p-value = 0.6048
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  -0.5067202  1.0609787
+##  -0.8398121  0.5179541
 ## sample estimates:
 ## mean of x 
-## 0.2771292 
+## -0.160929 
 ## 
 ## 
 ## [[3]]
@@ -1059,13 +1059,13 @@ apply(random_matrix, 2, sum)</code></pre>
 ##  One Sample t-test
 ## 
 ## data:  newX[, i]
-## t = 0.54877, df = 9, p-value = 0.5965
+## t = 0.7115, df = 9, p-value = 0.4948
 ## alternative hypothesis: true mean is not equal to 0
 ## 95 percent confidence interval:
-##  -0.4815491  0.7900161
+##  -0.525027  1.006836
 ## sample estimates:
 ## mean of x 
-## 0.1542335</code></pre>
+## 0.2409045</code></pre>
 <p>What if we wanted to return only the t-values, rather than whole output?</p>
 <p>You might try this, but it doesn’t work</p>
 <pre class="r"><code>apply(sample_matrix,2,t.test$statistic, mu=0)</code></pre>
@@ -1076,7 +1076,7 @@ apply(random_matrix, 2, sum)</code></pre>
         t_out &lt;- t.test(x,mu=0)
         return(t_out$statistic)
       })</code></pre>
-<pre><code>## [1] -2.3312420  0.7997836  0.5487730</code></pre>
+<pre><code>## [1]  3.0735863 -0.5362436  0.7115046</code></pre>
 </div>
 </div>
 

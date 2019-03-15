@@ -1,0 +1,62 @@
+---
+title: "papaja"
+author: "Matt"
+date: "1/31/2019"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+```
+
+`papaja` is an R package for **P**reparing **APA** **J**ournal **A**rticles. It allows you to write in Rmarkdown (.rmd file), and then compile your document as a .pdf in APA format (double-spaced, all the APA style things)
+
+- full documentation for using papaja [https://crsh.github.io/papaja_man/](https://crsh.github.io/papaja_man/)
+- github repository for papaja [https://github.com/crsh/papaja](https://github.com/crsh/papaja)
+
+
+## Installation
+
+There is one small complication with using `papaja`. You need to have TEX (or Latex) installed on your computer before it will work. 
+
+Latex is a powerful typesetting program that is often used to produce .pdfs. R Markdown can output .rmd files to .pdf when you have latex installed on your computer.
+
+### Installing Latex
+
+- Mac users should install MacTex [https://tug.org/mactex/](https://tug.org/mactex/)
+  - note there are two installations called Mactex download (the full installation, it's big), and Basic Tex (smaller download). I know that the Mactex (big download) works. You can try the smaller download, but I don't know if it works.
+  
+- Windows users should install MikTex [https://miktex.org](https://miktex.org)
+  - I have never tried to do this on windows, I'm assuming it works.
+  
+- R-studio cloud. A latex distribution is already installed if you use R-studio cloud. However, there is one step you need to take in order to get papaja to work, and that is to include the `apa.cls` file in your main project directory.
+
+### Installing papaja
+
+`papaja` is not available on CRAN, so you have to download it from github.
+
+- The following code uses the `devtools` library to install from github. If you don't have `devtools` installed, first install it using R-studio (it is on CRAN, so you can install it from the packages tab)
+- Then run the following line in the console of R-studio.
+
+```{r, eval=FALSE}
+devtools::install_github("crsh/papaja")
+```
+
+## Using papaja
+
+We will go over papaja in class. Follow these steps to check if papaja works on your computer.
+
+1. Create a new R project. **Do not attempt the next steps inside the project file for your website, it will not work, you need to start fresh with a new R project folder**.
+2. Select the green plus (top-left corner), and choose `R Markdown...` to create a new .rmd file.
+3. This will open a window, look at the column on the left and choose from template, find the "APA article (6th edition)" option, and choose that.
+4. This will open up a default `papaja` template .rmd file. 
+5. Knit the file.
+6. If everything works, then you will create a new .pdf with showing a bare minimum APA-style manuscript.
+
+

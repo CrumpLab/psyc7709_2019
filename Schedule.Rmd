@@ -205,7 +205,8 @@ Due date: M Mar 18th
 
 #### Readings and Resources
 
-1. [Frederick Aust & Marius Barth's papaja package: Reproducible APA manuscripts with R Markdown](https://crsh.github.io/papaja_man/)
+1. [Installing papaja](https://crumplab.github.io/psyc7709/Presentations/papaja.html)
+2. [Frederick Aust & Marius Barth's papaja package: Reproducible APA manuscripts with R Markdown](https://crsh.github.io/papaja_man/)
 
 #### Midterm Assignment (due M April 8th)
 
