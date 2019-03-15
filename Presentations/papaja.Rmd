@@ -20,6 +20,7 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
 - full documentation for using papaja [https://crsh.github.io/papaja_man/](https://crsh.github.io/papaja_man/)
 - github repository for papaja [https://github.com/crsh/papaja](https://github.com/crsh/papaja)
 
+**Important note: papaja will not work if you attempt to use it inside the R project for your website, you need to create a new R project folder**
 
 ## Installation
 
@@ -36,6 +37,8 @@ Latex is a powerful typesetting program that is often used to produce .pdfs. R M
   - I have never tried to do this on windows, I'm assuming it works.
   
 - R-studio cloud. A latex distribution is already installed if you use R-studio cloud. However, there is one step you need to take in order to get papaja to work, and that is to include the `apa.cls` file in your main project directory.
+  - Below is a link to the `apa.cls` file. A reminder that you will need to create a new R project on R-studio cloud. Then, copy this file into that new R project. 
+  - [https://github.com/CrumpLab/psyc7709/blob/master/Presentations/apa6.cls](https://github.com/CrumpLab/psyc7709/blob/master/Presentations/apa6.cls)
 
 ### Installing papaja
 
