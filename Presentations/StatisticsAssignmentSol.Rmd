@@ -27,7 +27,15 @@ If you take two random samples from the same distribution they can be different 
 5. Assume an alpha criteria of p<.05 for a non-directional test. What is the critical value for the absolute value of the mean difference. In other words, how large must the absolute value of the mean difference be in order to occur less than 5% of the time under the null?
 
 ```{r}
-# your code here
+null <- replicate(10000,mean(rnorm(10,0,1)-mean(rnorm(10,0,1))))
+
+#directional positive
+sorted_null <- sort(null)
+sorted_null[9500]
+
+#nondirectional
+sorted_null <- sort(abs(null))
+sorted_null[9500]
 ```
 
 
@@ -44,7 +52,17 @@ Show that the properties of a simulated t-distribution are the same as the prope
 4. Compare the two sets of probabilities to show that the difference is small. What happens to the difference if the simulation is repeated fewer times (e.g., 100) vs. more times (e.g., 100,000)
 
 ```{r}
-# your code here
+
+t_dist <- replicate(10000,t.test(rnorm(10,0,1))$statistic)
+
+ts <- c(.5,1,2,2.5)
+sim_t <- c()
+for(i in ts){
+  sim_t <- c(sim_t,length(t_dist[t_dist >= i])/10000)
+}
+  
+sim_t-(1-pt(ts,9))
+
 ```
 
 
@@ -59,7 +77,14 @@ Sample A and Sample B both have 10 observations randomly sampled from the same n
 3. Find the critical value when the sample-size is increased to 100
 
 ```{r}
-# your code here
+null <- replicate(10000,cor(rnorm(10,0,1),rnorm(10,0,1)))
+sorted_null <- sort(abs(null))
+sorted_null[9500]
+
+null <- replicate(10000,cor(rnorm(100,0,1),rnorm(100,0,1)))
+sorted_null <- sort(abs(null))
+sorted_null[9500]
+
 ```
 
 ## F-values
@@ -83,7 +108,23 @@ Assume that there are three groups of different subjects. Each group has four su
 3. Compare your answer from above to the answer obtained using `qf`, that can compute the critical value directly.
 
 ```{r}
-# your code here
+sim_F <- function(){
+A <- rnorm(4,0,1)
+B <- rnorm(4,0,1)
+C <- rnorm(4,0,1)
+df <- data.frame(group = as.factor(rep(c("A","B","C"), each =4)),
+                 DV = c(A,B,C))
+aov_sum<-summary(aov(DV~group,df))
+my_F <- aov_sum[[1]]$`F value`[1]
+return(my_F)
+}
+
+sim_fs <- replicate(1000,sim_F())
+sort_fs<-sort(sim_fs)
+sort_fs[950]
+
+qf(.05,2,9, lower.tail=FALSE)
+
 ```
 
 

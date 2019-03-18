@@ -1546,22 +1546,13 @@ div.tocify {
 <h2>Null distribution of mean differences</h2>
 <p>If you take two random samples from the same distribution they can be different because of random sampling. This question asks you to construct a null-distribution using simulation.</p>
 <ol style="list-style-type: decimal">
-<li>Assume your samples come from a normal distribution with mean =0, sd =1.</li>
-<li>Assume sample size for each sample is n =10</li>
+<li>Assume your samples come from a normal distribution with mean =0, sd =1. (use <code>rnorm</code>)</li>
+<li>Assume sample size for each sample is n =10 (e.g., <code>rnorm(10,0,1)</code>)</li>
 <li>Create the null-distribution: Run a simulation 10,000 times that finds the difference between means of sample A and B. You should have a vector of 10,000 difference scores</li>
 <li>Assume an alpha criteria of p&lt;.05 for a directional test. What is the critical value for a positive mean difference? In other words, how large must a positive mean difference be in order to occur less than 5% of the time under the null?</li>
 <li>Assume an alpha criteria of p&lt;.05 for a non-directional test. What is the critical value for the absolute value of the mean difference. In other words, how large must the absolute value of the mean difference be in order to occur less than 5% of the time under the null?</li>
 </ol>
-<pre class="r"><code>null &lt;- replicate(10000,mean(rnorm(10,0,1)-mean(rnorm(10,0,1))))
-
-#directional positive
-sorted_null &lt;- sort(null)
-sorted_null[9500]</code></pre>
-<pre><code>## [1] 0.7459116</code></pre>
-<pre class="r"><code>#nondirectional
-sorted_null &lt;- sort(abs(null))
-sorted_null[9500]</code></pre>
-<pre><code>## [1] 0.8972179</code></pre>
+<pre class="r"><code># your code here</code></pre>
 </div>
 <div id="t-distribution" class="section level2">
 <h2>t-distribution</h2>
@@ -1570,35 +1561,19 @@ sorted_null[9500]</code></pre>
 <li><p>For example, what are the probabilities of t(9) &gt;= .5, 1, 1.5, 2, and 2.5? These p-values can be obtained using the <code>qt()</code> function.</p></li>
 <li><p>Create a simulated t-distribution for the null hypothesis with df=9. Here, the model situation involves taking samples of size n=10 from a normal distribution. The t-value is computed for each sample (sample mean - 0)/SEM. The process is repeated 10,000 times, and each t-value is saved. The resulting 10,000 t-values are the simulated t-distribution.</p></li>
 <li><p>Using the simulated t-distribution, find the probability of t(9) &gt;= .5, 1, 1.5, 2, and 2.5</p></li>
-<li><p>Compare the two sets of probabilites to show that the difference is small. What happens to the difference if the simulation is repeated fewer times (e.g., 100) vs. more times (e.g., 100,000)</p></li>
+<li><p>Compare the two sets of probabilities to show that the difference is small. What happens to the difference if the simulation is repeated fewer times (e.g., 100) vs. more times (e.g., 100,000)</p></li>
 </ol>
-<pre class="r"><code>t_dist &lt;- replicate(10000,t.test(rnorm(10,0,1))$statistic)
-
-ts &lt;- c(.5,1,2,2.5)
-sim_t &lt;- c()
-for(i in ts){
-  sim_t &lt;- c(sim_t,length(t_dist[t_dist &gt;= i])/10000)
-}
-  
-sim_t-(1-pt(ts,9))</code></pre>
-<pre><code>## [1] -0.0011356499 -0.0001181981 -0.0009764119 -0.0011309138</code></pre>
+<pre class="r"><code># your code here</code></pre>
 </div>
 <div id="correlation" class="section level2">
 <h2>Correlation</h2>
 <p>Sample A and Sample B both have 10 observations randomly sampled from the same normal distribution with mean = 0, and sd =1. The expected correlation between A and B is 0, because both samples are taken randomly.</p>
 <ol style="list-style-type: decimal">
-<li><p>Generate the distribution of correlations (pearson r values) that could be obtained by chance (simulate 10,000 times)</p></li>
+<li><p>Generate the distribution of correlations (Pearson r values) that could be obtained by chance (simulate 10,000 times)</p></li>
 <li><p>Find the critical value such that the absolute value of the correlation occurs less than 5% of the time by chance.</p></li>
 <li><p>Find the critical value when the sample-size is increased to 100</p></li>
 </ol>
-<pre class="r"><code>null &lt;- replicate(10000,cor(rnorm(10,0,1),rnorm(10,0,1)))
-sorted_null &lt;- sort(abs(null))
-sorted_null[9500]</code></pre>
-<pre><code>## [1] 0.6252661</code></pre>
-<pre class="r"><code>null &lt;- replicate(10000,cor(rnorm(100,0,1),rnorm(100,0,1)))
-sorted_null &lt;- sort(abs(null))
-sorted_null[9500]</code></pre>
-<pre><code>## [1] 0.1940472</code></pre>
+<pre class="r"><code># your code here</code></pre>
 </div>
 <div id="f-values" class="section level2">
 <h2>F-values</h2>
@@ -1615,23 +1590,7 @@ C &lt;- c(5,6,7,8)</code></pre>
 <li><p>Using the simulated F-distribution, what is the critical value of F for alpha set at, p&lt;.05</p></li>
 <li><p>Compare your answer from above to the answer obtained using <code>qf</code>, that can compute the critical value directly.</p></li>
 </ol>
-<pre class="r"><code>sim_F &lt;- function(){
-A &lt;- rnorm(4,0,1)
-B &lt;- rnorm(4,0,1)
-C &lt;- rnorm(4,0,1)
-df &lt;- data.frame(group = as.factor(rep(c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;), each =4)),
-                 DV = c(A,B,C))
-aov_sum&lt;-summary(aov(DV~group,df))
-my_F &lt;- aov_sum[[1]]$`F value`[1]
-return(my_F)
-}
-
-sim_fs &lt;- replicate(1000,sim_F())
-sort_fs&lt;-sort(sim_fs)
-sort_fs[950]</code></pre>
-<pre><code>## [1] 3.734236</code></pre>
-<pre class="r"><code>qf(.05,2,9, lower.tail=FALSE)</code></pre>
-<pre><code>## [1] 4.256495</code></pre>
+<pre class="r"><code># your code here</code></pre>
 </div>
 
 
