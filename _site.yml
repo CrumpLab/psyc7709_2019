@@ -16,6 +16,8 @@ navbar:
     href: Advanced.html
   - text: Midterm
     href: MidtermAssignment.html
+  - text: Final
+    href: FinalProject.html
 output_dir: docs
 output:
   html_document:

@@ -1,0 +1,475 @@
+---
+title: "Shiny tutorial"
+author: "Matt"
+date: "4/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=F)
+```
+
+
+Shiny is a tool for building web apps with R. This allows a user to interact with a webpage, and have the content of the webpage be controlled by R. It is easy to get started with your first Shiny app, but Shiny is also very deep and can become very complicated. This tutorial is intended to highlight some of the general structure and features of Shiny to get you started. 
+
+The R-studio Shiny tutorials are very helpful [https://shiny.rstudio.com/tutorial/](https://shiny.rstudio.com/tutorial/)
+
+This is a list of Shiny Apps that recently won prizes in the first annual Shiny app contest [https://blog.rstudio.com/2019/04/05/first-shiny-contest-winners/?utm_content=buffere0bd9&utm_medium=social&utm_source=twitter&utm_campaign=buffer](https://blog.rstudio.com/2019/04/05/first-shiny-contest-winners/?utm_content=buffere0bd9&utm_medium=social&utm_source=twitter&utm_campaign=buffer)
+
+
+## Shiny template
+
+1. In R-studio, choose new file, then choose Shiny Web app.
+2. Save, adn then run the app.
+3. If everything is working you should see a slider and a histogram. Changinge the slider will change the number of bins shown in the histogram. Voila, and interactive web app.
+
+## Shiny app basics
+
+The code below shows an example of the major parts of a shiny app. The two major parts are th `ui` and `server` objects. 
+
+`ui` stands for user interface, and in this section we define and layout how the webpage will look.
+
+`server`: when you deploy a shiny app a few things happen.
+  a. a server somewhere in the world will host your shiny app, and allow other people to find the app on the internet
+  b. a user somewhere in the world will go to the website and will begin running your app locally on their computer
+  c. as the user interacts with app, we need to pass information back and forth between their computer and the web server.
+  
+The server object runs on the server side and handles inputs and outputs. For example, it takes inputs from the user, does something based on the input, and the return an output that modifies the webpage that the user is looking at. 
+
+```{r}
+
+library(shiny)
+
+# USER INTERFACE
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      # put web page elements here
+    ),
+    mainPanel(
+      # put web page elements here
+    )
+  )
+)
+
+# SERVER
+server <- function(input, output) {
+  
+  # recieve inputs
+  # do things
+  # update the webpage
+  
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+### Defining terms
+
+`library(shiny)` is placed at the beginning of the code, this loads the shiny package. If you want to use other packages, then load them here (at the beginning), before the `ui` and `server` objects are defined.
+
+`ui <- ...` this is where you define the User interface. This whole piece can get pretty long, especially when there are multiple pages, tabs, or other things on the webpage
+
+`fluidPage()` Shiny has many functions that make it "easy" to create webpage elements. Fluidpage is a system for setting up a webpage with different layouts. For example, inside this function we use the `sideBarLayout()`
+
+`sidedarLayout()` Sets up the ability to have a side panel (e.g., on the left or right of the page), and a main panel.
+
+`sidebarPanel()` this is where you put shiny widgets (or other html objects), and they will appear in the sidebar.
+
+`mainPanel()` this is where you put shiny widgets (or other html objects), and they will appear in the main panel of the website
+
+`server()` This is where you handle inputs that come in, do something based on the inputs, and then return something to the webpage as an output.
+
+`shinyApp()` runs the app.
+
+# Example apps
+
+## UI Elements
+
+Shiny comes with several "widgets" that can be put into the user interface.
+  
+- check out the widget gallery [https://shiny.rstudio.com/gallery/widget-gallery.html](https://shiny.rstudio.com/gallery/widget-gallery.html)
+  
+This example shows the addition of a few widgets, and making a plot  
+
+- adding in some action buttons, a slider input, and dropdown select input to the sidebar panel
+- creating space for plots in the main panel
+- rendering a plot from the server and putting it into the first plot
+
+```{r}
+library(shiny)
+
+# USER INTERFACE
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      # put web page elements here
+      # usually shiny widgets
+      actionButton("action1", label = "press me"),
+      actionButton("action2", label = "press me"),
+      sliderInput("slider1", label = h3("Slider"), min = 0, 
+                  max = 100, value = 50),
+      selectInput("select", label = h3("Select box"), 
+                  choices = list("Choice 1" = 1,
+                                 "Choice 2" = 2, 
+                                 "Choice 3" = 3), 
+                  selected = 1)
+      
+    ),
+    mainPanel(
+      # put web page elements here
+      # usually to display things
+      plotOutput("plot1"),
+      plotOutput("plot2"),
+      textOutput("text1")
+      
+    )
+  )
+)
+
+# SERVER
+server <- function(input, output) {
+  
+  # recieve inputs
+  # do things
+  # update the webpage
+  
+  output$plot1 <- renderPlot({
+    hist(rnorm(100,0,1))
+  })
+  
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+Note the following:
+
+1. The widgets are displayed in the sidebar, but they don't do anything yet. They need to be "hooked up" on the server side
+
+2. This app does create a plot and display it on the webpage. 
+
+- `plotOutput("plot1")` in the mainPanel creates an html object on the webpage capable of displaying a figure. This is an empty object at the beginning
+
+This code in the server object makes a figure and then sends it to `plot1`.
+
+```{r}
+output$plot1 <- renderPlot({
+    hist(rnorm(100,0,1))
+  })
+```
+
+A bunch of things are happnening above. Inside the server object there is an `output` object. This will contain the ids of output objects that are set up in the ui. We set up three output objects, with the ids `plot1`, `plot2`, and `text1`. We can address them using the dollar sign. so `output$plot1 <- ` will try to put something into the `plotOutput()` with the id `plot1`.
+
+Because `plot1` is an id for a `plotOutput()`, we need to send a plot object. We use `renderPlot({})` for this. Inside the `renderPlot({})` function, we simply write a line of R code that produces a figure. This gets "rendered" as a plot, and then sent to the plotOutput with the plot1 id. As a result, a plot is displayed on the webpage.
+
+## action button
+
+Client side
+
+- Make an action button, that the user can see and click on the webpage
+
+Server side
+
+- Allow the server to receive the click when the action button is pressed
+- print a message to the R console when the button is clicked
+
+```{r}
+library(shiny)
+
+# USER INTERFACE
+ui <- fluidPage(
+   sidebarLayout(
+      sidebarPanel(
+        # displays an action button
+        actionButton("action1", label = "press me")
+      ),
+      mainPanel(
+        # nothing else displayed on webpage
+      )
+   )
+)
+
+# SERVER
+server <- function(input, output) {
+  
+ # print a message to the R console when the button click is observed   
+ observeEvent(input$action1, {
+   print("button pressed")
+ })
+
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+UI Notes:
+
+This line of code creates an action button with the id `action1`. We can use this id in the server object to observe when the button is clicked. The label "press me" is the text that is displaed in the button on the website.
+
+```{r}
+actionButton("action1", label = "press me")
+```
+
+
+Server Notes:
+
+- we can use `observeEvent()`, to observe "events" that occur on the webpage. 
+- there are two parts to `observeEvent(input_to_observe, {do something})`
+- we observe `input$action1`. The `input` object contains links to the ids for all inputs. We only have one, called `action1`, which is the id for the action button. 
+- in this case, `observeEvent` will detect any changes to `input$action1` (e.g., when the button get's clicked), and then `observeEvent` will execute any code that is in the `{}`.
+- we put `print("button pressed")` into the `{}`, therefore, when the button is clicked, that message will get printed to the R console.
+
+```{r}
+ observeEvent(input$action1, {
+   print("button pressed")
+ })
+```
+
+## action button 2
+
+1. we add a `plotOutput("someplot")` to the main panel. This creates a place to display a figure, the id of this object is `someplot`.
+
+2. We render a new plot everytime the button is clicked.
+
+```{r}
+
+library(shiny)
+
+# USER INTERFACE
+ui <- fluidPage(
+   sidebarLayout(
+      sidebarPanel(
+        # displays an action button
+        actionButton("action1", label = "press me")
+      ),
+      mainPanel(
+        # create a plotting object for the webpage
+        plotOutput("someplot")
+      )
+   )
+)
+
+# SERVER
+server <- function(input, output) {
+  
+ # make a new plot every time button is clicked  
+ observeEvent(input$action1, {
+   output$someplot <-  renderPlot({
+     hist(rnorm(100,0,1))
+   })
+ })
+  
+
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+```
+
+## slider
+
+1. make slider, with id `slider1`
+2. have the value of the slider change the graph. In this case, we are graphing a histogram of 100 samples from a normal distribution. We connect the slider value to change the mean of the distibrution
+3. We also print the value of the slider to a textoutput
+
+```{r}
+
+library(shiny)
+
+# USER INTERFACE
+ui <- fluidPage(
+   sidebarLayout(
+      sidebarPanel(
+        #displays a slider
+        sliderInput("slider1", 
+                    label = h3("Slider"), 
+                    min = 0, 
+                    max = 100, 
+                    value = 50)
+      ),
+      mainPanel(
+        # create a plotting object for the webpage
+        plotOutput("someplot"),
+        #create a textoutput
+        textOutput("sometext")
+      )
+   )
+)
+
+# SERVER
+server <- function(input, output) {
+  
+ # update plot 
+ 
+   output$someplot <-  renderPlot({
+     hist(rnorm(100,input$slider1,1))
+   })
+
+   output$sometext <-  renderText({
+     input$slider1
+   })
+   
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+```
+
+## select from dropdown
+
+- use `selectInput` to create a dropdown menu
+- choose one of three column names from the mtcars dataframe (comes with R, just type mtcars into the console to the data)
+- plot a histogram for the numbers in the chosen column
+
+```{r}
+
+library(shiny)
+
+# USER INTERFACE
+ui <- fluidPage(
+   sidebarLayout(
+      sidebarPanel(
+        #displays a dropdown with choices
+        selectInput("select", label = h3("Select box"), 
+                    choices = list("mpg" = "mpg",
+                                   "cyl" = "cyl", 
+                                   "disp" = "disp"), 
+                    selected = "mpg")
+      ),
+      mainPanel(
+        # create a plotting object for the webpage
+        plotOutput("someplot")
+      )
+   )
+)
+
+# SERVER
+server <- function(input, output) {
+  
+ # make a new plot every time button is clicked  
+ 
+   output$someplot <-  renderPlot({
+     hist(mtcars[,input$select])
+   })
+
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+```
+
+## select 2
+
+Same as above, only this time we automatically set the choices in the dropdown to be all of the column names in the mtcars dataframe.
+
+```{r}
+
+library(shiny)
+
+# USER INTERFACE
+ui <- fluidPage(
+   sidebarLayout(
+      sidebarPanel(
+        #displays a dropdown with choices
+        selectInput("select", label = h3("Select box"), 
+                    choices = setNames(names(mtcars),names(mtcars)), 
+                    selected = "mpg")
+      ),
+      mainPanel(
+        # create a plotting object for the webpage
+        plotOutput("someplot")
+      )
+   )
+)
+
+# SERVER
+server <- function(input, output) {
+  
+ # make a new plot every time button is clicked  
+ 
+   output$someplot <-  renderPlot({
+     hist(mtcars[,input$select])
+   })
+
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+```
+
+## Reactive values
+
+Shiny implements a concept called reactivity. The basic idea is that some variables are "reactive" to changes. 
+
+Many things in Shiny are reactive by default. For example an `input$id` is reactive. If the id points to an action button, that object automatically "reacts" or updates when the action button is clicked. If the id points to a choice in a dropdown menu, then the object will automatically update with the new choice. If somethingn depends on the reactive input, like a plotting object, then the plot will automatically be redrawn when the reactive input changes.
+
+Shiny allows you to create your own reactive objects. This example shows the use of `reactiveValues`. We create an object called `d`, that is reactive `d <- reactiveValues()`. This new variable will be like a list, we can add named items to it. For example, in the code below, when we click the button, we add a random sample of 10 numbers to `d`, under the named item `a`.
+
+```{r}
+d$a <- rnorm(10,0,1)
+```
+
+Then, we use the `observe` function. The observe function will detect any changes to reactive variables placed inside the function, and then do something automatically. In this case, whenever the contents of `d$a` is changed, we print the contents of `d$a` to the console.
+
+```{r}
+observe({
+    print(d$a)
+  })
+```
+
+
+```{r}
+
+library(shiny)
+
+# USER INTERFACE
+ui <- fluidPage(
+   sidebarLayout(
+      sidebarPanel(
+        # displays an action button
+        actionButton("action1", label = "press me")
+      ),
+      mainPanel(
+        # create a plotting object for the webpage
+        plotOutput("someplot")
+      )
+   )
+)
+
+# SERVER
+server <- function(input, output) {
+  
+  d <- reactiveValues()
+  
+ # make a new plot every time button is clicked  
+ observeEvent(input$action1, {
+   output$someplot <-  renderPlot({
+     hist(rnorm(100,0,1))
+     d$a <- rnorm(10,0,1)
+   })
+ })
+  
+  observe({
+    print(d$a)
+  })
+  
+
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+```
+

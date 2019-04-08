@@ -244,9 +244,14 @@ Due date: M Mar 18th
 
 #### Readings and Resources
 
-1. [R shiny tutorials](https://shiny.rstudio.com/tutorial/#written-tutorials)
+1. [Class notes on Shiny](https://crumplab.github.io/psyc7709/Shiny_tutorial.html)
+2. [R shiny tutorials](https://shiny.rstudio.com/tutorial/#written-tutorials)
 
 #### Assignment 7 (Shiny)
+
+1. Make a R shiny app (it can do whatever you want to make).
+2. Host the app as a folder on Github, or upload to [shinyapps.io](https://www.shinyapps.io) cloud server (need to create free account).
+3. Submit link on Blackboard
 
 Due date: M Apr 15th
 

@@ -15,6 +15,38 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
 ```
 
+# Sampling distributions
+
+```{r}
+
+hist(rnorm(n=100000,mean=0,sd=1))
+
+mean(rnorm(n=100000,mean=0,sd=1))
+sd(rnorm(n=100000,mean=0,sd=1))
+
+# 1 sample mean
+#n=10
+save_means <-c()
+for(i in 1:10000){
+save_means[i]<-mean(rnorm(n=10,mean=0,sd=1))
+}
+
+# replicate
+
+replicate(1000,mean(rnorm(n=10,mean=0,sd=1)))
+
+mean(replicate(100000,sd(rnorm(n=10,mean=0,sd=1))))
+
+hist(save_means)
+
+SEM <- 1/sqrt(10)
+SEM
+
+sd(save_means)
+
+```
+
+
 
 ## Null distribution of mean differences
 
@@ -27,7 +59,20 @@ If you take two random samples from the same distribution they can be different 
 5. Assume an alpha criteria of p<.05 for a non-directional test. What is the critical value for the absolute value of the mean difference. In other words, how large must the absolute value of the mean difference be in order to occur less than 5% of the time under the null?
 
 ```{r}
-# your code here
+A <- rnorm(10,0,1)
+B <- rnorm(10,0,1)
+MD <- mean(A)-mean(B)
+MD
+
+mean_differences <- replicate(100000,
+                              mean(rnorm(10,0,1))-mean(rnorm(10,0,1)))
+sort(mean_differences)[95000]
+
+sort(mean_differences)[2500]
+sort(mean_differences)[97500]
+
+hist(mean_differences)
+
 ```
 
 
@@ -35,7 +80,7 @@ If you take two random samples from the same distribution they can be different 
 
 Show that the properties of a simulated t-distribution are the same as the properties of the analytic t-distribution. Assume df = 9.
 
-1. For example, what are the probabilities of t(9) >= .5, 1, 1.5, 2, and 2.5? These p-values can be obtained using the `qt()` function. 
+1. For example, what are the probabilities of t(9) >= .5, 1, 1.5, 2, and 2.5? These p-values can be obtained using the `pt()` function. 
 
 2. Create a simulated t-distribution for the null hypothesis with df=9. Here, the model situation involves taking samples of size n=10 from a normal distribution. The t-value is computed for each sample (sample mean - 0)/SEM. The process is repeated 10,000 times, and each t-value is saved. The resulting 10,000 t-values are the simulated t-distribution. 
 
@@ -45,6 +90,37 @@ Show that the properties of a simulated t-distribution are the same as the prope
 
 ```{r}
 # your code here
+
+real_ps <-pt(q=c(.5,1,1.5,2,2.5),df=9)
+
+t_s <- replicate(10000,t.test(rnorm(10,0,1),mu=0)$statistic)
+hist(t_s)
+
+sim_ps <- c(length(t_s[t_s < .5])/10000,
+length(t_s[t_s < 1])/10000,
+length(t_s[t_s < 1.5])/10000,
+length(t_s[t_s < 2])/10000,
+length(t_s[t_s < 2.5])/10000)
+
+real_ps
+sim_ps
+
+t_s <- replicate(100,t.test(rnorm(10,0,1),mu=0)$statistic)
+hist(t_s)
+
+sim_ps <- c(length(t_s[t_s < .5])/100,
+length(t_s[t_s < 1])/100,
+length(t_s[t_s < 1.5])/100,
+length(t_s[t_s < 2])/100,
+length(t_s[t_s < 2.5])/100)
+
+real_ps
+sim_ps
+
+real_ps-sim_ps
+
+sum(abs(real_ps-sim_ps))
+
 ```
 
 
@@ -59,7 +135,12 @@ Sample A and Sample B both have 10 observations randomly sampled from the same n
 3. Find the critical value when the sample-size is increased to 100
 
 ```{r}
-# your code here
+hist(replicate(100000,cor(rnorm(100,0,1),rnorm(100,0,1))))
+
+sim_rs<-replicate(100000,cor(rnorm(100,0,1),rnorm(100,0,1)))
+
+sort(abs(sim_rs))[95000]
+
 ```
 
 ## F-values
@@ -70,6 +151,12 @@ There are three groups of different subjects. The means for each subject in each
 A <- c(1,2,3,4)
 B <- c(3,4,5,6)
 C <- c(5,6,7,8)
+
+conds<- rep(c("A","B","C"),each=4)
+DV <- c(A,B,C)
+df <- data.frame(conds,DV)
+summary(aov(DV~conds,df))
+
 ```
 
 ## F simulation
@@ -83,7 +170,27 @@ Assume that there are three groups of different subjects. Each group has four su
 3. Compare your answer from above to the answer obtained using `qf`, that can compute the critical value directly.
 
 ```{r}
-# your code here
+
+run_anova <- function(){
+A <- rnorm(4,0,1)
+B <- rnorm(4,0,1)
+C <- rnorm(4,0,1)
+
+conds<- rep(c("A","B","C"),each=4)
+DV <- c(A,B,C)
+df <- data.frame(conds,DV)
+sum_out <- summary(aov(DV~conds,df))
+return(sum_out[[1]]$`F value`[1])
+}
+
+save_fs <- replicate(10000,run_anova())
+hist(save_fs)
+
+sort(save_fs)[9500]
+
+qf(.95,2,9)
+
+
 ```
 
 
