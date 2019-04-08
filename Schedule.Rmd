@@ -244,7 +244,7 @@ Due date: M Mar 18th
 
 #### Readings and Resources
 
-1. [Class notes on Shiny](https://crumplab.github.io/psyc7709/Shiny_tutorial.html)
+1. [Class notes on Shiny](https://crumplab.github.io/psyc7709/Presentations/Shiny_tutorial.html)
 2. [R shiny tutorials](https://shiny.rstudio.com/tutorial/#written-tutorials)
 
 #### Assignment 7 (Shiny)
