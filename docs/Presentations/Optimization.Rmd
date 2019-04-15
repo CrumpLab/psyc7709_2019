@@ -1,0 +1,111 @@
+---
+title: "Code optimization"
+author: "Matt"
+date: "4/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=T)
+```
+
+
+This is a brief tutorial on making your code run faster in R. Code-optimization can become a very advanced topic in R. For our purposes, we discuss a little bit about memory management, and show two ways to test how fast parts of your code are running, so that you can identify where to make changes that could speed up your code.
+
+## memory management
+
+When you create objects in R, you are assigning part of your computer's memory to represent the parts of the object. Generally speaking, your ability to create objects in R is limited by the memory of your computer. Additionally, the process of representing your object in memory takes time. So, memory management involves understanding how to efficiently represent information in memory.
+
+The size of an object in memory depends on object class
+
+```{r}
+# numeric by default
+a <- rep(0,1000)
+object.size(a)
+
+# as.character
+a <- as.character(rep(0,1000))
+object.size(a)
+
+# as.integer
+a <- as.integer(rep(0,1000))
+object.size(a)
+
+a <- as.double(rep(0,1000))
+object.size(a)
+
+```
+
+### matrices and data frames
+
+```{r}
+b <- matrix(0,ncol=10,nrow=100)
+object.size(b)
+
+b <- as.data.frame(matrix(0,ncol=10,nrow=100))
+object.size(b)
+
+```
+
+
+# Rprofvis
+
+We can use the Rprofvis function to find out how long parts of our code take:
+
+In this example, we create a matrix with two rows and 1000 columns. Then, we use rbind to add rows to the bottom one at a time. We add 1,000 new rows.
+
+```{r}
+Rprof(tmp <- tempfile())
+
+a <- matrix(0,nrow=2,ncol=1000)
+for(i in 1:1000){
+  a <- rbind(a,rnorm(1000,0,1))
+}
+
+Rprof()
+summaryRprof(tmp)
+```
+
+In this example, we do the same as above, except we pre-allocate the matrix with 1002 rows. 
+
+```{r}
+Rprof(tmp <- tempfile())
+
+a <- matrix(0,nrow=1002,ncol=1000)
+for(i in 3:1002){
+  a[i,] <- rnorm(1000,0,1)
+}
+
+Rprof()
+summaryRprof(tmp)
+```
+
+```{r}
+Rprof(tmp <- tempfile())
+
+a <- matrix(rnorm(1002*1000,0,1),nrow=1002,ncol=1000)
+
+Rprof()
+summaryRprof(tmp)
+```
+
+## microbenchmark
+
+Microbenchmark allows you to run an expression X number of times, and measuring the mean amout of time the expression takes. You can put a multiple expressions and compare them. The default is to run the expression 100 times (but you can change that)
+
+```{r}
+library(microbenchmark)
+
+a<-rnorm(10000,500,25)
+
+microbenchmark(mean(a),
+               sum(a)/length(a))
+
+microbenchmark(mean(a),
+               sum(a)/length(a), times=50)
+```
+
+
+
+
+

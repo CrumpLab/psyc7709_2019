@@ -244,7 +244,7 @@ Due date: M Mar 18th
 
 #### Readings and Resources
 
-1. [Class notes on Shiny](https://crumplab.github.io/psyc7709/Presentations/Shiny_tutorial.html)
+1. [Class notes on Shiny](https://crumplab.github.io/psyc7709/Presentations/Optimization.html)
 2. [R shiny tutorials](https://shiny.rstudio.com/tutorial/#written-tutorials)
 
 #### Assignment 7 (Shiny)
@@ -265,12 +265,13 @@ Due date: M Apr 15th
 
 #### Readings and Resources
 
-1. [Hadley Wickham's, Advanced R, profiling chapter](http://adv-r.had.co.nz/Profiling.html)
+1. [Class Notes](https://crumplab.github.io/psyc7709/Presentations/Shiny_tutorial.html)
+2. [Hadley Wickham's, Advanced R, profiling chapter](http://adv-r.had.co.nz/Profiling.html)
 
 
 #### Assignment 7 (Optimization)
 
-Due date: M Apr 22nd
+No Assignment
 
 ---
 
