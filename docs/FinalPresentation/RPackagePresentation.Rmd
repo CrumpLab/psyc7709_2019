@@ -1,0 +1,113 @@
+---
+title: "Making Packages in R"
+subtitle: "Using pkgdown and roxygen2"
+author: "Matthew Crump"
+date: "2019/4/29 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+class: inverse, center, middle
+
+# How to use pkgdown and roxygen2 to build and share R packages
+
+---
+
+# What is pkgdown and roxygen2?
+
+## pkgdown
+
+- a library to convert the documentation for your R package into an an awesome website
+
+## roxygen2
+
+- a library to make writing documentation for your R package faster and easier, and more betterly.
+
+---
+
+# pkgdown
+
+## How to install
+
+```{r, eval = FALSE}
+# Install release version from CRAN
+install.packages("pkgdown")
+```
+
+## More info about pkgdown
+
+- (https://pkgdown.r-lib.org)[https://pkgdown.r-lib.org]
+- (A vignette on using pkgdown)[https://pkgdown.r-lib.org/articles/pkgdown.html]
+
+---
+
+# roxygen2
+
+## How to install
+
+```{r, eval = FALSE}
+# Install release version from CRAN
+install.packages("roxygen2")
+```
+
+## helpful tutorials on getting started with roxygen2
+
+- (http://r-pkgs.had.co.nz/man.html)[http://r-pkgs.had.co.nz/man.html]
+
+---
+
+class: inverse, center, middle
+
+# Show me an example of why I should bother with this
+
+---
+
+# Ok, but first
+
+## R-packages
+
+Hadley Wickham wrote a wonderful and free book on making R packages, and it is worth looking at:
+
+(http://r-pkgs.had.co.nz)[http://r-pkgs.had.co.nz]
+
+---
+
+# pkgdown example
+
+I recently made an R package for calculating statistical power (for particular designs).
+
+I compiled the packaged using pkgdown, let's a take a look:
+
+[https://crumplab.github.io/conflictPower/](https://crumplab.github.io/conflictPower/)
+
+---
+
+# compiling a package with pkgdown
+
+1. Make an R package (e.g., start with the R template for packages)
+2. Install pkgdown
+3. Run the following line when you want to compile your package using pkgdown:
+
+```{r, eval=FALSE}
+pkgdown::build_site()
+```
+
+4. That's it...pkgdown creates a new docs folder in your R project folder that contains a website for your R package. If you upload the folder to github, and use github pages to serve the website through the docs folder, then you can share it on the web.
+
+---
+
+# Writing documentation with roxygen2
+
+"nothing here yet..."
+
+---

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Making Packages in R</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Matthew Crump" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Making Packages in R
+## Using pkgdown and roxygen2
+### Matthew Crump
+### 2019/4/29 (updated: 2019-05-06)
+
+---
+
+
+
+
+class: inverse, center, middle
+
+# How to use pkgdown and roxygen2 to build and share R packages
+
+---
+
+# What is pkgdown and roxygen2?
+
+## pkgdown
+
+- a library to convert the documentation for your R package into an an awesome website
+
+## roxygen2
+
+- a library to make writing documentation for your R package faster and easier, and more betterly.
+
+---
+
+# pkgdown
+
+## How to install
+
+
+```r
+# Install release version from CRAN
+install.packages("pkgdown")
+```
+
+## More info about pkgdown
+
+- (https://pkgdown.r-lib.org)[https://pkgdown.r-lib.org]
+- (A vignette on using pkgdown)[https://pkgdown.r-lib.org/articles/pkgdown.html]
+
+---
+
+# roxygen2
+
+## How to install
+
+
+```r
+# Install release version from CRAN
+install.packages("roxygen2")
+```
+
+## helpful tutorials on getting started with roxygen2
+
+- (http://r-pkgs.had.co.nz/man.html)[http://r-pkgs.had.co.nz/man.html]
+
+---
+
+class: inverse, center, middle
+
+# Show me an example of why I should bother with this
+
+---
+
+# Ok, but first
+
+## R-packages
+
+Hadley Wickham wrote a wonderful and free book on making R packages, and it is worth looking at:
+
+(http://r-pkgs.had.co.nz)[http://r-pkgs.had.co.nz]
+
+---
+
+# pkgdown example
+
+I recently made an R package for calculating statistical power (for particular designs).
+
+I compiled the packaged using pkgdown, let's a take a look:
+
+[https://crumplab.github.io/conflictPower/](https://crumplab.github.io/conflictPower/)
+
+---
+
+# compiling a package with pkgdown
+
+1. Make an R package (e.g., start with the R template for packages)
+2. Install pkgdown
+3. Run the following line when you want to compile your package using pkgdown:
+
+
+```r
+pkgdown::build_site()
+```
+
+4. That's it...pkgdown creates a new docs folder in your R project folder that contains a website for your R package. If you upload the folder to github, and use github pages to serve the website through the docs folder, then you can share it on the web.
+
+---
+
+# Writing documentation with roxygen2
+
+"nothing here yet..."
+
+---
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
