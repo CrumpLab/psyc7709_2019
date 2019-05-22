@@ -1,0 +1,341 @@
+# A tutorial for using the lme function from the nlme package. 
+
+**Author: Melissa Horger**
+
+## The nlme package
+
+**nlme is a package for fitting and comparing linear and nonlinear mixed effects models.**
+
+It let's you specify variance-covariance structures for the residuals and is well suited for repeated measure or longitudinal designs. 
+
+### Similar packages
+One similar package is lme4. 
+It allows you to fit outcomes whose distribution is not Gaussian and crossed random effects.
+Some pros include that it stores data more effiently due to the use of sparse matrices and it works well with clustered data sets.
+
+### What's included in nlme?
+nlme contains sample data, statistical functions, matrices, and a lattice framework. 
+
+**Examples of sample data** 
+
+  1. MathAchSchool
+      - A dataset (160x7) that contains school-level demographic data such as student enrollment, academic progress, and SES. 
+      
+```{r}
+library(nlme)
+print(MathAchSchool[1:5,])
+```
+  
+  2. BodyWeight
+      - A data set (176x4) describing the weight of rats over time while consuming different diets. 
+      
+```{r}
+print(BodyWeight[1:5,])
+```
+  
+   3. Earthquake 
+      - A dataset (182x5) listing seismic measurements of 23 large earthquakes in western North America between 1940 and 1980
+      
+```{r}
+print(Earthquake[1:5,])
+```
+      
+**Examples of functions** 
+  1. anova.lme
+    - This compares the likelihoods of fitted models. It will produce an AIC and BIC and can be used to compare null and predictive models or models with different predictors and/or interactions.
+    
+```{r, eval=FALSE}
+anova.lme(object, ..., test=TRUE,type = "sequential/marginal", adjustSigma, Terms, L, verbose)
+```
+    
+  2. corMatrix
+    - A function to generate the correlation matrix of an object/dataset.
+    
+```{r, eval=FALSE}
+corMatrix(object, ...)
+```
+    
+  3. gapply
+    - Applies a function to a distinct set of rows in a data frame. 
+    - To use this, the rows must first be identified using the "groups" function
+```{r, eval=FALSE}
+gapply(object, which, FUN, form, level, groups, .)
+```
+  
+  4. lme
+    - We will learn about this function extensively in the following sections
+  
+### Using the nlme package 
+
+#### Begin by installing the nlme package
+
+Found on the CRAN repository 
+
+Website: https://svn.r-project.org/R-packages/trunk/nlme
+
+```{r, eval=FALSE}
+install.packages("nlme")
+```
+
+
+#### Load the package (and other relevant packages)
+
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(nlme)
+library(dplyr)
+library(knitr)
+```
+
+
+## The lme function
+
+This generic function fits a linear mixed-effects model in the formulation described in Laird and Ware (1982) but allowing for nested random effects. The within-group errors are allowed to be correlated and/or have unequal variances.
+
+### Some important considerations  
+
+1. Need repeated measures from a single subject The data may be longitudinal, but they also may not.
+  
+2. Can account for correlations within individuals within the random effects 
+  
+3. Uses maximum likelihood estimates 
+
+### The arguments for this function
+
+lme(model, data, fixed, random, groups, start, correlation, weights,
+subset, method, na.action, naPattern, control, verbose)
+
+## **An example: Does the number of daily naps impact infant performance on a thing?** 
+
+```{r, eval=F}
+
+#creating a data set 
+
+Subs <- rep(c(seq(1:10)), 4)
+
+Month <- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
+
+Naps <- c(rep(c(3), 10), 2, 3, 2, 1, 2, 3, 2, 3, 2, 3, 2, 2, 2 ,2, 3, 3, 2, 2, 1, 2, 3, 1, 2, 2, 1, 1, 2, 1, 2, 1 )
+
+Napsfactor <- as.factor(Naps)
+
+#Let's assume that infants' performance will get better with time. I altered the possible sampling distributions to reflect this. 
+
+scores <- c(runif(10, 1, 7), runif(10, 8, 15), runif(10, 16, 22), runif(10, 23, 30))
+
+
+dataset <- data.frame(Subs, Month, Naps, scores, Napsfactor)
+
+#save(dataset,file="horger.RData")
+
+```
+
+
+```{r}
+
+load("data/horger.RData")
+
+#Data should be set up in long format and look similar to this. 
+print(dataset)
+```
+
+
+### The experimental design.
+
+This is a 4x3 within subject design. 
+Infants are assessed at 4 time points - 1 month, 5 months, 10 months, and 15 months. 
+There are 3 levels of napping - 1, 2, or 3 naps per day. 
+
+
+### Data analysis
+
+We will run a conditional growth model because we are including predictors. Subsequent fixed and random effects are now “conditioned on” the predictors (age and number of naps).
+
+```{r}
+#Conditional growth model
+tutorial<-lme(scores ~ Month * Naps, random = ~ Month | Subs, data=dataset)
+
+
+#Because we are using a random sample, may need to rerun the scores several times for this piece of code to run effectively
+```
+
+**lme(model, random, data)**
+
+**model** - scores ~ Month * Naps
+
+We expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. There may be an interaction between these predictors. 
+
+
+**random** - random = ~ Month | Subs
+
+Random error comes from the fact that this is a within subjects design. The same infants are assessed at 1 month, 5 months, 10 months, and 15 months. 
+
+
+
+**data** - data=dataset
+
+Using the data set we created previously. 
+
+
+### Displaying our results
+
+```{r}
+tutorial
+```
+
+We can move the results to a nicer table using the summary function 
+
+```{r}
+#summarize an lme object - our solution
+tut <- summary(tutorial)
+tabl = tut$tTable 
+tabl 
+
+```
+
+
+From this analysis, we would conclude that there is a main effect of age, infants performance improved with age, but there is no effect of number of naps. It was trending in the correct direction as the only negative slope. 
+
+### Graphing our results
+
+```{r}
+library(ggplot2)
+plot<- ggplot(dataset, aes(x=Month, y=scores,  color=Napsfactor, shape = Napsfactor, group = Subs), xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
+  geom_point()+
+  geom_line(color="grey")
+
+plot + scale_x_continuous(name="Age (in months)", limits=c(1, 15), breaks =c(1,5,10,15)) +
+  scale_y_continuous(name="Scores", limits=c(0, 30))
+
+```
+
+This kind of graph allows us to see the developmental trajectory of individual infants. It highlights the fact that there are 2 developmental trends occuring here- Infants' performance on the assessment is improving with time and the average number of naps they take is decreasing with time. 
+
+## Continuing our example: Single main effect versus two main effects or an interaction
+
+When making the original data set, I intentionally biased the data to show a developmental curve by increasing the sampling distribution for each age range. I could do something similar to bias our data to support the impact of taking fewer naps 
+
+```{r}
+
+#Create a new data set 
+Subs <- rep(c(seq(1:10)), 4)
+
+Month <- c(rep(c(1), 10), rep(c(5), 10), rep(c(10), 10), rep(c(15), 10))
+
+Naps <- c(rep(c(3), 10), 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3 ,2,2,  2, 2,2,1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1)
+Napsfactor <- as.factor(Naps)
+
+secondscores <- c(runif(10, 1, 10), runif(5, 5, 10),runif(5, 9, 17), runif(3, 10, 15), runif(5, 14, 22), runif(2, 20, 25), runif(5, 18, 23), runif(4,22, 27), runif(1, 27, 30) )
+```
+
+
+```{r, eval=F}
+seconddataset <- data.frame(Subs, Month, Naps, secondscores, Napsfactor)
+#save(seconddataset, file="horger2.RData")
+```
+
+```{r}
+load("data/horger2.Rdata")
+print(seconddataset)
+```
+
+
+
+### Did the manipulation work? 
+
+```{r}
+#Summary stats from our first dataset
+demos <- dataset %>%
+    group_by(Month, Naps) %>%
+  summarise(mean_score = mean(scores, na.rm=TRUE))
+
+
+
+#Summary stats from our second dataset
+seconddemos <- seconddataset %>%
+    group_by(Month, Naps) %>%
+  summarise(mean_secondscore = mean(secondscores, na.rm=TRUE))
+
+
+print(demos)
+print(seconddemos)
+
+```
+
+It may or may not because we're still drawing a random sample, but the trend should be clearer than during the first example. 
+
+###Now run the analysis again 
+
+```{r}
+#Run the analysis again 
+
+secondtutorial <- lme(secondscores ~ Month * Naps, random = ~ Month | Subs, data=seconddataset)
+
+secondtutorial
+```
+
+```{r}
+#Create a table 
+secondtut<- summary(secondtutorial)
+secondtabl = secondtut$tTable 
+secondtabl 
+```
+
+```{r}
+#Graph the results 
+secondplot<-
+ggplot2::ggplot(seconddataset, aes(x=Month, y=secondscores,  color=Napsfactor, shape = Napsfactor, group=Subs), xlim(1, 15), ylim(0, 25), xlab(Month) ) + 
+  geom_point()+
+  geom_line( color="grey")
+
+secondplot + scale_x_continuous(name="Age (in months)", limits=c(1, 15), breaks = Month) +
+  scale_y_continuous(name="Scores", limits=c(0, 30))
+```
+
+
+## Plot the residuals  
+
+We can check the residuals to judge the fit of our models. The second tutorial should fit better because we set the data up that way. 
+
+
+```{r}
+plot(tutorial)
+plot(secondtutorial)
+```
+
+Remember, for a well fitting regression, we want the plot of our residuals to meet the following criteria: 
+(1) they’re pretty symmetrically distributed
+(2) they’re relatively small and
+(3) they don't follow a clear pattern 
+
+The second plot seems to meet these qualifications. 
+
+## Writing up our results 
+
+```{r}
+summary(secondtutorial)
+```
+
+A linear mixed effects model and conditional growth curve analysis was used to analyze infants' scores at 1, 5, 10, and 15 months old. Their scores were modeled with fixed effects of Month and Naps (1, 2, or 3) and random error to account for the within subjects design.There was a significant effect of Month- scores increased with age (Estimate= , SE= , p= ).
+```{r}
+#Estimate = 
+secondtabl[2,1]
+
+#SE = 
+secondtabl[2,2]
+
+#p = 
+secondtabl[2,5]
+```
+There was also a significant effect of Naps with fewer naps associated with better scores over time (Estimate= , SE= , p= ).
+```{r}
+#Estimate = 
+secondtabl[3,1]
+
+#SE = 
+secondtabl[3,2]
+
+#p = 
+secondtabl[3,5]
+```
+The interaction was not significant. 

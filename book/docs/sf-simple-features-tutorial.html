@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 9 SF simple features tutorial | PSYC 7709: Using R for Reproducible Research</title>
+  <meta name="description" content="Student contributed chapters about various R packages">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 9 SF simple features tutorial | PSYC 7709: Using R for Reproducible Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Student contributed chapters about various R packages" />
+  <meta name="github-repo" content="CrumpLab/OER_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 SF simple features tutorial | PSYC 7709: Using R for Reproducible Research" />
+  
+  <meta name="twitter:description" content="Student contributed chapters about various R packages" />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="forcats-tutorial.html">
+<link rel="next" href="psych-package.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79429674-2');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PSYC 7709: Using R for Reproducible Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="bootstrapped-mediation-tutorial.html"><a href="bootstrapped-mediation-tutorial.html"><i class="fa fa-check"></i><b>2</b> Bootstrapped Mediation Tutorial</a></li>
+<li class="chapter" data-level="3" data-path="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><a href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><i class="fa fa-check"></i><b>3</b> A tutorial for using the lme function from the nlme package.</a></li>
+<li class="chapter" data-level="4" data-path="data-shaping-using-reshape2-and-stats-packages.html"><a href="data-shaping-using-reshape2-and-stats-packages.html"><i class="fa fa-check"></i><b>4</b> Data Shaping using Reshape(2) and Stats Packages</a></li>
+<li class="chapter" data-level="5" data-path="how-to-annotate-a-graph-using-gg-signif.html"><a href="how-to-annotate-a-graph-using-gg-signif.html"><i class="fa fa-check"></i><b>5</b> How to Annotate a Graph Using GG Signif"</a></li>
+<li class="chapter" data-level="6" data-path="leaflet-package.html"><a href="leaflet-package.html"><i class="fa fa-check"></i><b>6</b> Leaflet Package</a></li>
+<li class="chapter" data-level="7" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>7</b> ggplot2</a></li>
+<li class="chapter" data-level="8" data-path="forcats-tutorial.html"><a href="forcats-tutorial.html"><i class="fa fa-check"></i><b>8</b> Forcats tutorial</a></li>
+<li class="chapter" data-level="9" data-path="sf-simple-features-tutorial.html"><a href="sf-simple-features-tutorial.html"><i class="fa fa-check"></i><b>9</b> SF simple features tutorial</a></li>
+<li class="chapter" data-level="10" data-path="psych-package.html"><a href="psych-package.html"><i class="fa fa-check"></i><b>10</b> “psych” Package</a></li>
+<li class="chapter" data-level="11" data-path="imager-tutorial.html"><a href="imager-tutorial.html"><i class="fa fa-check"></i><b>11</b> Imager Tutorial</a></li>
+<li class="chapter" data-level="12" data-path="animal-tracking-with-trajr.html"><a href="animal-tracking-with-trajr.html"><i class="fa fa-check"></i><b>12</b> Animal Tracking with TRAJR</a></li>
+<li class="chapter" data-level="13" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>13</b> Knitr</a></li>
+<li class="chapter" data-level="14" data-path="creating-your-own-html-widget.html"><a href="creating-your-own-html-widget.html"><i class="fa fa-check"></i><b>14</b> Creating your own html widget</a></li>
+<li class="chapter" data-level="15" data-path="network-analysis-tutorial.html"><a href="network-analysis-tutorial.html"><i class="fa fa-check"></i><b>15</b> Network Analysis tutorial</a></li>
+<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PSYC 7709: Using R for Reproducible Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sf-simple-features-tutorial" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> SF simple features tutorial</h1>
+<p><strong>Author: Kamal Abdelrahman</strong></p>
+<p><strong>Abstract:</strong> R is a statistical programming software that empowers its users with the ability to process, analyze, and present data. One of the key tools allow it to acheive this is through packages. Each package is comprised of various tools that serve a particular purpose. That could include data processing, visualization, and statistical analysis. This study will explore the sf (simple features) package in R to make a choropleth map. Given its user friendly interface, and integration with ggplot2, the grammer of graphics for data visualization, it should allow users to fell confident to develop this skill.</p>
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">9.1</span> Introduction</h2>
+<p>Data visualization is a key component in being able to communicate information to an audience. <span class="citation">(Keim <a href="#ref-keim2002information">2002</a>)</span> Common forms of data visualization include bar charts, scatter plots, and among others courtesy of the ggplot2 package <span class="citation">(<span class="citeproc-not-found" data-reference-id="R-ggplot2"><strong>???</strong></span>)</span> to help analysts understand the circumstances of their studies. Spatial data visualization has also been a key component in building off of that same aspect, especially with the sf package. <span class="citation">(Pebesma <a href="#ref-R-sf">2018</a>)</span> The various capabilities of being able to explore not just what is going on in a scenario, but also the ability to provide that with spatial context. That advantage with spatial data could allow analysts and users to visually connect areas of need within a given study area.</p>
+</div>
+<div id="methods" class="section level2">
+<h2><span class="header-section-number">9.2</span> Methods</h2>
+<p>The sample in this study was pre-determined by the standardized number of community districts across New York City. The income levels across New York City contains data on both the borough and community district level as well as data across four household types spanning from 2005 to 2017. For the purpose, of simplifying the demenstration, the data was subsetted to the community district for only “All Households” types during the year 2017.</p>
+<div id="participants" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> Participants</h3>
+<p>The Median Income dataset contains 3381 rows of data and six columns of data. The six columns are Location, Household Type, TimeFrame, DataFormat, Income, and Fips. The Location column identifies the both the borough and community district level locations throughout New York City, but only the community district values were used. The Household Type indicates the type of household that was analyzed; All households, families, families with children, families without children. Only the "All households level was used in this demonstration. The TimeFrame column indicates the year the of the record, spanning from 2005 to 2017. This demonstration only used 2017. DataFormat indicates the unit, which in this dataset would be dollars to represent money for income. Income indicates the median income value throughout a particular area. Fips is the identifying value for each area. Only Fips that have 3 numbers were used in this demonstration were used to as a unique identifier of the community district level.</p>
+</div>
+<div id="material" class="section level3">
+<h3><span class="header-section-number">9.2.2</span> Material</h3>
+<p>For this demonstation, R Studio, the sf package, the ggplot2 package, the community districts shapefile, and the income levels for each community district are needed. The R Studio Integrated Development Environment (IDE) provides the platform to run the analysis. The sf package is used to process the spatial data. The ggplot2 package will be used to access data visualization capabilities. The community district shapefile will be used to identify the areas of interest for New York City. The income levels will be used to shade in the geographical boundaries in proportion to the values.</p>
+</div>
+<div id="procedure" class="section level3">
+<h3><span class="header-section-number">9.2.3</span> Procedure</h3>
+<p>To conduct the geospatial analysis of creating a choropleth, the following steps were taken. First, the sf and ggplot2 packages were loaded into R. Next, the shapefile of New York City’s community districts was loaded into R with the read_sf function from <a href="https://data.cityofnewyork.us/City-Government/Community-Districts/yfnk-k7r4">New York City Open Data Portal</a>. The shapefile could be loaded into R from user’s computer filepath as well as straight from the website. If the user is loading the shapefile from their computer’s filepath, they must download the shapefile. The downloaded folder must be unzipped. The shapefile must be kept in the same folder of the files it is located in, regardless if user keeps it in its original folder or moves it to another folder. If the user decides to load the shapefile from straight from the website, they must copy the link to the GeoJson version into the read_sf function.</p>
+<p>The dataset containing the income levels was downloaded from the <a href="https://data.cccnewyork.org/data/map/66/median-incomes#66/49/3/107/25/a">Citzens’ Committee For Children of New York</a> website. To reproduce this analysis, the user must unzip the folder containing the dataset and load the csv containing the data into R with the read.csv function.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sf)
+
+<span class="co">#Reading From File</span>
+
+<span class="co">#NycCommunityDistricts &lt;- read_sf(&quot;/Users/kamal/Documents/GitHub/Laundro-Hydro Startup/Shapefiles/NYC Community Districts Shapefile/Community Districts/geo_export_56ffd4c2-465e-4b9e-ab06-8ab9ebaa596f.shp&quot;)</span>
+
+<span class="co">#Reading From Website</span>
+NycCommunityDistricts &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="st">&quot;https://data.cityofnewyork.us/api/geospatial/yfnk-k7r4?method=export&amp;format=GeoJSON&quot;</span>)
+
+NYCIncome &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Median Incomes.csv&quot;</span>)</code></pre>
+<p>The dataset for the Median Income levels contains data spanning from 2005 to 2017, as well as data on both the borough and community district level, and four different household types (All Households, Families, Families With Children, and Families Without Children). The data was subsetted to only view areas of a Fips code with 3 characters, only the “All Households” Household type, and the year of 2017. Fips codes with only 3 characters indicates the community districts, as opposed to the boroughs that have 5 characters. The Income dataset was merged with the shapefile to combine attribute data with the spatial data. Since the income dataset and the shapefile have different column names for the Fips codes, they were merged together by their respective coloumn names (“boro_cd” from the shapefile, “Fips” from the income dataset). There were non-matching identifiers given that the Income dataset did not have data for (number) of the total Fips across New York City. They were retained in the merged.</p>
+<p>To visualize the choropleth, the <code>ggplot</code> function was called to activate the ggplot2 syntax. The <code>geom_sf</code> function was called to load in the shapefile dataset containing both the shapefile and fill the community district boundaries by the value of their correpsonding income levels. The choropleth was further editted to change colors to accurately represent the analysis being presented.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> NycCommunityDistrictsIncome,
+  <span class="kw">aes</span>(<span class="dt">fill =</span> Income)) </code></pre>
+</div>
+</div>
+<div id="results" class="section level2">
+<h2><span class="header-section-number">9.3</span> Results</h2>
+<p>The choropleth map indicates the income levels across New York City. Thus, individuals are able to spatially reference the income levels across New York City. Though, this possible could have been acheived with a bar chart or even a pie chart, but then they take away that dynamic spatial reference. The choropleth is shaped to New York City, and is shaded in relating to the density of the data. So areas of higher income are darker green, areas of lower incomes are light gray. The darker gray values indicate values that do not have data for them. By analyzing the map, analysts can observe there is a greater cluster of higher income community districts in lower Manhattan. In the lower Bronx, there is a greater clustering of lower incomes.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-99"></span>
+<img src="7709_bookdown_files/figure-html/unnamed-chunk-99-1.png" alt="A choropleth map that indicates the income levels across New York City at the community district level" width="672" />
+<p class="caption">
+Figure 9.1: A choropleth map that indicates the income levels across New York City at the community district level
+</p>
+</div>
+</div>
+<div id="discussion" class="section level2">
+<h2><span class="header-section-number">9.4</span> Discussion</h2>
+<p>The sf package in R provides a multitude of ways for analysts to process geospatial data. This opens upon different avenues in the field of data science, especially designing predictive models of how income levels may continue to disperage across New York City. This would allow policymakers to truly have a more proactive approach to understand where exactly these disparities are occuring. For the user, there great deal of tools at their disposal with the sf package. They include converting non-spatial data frames to spatial data frames. For example, a dataset containing the Longitude and Latitude location of universities across New York City, but it is not a feature. That could be accomplished with the sf package.
+`</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-keim2002information">
+<p>Keim, Daniel A. 2002. “Information Visualization and Visual Data Mining.” <em>IEEE Transactions on Visualization and Computer Graphics</em> 8 (1): 1–8.</p>
+</div>
+<div id="ref-R-sf">
+<p>Pebesma, Edzer. 2018. “Simple Features for R: Standardized Support for Spatial Vector Data.” <em>The R Journal</em>. <a href="https://journal.r-project.org/archive/2018/RJ-2018-009/index.html">https://journal.r-project.org/archive/2018/RJ-2018-009/index.html</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="forcats-tutorial.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="psych-package.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-Abdelrahman.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709_bookdown.pdf", "7709_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

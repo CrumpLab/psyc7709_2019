@@ -303,7 +303,7 @@ Paper due date: M May 20th
 
 1. [R markdown slide presentations tutorial](https://rmarkdown.rstudio.com/lesson-11.html)
 2. [Yihui Xie, J. J. Allaire, & Garrett Grolemund's "R Markdown: The Definitive guide", Chapter 7](https://bookdown.org/yihui/rmarkdown/xaringan.html)
-
+3. [example presentation](https://crumplab.github.io/psyc7709/FinalPresentation/RPackagePresentation.html#1)
 
 #### Final Project
 

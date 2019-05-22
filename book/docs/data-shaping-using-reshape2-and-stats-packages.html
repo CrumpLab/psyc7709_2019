@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 4 Data Shaping using Reshape(2) and Stats Packages | PSYC 7709: Using R for Reproducible Research</title>
+  <meta name="description" content="Student contributed chapters about various R packages">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 4 Data Shaping using Reshape(2) and Stats Packages | PSYC 7709: Using R for Reproducible Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Student contributed chapters about various R packages" />
+  <meta name="github-repo" content="CrumpLab/OER_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Data Shaping using Reshape(2) and Stats Packages | PSYC 7709: Using R for Reproducible Research" />
+  
+  <meta name="twitter:description" content="Student contributed chapters about various R packages" />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html">
+<link rel="next" href="how-to-annotate-a-graph-using-gg-signif.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79429674-2');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PSYC 7709: Using R for Reproducible Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="bootstrapped-mediation-tutorial.html"><a href="bootstrapped-mediation-tutorial.html"><i class="fa fa-check"></i><b>2</b> Bootstrapped Mediation Tutorial</a></li>
+<li class="chapter" data-level="3" data-path="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><a href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><i class="fa fa-check"></i><b>3</b> A tutorial for using the lme function from the nlme package.</a></li>
+<li class="chapter" data-level="4" data-path="data-shaping-using-reshape2-and-stats-packages.html"><a href="data-shaping-using-reshape2-and-stats-packages.html"><i class="fa fa-check"></i><b>4</b> Data Shaping using Reshape(2) and Stats Packages</a></li>
+<li class="chapter" data-level="5" data-path="how-to-annotate-a-graph-using-gg-signif.html"><a href="how-to-annotate-a-graph-using-gg-signif.html"><i class="fa fa-check"></i><b>5</b> How to Annotate a Graph Using GG Signif"</a></li>
+<li class="chapter" data-level="6" data-path="leaflet-package.html"><a href="leaflet-package.html"><i class="fa fa-check"></i><b>6</b> Leaflet Package</a></li>
+<li class="chapter" data-level="7" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>7</b> ggplot2</a></li>
+<li class="chapter" data-level="8" data-path="forcats-tutorial.html"><a href="forcats-tutorial.html"><i class="fa fa-check"></i><b>8</b> Forcats tutorial</a></li>
+<li class="chapter" data-level="9" data-path="sf-simple-features-tutorial.html"><a href="sf-simple-features-tutorial.html"><i class="fa fa-check"></i><b>9</b> SF simple features tutorial</a></li>
+<li class="chapter" data-level="10" data-path="psych-package.html"><a href="psych-package.html"><i class="fa fa-check"></i><b>10</b> “psych” Package</a></li>
+<li class="chapter" data-level="11" data-path="imager-tutorial.html"><a href="imager-tutorial.html"><i class="fa fa-check"></i><b>11</b> Imager Tutorial</a></li>
+<li class="chapter" data-level="12" data-path="animal-tracking-with-trajr.html"><a href="animal-tracking-with-trajr.html"><i class="fa fa-check"></i><b>12</b> Animal Tracking with TRAJR</a></li>
+<li class="chapter" data-level="13" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>13</b> Knitr</a></li>
+<li class="chapter" data-level="14" data-path="creating-your-own-html-widget.html"><a href="creating-your-own-html-widget.html"><i class="fa fa-check"></i><b>14</b> Creating your own html widget</a></li>
+<li class="chapter" data-level="15" data-path="network-analysis-tutorial.html"><a href="network-analysis-tutorial.html"><i class="fa fa-check"></i><b>15</b> Network Analysis tutorial</a></li>
+<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PSYC 7709: Using R for Reproducible Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-shaping-using-reshape2-and-stats-packages" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Data Shaping using Reshape(2) and Stats Packages</h1>
+<p><strong>Author: Aira Contreras</strong></p>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">4.1</span> Introduction</h2>
+<p>Research data sets can be overwrought with information that may not be of interest to the researcher; on one hand it could be that the researcher is using data sets from experiments or studies that were not conducted directly by them and therefore needs to carefully choose variables, or perhaps there were too many variables collected during the study and a particular analysis only requires a select few. It is also possible that the analysis software is only able to process the data if it is fed into the input in a certain manner. Whatever the limitations are, data shaping is a key step in data analysis and there are many tools available to assist with this task. R programmers have acknowledged the need for CRAN approved packages that aid with this endeavor and since 2003 have created packages such as Reshape to help others. This section will focus on the functionalities of the Reshape2 package distributed in 2012 by Hadley Wickham and the Stats 2001 by the R Core Team.</p>
+</div>
+<div id="different-data-inputs" class="section level2">
+<h2><span class="header-section-number">4.2</span> Different Data Inputs</h2>
+<p>Data input formats, for the purposes of this exercise, exist mainly in 2 forms: <em>wide format</em> or <em>long format</em>. It is important to understand what format the data is in prior to re-shaping or performing an analysis. This will allow you to correctly reshape the data prior to analysis or input into the software correctly. The next subsections describe the differences between the 2 formats and provide a visual example of the formats.</p>
+<div id="long-format" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Long Format</h3>
+<p>Data is described to be in <strong>long format</strong> when each row represents 1 time point or variable. For example, if an experiment collected information on state population, state mortality, and state income then the output would be the state (e.g. California) and the variable (e.g. Income) in the first row, the state (e.g. California) and and the variable (e.g. Mortality) in the next row, and so forth until a full data output is created.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;reshape2&quot;)</span>
+<span class="co">#install.packages(&quot;dplyr&quot;)</span>
+<span class="kw">library</span>(reshape2)
+<span class="kw">library</span>(dplyr)
+
+SubjectID&lt;-<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>
+df&lt;-<span class="st"> </span><span class="kw">data.frame</span>(SubjectID,state.x77)
+example&lt;-<span class="kw">melt</span>(df,<span class="dt">id=</span><span class="st">&quot;SubjectID&quot;</span>)
+ex&lt;-example<span class="op">%&gt;%</span><span class="kw">filter</span>(SubjectID<span class="op">==</span><span class="dv">1</span>)
+ex</code></pre>
+<pre><code>##   SubjectID   variable    value
+## 1         1 Population  3615.00
+## 2         1     Income  3624.00
+## 3         1 Illiteracy     2.10
+## 4         1   Life.Exp    69.05
+## 5         1     Murder    15.10
+## 6         1    HS.Grad    41.30
+## 7         1      Frost    20.00
+## 8         1       Area 50708.00</code></pre>
+<p>This example demonstrates that all of the rows, which measure a distinct variable with its corresponding value, belong to 1 subject (i.e. 1). This format is useful for analysis of repeated measures experiments in which the same subject may be asked about different benchmarks during the course of the experiment.</p>
+</div>
+<div id="wide-format" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Wide Format</h3>
+<p>Data is described to be in <strong>wide format</strong> when each row represents all of the individual variable responses for 1 subjected, separated by column. For example, if an experiment collected information on subjected responses at different intervals then the output would be the subject (e.g. 1) and the responses at each interval in separate columns (e.g. inter1, inter2, inter3, etc.) in the first row, the next subject (e.g. 2) and the responses at each interval in separate columns (e.g. inter1, inter2, etc.) in the next row and so fhorth until a full data output is created.</p>
+<pre class="sourceCode r"><code class="sourceCode r">wide &lt;-<span class="st"> </span><span class="kw">reshape</span>(Indometh, <span class="dt">v.names =</span> <span class="st">&quot;conc&quot;</span>, <span class="dt">idvar =</span> <span class="st">&quot;Subject&quot;</span>,
+                <span class="dt">timevar =</span> <span class="st">&quot;time&quot;</span>, <span class="dt">direction =</span> <span class="st">&quot;wide&quot;</span>)
+wide[,<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>]</code></pre>
+<pre><code>##    Subject conc.0.25 conc.0.5 conc.0.75 conc.1 conc.1.25 conc.2 conc.3
+## 1        1      1.50     0.94      0.78   0.48      0.37   0.19   0.12
+## 12       2      2.03     1.63      0.71   0.70      0.64   0.36   0.32
+## 23       3      2.72     1.49      1.16   0.80      0.80   0.39   0.22
+## 34       4      1.85     1.39      1.02   0.89      0.59   0.40   0.16
+## 45       5      2.05     1.04      0.81   0.39      0.30   0.23   0.13
+## 56       6      2.31     1.44      1.03   0.84      0.64   0.42   0.24</code></pre>
+<p>This example demonstrates that all of the rows show a distinct subject with the distinct variable measures in each individual column.</p>
+</div>
+</div>
+<div id="reshape2-package-functions" class="section level2">
+<h2><span class="header-section-number">4.3</span> Reshape2 Package Functions</h2>
+<p>The Reshape2 package contains various functions that helps users place their data into either the <em>long format</em> or the <em>wide format</em> depending on what is needed by the software being used for analysis. Though there are many functions availalble and it is encouraged that all functions are reviewed (you can do so here: <a href="https://cran.r-project.org/web/packages/reshape2/reshape2.pdf" class="uri">https://cran.r-project.org/web/packages/reshape2/reshape2.pdf</a>), the primary focus of this section will be on the use of the <strong>melt()</strong> and <strong>cast()</strong> functions. For proper use and data reshaping, the functions are ideally used in tandem, though as shown above, they can be used separately (i.e. only the melt function used for the separation of some data from others).</p>
+<div id="melt" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> melt()</h3>
+<p>As it implies, the melt function strips away variables and/or structures from existing data sets and prepares the data for the cast function (or for analysis). Depending on the type of data that you may have (array, data frame, matrix), <strong>melt()</strong> should be able to accommodate the breakdown or reshaping of the data. A check for the use of the function called <em>melt_check()</em> is purported to exist, but the documentation on how to use this function is bare and I currently cannot make it run.</p>
+<div id="meltmelt.defaultmelt.data.frame" class="section level4">
+<h4><span class="header-section-number">4.3.1.1</span> melt()/melt.default()/melt.data.frame()</h4>
+<p>The melt function requires the following inputs at minimum to work <em>melt(data,Subject Name Code Column, Variable Column Names in List Form)</em>. As is, the function does not remove any missing values (na.rm = FALSE), so if it is necessary to remove missing values from the data set, this should be done prior to the use of melt() or na.rm should be set as equal to <strong>TRUE</strong>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(airquality)</code></pre>
+<pre><code>##   Ozone Solar.R Wind Temp Month Day
+## 1    41     190  7.4   67     5   1
+## 2    36     118  8.0   72     5   2
+## 3    12     149 12.6   74     5   3
+## 4    18     313 11.5   62     5   4
+## 5    NA      NA 14.3   56     5   5
+## 6    28      NA 14.9   66     5   6</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(airquality) &lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">names</span>(airquality))
+aqm &lt;-<span class="st"> </span><span class="kw">melt</span>(airquality, <span class="dt">id=</span><span class="kw">c</span>(<span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>), <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+
+<span class="kw">head</span>(aqm)</code></pre>
+<pre><code>##   month day variable value
+## 1     5   1    ozone    41
+## 2     5   2    ozone    36
+## 3     5   3    ozone    12
+## 4     5   4    ozone    18
+## 6     5   6    ozone    28
+## 7     5   7    ozone    23</code></pre>
+<p>The air quality data set contained 4 measured variables (Ozone, Solar.R, Wind, and Temp) over 2 time metrics (Month, Day). Using melt(), the data set was reshaped in aqm to show Month and Day as the independent variables, with the dependent variables Ozone, Solar R., Wind, and Temp shown as the dependent variables with their corresponding measurments. Note that because we did not specify the measured variable, all of the variables not designated as independent variables were designated as measured variables. In order to select specific measured/dependent variables, it is necessary to specify them as shown in the example below.</p>
+<pre class="sourceCode r"><code class="sourceCode r">aqm2 &lt;-<span class="st"> </span><span class="kw">melt</span>(airquality, <span class="dt">id=</span><span class="kw">c</span>(<span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>),<span class="dt">measure.vars =</span> <span class="st">&quot;ozone&quot;</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+
+<span class="kw">head</span>(aqm2)</code></pre>
+<pre><code>##   month day variable value
+## 1     5   1    ozone    41
+## 2     5   2    ozone    36
+## 3     5   3    ozone    12
+## 4     5   4    ozone    18
+## 6     5   6    ozone    28
+## 7     5   7    ozone    23</code></pre>
+<p>Here, again, the columns are the same as the aqm data set, however, because we specify <em>ozone</em> as the measured variable, only ozone will appear in the data set aqm2.</p>
+</div>
+<div id="melt.array" class="section level4">
+<h4><span class="header-section-number">4.3.1.2</span> melt.array()</h4>
+<p>If the data you are working with is presented in an <em>array</em> as opposed to a data frame or matrix (meaning that there are a fixed number of values of a sinlge type) then you can use the melt.array() feature.</p>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">23</span>, <span class="ot">NA</span>), <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))
+
+a[,,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre>
+<pre><code>## , , 1
+## 
+##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6
+## 
+## , , 2
+## 
+##      [,1] [,2] [,3]
+## [1,]    7    9   11
+## [2,]    8   10   12</code></pre>
+<p>The above is an example of a random array that was created with 3 dimensions (row, column, depth).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">melt</span>(a)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,]</code></pre>
+<pre><code>##    Var1 Var2 Var3 value
+## 1     1    1    1     1
+## 2     2    1    1     2
+## 3     1    2    1     3
+## 4     2    2    1     4
+## 5     1    3    1     5
+## 6     2    3    1     6
+## 7     1    1    2     7
+## 8     2    1    2     8
+## 9     1    2    2     9
+## 10    2    2    2    10</code></pre>
+<p>Using the function melt, without any additional indicators will break the data down and out of the current structures that hold them. The first 3 columns represent the location of the data and the fourth column indicates the value in that given location. Based on the data output provided, it can be very easy to get lost or make mistakes. Additional data commands that name the columns may be helpful to keep track of the data as shown below.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">melt</span>(a, <span class="dt">varnames =</span> <span class="kw">c</span>(<span class="st">&quot;X&quot;</span>,<span class="st">&quot;Y&quot;</span>,<span class="st">&quot;Z&quot;</span>))[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,]</code></pre>
+<pre><code>##    X Y Z value
+## 1  1 1 1     1
+## 2  2 1 1     2
+## 3  1 2 1     3
+## 4  2 2 1     4
+## 5  1 3 1     5
+## 6  2 3 1     6
+## 7  1 1 2     7
+## 8  2 1 2     8
+## 9  1 2 2     9
+## 10 2 2 2    10</code></pre>
+</div>
+</div>
+<div id="cast" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> cast()</h3>
+<p>The <strong>cast()</strong> function is what allows us to shape the data after we have melted it down into the ideal formats that are needed. The options exist to run <em>dcast()</em> or <em>acast()</em>. As you can imagine, the <strong>dcast()</strong> function best serves those that are intending to have a data frame or matrix output.</p>
+<div id="acast" class="section level4">
+<h4><span class="header-section-number">4.3.2.1</span> acast()</h4>
+<p>According to the README, the cast function provides outputs in the following format: x_var+x_2<sub>y_var+y_2</sub>z_var. Though it may be an easy format to understand, it was not sufficient of an explanation for some. As such, please refer to the example below.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">acast</span>(aqm, day <span class="op">~</span><span class="st"> </span>month <span class="op">~</span><span class="st"> </span>variable)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre>
+<pre><code>## , , ozone
+## 
+##     5  6   7   8  9
+## 1  41 NA 135  39 96
+## 2  36 NA  49   9 78
+## 3  12 NA  32  16 73
+## 4  18 NA  NA  78 91
+## 5  NA NA  64  35 47
+## 6  28 NA  40  66 32
+## 7  23 29  77 122 20
+## 8  19 NA  97  89 23
+## 9   8 71  97 110 21
+## 10 NA 39  85  NA 24
+## 
+## , , solar.r
+## 
+##      5   6   7   8   9
+## 1  190 286 269  83 167
+## 2  118 287 248  24 197
+## 3  149 242 236  77 183
+## 4  313 186 101  NA 189
+## 5   NA 220 175  NA  95
+## 6   NA 264 314  NA  92
+## 7  299 127 276 255 252
+## 8   99 273 267 229 220
+## 9   19 291 272 207 230
+## 10 194 323 175 222 259</code></pre>
+<p>As demonstrated from the data output above, the cast() function shaped the data such that the months are the column headers, divided across days in the rows, and then by variable as the overall “topic”.</p>
+<p>It is also possible to cast the data in such a way that the averages are obtained.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">acast</span>(aqm, month <span class="op">~</span><span class="st"> </span>variable, mean, <span class="dt">margins =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>##          ozone  solar.r      wind     temp    (all)
+## 5     23.61538 181.2963 11.622581 65.54839 68.70696
+## 6     29.44444 190.1667 10.266667 79.10000 87.38384
+## 7     59.11538 216.4839  8.941935 83.90323 93.49748
+## 8     59.96154 171.8571  8.793548 83.96774 79.71207
+## 9     31.44828 167.4333 10.180000 76.90000 71.82689
+## (all) 42.12931 185.9315  9.957516 77.88235 80.05722</code></pre>
+<p>In the above example, the data once again separated by what was indicated (e.g. month and variable). We have added however, that the mean of these variables for each month be calculated and additionally, by adding the <em>margins = TRUE</em> command, we have asked for the means of each row to be included.</p>
+<p>Overall, the takeaway for how to use cast should be as follows: acast(melted data set, rowvariablename<sub>columnvariablename</sub>OPTIONALvariableinformationisseparatedby,…ANYOTHERCOMMANDS,MARGINS).</p>
+</div>
+<div id="dcast" class="section level4">
+<h4><span class="header-section-number">4.3.2.2</span> dcast()</h4>
+<p>Similar to <em>acast()</em>, <strong>dcast()</strong> reforms the data, however, it places it into a data fram or matrix format.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dcast</span>(aqm, month <span class="op">~</span><span class="st"> </span>variable, mean, <span class="dt">margins =</span> <span class="kw">c</span>(<span class="st">&quot;month&quot;</span>, <span class="st">&quot;variable&quot;</span>))</code></pre>
+<pre><code>##   month    ozone  solar.r      wind     temp    (all)
+## 1     5 23.61538 181.2963 11.622581 65.54839 68.70696
+## 2     6 29.44444 190.1667 10.266667 79.10000 87.38384
+## 3     7 59.11538 216.4839  8.941935 83.90323 93.49748
+## 4     8 59.96154 171.8571  8.793548 83.96774 79.71207
+## 5     9 31.44828 167.4333 10.180000 76.90000 71.82689
+## 6 (all) 42.12931 185.9315  9.957516 77.88235 80.05722</code></pre>
+<p>To use a different data set, the example below takes data from the ChickWeight set and melts it down and casts it as a data frame that displays only the time (row) and variable (column) and the corresponding means.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ChickWeight)</code></pre>
+<pre><code>## Grouped Data: weight ~ Time | Chick
+##   weight Time Chick Diet
+## 1     42    0     1    1
+## 2     51    2     1    1
+## 3     59    4     1    1
+## 4     64    6     1    1
+## 5     76    8     1    1
+## 6     93   10     1    1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(ChickWeight) &lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">names</span>(ChickWeight))
+chick_m &lt;-<span class="st"> </span><span class="kw">melt</span>(ChickWeight, <span class="dt">id=</span><span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+<span class="kw">dcast</span>(chick_m, time <span class="op">~</span><span class="st"> </span>variable, mean)</code></pre>
+<pre><code>##    time    weight
+## 1     0  41.06000
+## 2     2  49.22000
+## 3     4  59.95918
+## 4     6  74.30612
+## 5     8  91.24490
+## 6    10 107.83673
+## 7    12 129.24490
+## 8    14 143.81250
+## 9    16 168.08511
+## 10   18 190.19149
+## 11   20 209.71739
+## 12   21 218.68889</code></pre>
+</div>
+</div>
+</div>
+<div id="stats-package-functions" class="section level2">
+<h2><span class="header-section-number">4.4</span> Stats Package Functions</h2>
+<p>The Stats package contains various functions that helps users place their data into either the <em>long format</em> or the <em>wide format</em> depending on what is needed by the software being used for analysis. Though there are many functions availalble and it is encouraged that all functions are reviewed (you can do so here: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.0" class="uri">https://www.rdocumentation.org/packages/stats/versions/3.6.0</a>), the primary focus of this section will be on the use of the <strong>reshape()</strong> function.</p>
+<div id="reshape" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Reshape()</h3>
+<p>More readily than the melt() and cast() functions, reshape is able to guid the direction of the data as it reshapes and rebuilds the data set as indicated.</p>
+<p>The reshape() functions require the basic inputs the melt() function did, with the added input of direction, which indicates whether the dataset should be a long format data set or a wide format dataset.</p>
+<pre class="sourceCode r"><code class="sourceCode r">wide &lt;-<span class="st"> </span><span class="kw">reshape</span>(Indometh, <span class="dt">v.names =</span> <span class="st">&quot;conc&quot;</span>, <span class="dt">idvar =</span> <span class="st">&quot;Subject&quot;</span>,
+                <span class="dt">timevar =</span> <span class="st">&quot;time&quot;</span>, <span class="dt">direction =</span> <span class="st">&quot;wide&quot;</span>)
+wide[,<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</code></pre>
+<pre><code>##    Subject conc.0.25 conc.0.5 conc.0.75 conc.1
+## 1        1      1.50     0.94      0.78   0.48
+## 12       2      2.03     1.63      0.71   0.70
+## 23       3      2.72     1.49      1.16   0.80
+## 34       4      1.85     1.39      1.02   0.89
+## 45       5      2.05     1.04      0.81   0.39
+## 56       6      2.31     1.44      1.03   0.84</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">state.x77 &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(state.x77)
+long &lt;-<span class="st"> </span><span class="kw">reshape</span>(state.x77, <span class="dt">idvar =</span> <span class="st">&quot;state&quot;</span>, <span class="dt">ids =</span> <span class="kw">row.names</span>(state.x77),
+                <span class="dt">times =</span> <span class="kw">names</span>(state.x77), <span class="dt">timevar =</span> <span class="st">&quot;Characteristic&quot;</span>,
+                <span class="dt">varying =</span> <span class="kw">list</span>(<span class="kw">names</span>(state.x77)), <span class="dt">direction =</span> <span class="st">&quot;long&quot;</span>)
+longa&lt;-long<span class="op">%&gt;%</span><span class="kw">filter</span>(state<span class="op">==</span><span class="st">&quot;Alabama&quot;</span>)
+
+longa</code></pre>
+<pre><code>##   Characteristic Population   state
+## 1     Population    3615.00 Alabama
+## 2         Income    3624.00 Alabama
+## 3     Illiteracy       2.10 Alabama
+## 4       Life Exp      69.05 Alabama
+## 5         Murder      15.10 Alabama
+## 6        HS Grad      41.30 Alabama
+## 7          Frost      20.00 Alabama
+## 8           Area   50708.00 Alabama</code></pre>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">4.5</span> Summary</h2>
+<p>Data reshaping is important and there are many tools availalbe to assist users in re-formatting the data sets they have available. In addition to the packages discussed above, other packages have been developed by other R users to facilitate this process; the next generation of ReShape can be found in the tidyr package, and other packages like psych, include tools that help reformat data. Additionally with the use of additional packages like dplyr and forcats, additional power is added to the ability of the user to format and reformat as needed.</p>
+</div>
+<div id="references" class="section level2">
+<h2><span class="header-section-number">4.6</span> References</h2>
+<p>Kabacoff, R. I. (n.d.). Qhick-R: Reshape. Retrieved May 03, 2019, from <a href="https://www.statmethods.net/management/reshape.html" class="uri">https://www.statmethods.net/management/reshape.html</a></p>
+<p>Wickham, H. (2012). reshape2: Flexibly reshape data: a reboot of the reshape package. R package version, 1(2).</p>
+<p>Martin, K. G. (n.d.). The Wide and Long Data Format for Repeated Measures Data. Retrieved May 03, 2019, from <a href="https://www.theanalysisfactor.com/wide-and-long-data/" class="uri">https://www.theanalysisfactor.com/wide-and-long-data/</a></p>
+<p>R Core Team (2012). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. ISBN 3-900051-07-0, URL <a href="http://www.R-project.org/" class="uri">http://www.R-project.org/</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-to-annotate-a-graph-using-gg-signif.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-Contreras.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709_bookdown.pdf", "7709_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 8 Forcats tutorial | PSYC 7709: Using R for Reproducible Research</title>
+  <meta name="description" content="Student contributed chapters about various R packages">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 8 Forcats tutorial | PSYC 7709: Using R for Reproducible Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Student contributed chapters about various R packages" />
+  <meta name="github-repo" content="CrumpLab/OER_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Forcats tutorial | PSYC 7709: Using R for Reproducible Research" />
+  
+  <meta name="twitter:description" content="Student contributed chapters about various R packages" />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="ggplot2.html">
+<link rel="next" href="sf-simple-features-tutorial.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79429674-2');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PSYC 7709: Using R for Reproducible Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="bootstrapped-mediation-tutorial.html"><a href="bootstrapped-mediation-tutorial.html"><i class="fa fa-check"></i><b>2</b> Bootstrapped Mediation Tutorial</a></li>
+<li class="chapter" data-level="3" data-path="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><a href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><i class="fa fa-check"></i><b>3</b> A tutorial for using the lme function from the nlme package.</a></li>
+<li class="chapter" data-level="4" data-path="data-shaping-using-reshape2-and-stats-packages.html"><a href="data-shaping-using-reshape2-and-stats-packages.html"><i class="fa fa-check"></i><b>4</b> Data Shaping using Reshape(2) and Stats Packages</a></li>
+<li class="chapter" data-level="5" data-path="how-to-annotate-a-graph-using-gg-signif.html"><a href="how-to-annotate-a-graph-using-gg-signif.html"><i class="fa fa-check"></i><b>5</b> How to Annotate a Graph Using GG Signif"</a></li>
+<li class="chapter" data-level="6" data-path="leaflet-package.html"><a href="leaflet-package.html"><i class="fa fa-check"></i><b>6</b> Leaflet Package</a></li>
+<li class="chapter" data-level="7" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>7</b> ggplot2</a></li>
+<li class="chapter" data-level="8" data-path="forcats-tutorial.html"><a href="forcats-tutorial.html"><i class="fa fa-check"></i><b>8</b> Forcats tutorial</a></li>
+<li class="chapter" data-level="9" data-path="sf-simple-features-tutorial.html"><a href="sf-simple-features-tutorial.html"><i class="fa fa-check"></i><b>9</b> SF simple features tutorial</a></li>
+<li class="chapter" data-level="10" data-path="psych-package.html"><a href="psych-package.html"><i class="fa fa-check"></i><b>10</b> “psych” Package</a></li>
+<li class="chapter" data-level="11" data-path="imager-tutorial.html"><a href="imager-tutorial.html"><i class="fa fa-check"></i><b>11</b> Imager Tutorial</a></li>
+<li class="chapter" data-level="12" data-path="animal-tracking-with-trajr.html"><a href="animal-tracking-with-trajr.html"><i class="fa fa-check"></i><b>12</b> Animal Tracking with TRAJR</a></li>
+<li class="chapter" data-level="13" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>13</b> Knitr</a></li>
+<li class="chapter" data-level="14" data-path="creating-your-own-html-widget.html"><a href="creating-your-own-html-widget.html"><i class="fa fa-check"></i><b>14</b> Creating your own html widget</a></li>
+<li class="chapter" data-level="15" data-path="network-analysis-tutorial.html"><a href="network-analysis-tutorial.html"><i class="fa fa-check"></i><b>15</b> Network Analysis tutorial</a></li>
+<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PSYC 7709: Using R for Reproducible Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="forcats-tutorial" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Forcats tutorial</h1>
+<div id="dealing-with-catergorical-data" class="section level2">
+<h2><span class="header-section-number">8.1</span> Dealing with Catergorical Data</h2>
+<p>Categorical variables deal with qualitative data and have have an infinite number or values (i.e. hair color, location, ethnicity) verses quantitative data that is on a continuious scale (i.e. 2,3,4).</p>
+<p>Although this categorical information is useful, it might be hard to work with. Using a package to organize and manipulate categorical data can help.</p>
+</div>
+<div id="packages-to-work-with-categorical-data" class="section level2">
+<h2><span class="header-section-number">8.2</span> Packages to Work with Categorical Data</h2>
+<p>Forcats is a package under the Tidyverse universe. However, it is not one of the main packages, so you would need to install forcats from tidyverse</p>
+<p>You can install the package a few different ways.</p>
+<p>Install the <strong>forcats</strong> package from <a href="https://github.com/tidyverse/forcats">Github</a>:</p>
+<p>Or enter the R code listed below</p>
+<pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tidyverse/forcats&quot;</span>)
+<span class="kw">install.packages</span>(<span class="st">&quot;forcats&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(forcats)</code></pre>
+</div>
+<div id="the-different-functions-of-forcats" class="section level2">
+<h2><span class="header-section-number">8.3</span> The Different Functions of Forcats</h2>
+<p>It is important to note a few things before using the Forcats package. First, this package works with categorical data in the form of factors or characters. You can check what type of class your variable is with the function <strong>class()</strong>. To use Forcats, you should change your variable to a factor with the function <strong>as.factor()</strong> or <strong>factor()</strong> or a character with the function <strong>as.character()</strong>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">a&lt;-<span class="st">&quot;hi&quot;</span>
+<span class="kw">class</span>(a)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">b&lt;-<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>)
+<span class="kw">class</span>(b)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">c&lt;-<span class="kw">as.factor</span>(b)
+<span class="kw">class</span>(c)</code></pre>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<p>Second,forcats is a package that is used to do something with you categorical data. When you enter in the specific R code to do something with that data, it will store it into the variable you selected. However, it may be difficult for you to see that what you did with Forcats actually happened. It is useful to also install the package <strong>dplyr</strong> and <strong>ggplot2</strong> to your R studio so you can visualize what you have done with your data</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(dplyr)</code></pre>
+<div id="recoding-a-factor" class="section level3">
+<h3><span class="header-section-number">8.3.1</span> Recoding a Factor</h3>
+<p>If you have categorical variables/factors, you can change the name or identity of that factor.</p>
+<p>Use the <strong>fct_recode()</strong></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Using data in r (airquality)</span>
+<span class="co"># Take a look at the data</span>
+<span class="kw">glimpse</span>(airquality)</code></pre>
+<pre><code>## Observations: 153
+## Variables: 6
+## $ ozone   &lt;int&gt; 41, 36, 12, 18, NA, 28, 23, 19, 8, NA, 7, 16, 11, 14, 18…
+## $ solar.r &lt;int&gt; 190, 118, 149, 313, NA, NA, 299, 99, 19, 194, NA, 256, 2…
+## $ wind    &lt;dbl&gt; 7.4, 8.0, 12.6, 11.5, 14.3, 14.9, 8.6, 13.8, 20.1, 8.6, …
+## $ temp    &lt;int&gt; 67, 72, 74, 62, 56, 66, 65, 59, 61, 69, 74, 69, 66, 68, …
+## $ month   &lt;int&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
+## $ day     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1…</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The column month is listed as an integer so lets change it to a factor</span>
+airquality<span class="op">$</span>month &lt;-<span class="st"> </span><span class="kw">factor</span>(airquality<span class="op">$</span>month)
+
+<span class="kw">levels</span>(airquality<span class="op">$</span>month)</code></pre>
+<pre><code>## [1] &quot;5&quot; &quot;6&quot; &quot;7&quot; &quot;8&quot; &quot;9&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now we can recode the factors into the categorical names of the months</span>
+
+airquality<span class="op">$</span>month &lt;-<span class="st"> </span><span class="kw">fct_recode</span>(airquality<span class="op">$</span>month, <span class="dt">May =</span> <span class="st">&#39;5&#39;</span>, <span class="dt">June =</span> <span class="st">&#39;6&#39;</span>, <span class="dt">July =</span> <span class="st">&#39;7&#39;</span>, <span class="dt">Aug =</span> <span class="st">&#39;8&#39;</span>, <span class="dt">Sept =</span> <span class="st">&#39;9&#39;</span>)
+
+<span class="kw">glimpse</span>(airquality<span class="op">$</span>month)</code></pre>
+<pre><code>##  Factor w/ 5 levels &quot;May&quot;,&quot;June&quot;,&quot;July&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div id="reversing-the-order-of-the-factors" class="section level3">
+<h3><span class="header-section-number">8.3.2</span> Reversing the order of the Factors</h3>
+<p>If you have categorical variables/factors in one order you can reverse that order.</p>
+<p>Use <strong>fct_rev()</strong></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#You will reverse the original order of the factors</span>
+<span class="kw">ggplot</span>(airquality, <span class="kw">aes</span>(<span class="kw">fct_rev</span>(month), temp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> month)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;month&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Plot with The X-axis Reversed&quot;</span>)</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
+</div>
+<div id="releveling-a-factor" class="section level3">
+<h3><span class="header-section-number">8.3.3</span> Releveling a Factor</h3>
+<p>If you want to change the location or level of your factor.</p>
+<p>Use <strong>fct_relevel()</strong></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#You will see the order of the factor months has changed from the orginal order</span>
+airquality<span class="op">$</span>month &lt;-<span class="st"> </span><span class="kw">fct_relevel</span>(airquality<span class="op">$</span>month, <span class="st">&#39;Sept&#39;</span>, <span class="st">&#39;July&#39;</span>, <span class="st">&#39;May&#39;</span>, <span class="st">&#39;Aug&#39;</span>, <span class="st">&#39;June&#39;</span>)
+
+<span class="kw">levels</span>(airquality<span class="op">$</span>month)</code></pre>
+<pre><code>## [1] &quot;Sept&quot; &quot;July&quot; &quot;May&quot;  &quot;Aug&quot;  &quot;June&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(airquality, <span class="kw">aes</span>(month, temp)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> month)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;Order of &#39;month&#39; has changed&quot;</span>)</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+</div>
+<div id="combining-levels-of-a-factor" class="section level3">
+<h3><span class="header-section-number">8.3.4</span> Combining Levels of a Factor</h3>
+<p>If you have too many levels of a factor, you can combine some of them to an “other” category and choose to display only a certain number of the levels you want.</p>
+<p>Use <strong>fct_lump()</strong></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#You will lump the  category skin color into 5 levels and then the remaining will be in &quot;other&quot;</span>
+starwars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">skin_color =</span> <span class="kw">fct_lump</span>(skin_color, <span class="dt">n =</span> <span class="dv">5</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(skin_color, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   skin_color     n
+##   &lt;fct&gt;      &lt;int&gt;
+## 1 Other         41
+## 2 fair          17
+## 3 light         11
+## 4 dark           6
+## 5 green          6
+## 6 grey           6</code></pre>
+</div>
+<div id="randomly-reordering-a-factor" class="section level3">
+<h3><span class="header-section-number">8.3.5</span> Randomly Reordering a Factor</h3>
+<p>If you don’t want the order your factors are in but don’t know what order you want, you can randomly choose the order of your factors.</p>
+<p>Use <strong>fct_shuffle()</strong></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You will see a random order of the factor eye color</span>
+Randomized &lt;-<span class="st"> </span>starwars<span class="op">$</span>eye_color <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">fct_shuffle</span>()
+
+<span class="kw">levels</span>(Randomized)</code></pre>
+<pre><code>##  [1] &quot;green, yellow&quot; &quot;red, blue&quot;     &quot;brown&quot;         &quot;gold&quot;         
+##  [5] &quot;unknown&quot;       &quot;white&quot;         &quot;black&quot;         &quot;pink&quot;         
+##  [9] &quot;hazel&quot;         &quot;red&quot;           &quot;blue&quot;          &quot;dark&quot;         
+## [13] &quot;orange&quot;        &quot;blue-gray&quot;     &quot;yellow&quot;</code></pre>
+</div>
+<div id="reordering-a-factor" class="section level3">
+<h3><span class="header-section-number">8.3.6</span> Reordering a Factor</h3>
+<p>Lastly, you can reorder your factors by using another variable.</p>
+<p>Use <strong>fct_reorder()</strong></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#First you will lump how many levels of the factor eyecolor you want</span>
+
+<span class="kw">glimpse</span>(starwars)</code></pre>
+<pre><code>## Observations: 87
+## Variables: 13
+## $ name       &lt;chr&gt; &quot;Luke Skywalker&quot;, &quot;C-3PO&quot;, &quot;R2-D2&quot;, &quot;Darth Vader&quot;, &quot;L…
+## $ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, …
+## $ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.…
+## $ hair_color &lt;chr&gt; &quot;blond&quot;, NA, NA, &quot;none&quot;, &quot;brown&quot;, &quot;brown, grey&quot;, &quot;bro…
+## $ skin_color &lt;chr&gt; &quot;fair&quot;, &quot;gold&quot;, &quot;white, blue&quot;, &quot;white&quot;, &quot;light&quot;, &quot;lig…
+## $ eye_color  &lt;chr&gt; &quot;blue&quot;, &quot;yellow&quot;, &quot;red&quot;, &quot;yellow&quot;, &quot;brown&quot;, &quot;blue&quot;, &quot;…
+## $ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, …
+## $ gender     &lt;chr&gt; &quot;male&quot;, NA, NA, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, N…
+## $ homeworld  &lt;chr&gt; &quot;Tatooine&quot;, &quot;Tatooine&quot;, &quot;Naboo&quot;, &quot;Tatooine&quot;, &quot;Alderaa…
+## $ species    &lt;chr&gt; &quot;Human&quot;, &quot;Droid&quot;, &quot;Droid&quot;, &quot;Human&quot;, &quot;Human&quot;, &quot;Human&quot;,…
+## $ films      &lt;list&gt; [&lt;&quot;Revenge of the Sith&quot;, &quot;Return of the Jedi&quot;, &quot;The …
+## $ vehicles   &lt;list&gt; [&lt;&quot;Snowspeeder&quot;, &quot;Imperial Speeder Bike&quot;&gt;, &lt;&gt;, &lt;&gt;, &lt;…
+## $ starships  &lt;list&gt; [&lt;&quot;X-wing&quot;, &quot;Imperial shuttle&quot;&gt;, &lt;&gt;, &lt;&gt;, &quot;TIE Advanc…</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">avg_mass_eye_color &lt;-<span class="st"> </span>starwars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">eye_color =</span> <span class="kw">fct_lump</span>(eye_color, <span class="dt">n =</span> <span class="dv">6</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(eye_color) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_mass =</span> <span class="kw">mean</span>(mass, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Then you will reorder the factor by it&#39;s mean mass from least to most</span>
+avg_mass_eye_color <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">eye_color =</span> <span class="kw">fct_reorder</span>(eye_color, mean_mass)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> eye_color, <span class="dt">y =</span> mean_mass)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_col</span>()</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+<p>If you want to try these out for yourself, there are many different data sources that R provides for you to practice on. My favorite is the starwars data, but listed in my examples is also airquality data.</p>
+<p>Below are some links to tutorials that I used to compromise this tutorial. I hope you have found it useful and feel free to now use this link as a tutorial for working with categorical data.</p>
+<p>Happy coding!</p>
+<p><a href="https://r4ds.had.co.nz/factors.html">link to factors chapter reference</a></p>
+<p><a href="https://rpubs.com/tictacjoe/forcats_tutorial">link to explaination of factors in forcats tutorial</a></p>
+<p><a href="https://forcats.tidyverse.org/articles/forcats.html">link to basic things to do with forcats tutorial</a></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ggplot2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sf-simple-features-tutorial.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/08-Vasquez.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709_bookdown.pdf", "7709_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

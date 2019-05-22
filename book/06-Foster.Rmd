@@ -1,0 +1,110 @@
+# Leaflet Package
+
+**Author: Javante Foster**
+
+## Abstract
+
+This is a very short, simple, basic, bare-bones, tutorial for Leaflet package. What is the Leaflet package? The Leaflet package is package available in RStudio that allows you to create interactive map on both RMarkdown and the ShinyApp.
+
+## Introduction
+
+This is a very short, simple, basic, bare-bones, tutorial for Leaflet package. What is the Leaflet package? The Leaflet package is package available in RStudio that allows you to create interactive map on both RMarkdown and the ShinyApp. The examples used were inspired by CUNY Brooklyn College and the information used for this tutorial was based on the Github account user, cpsievert (2016), and more information can be located on their website. 
+	
+This package can be downloaded from the RStudio library, found in under "Tools" tab, then click "Install Packages, and type in "leaflet" and download. After the package has been downloaded, load the Leaflet package by typing in "library(leaflet)" into the "Console". So how do you use the Leaflet package? Well by typing in "leaflet()", adding a pipe operator (%>%), and adding "addTiles()", you can generate a simple world map of the without even entering any data into the functions:
+
+## Load Leaflet
+
+```{r}
+library(leaflet)
+leaflet() %>% 
+  addTiles()
+```
+
+So how do you add features to the map? This can simply be done by adding another pipe operator and include the function "addMarkers()". The "addMarkers()" function allows your map to focus on a specific location of your choosing using mapping coordinates. Within the "addMarkers()" function,  include the longitude (lng) first and then the latitude (lat). You could find the coordinates for the longitude and longitude of a location by using an online mapping service like GoogleMaps, which was used for the following examples. As a warning, make sure the longitude and latitude in entered into the correct order as, for example, GoogleMaps will give you the latitude first and then the longitude. If the coordinates are entered into the function in the wrong order, the function will not work.  You can also include a "popup name" if you desire. The popup name references to whatever name you wish to call the specific location whose coordinates you entered.
+
+## Add Markers
+
+```{r}
+leaflet() %>% 
+addTiles() %>% 
+addMarkers(lng = -73.952533, lat =40.631021, popup="CUNY Brooklyn College")
+```
+
+Want to change how your location icons, also known as markers, look? There are several ways to do this, one being, by replacing the "addMarkers()" function with an "addCircleMarkers()" function. The "addCircleMarkers()" function turns your default location marker into a simply blue circular one. Just like with the "addMarkers" function, you must include the longitude first, then the latitude, and if you desire, a popup name:
+
+```{r}
+leaflet() %>% 
+addTiles() %>% 
+addCircleMarkers(lng=-73.952533, lat=40.631021, popup="CUNY Brooklyn College")
+```
+
+What about want to map multiple locations? Well this can be done by entering the data.frame into the leaflet function and entering the desired columns from the data.frame as your longitude and latitude:
+
+## Multiple Locations
+
+```{r}
+a <- runif(50,1,50)
+b <- runif(50,1,50)
+long_lat <- data.frame(a,b)
+leaflet(long_lat) %>% addTiles() %>% addCircleMarkers(lng = a, lat = b)
+```
+
+What about changing your circle markers colors? Yes, you can. This can simply be done by adding "color = '[insert color]' " into the add "addCircleMarkers" function. For color choices, use basic colors like black, red, yellow:
+
+```{r}
+a <- runif(50,1,50)
+b <- runif(50,1,50)
+long_lat <- data.frame(a,b)
+leaflet(long_lat) %>% 
+  addTiles() %>% 
+  addCircleMarkers(a, b, color = 'fuchsia')
+```
+
+No fancy colors like burgundy, rainbow, aquamarine, etc. If you do, you will get faded looking markers:
+
+```{r}
+a <- runif(50,1,50)
+b <- runif(50,1,50)
+long_lat <- data.frame(a,b)
+leaflet(long_lat) %>% 
+ addTiles() %>% 
+ addCircleMarkers(a, b, color = 'burgundy')
+```
+ 
+Another way to create a location marker is by creating your own using images from the off the internet. You first have to create a variable for it. Under that variable, include the function "makeIcon()" and within that include "iconUrl = [inserting the website link of image here]", then follow it with "iconWidth = [inserting the width of the icon here]", and lastly "iconHeight = [inserting the height of the icon here]).  Then under the "addmarkers" functions in the Leaflet package, include "icon = [inserting name of the variable for the "makeIcon" ": 
+
+```{r}
+CUNYBC <- makeIcon(
+  iconUrl = "https://upload.wikimedia.org/wikipedia/commons/6/6c/2016_Brooklyn_College_Library.jpg",
+  iconWidth = 70, iconHeight = 70)
+leaflet() %>% addTiles() %>%
+ addMarkers(lng=-73.953558, lat=40.631021, popup="CUNY Brooklyn College", icon = CUNYBC)
+```
+
+Is it possible to change the appearance of the popup for the location markers? Yes it is. Within the "addMarkers" function, replace "popup" with "label = "[inserting icon/marker label]".  Follow it with "labelOptions = labelOptions()" function.  As a warning, you must write out "labelOptions = labelOptions()", if not changes to the label will not work. Within the "labelOptions()" function, you can include "noHide = F" for your label to be seen simply by having your mouse hover the icon without having to click it, or "noHide = T" which allows your label to be seen constantly without any prompting. You can also include "direction = "[insert the location the label will appear]". To change the font specifically, "style = list("color" = "[inserting basic color choice here]","font-family" = "[inserting font choice]", "font-size" = "[insert the desired font size]px"))):
+
+## Adding Icons
+
+```{r}
+CUNYBC <- makeIcon(
+  iconUrl = "https://upload.wikimedia.org/wikipedia/commons/6/6c/2016_Brooklyn_College_Library.jpg",
+  iconWidth = 70, iconHeight = 70)
+leaflet() %>% 
+  addTiles() %>% 
+  addMarkers(lng=-73.953558, lat=40.631021, icon = CUNYBC, 
+             label = "Sup?",  labelOptions = labelOptions(noHide = F,
+            direction = "top",
+            style = list("color" = "fuchsia",
+                         "font-family" = "Snap ITC", 
+                         "font-size" = "50px")))
+```
+
+
+## References
+- cpsievert. (2016).  Leaflet for R. Retrieved from: https://rstudio.github.io/leaflet/
+
+- CUNY Brooklyn College. (2019). Campus map. Retrieved from: http://www.brooklyn.cuny.edu/web/abo_misc/180827_Map_689x892.jpg
+Wikipedia, the free encyclopedia. (2019). Brooklyn College. Retrieved from: https://upload.wikimedia.org/wikipedia/commons/6/6c/2016_Brooklyn_College_Library.jpg
+
+- Wikipedia, the free encyclopedia. (2019). Brooklyn College Logo. Retrieved from: https://en.wikipedia.org/wiki/File:Brooklyn_College_Logo.svg 
+

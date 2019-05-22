@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 6 Leaflet Package | PSYC 7709: Using R for Reproducible Research</title>
+  <meta name="description" content="Student contributed chapters about various R packages">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 6 Leaflet Package | PSYC 7709: Using R for Reproducible Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Student contributed chapters about various R packages" />
+  <meta name="github-repo" content="CrumpLab/OER_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Leaflet Package | PSYC 7709: Using R for Reproducible Research" />
+  
+  <meta name="twitter:description" content="Student contributed chapters about various R packages" />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="how-to-annotate-a-graph-using-gg-signif.html">
+<link rel="next" href="ggplot2.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79429674-2');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PSYC 7709: Using R for Reproducible Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="bootstrapped-mediation-tutorial.html"><a href="bootstrapped-mediation-tutorial.html"><i class="fa fa-check"></i><b>2</b> Bootstrapped Mediation Tutorial</a></li>
+<li class="chapter" data-level="3" data-path="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><a href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><i class="fa fa-check"></i><b>3</b> A tutorial for using the lme function from the nlme package.</a></li>
+<li class="chapter" data-level="4" data-path="data-shaping-using-reshape2-and-stats-packages.html"><a href="data-shaping-using-reshape2-and-stats-packages.html"><i class="fa fa-check"></i><b>4</b> Data Shaping using Reshape(2) and Stats Packages</a></li>
+<li class="chapter" data-level="5" data-path="how-to-annotate-a-graph-using-gg-signif.html"><a href="how-to-annotate-a-graph-using-gg-signif.html"><i class="fa fa-check"></i><b>5</b> How to Annotate a Graph Using GG Signif"</a></li>
+<li class="chapter" data-level="6" data-path="leaflet-package.html"><a href="leaflet-package.html"><i class="fa fa-check"></i><b>6</b> Leaflet Package</a></li>
+<li class="chapter" data-level="7" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>7</b> ggplot2</a></li>
+<li class="chapter" data-level="8" data-path="forcats-tutorial.html"><a href="forcats-tutorial.html"><i class="fa fa-check"></i><b>8</b> Forcats tutorial</a></li>
+<li class="chapter" data-level="9" data-path="sf-simple-features-tutorial.html"><a href="sf-simple-features-tutorial.html"><i class="fa fa-check"></i><b>9</b> SF simple features tutorial</a></li>
+<li class="chapter" data-level="10" data-path="psych-package.html"><a href="psych-package.html"><i class="fa fa-check"></i><b>10</b> “psych” Package</a></li>
+<li class="chapter" data-level="11" data-path="imager-tutorial.html"><a href="imager-tutorial.html"><i class="fa fa-check"></i><b>11</b> Imager Tutorial</a></li>
+<li class="chapter" data-level="12" data-path="animal-tracking-with-trajr.html"><a href="animal-tracking-with-trajr.html"><i class="fa fa-check"></i><b>12</b> Animal Tracking with TRAJR</a></li>
+<li class="chapter" data-level="13" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>13</b> Knitr</a></li>
+<li class="chapter" data-level="14" data-path="creating-your-own-html-widget.html"><a href="creating-your-own-html-widget.html"><i class="fa fa-check"></i><b>14</b> Creating your own html widget</a></li>
+<li class="chapter" data-level="15" data-path="network-analysis-tutorial.html"><a href="network-analysis-tutorial.html"><i class="fa fa-check"></i><b>15</b> Network Analysis tutorial</a></li>
+<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PSYC 7709: Using R for Reproducible Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="leaflet-package" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Leaflet Package</h1>
+<p><strong>Author: Javante Foster</strong></p>
+<div id="abstract" class="section level2">
+<h2><span class="header-section-number">6.1</span> Abstract</h2>
+<p>This is a very short, simple, basic, bare-bones, tutorial for Leaflet package. What is the Leaflet package? The Leaflet package is package available in RStudio that allows you to create interactive map on both RMarkdown and the ShinyApp.</p>
+</div>
+<div id="introduction-1" class="section level2">
+<h2><span class="header-section-number">6.2</span> Introduction</h2>
+<p>This is a very short, simple, basic, bare-bones, tutorial for Leaflet package. What is the Leaflet package? The Leaflet package is package available in RStudio that allows you to create interactive map on both RMarkdown and the ShinyApp. The examples used were inspired by CUNY Brooklyn College and the information used for this tutorial was based on the Github account user, cpsievert (2016), and more information can be located on their website.</p>
+<p>This package can be downloaded from the RStudio library, found in under “Tools” tab, then click “Install Packages, and type in”leaflet" and download. After the package has been downloaded, load the Leaflet package by typing in “library(leaflet)” into the “Console”. So how do you use the Leaflet package? Well by typing in “leaflet()”, adding a pipe operator (%&gt;%), and adding “addTiles()”, you can generate a simple world map of the without even entering any data into the functions:</p>
+</div>
+<div id="load-leaflet" class="section level2">
+<h2><span class="header-section-number">6.3</span> Load Leaflet</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(leaflet)
+<span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">addTiles</span>()</code></pre>
+<div id="htmlwidget-d6bd620c87727b3a2576" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d6bd620c87727b3a2576">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}]},"evals":[],"jsHooks":[]}</script>
+<p>So how do you add features to the map? This can simply be done by adding another pipe operator and include the function “addMarkers()”. The “addMarkers()” function allows your map to focus on a specific location of your choosing using mapping coordinates. Within the “addMarkers()” function, include the longitude (lng) first and then the latitude (lat). You could find the coordinates for the longitude and longitude of a location by using an online mapping service like GoogleMaps, which was used for the following examples. As a warning, make sure the longitude and latitude in entered into the correct order as, for example, GoogleMaps will give you the latitude first and then the longitude. If the coordinates are entered into the function in the wrong order, the function will not work. You can also include a “popup name” if you desire. The popup name references to whatever name you wish to call the specific location whose coordinates you entered.</p>
+</div>
+<div id="add-markers" class="section level2">
+<h2><span class="header-section-number">6.4</span> Add Markers</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="kw">addMarkers</span>(<span class="dt">lng =</span> <span class="fl">-73.952533</span>, <span class="dt">lat =</span><span class="fl">40.631021</span>, <span class="dt">popup=</span><span class="st">&quot;CUNY Brooklyn College&quot;</span>)</code></pre>
+<div id="htmlwidget-0bd9f08b4a73c144d7ec" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0bd9f08b4a73c144d7ec">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[40.631021,-73.952533,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"CUNY Brooklyn College",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[40.631021,40.631021],"lng":[-73.952533,-73.952533]}},"evals":[],"jsHooks":[]}</script>
+<p>Want to change how your location icons, also known as markers, look? There are several ways to do this, one being, by replacing the “addMarkers()” function with an “addCircleMarkers()” function. The “addCircleMarkers()” function turns your default location marker into a simply blue circular one. Just like with the “addMarkers” function, you must include the longitude first, then the latitude, and if you desire, a popup name:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="kw">addCircleMarkers</span>(<span class="dt">lng=</span><span class="op">-</span><span class="fl">73.952533</span>, <span class="dt">lat=</span><span class="fl">40.631021</span>, <span class="dt">popup=</span><span class="st">&quot;CUNY Brooklyn College&quot;</span>)</code></pre>
+<div id="htmlwidget-afc9e74ffdb19054f328" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-afc9e74ffdb19054f328">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[40.631021,-73.952533,10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,"CUNY Brooklyn College",null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[40.631021,40.631021],"lng":[-73.952533,-73.952533]}},"evals":[],"jsHooks":[]}</script>
+<p>What about want to map multiple locations? Well this can be done by entering the data.frame into the leaflet function and entering the desired columns from the data.frame as your longitude and latitude:</p>
+</div>
+<div id="multiple-locations" class="section level2">
+<h2><span class="header-section-number">6.5</span> Multiple Locations</h2>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">50</span>,<span class="dv">1</span>,<span class="dv">50</span>)
+b &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">50</span>,<span class="dv">1</span>,<span class="dv">50</span>)
+long_lat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(a,b)
+<span class="kw">leaflet</span>(long_lat) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">addCircleMarkers</span>(<span class="dt">lng =</span> a, <span class="dt">lat =</span> b)</code></pre>
+<div id="htmlwidget-27d21e22b65dd5bfbbf3" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-27d21e22b65dd5bfbbf3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[9.11711356858723,23.2450436269864,9.25356413749978,37.2592833961826,40.9434274567757,15.8821748557966,6.78238124540076,9.94745324156247,35.2627827711403,32.885237253271,22.5100561359432,49.6653952763882,14.7037391790655,5.69182610069402,35.4208411013242,37.3806732697412,35.3763297556434,29.914708808763,25.4142787358724,13.7558334299829,33.7387799776625,15.8426374529954,39.1830090207513,36.2954709623009,14.3879938947503,42.3566129116807,45.9027958570514,12.8899790395517,29.8212253493257,5.69445265759714,2.92374879564159,12.9182704745326,10.2289264670108,10.8318010573275,44.334669693606,3.7928864962887,17.9020985034294,33.8506337055005,42.7323330326471,18.4368428380694,11.720696039265,25.3926829765551,44.2620011933614,8.50829044706188,8.69824454048648,14.2377564690541,46.0226952864323,12.503756923601,7.16308907954954,26.976575372275],[40.3983325206209,35.7858977713622,42.8003971292637,14.9818513668142,44.167492502369,35.1560643280391,26.9323817132972,36.836605458986,1.02825532644056,24.2488795884419,8.47319704154506,31.9786566391122,20.7032178724185,8.18637329479679,9.09472483606078,47.4069382459857,42.1058457614854,25.742639625445,35.6141063307878,15.3405730815139,5.15040833735839,48.2368051537778,10.7434418275952,37.426531937439,36.5998838806991,42.0934967889916,22.1629881588742,5.65708582871594,33.5299849384464,37.5887203202583,35.0996740711853,3.26313155191019,1.02261524088681,9.06517454213463,21.2339716600254,2.4096796750091,36.9524555180687,27.3657446068246,19.7063272432424,27.0217976740096,17.1374986208975,41.2476361137815,19.928496041568,3.31871760939248,40.0154199777171,29.9881718452089,47.3644715906121,45.284765571123,25.0109381142538,48.0508938250132],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[2.92374879564159,49.6653952763882],"lng":[1.02261524088681,48.2368051537778]}},"evals":[],"jsHooks":[]}</script>
+<p>What about changing your circle markers colors? Yes, you can. This can simply be done by adding “color = ‘[insert color]’” into the add “addCircleMarkers” function. For color choices, use basic colors like black, red, yellow:</p>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">50</span>,<span class="dv">1</span>,<span class="dv">50</span>)
+b &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">50</span>,<span class="dv">1</span>,<span class="dv">50</span>)
+long_lat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(a,b)
+<span class="kw">leaflet</span>(long_lat) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">addCircleMarkers</span>(a, b, <span class="dt">color =</span> <span class="st">&#39;fuchsia&#39;</span>)</code></pre>
+<div id="htmlwidget-4f45e41dd5723b5d71d1" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4f45e41dd5723b5d71d1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[17.122166934656,20.1876496484037,40.2947737744544,35.2776324169245,20.1069381162524,22.8942896923982,3.43658502353355,28.4033216091339,13.4168631553184,42.1366319030058,30.1820273380727,14.8677984862588,30.8629019088112,43.3193047030363,27.6298840558156,24.9457903897855,21.5736820742022,1.66332182707265,6.31938842521049,19.0030135933775,17.8270960908849,20.0737449098378,19.0584990945645,9.43593896273524,12.5701249341946,5.94944076496176,10.1485094276723,39.591232053237,29.2220495056827,40.2374933422543,12.1897630461026,42.5562749088276,19.7937345309183,19.9331852803007,38.5056128718425,29.6818918357603,17.9645497698803,49.5095999420155,20.6848977680784,49.3357179823797,31.8166157822125,42.4811630526092,8.88416764303111,43.8016108463053,9.67391965095885,7.60085829882883,29.5268407936674,14.439601464197,41.5664375724737,31.1499474977609],[44.3597546331584,38.8404971542768,46.0593767375685,24.8354101185687,25.9155077850446,46.5033977769781,27.9099888531491,44.3026296673343,37.9413532451726,12.6567637659609,15.312702502124,36.1196674806997,7.22953218221664,10.0237146499567,40.7021774225868,48.764135110192,47.1266846677754,5.59700984251685,9.31127734738402,49.7320922682993,33.59705480095,30.986747585237,40.7192937606014,20.5595285394229,13.8855713927187,6.42114649037831,20.016979591921,30.7819773990195,39.0485471710563,26.0592791351955,10.9080826705322,15.6272009864915,5.74824510747567,2.1661134690512,33.3441879020538,19.3315891833045,15.6228441516869,17.3207907741889,27.1474133306183,44.5394676371943,49.1894520055503,11.6731242979877,49.0321338148788,7.43847228307277,26.4211802496575,34.2980547775514,2.27547496603802,7.96179572027177,3.92410570778884,24.1248491709121],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"fuchsia","weight":5,"opacity":0.5,"fill":true,"fillColor":"fuchsia","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[1.66332182707265,49.5095999420155],"lng":[2.1661134690512,49.7320922682993]}},"evals":[],"jsHooks":[]}</script>
+<p>No fancy colors like burgundy, rainbow, aquamarine, etc. If you do, you will get faded looking markers:</p>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">50</span>,<span class="dv">1</span>,<span class="dv">50</span>)
+b &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">50</span>,<span class="dv">1</span>,<span class="dv">50</span>)
+long_lat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(a,b)
+<span class="kw">leaflet</span>(long_lat) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st"> </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st"> </span><span class="kw">addCircleMarkers</span>(a, b, <span class="dt">color =</span> <span class="st">&#39;burgundy&#39;</span>)</code></pre>
+<div id="htmlwidget-68381e6fafc035be0195" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-68381e6fafc035be0195">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[20.3241708029527,24.4850391170476,19.3201680006459,12.9724667810369,13.0976494317874,21.4155112884473,18.9471292211674,11.2828856573906,21.9732645440381,41.862889533164,29.5031155887991,37.2828356223181,7.49404801568016,48.0991183721926,30.416164617287,48.8947091710288,31.9102943076286,31.9236021244433,33.9809013172053,13.3978754593991,17.4959733029827,14.5809576606844,12.9279350822326,25.1070352843963,2.88234275020659,48.0136917263735,11.5767731016967,25.0403077970259,31.9592116596177,46.8075393964536,8.26578179351054,11.9877681520302,30.0826229907107,26.9354492507409,17.7564904321916,9.98238150612451,32.1735591199249,3.84005231596529,41.8956318905111,7.79757203650661,36.6489913244732,49.62097423058,40.3644104008563,15.6969504677691,31.654017210938,16.1557223764248,9.71232332545333,39.646076556528,42.4127989071421,44.6569022280164],[49.8446585608181,16.8937216848135,6.46737020229921,8.34023923519999,45.3327368679456,29.3191462492105,25.6930449046195,30.881414717529,34.002656341996,33.6206653825939,8.2930067544803,2.7995218175929,30.6900166932028,8.05644049425609,24.712451411644,24.851714259712,7.13917961274274,48.0477882167324,3.87371035851538,49.1269114089664,28.6729896350298,40.9733055797406,15.8579763723537,37.4683336024173,48.6253431676887,31.5435288536828,19.6127142608166,9.89459985331632,38.6909403374884,49.4097743169405,20.1103090567049,29.3217115984298,49.809347853763,12.0871211944614,13.1546516628005,38.8074955684133,11.3522359710187,18.5967369310092,34.9376029926352,40.3742377993185,36.6278418279253,8.63888725684956,8.94086151965894,33.909884397639,34.895156850107,26.041767166229,39.5762383269612,16.0675957701169,31.5559518230148,24.5221824038308],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"burgundy","weight":5,"opacity":0.5,"fill":true,"fillColor":"burgundy","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[2.88234275020659,49.62097423058],"lng":[2.7995218175929,49.8446585608181]}},"evals":[],"jsHooks":[]}</script>
+<p>Another way to create a location marker is by creating your own using images from the off the internet. You first have to create a variable for it. Under that variable, include the function “makeIcon()” and within that include “iconUrl = [inserting the website link of image here]”, then follow it with “iconWidth = [inserting the width of the icon here]”, and lastly “iconHeight = [inserting the height of the icon here]). Then under the”addmarkers" functions in the Leaflet package, include “icon = [inserting name of the variable for the”makeIcon" ":</p>
+<pre class="sourceCode r"><code class="sourceCode r">CUNYBC &lt;-<span class="st"> </span><span class="kw">makeIcon</span>(
+  <span class="dt">iconUrl =</span> <span class="st">&quot;https://upload.wikimedia.org/wikipedia/commons/6/6c/2016_Brooklyn_College_Library.jpg&quot;</span>,
+  <span class="dt">iconWidth =</span> <span class="dv">70</span>, <span class="dt">iconHeight =</span> <span class="dv">70</span>)
+<span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span>
+<span class="st"> </span><span class="kw">addMarkers</span>(<span class="dt">lng=</span><span class="op">-</span><span class="fl">73.953558</span>, <span class="dt">lat=</span><span class="fl">40.631021</span>, <span class="dt">popup=</span><span class="st">&quot;CUNY Brooklyn College&quot;</span>, <span class="dt">icon =</span> CUNYBC)</code></pre>
+<div id="htmlwidget-61409883d41299108da4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-61409883d41299108da4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[40.631021,-73.953558,{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/6/6c/2016_Brooklyn_College_Library.jpg","index":0},"iconWidth":70,"iconHeight":70},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"CUNY Brooklyn College",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[40.631021,40.631021],"lng":[-73.953558,-73.953558]}},"evals":[],"jsHooks":[]}</script>
+<p>Is it possible to change the appearance of the popup for the location markers? Yes it is. Within the “addMarkers” function, replace “popup” with “label =”[inserting icon/marker label]“. Follow it with”labelOptions = labelOptions()" function. As a warning, you must write out “labelOptions = labelOptions()”, if not changes to the label will not work. Within the “labelOptions()” function, you can include “noHide = F” for your label to be seen simply by having your mouse hover the icon without having to click it, or “noHide = T” which allows your label to be seen constantly without any prompting. You can also include “direction =”[insert the location the label will appear]“. To change the font specifically,”style = list(“color” = “[inserting basic color choice here]”,“font-family” = “[inserting font choice]”, “font-size” = “[insert the desired font size]px”))):</p>
+</div>
+<div id="adding-icons" class="section level2">
+<h2><span class="header-section-number">6.6</span> Adding Icons</h2>
+<pre class="sourceCode r"><code class="sourceCode r">CUNYBC &lt;-<span class="st"> </span><span class="kw">makeIcon</span>(
+  <span class="dt">iconUrl =</span> <span class="st">&quot;https://upload.wikimedia.org/wikipedia/commons/6/6c/2016_Brooklyn_College_Library.jpg&quot;</span>,
+  <span class="dt">iconWidth =</span> <span class="dv">70</span>, <span class="dt">iconHeight =</span> <span class="dv">70</span>)
+<span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">addMarkers</span>(<span class="dt">lng=</span><span class="op">-</span><span class="fl">73.953558</span>, <span class="dt">lat=</span><span class="fl">40.631021</span>, <span class="dt">icon =</span> CUNYBC, 
+             <span class="dt">label =</span> <span class="st">&quot;Sup?&quot;</span>,  <span class="dt">labelOptions =</span> <span class="kw">labelOptions</span>(<span class="dt">noHide =</span> F,
+            <span class="dt">direction =</span> <span class="st">&quot;top&quot;</span>,
+            <span class="dt">style =</span> <span class="kw">list</span>(<span class="st">&quot;color&quot;</span> =<span class="st"> &quot;fuchsia&quot;</span>,
+                         <span class="st">&quot;font-family&quot;</span> =<span class="st"> &quot;Snap ITC&quot;</span>, 
+                         <span class="st">&quot;font-size&quot;</span> =<span class="st"> &quot;50px&quot;</span>)))</code></pre>
+<div id="htmlwidget-0b8b7c66f211981e9386" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0b8b7c66f211981e9386">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[40.631021,-73.953558,{"iconUrl":{"data":"https://upload.wikimedia.org/wikipedia/commons/6/6c/2016_Brooklyn_College_Library.jpg","index":0},"iconWidth":70,"iconHeight":70},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,"Sup?",{"interactive":false,"permanent":false,"direction":"top","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"style":{"color":"fuchsia","font-family":"Snap ITC","font-size":"50px"},"className":"","sticky":true},null]}],"limits":{"lat":[40.631021,40.631021],"lng":[-73.953558,-73.953558]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="references-1" class="section level2">
+<h2><span class="header-section-number">6.7</span> References</h2>
+<ul>
+<li><p>cpsievert. (2016). Leaflet for R. Retrieved from: <a href="https://rstudio.github.io/leaflet/" class="uri">https://rstudio.github.io/leaflet/</a></p></li>
+<li><p>CUNY Brooklyn College. (2019). Campus map. Retrieved from: <a href="http://www.brooklyn.cuny.edu/web/abo_misc/180827_Map_689x892.jpg" class="uri">http://www.brooklyn.cuny.edu/web/abo_misc/180827_Map_689x892.jpg</a>
+Wikipedia, the free encyclopedia. (2019). Brooklyn College. Retrieved from: <a href="https://upload.wikimedia.org/wikipedia/commons/6/6c/2016_Brooklyn_College_Library.jpg" class="uri">https://upload.wikimedia.org/wikipedia/commons/6/6c/2016_Brooklyn_College_Library.jpg</a></p></li>
+<li><p>Wikipedia, the free encyclopedia. (2019). Brooklyn College Logo. Retrieved from: <a href="https://en.wikipedia.org/wiki/File:Brooklyn_College_Logo.svg" class="uri">https://en.wikipedia.org/wiki/File:Brooklyn_College_Logo.svg</a></p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="how-to-annotate-a-graph-using-gg-signif.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ggplot2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-Foster.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709_bookdown.pdf", "7709_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

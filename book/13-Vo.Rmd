@@ -1,0 +1,91 @@
+# Knitr
+
+**Author: Annie Vo**
+
+## Knitr Basics
+
+
+Knitr is a package that can generate dynamic web-based reports in R Markdown. R Markdown consists of three elements: YAML, text and code chunks. Knitr evaluates and then executes the code listed in each code chunk. Knitr then creates a new markdown file that includes the R code and its output. It is recommended to use Knitr in R Markdown in the R Studio program because its functions are built into the user interface. Knitr can be summoned in a code chunk in two ways,
+
+As with all other downloaded packages, Knitr can be used with the library function:
+
+
+```{r}
+library(knitr) 
+```
+
+Additionally, knitr has the ability to be used in this way:
+
+knitr:: 
+
+## "Knit" Button
+It’s an abbreviated version of the Knitr function that applies to each individual code chunk. RStudio includes the "Knit" button that allows you to view your progress, code chunk by code chunk by rendering an instant preview of the code chunk output. This also automatically saves your progress and will indicate whether there are problems with the code in the code chunk.
+
+## Code Chunk Options
+
+Knitr works directly with R Markdown by executing all the code chunks in the file. It is of note that although code chunks do not need to be named, it may be useful to name them so that they are easy to locate if an error occurs. Each code chunk must have a unique name (if it is named).
+To name a code chunk, the name must be placed in the initial line of the code chunk.
+An unnamed code chunk looks like this,
+
+````markdown
+`r ''````{r}
+```
+````
+
+
+And a named code chunk looks like this,
+
+````markdown
+`r ''````{r chunk_name}
+```
+````
+
+All code is then placed between the named (or unnamed) code line and the final three backticks like this,
+
+````markdown
+`r ''````{r simulate_data}
+x <-rnorm(100)
+```
+````
+
+
+Since an R Markdown document with knitr will often include several chunks of code, it may be useful to alter some of the code chunks to speed up processing time. Also, a code chunk can be altered to hide code or its output as well as other combinations of visibility. As with naming the code chunk, all other additional code chunk altering commands will be noted in the initial line.
+For example, echo=FALSE makes it so that the code of that chunk will not be shown in the final document while still displaying the output,
+
+````markdown
+`r ''````{r chunk_name, echo=FALSE}
+```
+````
+
+Another command is to use results="hide" to hide the results of the output while still displaying the code,
+
+````markdown
+`r ''````{r chunk_name, results='hide'}
+```
+````
+
+There is also the option to use include=FALSE which will process the chunk without displaying the code nor its outputs in the final document,
+
+````markdown
+`r ''````{r chunk_name, include=FALSE}
+```
+````
+
+There are several other code chunk options that allow you to manipulate graphing data, add images, create animation, code in other languages and many more.
+
+## Reproducible Research
+
+When research is reproduced, it is important that all notes, graphs, methods and all other details are clearly listed to be performed accurately. Generally, the process of organizing these materials require accessing several different computing systems (software, graphs, animation etc.) and text. It can be tedious, difficult and riddled with mistakes to attempt to locate and organize these elements one by one.
+Knitr makes this process much easier by allowing the user to input text directly, access old text from outdated software, access data, graphs, html etc. and place all of these elements in one file. 
+
+By using code in Knitr, pdfs, Word documents, slide presentations, web pages and other document formats that are used in collaborative science, different pieces of information can be organized in one file. Each line of code can be directly linked to the original source so that adjustments to content can be made easily and transparently. Knitr does the challenging work of processing other computing systems and interfaces to create a timeless, easy to read and interpret, output.
+
+## References
+
+https://yihui.name/knitr/
+
+https://kbroman.org/knitr_knutshell/pages/Rmarkdown.html
+
+https://sachsmc.github.io/knit-git-markr-guide/knitr/knit.html
+
+https://en.m.wikipedia.org/wiki/Knitr

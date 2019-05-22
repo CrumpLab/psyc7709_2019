@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PSYC 7709: Using R for Reproducible Research</title>
+  <meta name="description" content="Student contributed chapters about various R packages">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="PSYC 7709: Using R for Reproducible Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Student contributed chapters about various R packages" />
+  <meta name="github-repo" content="CrumpLab/OER_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="PSYC 7709: Using R for Reproducible Research" />
+  
+  <meta name="twitter:description" content="Student contributed chapters about various R packages" />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+<link rel="next" href="overview.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79429674-2');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PSYC 7709: Using R for Reproducible Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="bootstrapped-mediation-tutorial.html"><a href="bootstrapped-mediation-tutorial.html"><i class="fa fa-check"></i><b>2</b> Bootstrapped Mediation Tutorial</a></li>
+<li class="chapter" data-level="3" data-path="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><a href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><i class="fa fa-check"></i><b>3</b> A tutorial for using the lme function from the nlme package.</a></li>
+<li class="chapter" data-level="4" data-path="data-shaping-using-reshape2-and-stats-packages.html"><a href="data-shaping-using-reshape2-and-stats-packages.html"><i class="fa fa-check"></i><b>4</b> Data Shaping using Reshape(2) and Stats Packages</a></li>
+<li class="chapter" data-level="5" data-path="how-to-annotate-a-graph-using-gg-signif.html"><a href="how-to-annotate-a-graph-using-gg-signif.html"><i class="fa fa-check"></i><b>5</b> How to Annotate a Graph Using GG Signif"</a></li>
+<li class="chapter" data-level="6" data-path="leaflet-package.html"><a href="leaflet-package.html"><i class="fa fa-check"></i><b>6</b> Leaflet Package</a></li>
+<li class="chapter" data-level="7" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>7</b> ggplot2</a></li>
+<li class="chapter" data-level="8" data-path="forcats-tutorial.html"><a href="forcats-tutorial.html"><i class="fa fa-check"></i><b>8</b> Forcats tutorial</a></li>
+<li class="chapter" data-level="9" data-path="sf-simple-features-tutorial.html"><a href="sf-simple-features-tutorial.html"><i class="fa fa-check"></i><b>9</b> SF simple features tutorial</a></li>
+<li class="chapter" data-level="10" data-path="psych-package.html"><a href="psych-package.html"><i class="fa fa-check"></i><b>10</b> “psych” Package</a></li>
+<li class="chapter" data-level="11" data-path="imager-tutorial.html"><a href="imager-tutorial.html"><i class="fa fa-check"></i><b>11</b> Imager Tutorial</a></li>
+<li class="chapter" data-level="12" data-path="animal-tracking-with-trajr.html"><a href="animal-tracking-with-trajr.html"><i class="fa fa-check"></i><b>12</b> Animal Tracking with TRAJR</a></li>
+<li class="chapter" data-level="13" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>13</b> Knitr</a></li>
+<li class="chapter" data-level="14" data-path="creating-your-own-html-widget.html"><a href="creating-your-own-html-widget.html"><i class="fa fa-check"></i><b>14</b> Creating your own html widget</a></li>
+<li class="chapter" data-level="15" data-path="network-analysis-tutorial.html"><a href="network-analysis-tutorial.html"><i class="fa fa-check"></i><b>15</b> Network Analysis tutorial</a></li>
+<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PSYC 7709: Using R for Reproducible Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">PSYC 7709: Using R for Reproducible Research</h1>
+<p class="author"><em>Matthew Crump</em></p>
+<p class="date"><em>2018: Last compiled 2019-05-22</em></p>
+</div>
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
+<p><img src="OER.png" width="453" style="display: block; margin: auto;" /></p>
+<p>Crump, Matthew J. C. (2018). Open tools for writing open interactive textbooks (and more).</p>
+<p>This is a tutorial and set of working examples for creating web-based textbooks using a collection of open-source tools.</p>
+<p><strong>License CC BY-SA 4.0 license</strong></p>
+<p>The book is released under a creative commons <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> license. This means that this book can be reused, remixed, retained, revised and redistributed (including commercially) as long as appropriate credit is given to the authors. If you remix, or modify the original version of this open textbook, you must redistribute all versions of this open textbook under the same license - CC BY-SA 4.0.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="overview.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709_bookdown.pdf", "7709_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

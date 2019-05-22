@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 2 Bootstrapped Mediation Tutorial | PSYC 7709: Using R for Reproducible Research</title>
+  <meta name="description" content="Student contributed chapters about various R packages">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 2 Bootstrapped Mediation Tutorial | PSYC 7709: Using R for Reproducible Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Student contributed chapters about various R packages" />
+  <meta name="github-repo" content="CrumpLab/OER_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Bootstrapped Mediation Tutorial | PSYC 7709: Using R for Reproducible Research" />
+  
+  <meta name="twitter:description" content="Student contributed chapters about various R packages" />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="overview.html">
+<link rel="next" href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79429674-2');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PSYC 7709: Using R for Reproducible Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="bootstrapped-mediation-tutorial.html"><a href="bootstrapped-mediation-tutorial.html"><i class="fa fa-check"></i><b>2</b> Bootstrapped Mediation Tutorial</a></li>
+<li class="chapter" data-level="3" data-path="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><a href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><i class="fa fa-check"></i><b>3</b> A tutorial for using the lme function from the nlme package.</a></li>
+<li class="chapter" data-level="4" data-path="data-shaping-using-reshape2-and-stats-packages.html"><a href="data-shaping-using-reshape2-and-stats-packages.html"><i class="fa fa-check"></i><b>4</b> Data Shaping using Reshape(2) and Stats Packages</a></li>
+<li class="chapter" data-level="5" data-path="how-to-annotate-a-graph-using-gg-signif.html"><a href="how-to-annotate-a-graph-using-gg-signif.html"><i class="fa fa-check"></i><b>5</b> How to Annotate a Graph Using GG Signif"</a></li>
+<li class="chapter" data-level="6" data-path="leaflet-package.html"><a href="leaflet-package.html"><i class="fa fa-check"></i><b>6</b> Leaflet Package</a></li>
+<li class="chapter" data-level="7" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>7</b> ggplot2</a></li>
+<li class="chapter" data-level="8" data-path="forcats-tutorial.html"><a href="forcats-tutorial.html"><i class="fa fa-check"></i><b>8</b> Forcats tutorial</a></li>
+<li class="chapter" data-level="9" data-path="sf-simple-features-tutorial.html"><a href="sf-simple-features-tutorial.html"><i class="fa fa-check"></i><b>9</b> SF simple features tutorial</a></li>
+<li class="chapter" data-level="10" data-path="psych-package.html"><a href="psych-package.html"><i class="fa fa-check"></i><b>10</b> “psych” Package</a></li>
+<li class="chapter" data-level="11" data-path="imager-tutorial.html"><a href="imager-tutorial.html"><i class="fa fa-check"></i><b>11</b> Imager Tutorial</a></li>
+<li class="chapter" data-level="12" data-path="animal-tracking-with-trajr.html"><a href="animal-tracking-with-trajr.html"><i class="fa fa-check"></i><b>12</b> Animal Tracking with TRAJR</a></li>
+<li class="chapter" data-level="13" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>13</b> Knitr</a></li>
+<li class="chapter" data-level="14" data-path="creating-your-own-html-widget.html"><a href="creating-your-own-html-widget.html"><i class="fa fa-check"></i><b>14</b> Creating your own html widget</a></li>
+<li class="chapter" data-level="15" data-path="network-analysis-tutorial.html"><a href="network-analysis-tutorial.html"><i class="fa fa-check"></i><b>15</b> Network Analysis tutorial</a></li>
+<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PSYC 7709: Using R for Reproducible Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bootstrapped-mediation-tutorial" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Bootstrapped Mediation Tutorial</h1>
+<p><strong>Author: Jeff Kravtiz</strong></p>
+<p>This tutorial will a) review the concepts of mediation, moderation, and bootstrapping; b) demonstrate how to complete bootsrapped mediation analyses in R; and c) generate hypothetical datasets to explore various possible outcomes.</p>
+<div id="mediation-moderation-and-bootstrapping" class="section level2">
+<h2><span class="header-section-number">2.1</span> Mediation, Moderation, and Bootstrapping</h2>
+<p>Basic statistical analyses like ANOVAs allow us to test the effect of one variable on another. However, we often want to go beyond testing these simple relationships to examine more complex relationships, allowing us to test theoretically rich ideas. Mediation and Moderation analyses are two commonly used statisitcal techniques that allow us to explore these complex relationships.</p>
+<div id="mediation---overview" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Mediation - Overview</h3>
+<p>Mediation analyses help us examine the <strong>mechanism</strong> of the relationship between two variables. This technique answers the question of <em>how</em> variables are related. A mediator variable <strong>explains the relationship</strong> between an independent variable and a dependent variable.</p>
+<p>For example, consider a case in which we know that mindfulness meditation increases happiness in people. Although there is clear evidence that mindfulness increases happiness, research has not yet explored why this is the case. Suppose that we think that mindfulness decreases stress, which in turn increases happiness. In other words, we think that mindfulness only indirectly affects happiness <em>by means of</em> reducing stress.</p>
+</div>
+<div id="moderation---overview" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Moderation - Overview</h3>
+<p>Moderation analyses help us examine the <strong>conditions</strong> in which two variables are related. This technique answers the question of <em>when</em> variables are related. A moderator variable <strong>affects the strength and/or direction</strong> of the relationship between an independent variable and a dependent variable.</p>
+<p>Consider again the above case in which we know that mindfulness meditation increases happiness in people. Various studies examine this effect, and while most studies produce positive findings, some produce null findings. We suspect that there certain situations in which mindfulness does not increase happiness. Specifically, we hypothesize that mindfulness can only function properly when people have a sufficient attention span. In other words, we expect that the effect of mindfulness on happiness <em>depends on</em> an individual’s attention span.</p>
+</div>
+<div id="bootstrapping" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Bootstrapping</h3>
+<p>Bootstrapping is a statistical method that utilizes random resampling with replacement to estimate a population parameter. This technique samples from a given dataset to estimate a parameter when it would otherwise be impossible or impractical to do so. In this way, the dataset is treated as the population, and each random sample aims to replicate a potential score within the true population. The amount of samples varies, but usually falls between 1,000 and 10,000.</p>
+<p>One advantage of the bootstrap method is that it produces confidence intervals for your statisitcal estimate. This gives us valuable information of the likely value of a parameter, whereas a <em>p</em> value simply gives us a single number that estimate the likelihood of our statistic assuming that the null is true.</p>
+</div>
+</div>
+<div id="mediation---effects" class="section level2">
+<h2><span class="header-section-number">2.2</span> Mediation - Effects</h2>
+<p>The purpose of mediation analyses is to determine if the effect of an independent variable (X) on a dependent variable (Y) can be explained by a mediating variable (M). This can be visualized in the following figure:</p>
+<p><img src="images/mediation_model.png" style="width:70.0%" /></p>
+<p><br /></p>
+<p>There are various different effects to consider when conducting a mediation analysis.</p>
+<ul>
+<li>The <strong>total effect</strong> is the total effect of X on Y, with no consideration of mediator variables. This is also known as the <strong>c path</strong></li>
+</ul>
+<p><img src="images/mediation_total.png" style="width:70.0%" /></p>
+<p><br /></p>
+<ul>
+<li><p>The <strong>direct effect</strong> is the effect of X on Y after removing the contribution of M. This is known as the <strong>c’ path</strong></p></li>
+<li><p>The effect of X on M is known as the <strong>a path</strong></p></li>
+<li><p>The effect of M on Y is known as the <strong>b path</strong></p></li>
+<li><p>The <strong>indirect effect</strong> is the effect of X on Y <em>through M</em>. This is equivalent to the product of the a path and the b path, sometimes known as the <strong>ab path</strong></p></li>
+</ul>
+<p><img src="images/mediation_indirect.png" style="width:70.0%" /></p>
+<p><br /></p>
+</div>
+<div id="bootstrapped-mediation-in-r" class="section level2">
+<h2><span class="header-section-number">2.3</span> Bootstrapped Mediation in R</h2>
+<p>This tutorial demonstrates how to conduct bootstrapped mediation analyses using the <code>mediate</code> function in the <code>mediation</code> package. As such, the first step is to install and load the <code>mediation</code> package.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;mediation&quot;</span>)
+<span class="kw">library</span>(mediation)</code></pre>
+<div id="structure" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Structure</h3>
+<p>In this section, I will first introduce and then breakdown the structure of mediation using the <code>mediate</code> function. The basic structure is as follows:</p>
+<pre class="sourceCode r"><code class="sourceCode r">X &lt;-
+Y &lt;-
+M &lt;-
+
+
+model.m &lt;-<span class="st"> </span><span class="kw">lm</span>(M <span class="op">~</span><span class="st"> </span>X)
+model.y &lt;-<span class="st"> </span><span class="kw">lm</span>(Y <span class="op">~</span><span class="st"> </span>X <span class="op">+</span><span class="st"> </span>M)
+
+<span class="kw">library</span>(mediation)
+mediation_results &lt;-<span class="st"> </span><span class="kw">mediate</span>(<span class="dt">model.m =</span> model.m,
+                       <span class="dt">model.y =</span> model.y,
+                       <span class="dt">sims =</span> 
+                       <span class="dt">boot =</span> <span class="ot">TRUE</span>,
+                       <span class="dt">mediator =</span> <span class="st">&quot;  &quot;</span>,
+                       <span class="dt">treat =</span> <span class="st">&quot;  &quot;</span>)
+<span class="kw">summary</span>(mediation_results)</code></pre>
+</div>
+<div id="defining-variables" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Defining Variables</h3>
+<p>The next step in mediation is defining your variables. As I mentioned earlier, X will denote the independent variable; Y will denote the dependent variable; and M will denote the mediator variable. We will assign X, Y, and M to be vectors of equal length representing participants’ scores on each of these variables.</p>
+<pre class="sourceCode r"><code class="sourceCode r">X &lt;-
+Y &lt;-
+M &lt;-</code></pre>
+<p>In order to demonstrate a practical example, let us revisit the aforementioned example in which we want to investigate whether mindfulness increases happiness by decreasing stress. Suppose that we have one randomly-assigned, between-subjects independent variable of mindfulness training, with one experimental condition in which 50 participants practice mindfulness meditation for 20 minutes (dummy coded 1), and one control condition in which 50 participants close their eyes for 20 minutes (dummy coded 0). We measure both stress levels and happiness, each on a 1 - 7 likert scale, where 7 indicates minimum stress or maximum happiness.</p>
+<pre class="sourceCode r"><code class="sourceCode r">X_mindfulness &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">50</span>))
+Y_happiness &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">7</span>)
+M_stress  &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">7</span>)</code></pre>
+</div>
+<div id="defining-models" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Defining Models</h3>
+<p>To use the <code>mediate</code> function, we must first define two linear models:</p>
+<ul>
+<li><p><code>model.m</code>, predicting M from X</p></li>
+<li><p><code>model.y</code>, predicting Y from X and M</p></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">model.m &lt;-<span class="st"> </span><span class="kw">lm</span>(M <span class="op">~</span><span class="st"> </span>X)
+model.y &lt;-<span class="st"> </span><span class="kw">lm</span>(Y <span class="op">~</span><span class="st"> </span>X <span class="op">+</span><span class="st"> </span>M)</code></pre>
+<p>In our example, it would look like this:</p>
+<pre class="sourceCode r"><code class="sourceCode r">model.m &lt;-<span class="st"> </span><span class="kw">lm</span>(M_stress <span class="op">~</span><span class="st"> </span>X_mindfulness)
+model.y &lt;-<span class="st"> </span><span class="kw">lm</span>(Y_happiness <span class="op">~</span><span class="st"> </span>X_mindfulness <span class="op">+</span><span class="st"> </span>M_stress)</code></pre>
+</div>
+<div id="mediate" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> Mediate</h3>
+<p>Next, we call the <code>mediate</code> function with the following arguments:</p>
+<ul>
+<li><p><code>model.m</code> = <code>model.m</code></p></li>
+<li><p><code>model.y</code> = <code>model.y</code></p></li>
+<li><p><code>sims</code> = <em>the number of resamples that you want to use</em></p></li>
+<li><p><code>boot</code> = <code>TRUE</code></p></li>
+<li><p><code>mediator</code> = <em>your mediator variable, <strong>in quotes</strong> </em></p></li>
+<li><p><code>treat</code> = <em>your independent variable, <strong>in quotes</strong> </em></p></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">mediation_results &lt;-<span class="st"> </span><span class="kw">mediate</span>(<span class="dt">model.m =</span> model.m,
+                       <span class="dt">model.y =</span> model.y,
+                       <span class="dt">sims =</span> 
+                       <span class="dt">boot =</span> <span class="ot">TRUE</span>,
+                       <span class="dt">mediator =</span> <span class="st">&quot;  &quot;</span>,
+                       <span class="dt">treat =</span> <span class="st">&quot;  &quot;</span>)
+<span class="kw">summary</span>(mediation_results)</code></pre>
+<p>In our example, it would look like this:</p>
+<pre class="sourceCode r"><code class="sourceCode r">full_mediation &lt;-<span class="st"> </span><span class="kw">mediate</span>(<span class="dt">model.m =</span> model.m,
+                       <span class="dt">model.y =</span> model.y,
+                       <span class="dt">sims =</span> <span class="dv">500</span>,
+                       <span class="dt">boot =</span> <span class="ot">TRUE</span>,
+                       <span class="dt">mediator =</span> <span class="st">&quot;M_stress&quot;</span>,
+                       <span class="dt">treat =</span> <span class="st">&quot;X_mindfulness&quot;</span>)
+<span class="kw">summary</span>(full_mediation)</code></pre>
+</div>
+</div>
+<div id="generating-datasets-to-interpret-outcomes" class="section level2">
+<h2><span class="header-section-number">2.4</span> Generating Datasets to Interpret Outcomes</h2>
+<p>Because there are various possible outcomes of a mediation analysis, it is useful to generate datasets to model and interpret each outcome. The possible results of a mediation analysis include a) full mediation, in which the effect of the independent variable on the dependent variable is completely explained by the mediator variable; b) partial mediation, in which in which the effect of the independent variable on the dependent variable is partially explained by the mediator variable, but the independent variable still has some direct effect on the dependent variable; and c) no mediation.</p>
+<p>Let’s first look at the results of our running example:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(mediation_results)</code></pre>
+<pre><code>## 
+## Causal Mediation Analysis 
+## 
+## Nonparametric Bootstrap Confidence Intervals with the Percentile Method
+## 
+##                Estimate 95% CI Lower 95% CI Upper p-value
+## ACME             -0.074       -0.281         0.06    0.28
+## ADE              -0.267       -0.923         0.44    0.53
+## Total Effect     -0.341       -0.958         0.37    0.37
+## Prop. Mediated    0.217       -2.778         2.79    0.52
+## 
+## Sample Size Used: 100 
+## 
+## 
+## Simulations: 500</code></pre>
+<ul>
+<li><p><code>ACME</code> is the Average Causal Mediation Effect, or the <strong>indirect effect</strong> (ab path)</p></li>
+<li><p><code>ADE</code> is the Average Direct Effect, or the <strong>direct effect</strong> (c’ path)</p></li>
+<li><p><code>Total Effect</code> is the <strong>total effect</strong> (c path)</p></li>
+<li><p>Our output also gives us confidence intervals and <em>p</em> values for each of these effects</p></li>
+</ul>
+<p>Because this data was generated randomly, it is likely that none of the effects are significant. If we impose a structure on our data when generating our example datasets, we can examine each of the possible outcomes of mediation.</p>
+<div id="full-mediation" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Full Mediation</h3>
+<p>In the case of full mediation, the relationship between mindfulness (X) and happiness (Y) is completely explained by stress (M).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Full Mediation</span>
+
+X_mindfulness &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">50</span>),<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">50</span>))
+Y_happiness &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">25</span>),<span class="kw">rep</span>(<span class="dv">4</span>,<span class="dv">25</span>),<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">25</span>),<span class="kw">rep</span>(<span class="dv">6</span>,<span class="dv">25</span>))
+M_stress  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">25</span>),<span class="kw">rep</span>(<span class="dv">4</span>,<span class="dv">25</span>),<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">25</span>),<span class="kw">rep</span>(<span class="dv">6</span>,<span class="dv">25</span>))
+
+model.m &lt;-<span class="st"> </span><span class="kw">lm</span>(M_stress <span class="op">~</span><span class="st"> </span>X_mindfulness)
+model.y &lt;-<span class="st"> </span><span class="kw">lm</span>(Y_happiness <span class="op">~</span><span class="st"> </span>X_mindfulness <span class="op">+</span><span class="st"> </span>M_stress)
+
+<span class="kw">library</span>(mediation)
+full_mediation &lt;-<span class="st"> </span><span class="kw">mediate</span>(<span class="dt">model.m =</span> model.m,
+                       <span class="dt">model.y =</span> model.y,
+                       <span class="dt">sims =</span> <span class="dv">500</span>,
+                       <span class="dt">boot =</span> <span class="ot">TRUE</span>,
+                       <span class="dt">mediator =</span> <span class="st">&quot;M_stress&quot;</span>,
+                       <span class="dt">treat =</span> <span class="st">&quot;X_mindfulness&quot;</span>)
+<span class="kw">summary</span>(full_mediation)</code></pre>
+<pre><code>## 
+## Causal Mediation Analysis 
+## 
+## Nonparametric Bootstrap Confidence Intervals with the Percentile Method
+## 
+##                 Estimate 95% CI Lower 95% CI Upper p-value    
+## ACME            2.00e+00     1.82e+00         2.22  &lt;2e-16 ***
+## ADE            -2.31e-15    -3.81e-15         0.00     0.9    
+## Total Effect    2.00e+00     1.82e+00         2.22  &lt;2e-16 ***
+## Prop. Mediated  1.00e+00     1.00e+00         1.00  &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Sample Size Used: 100 
+## 
+## 
+## Simulations: 500</code></pre>
+<p>In this case, we know we have a full mediation because we have a significant total effect and indirect effect (ACME), but not a direct effect (ADE). The significant total effect tells us that X affects Y. The significant indirect effect tells us that there was a mediating effect of M. The non-significant direct effect tells us that all of the effect of X on Y was explained by M, showing a full mediation.</p>
+</div>
+<div id="partial-mediation" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Partial Mediation</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Partial Mediation</span>
+
+X_mindfulness &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">50</span>))
+Y_happiness &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">25</span>), <span class="kw">rep</span>(<span class="dv">4</span>,<span class="dv">25</span>), <span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">25</span>), <span class="kw">rep</span>(<span class="dv">6</span>,<span class="dv">25</span>))
+M_stress  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dv">25</span>,<span class="dv">3</span>,<span class="dv">1</span>), <span class="kw">rnorm</span>(<span class="dv">25</span>,<span class="dv">4</span>,<span class="dv">1</span>), <span class="kw">rnorm</span>(<span class="dv">25</span>,<span class="dv">5</span>,<span class="dv">1</span>), <span class="kw">rnorm</span>(<span class="dv">25</span>,<span class="dv">6</span>,<span class="dv">1</span>))
+
+
+model.m &lt;-<span class="st"> </span><span class="kw">lm</span>(M_stress <span class="op">~</span><span class="st"> </span>X_mindfulness)
+model.y &lt;-<span class="st"> </span><span class="kw">lm</span>(Y_happiness <span class="op">~</span><span class="st"> </span>X_mindfulness <span class="op">+</span><span class="st"> </span>M_stress)
+
+<span class="kw">library</span>(mediation)
+partial_mediation &lt;-<span class="st"> </span><span class="kw">mediate</span>(<span class="dt">model.m =</span> model.m,
+                       <span class="dt">model.y =</span> model.y,
+                       <span class="dt">sims =</span> <span class="dv">500</span>,
+                       <span class="dt">boot =</span> <span class="ot">TRUE</span>,
+                       <span class="dt">mediator =</span> <span class="st">&quot;M_stress&quot;</span>,
+                       <span class="dt">treat =</span> <span class="st">&quot;X_mindfulness&quot;</span>)
+<span class="kw">summary</span>(partial_mediation)</code></pre>
+<pre><code>## 
+## Causal Mediation Analysis 
+## 
+## Nonparametric Bootstrap Confidence Intervals with the Percentile Method
+## 
+##                Estimate 95% CI Lower 95% CI Upper p-value    
+## ACME              0.464        0.315         0.63  &lt;2e-16 ***
+## ADE               1.536        1.348         1.75  &lt;2e-16 ***
+## Total Effect      2.000        1.798         2.21  &lt;2e-16 ***
+## Prop. Mediated    0.232        0.166         0.31  &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Sample Size Used: 100 
+## 
+## 
+## Simulations: 500</code></pre>
+<p>Here we know we have a partial mediation because we have a significant total effect, indirect effect (ACME), and direct effect (ADE). The significant total effect tells us that X affects Y. The significant indirect effect tells us that there was a mediating effect of M. The significant direct effect tells us that although there was a mediating effect of M, there was still a direct relationship between X and Y, showing a partial mediation.</p>
+</div>
+<div id="no-mediation" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> No Mediation</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># No Mediation</span>
+
+X_mindfulness &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">50</span>))
+Y_happiness &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">25</span>), <span class="kw">rep</span>(<span class="dv">4</span>,<span class="dv">25</span>), <span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">25</span>), <span class="kw">rep</span>(<span class="dv">6</span>,<span class="dv">25</span>))
+M_stress  &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">7</span>)
+
+model.m &lt;-<span class="st"> </span><span class="kw">lm</span>(M_stress <span class="op">~</span><span class="st"> </span>X_mindfulness)
+model.y &lt;-<span class="st"> </span><span class="kw">lm</span>(Y_happiness <span class="op">~</span><span class="st"> </span>X_mindfulness <span class="op">+</span><span class="st"> </span>M_stress)
+
+<span class="kw">library</span>(mediation)
+no_mediation &lt;-<span class="st"> </span><span class="kw">mediate</span>(<span class="dt">model.m =</span> model.m,
+                       <span class="dt">model.y =</span> model.y,
+                       <span class="dt">sims =</span> <span class="dv">500</span>,
+                       <span class="dt">boot =</span> <span class="ot">TRUE</span>,
+                       <span class="dt">mediator =</span> <span class="st">&quot;M_stress&quot;</span>,
+                       <span class="dt">treat =</span> <span class="st">&quot;X_mindfulness&quot;</span>)
+<span class="kw">summary</span>(no_mediation)</code></pre>
+<pre><code>## 
+## Causal Mediation Analysis 
+## 
+## Nonparametric Bootstrap Confidence Intervals with the Percentile Method
+## 
+##                Estimate 95% CI Lower 95% CI Upper p-value    
+## ACME           -0.01266     -0.06022         0.03    0.52    
+## ADE             2.01266      1.82294         2.23  &lt;2e-16 ***
+## Total Effect    2.00000      1.81828         2.21  &lt;2e-16 ***
+## Prop. Mediated -0.00633     -0.03070         0.01    0.52    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Sample Size Used: 100 
+## 
+## 
+## Simulations: 500</code></pre>
+<p>Here we know we have no mediation because we have a non-significant indirect effect (ACME), which means that the relationship between X and Y was not at all explained by M.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Kravitz.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709_bookdown.pdf", "7709_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 7 ggplot2 | PSYC 7709: Using R for Reproducible Research</title>
+  <meta name="description" content="Student contributed chapters about various R packages">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 7 ggplot2 | PSYC 7709: Using R for Reproducible Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Student contributed chapters about various R packages" />
+  <meta name="github-repo" content="CrumpLab/OER_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 ggplot2 | PSYC 7709: Using R for Reproducible Research" />
+  
+  <meta name="twitter:description" content="Student contributed chapters about various R packages" />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="leaflet-package.html">
+<link rel="next" href="forcats-tutorial.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79429674-2');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PSYC 7709: Using R for Reproducible Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="bootstrapped-mediation-tutorial.html"><a href="bootstrapped-mediation-tutorial.html"><i class="fa fa-check"></i><b>2</b> Bootstrapped Mediation Tutorial</a></li>
+<li class="chapter" data-level="3" data-path="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><a href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><i class="fa fa-check"></i><b>3</b> A tutorial for using the lme function from the nlme package.</a></li>
+<li class="chapter" data-level="4" data-path="data-shaping-using-reshape2-and-stats-packages.html"><a href="data-shaping-using-reshape2-and-stats-packages.html"><i class="fa fa-check"></i><b>4</b> Data Shaping using Reshape(2) and Stats Packages</a></li>
+<li class="chapter" data-level="5" data-path="how-to-annotate-a-graph-using-gg-signif.html"><a href="how-to-annotate-a-graph-using-gg-signif.html"><i class="fa fa-check"></i><b>5</b> How to Annotate a Graph Using GG Signif"</a></li>
+<li class="chapter" data-level="6" data-path="leaflet-package.html"><a href="leaflet-package.html"><i class="fa fa-check"></i><b>6</b> Leaflet Package</a></li>
+<li class="chapter" data-level="7" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>7</b> ggplot2</a></li>
+<li class="chapter" data-level="8" data-path="forcats-tutorial.html"><a href="forcats-tutorial.html"><i class="fa fa-check"></i><b>8</b> Forcats tutorial</a></li>
+<li class="chapter" data-level="9" data-path="sf-simple-features-tutorial.html"><a href="sf-simple-features-tutorial.html"><i class="fa fa-check"></i><b>9</b> SF simple features tutorial</a></li>
+<li class="chapter" data-level="10" data-path="psych-package.html"><a href="psych-package.html"><i class="fa fa-check"></i><b>10</b> “psych” Package</a></li>
+<li class="chapter" data-level="11" data-path="imager-tutorial.html"><a href="imager-tutorial.html"><i class="fa fa-check"></i><b>11</b> Imager Tutorial</a></li>
+<li class="chapter" data-level="12" data-path="animal-tracking-with-trajr.html"><a href="animal-tracking-with-trajr.html"><i class="fa fa-check"></i><b>12</b> Animal Tracking with TRAJR</a></li>
+<li class="chapter" data-level="13" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>13</b> Knitr</a></li>
+<li class="chapter" data-level="14" data-path="creating-your-own-html-widget.html"><a href="creating-your-own-html-widget.html"><i class="fa fa-check"></i><b>14</b> Creating your own html widget</a></li>
+<li class="chapter" data-level="15" data-path="network-analysis-tutorial.html"><a href="network-analysis-tutorial.html"><i class="fa fa-check"></i><b>15</b> Network Analysis tutorial</a></li>
+<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PSYC 7709: Using R for Reproducible Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ggplot2" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> ggplot2</h1>
+<p>The use of analytical statistical data can prove to be one of the most relevant parts of research. Using an option such as GGplot2 can enhance data to the extent an individual without a strong scientific background can easily comprehend it. Data visualization within GGplot2 can consist of such elements as:</p>
+<div id="violin-plots---geom_violin" class="section level2">
+<h2><span class="header-section-number">7.1</span> Violin Plots - geom_violin()</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(drv, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>()</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+</div>
+<div id="box-plots---geom_boxplot" class="section level2">
+<h2><span class="header-section-number">7.2</span> Box Plots - geom_boxplot()</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(carat, depth)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">group =</span> <span class="kw">cut_width</span>(carat, <span class="fl">0.1</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="ot">NA</span>, <span class="fl">2.05</span>)</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+</div>
+<div id="scatter-plots---geom_point" class="section level2">
+<h2><span class="header-section-number">7.3</span> Scatter Plots - geom_point()</h2>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy, <span class="dt">colour =</span> <span class="kw">factor</span>(cyl))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+</div>
+<div id="surface-plots---geom_contour" class="section level2">
+<h2><span class="header-section-number">7.4</span> Surface Plots - geom_contour()</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(faithfuld, <span class="kw">aes</span>(eruptions, waiting)) <span class="op">+</span>
+<span class="st"> </span><span class="kw">geom_contour</span>(<span class="kw">aes</span>(<span class="dt">z =</span> density, <span class="dt">colour =</span> ..level..))</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+</div>
+<div id="bar-graphs---geom_bar" class="section level2">
+<h2><span class="header-section-number">7.5</span> Bar Graphs - geom_bar()</h2>
+<pre class="sourceCode r"><code class="sourceCode r">dplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(color, <span class="dt">fill =</span> cut)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)
+dplot <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p>Bar Graphs can be laid out in a couple different ways, geom_bar(position = “fill”) represents the data stacked with #1 always being on top. geom_bar(position = “dodge”) places the bars side by side in a more traditional visual.</p>
+<p>Knowing the fundamental grammar that goes into ggplot2 can expand the working knowledge and confidence of the user. Wilkinson (2005) provides multiple enhancements to better understand expressions that fit into the R environment. Grammar allows you to change many high-level properties within a graph, this means changing independent aspects to effect the overall visualization and easier interpretation by the reader (Wickham, 2016).</p>
+<p>Layers create the objects within the plot that make it visually pleasing. Five parts compose a layer: data, aesthetic mappings, statistical transformation, geometric object, and a position adjustment.</p>
+<ul>
+<li>Mapping - aes() function will open a set of default mappings</li>
+<li>Data - This overrides the default plot dataset</li>
+<li>Geom - Geoms can make multiple arguments using aesthetics as parameters such as color.</li>
+<li>Stat - A statistical transformation can create a summary from a geom.</li>
+<li>Position - The adjustment of overlapping objects such as stacking or dodging.</li>
+</ul>
+<p>Scales are the controlling entity for attributions and data mapping. An example of a scale would be the color gradient mapping a segment of the real line to a path through a color space (Wickham, 2016). The function defines whether the path is linear or curved, what color is used, and the spectrum from start to end.</p>
+<p>The coordinate system places the objects into different planes on the plot. Coordinates affect all positions on the plot, both simultaneously and differntly depending on scales used. It is worth noting that scaling must be performed before a statistical transformation while a coordniate transformation must occur afterword (Wickham, 2016).</p>
+<p>GGplot2 can simply be implemented into Rstudio by library(ggplot2). The rest of the data visualization that occurs is included in the package. GG can be used tolayer the information by displaying data, creating a statistical summary, and showing metadata.</p>
+<p>Displaying data can help show a detection of a pattern, the summary can assist in model predictions from the context of the data revealing subtlties, and metadata helps give meaning to the raw data itself in either the background or foreground. Such code as: geom_area(), geombar(), geom_line(), and geom_point() are basic variaitons of plots/graphs used to repesent data.</p>
+</div>
+<div id="custom-ranges" class="section level2">
+<h2><span class="header-section-number">7.6</span> Custom ranges</h2>
+<p>Creating custom ranges for the data represented in the plots is adjusted by settign the x and y values. Code shown below sets the limits in ranges, specific parameters can be controlled by the code shown below.</p>
+<p>X/Y Ranges</p>
+<pre class="sourceCode r"><code class="sourceCode r">  df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)
+  base &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(x, y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+  <span class="kw">print</span>(base)</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p>X/Y Parameters</p>
+<pre class="sourceCode r"><code class="sourceCode r">  base <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="fl">1.5</span>, <span class="fl">2.5</span>))</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p>Aside from setting ranges on a plot you can also zoom into a plot to show a more specific data point relevant to the research. coord_cartesian adjusts the visualized X/Y limits of the data. For base mpg on the highway based on engine displacement can be respresented for all engine sizes or for the sake of independet research one may be interested in a smaller range of visualized data without altering the entire plot, simply by resettign the parameters of x. Each time “+” is utilized we are adding a layer or element to the plot. This can be shown with the code:</p>
+<p>Entire Plot:</p>
+<pre class="sourceCode r"><code class="sourceCode r">  base &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()</code></pre>
+<p>Zoomed In Plot:</p>
+<pre class="sourceCode r"><code class="sourceCode r">  base <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>))</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+</div>
+<div id="facet-wrapping" class="section level2">
+<h2><span class="header-section-number">7.7</span> Facet wrapping</h2>
+<p>Facet wrapping gives us the ability to present mutiple different variables or factors within an experiment. Laying out multiple plots into subsets visualizing data in individual panels. To represent the previos mpg data seperated by vehicle type and engine displacement we can use code such as:</p>
+<pre class="sourceCode r"><code class="sourceCode r">  mpg2 &lt;-<span class="st"> </span><span class="kw">subset</span>(mpg, cyl <span class="op">!=</span><span class="st"> </span><span class="dv">5</span> <span class="op">&amp;</span><span class="st"> </span>drv <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;4&quot;</span>, <span class="st">&quot;f&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>class <span class="op">!=</span><span class="st"> &quot;2seater&quot;</span>)
+  base &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg2, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_blank</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)
+  base <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>class, <span class="dt">ncol =</span> <span class="dv">3</span>)</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<p>The above code creates a facet wrap, a facet grid lays out a plot in 2D. Using (. ~) spreads the values across the columns. An example of a facet grid is:</p>
+<pre class="sourceCode r"><code class="sourceCode r">base <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>cyl)</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<p>A grid can have multiple variables in the rows and columns by adding them together, a+b ~ c+d. When these variables appear on the rows and columns they become nested, meaning that only combonations that appear in the data will appear in the plot (Wickham, 2016).</p>
+<p>Once you have established the type of plot ggplot offers multiple themed options to facilitate the aesthetics of your visualization. The themes do not affect the geoms but rather the non-data elements. Theme elements separate the data from non-data for your control. A simple element to change is the title, legend, and x-axis description. plot.title, axis.ticks, and legend.key.height govern these options respectively. GGplot is intuitive when adjusting theme colors, theme(plot.title = element_text(colour = “grey”)) will harmoniously adjust all colors appropriately. The following code will show just how intricate you can be with a scatter plot.</p>
+<p>A simple version:</p>
+<pre class="sourceCode r"><code class="sourceCode r">base &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(cty, hwy, <span class="dt">color =</span> <span class="kw">factor</span>(cyl)))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">colour =</span> <span class="st">&quot;grey50&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>)
+base</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<p>Building on the simple version:</p>
+<pre class="sourceCode r"><code class="sourceCode r">labelled &lt;-<span class="st"> </span>base <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(
+    <span class="dt">x =</span> <span class="st">&quot;city mileage/gallon&quot;</span>,
+    <span class="dt">y =</span> <span class="st">&quot;highway mileage/gallon&quot;</span>,
+    <span class="dt">colour =</span> <span class="st">&quot;cylinders&quot;</span>,
+    <span class="dt">title =</span> <span class="st">&quot;Highway and city mileage are highly correlated&quot;</span>
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">type =</span> <span class="st">&quot;seq&quot;</span>, <span class="dt">palette=</span><span class="st">&quot;Spectral&quot;</span>)
+labelled</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<p>A detailed version of the same plot:</p>
+<pre class="sourceCode r"><code class="sourceCode r">styled &lt;-<span class="st"> </span>labelled <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(
+    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">size =</span> <span class="dv">12</span>),
+    <span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>),
+    <span class="dt">legend.justification =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+    <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+    <span class="dt">axis.ticks =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;grey70&quot;</span>, <span class="dt">size =</span> <span class="fl">0.2</span>),
+    <span class="dt">panel.grid.major =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;grey70&quot;</span>, <span class="dt">size =</span> <span class="fl">0.2</span>),
+    <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>()
+     )
+styled</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<p>Functional Programming in Rstudio treats all GGplot objects the same as regular r objects. You can add multiple geoms to the same base plot, giving you the user, a quick reference to multiple visuals.</p>
+<pre class="sourceCode r"><code class="sourceCode r">geoms &lt;-<span class="st"> </span><span class="kw">list</span>(
+  <span class="kw">geom_point</span>(),
+  <span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">group =</span> <span class="kw">cut_width</span>(displ, <span class="dv">1</span>))),
+  <span class="kw">list</span>(<span class="kw">geom_point</span>(), <span class="kw">geom_smooth</span>())
+)
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy))
+<span class="kw">lapply</span>(geoms, <span class="cf">function</span>(g) p <span class="op">+</span><span class="st"> </span>g)</code></pre>
+<pre><code>## [[1]]</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<pre><code>## 
+## [[2]]</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-83-2.png" width="672" /></p>
+<pre><code>## 
+## [[3]]</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-83-3.png" width="672" /></p>
+<p>References:</p>
+<p>Wickham, H. (2016) ggplot2. Elegant graphics for data analysis. Houston, Texas: Springer Nature.</p>
+<p>Wilkinson, L. (2005). The grammar of graphics. Statistics and computing, 2nd edn. Springer, New York</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="leaflet-package.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="forcats-tutorial.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-Funderburk.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709_bookdown.pdf", "7709_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

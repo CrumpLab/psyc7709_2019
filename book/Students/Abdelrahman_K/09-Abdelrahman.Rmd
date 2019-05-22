@@ -1,0 +1,125 @@
+# The sf package
+
+**Author: Kamal Abdelrahman
+
+```{r, include=FALSE}
+library(scales)
+library(ggplot2)
+library(sf)
+library(data.table)
+```
+
+
+
+# Goals With Spatial Features 
+1. Getting to Know GIS
+
+2. Introducing the sf package  
+
+3. Example
+
+# Getting To Know GIS
+Geographic Information Systems - Framework of capturing, storing, manipulating, analyzing, managing, and presenting spatial data
+  + Features - The geometry of a shape, bits of points that comprise its structure on given place on Earth
+  
+  + Spatial Data - Data identifies geoprahical location
+  
+  + Attribute Data - Data that identifies characteristics of locations
+  
+  + Shapefiles - Geometric shape of spatial data
+      + **NOTE** - MUST BE KEPT IN SAME FOLDER of supporting files
+  
+  + Choropleth - Thematic map with areas of study site shaded in proportion to values of an area
+
+# Introducing the sf package
+
+The sf, short for **simple features**, package allows analysts to process and analyze geospatial data in R, noted by tibbles/data.frames with the **geometry column**
+
+  * Importing/Exporting shapefiles
+  
+  * Creating choropleths
+  
+  * Works well with ggplot2 syntax 
+
+# Example 
+
+You're analyzing disparities of income levels across New York City and want to use a choropleth to visualize that
+
+## What will we need?
+
+  * New York City Shapefile (Community District Level)
+  * New York City Median Incomes (Community District Level)
+
+## How will we actually make one?
+  1. Read in our shapefile, and dataset
+  2. Merge them together 
+  3. Visualize the map using ggplot syntax
+  
+## Step 1 - Reading In Shapefile/Data
+
+Here is where is where read in the shapefile and dataset
+
+```{r eval=FALSE, include=TRUE}
+install.packages("sf")
+```
+```{r eval=FALSE, include=TRUE}
+library(sf)
+#Reading From File
+NycCommunityDistricts <- read_sf("/filpath/shapefilename.shp")
+#Reading From Website
+NycCommunityDistricts <- read_sf("https://data.cityofnewyork.us/api/geospatial/yfnk-k7r4?method=export&format=GeoJSON")
+#Load in Income Levels
+NYCIncome <- fread("https://raw.githubusercontent.com/kamalabdel97/FinalPresentation/master/Median%20Incomes.csv")
+```
+
+```{r eval=TRUE, include=FALSE}
+#Reading From File
+library(sf)
+NycCommunityDistricts <- read_sf("https://data.cityofnewyork.us/api/geospatial/yfnk-k7r4?method=export&format=GeoJSON")
+NYCIncome <- fread("https://raw.githubusercontent.com/kamalabdel97/FinalPresentation/master/Median%20Incomes.csv")
+```
+
+```{r eval=TRUE, include=FALSE}
+NYCIncome <- subset(NYCIncome, nchar(NYCIncome$Fips) == 3 & NYCIncome$`Household Type` == "All Households" & NYCIncome$TimeFrame == "2017")
+```
+
+`read_sf` - Reads in simple features
+
+# New York Stand Up!
+
+```{r echo=FALSE, fig.align='center'}
+ggplot() + geom_sf(data = NycCommunityDistricts)
+```
+
+
+# Step 2 - Joining the data to the shapefile
+
+```{r eval=TRUE, include=TRUE}
+NycCommunityDistrictsIncome <- merge(NycCommunityDistricts, NYCIncome, by.x = "boro_cd", by.y = "Fips", all.x = T)
+```
+
+`NycCommunityDistricts` - The shapefile of the New York City community districts
+
+`NYCIncome` - The attribute data contain the income levels
+
+# Step 3 - Making the choropleth
+
+```{r eval=FALSE, include=TRUE}
+ggplot() + 
+  geom_sf(data = NycCommunityDistrictsIncome,
+  aes(fill = Income)) 
+```
+
+`ggplot` - Invokes the ggplot syntax for data visualization
+
+`geom_sf` - Visualizes the shapefile feature
+* `NycCommunityDistrictsIncome` - The shapefile dataframe containing BOTH the shapefile (spatial) and income levels (attribute) 
+
+* `Income` - The statistical value in the shapefile dataframe for each community district
+
+# Final Map!
+```{r echo=FALSE, fig.align='center'}
+ggplot() + 
+  geom_sf(data = NycCommunityDistrictsIncome, aes(fill = Income), color = NA)+
+  scale_fill_gradient(low = rgb(204, 209, 205, maxColorValue=255), high = rgb(0, 100, 46, maxColorValue=255))
+```
