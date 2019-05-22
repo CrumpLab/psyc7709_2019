@@ -1,0 +1,1906 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={PSYC 7709: Using R for Reproducible Research},
+            pdfauthor={Matthew Crump},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{PSYC 7709: Using R for Reproducible Research}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Matthew Crump}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2018: Last compiled 2019-05-20}
+
+\usepackage{booktabs}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{preface}{%
+\chapter*{Preface}\label{preface}}
+\addcontentsline{toc}{chapter}{Preface}
+
+\begin{center}\includegraphics{OER} \end{center}
+
+Crump, Matthew J. C. (2018). Open tools for writing open interactive textbooks (and more).
+
+This is a tutorial and set of working examples for creating web-based textbooks using a collection of open-source tools.
+
+\textbf{License CC BY-SA 4.0 license}
+
+The book is released under a creative commons \href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0} license. This means that this book can be reused, remixed, retained, revised and redistributed (including commercially) as long as appropriate credit is given to the authors. If you remix, or modify the original version of this open textbook, you must redistribute all versions of this open textbook under the same license - CC BY-SA 4.0.
+
+\hypertarget{overview}{%
+\chapter{Overview}\label{overview}}
+
+Something about the course and each of the chapters.
+
+\hypertarget{bootstrapped-mediation-tutorial}{%
+\chapter{Bootstrapped Mediation Tutorial}\label{bootstrapped-mediation-tutorial}}
+
+\textbf{Author: Jeff Kravtiz}
+
+This tutorial will a) review the concepts of mediation, moderation, and bootstrapping; b) demonstrate how to complete bootsrapped mediation analyses in R; and c) generate hypothetical datasets to explore various possible outcomes.
+
+\hypertarget{mediation-moderation-and-bootstrapping}{%
+\section{Mediation, Moderation, and Bootstrapping}\label{mediation-moderation-and-bootstrapping}}
+
+Basic statistical analyses like ANOVAs allow us to test the effect of one variable on another. However, we often want to go beyond testing these simple relationships to examine more complex relationships, allowing us to test theoretically rich ideas. Mediation and Moderation analyses are two commonly used statisitcal techniques that allow us to explore these complex relationships.
+
+\hypertarget{mediation---overview}{%
+\subsection{Mediation - Overview}\label{mediation---overview}}
+
+Mediation analyses help us examine the \textbf{mechanism} of the relationship between two variables. This technique answers the question of \emph{how} variables are related. A mediator variable \textbf{explains the relationship} between an independent variable and a dependent variable.
+
+For example, consider a case in which we know that mindfulness meditation increases happiness in people. Although there is clear evidence that mindfulness increases happiness, research has not yet explored why this is the case. Suppose that we think that mindfulness decreases stress, which in turn increases happiness. In other words, we think that mindfulness only indirectly affects happiness \emph{by means of} reducing stress.
+
+\hypertarget{moderation---overview}{%
+\subsection{Moderation - Overview}\label{moderation---overview}}
+
+Moderation analyses help us examine the \textbf{conditions} in which two variables are related. This technique answers the question of \emph{when} variables are related. A moderator variable \textbf{affects the strength and/or direction} of the relationship between an independent variable and a dependent variable.
+
+Consider again the above case in which we know that mindfulness meditation increases happiness in people. Various studies examine this effect, and while most studies produce positive findings, some produce null findings. We suspect that there certain situations in which mindfulness does not increase happiness. Specifically, we hypothesize that mindfulness can only function properly when people have a sufficient attention span. In other words, we expect that the effect of mindfulness on happiness \emph{depends on} an individual's attention span.
+
+\hypertarget{bootstrapping}{%
+\subsection{Bootstrapping}\label{bootstrapping}}
+
+Bootstrapping is a statistical method that utilizes random resampling with replacement to estimate a population parameter. This technique samples from a given dataset to estimate a parameter when it would otherwise be impossible or impractical to do so. In this way, the dataset is treated as the population, and each random sample aims to replicate a potential score within the true population. The amount of samples varies, but usually falls between 1,000 and 10,000.
+
+One advantage of the bootstrap method is that it produces confidence intervals for your statisitcal estimate. This gives us valuable information of the likely value of a parameter, whereas a \emph{p} value simply gives us a single number that estimate the likelihood of our statistic assuming that the null is true.
+
+\hypertarget{mediation---effects}{%
+\section{Mediation - Effects}\label{mediation---effects}}
+
+The purpose of mediation analyses is to determine if the effect of an independent variable (X) on a dependent variable (Y) can be explained by a mediating variable (M). This can be visualized in the following figure:
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/mediation_model.png}
+
+There are various different effects to consider when conducting a mediation analysis.
+
+\begin{itemize}
+\tightlist
+\item
+  The \textbf{total effect} is the total effect of X on Y, with no consideration of mediator variables. This is also known as the \textbf{c path}
+\end{itemize}
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/mediation_total.png}
+
+\begin{itemize}
+\item
+  The \textbf{direct effect} is the effect of X on Y after removing the contribution of M. This is known as the \textbf{c' path}
+\item
+  The effect of X on M is known as the \textbf{a path}
+\item
+  The effect of M on Y is known as the \textbf{b path}
+\item
+  The \textbf{indirect effect} is the effect of X on Y \emph{through M}. This is equivalent to the product of the a path and the b path, sometimes known as the \textbf{ab path}
+\end{itemize}
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{images/mediation_indirect.png}
+
+\hypertarget{bootstrapped-mediation-in-r}{%
+\section{Bootstrapped Mediation in R}\label{bootstrapped-mediation-in-r}}
+
+This tutorial demonstrates how to conduct bootstrapped mediation analyses using the \texttt{mediate} function in the \texttt{mediation} package. As such, the first step is to install and load the \texttt{mediation} package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"mediation"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(mediation)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{structure}{%
+\subsection{Structure}\label{structure}}
+
+In this section, I will first introduce and then breakdown the structure of mediation using the \texttt{mediate} function. The basic structure is as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X <-}
+\NormalTok{Y <-}
+\NormalTok{M <-}
+
+
+\NormalTok{model.m <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(M }\OperatorTok{~}\StringTok{ }\NormalTok{X)}
+\NormalTok{model.y <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Y }\OperatorTok{~}\StringTok{ }\NormalTok{X }\OperatorTok{+}\StringTok{ }\NormalTok{M)}
+
+\KeywordTok{library}\NormalTok{(mediation)}
+\NormalTok{mediation_results <-}\StringTok{ }\KeywordTok{mediate}\NormalTok{(}\DataTypeTok{model.m =}\NormalTok{ model.m,}
+                       \DataTypeTok{model.y =}\NormalTok{ model.y,}
+                       \DataTypeTok{sims =} 
+                       \DataTypeTok{boot =} \OtherTok{TRUE}\NormalTok{,}
+                       \DataTypeTok{mediator =} \StringTok{"  "}\NormalTok{,}
+                       \DataTypeTok{treat =} \StringTok{"  "}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(mediation_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{defining-variables}{%
+\subsection{Defining Variables}\label{defining-variables}}
+
+The next step in mediation is defining your variables. As I mentioned earlier, X will denote the independent variable; Y will denote the dependent variable; and M will denote the mediator variable. We will assign X, Y, and M to be vectors of equal length representing participants' scores on each of these variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X <-}
+\NormalTok{Y <-}
+\NormalTok{M <-}
+\end{Highlighting}
+\end{Shaded}
+
+In order to demonstrate a practical example, let us revisit the aforementioned example in which we want to investigate whether mindfulness increases happiness by decreasing stress. Suppose that we have one randomly-assigned, between-subjects independent variable of mindfulness training, with one experimental condition in which 50 participants practice mindfulness meditation for 20 minutes (dummy coded 1), and one control condition in which 50 participants close their eyes for 20 minutes (dummy coded 0). We measure both stress levels and happiness, each on a 1 - 7 likert scale, where 7 indicates minimum stress or maximum happiness.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X_mindfulness <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{50}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{50}\NormalTok{))}
+\NormalTok{Y_happiness <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DataTypeTok{min =} \DecValTok{1}\NormalTok{, }\DataTypeTok{max =} \DecValTok{7}\NormalTok{)}
+\NormalTok{M_stress  <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DataTypeTok{min =} \DecValTok{1}\NormalTok{, }\DataTypeTok{max =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{defining-models}{%
+\subsection{Defining Models}\label{defining-models}}
+
+To use the \texttt{mediate} function, we must first define two linear models:
+
+\begin{itemize}
+\item
+  \texttt{model.m}, predicting M from X
+\item
+  \texttt{model.y}, predicting Y from X and M
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.m <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(M }\OperatorTok{~}\StringTok{ }\NormalTok{X)}
+\NormalTok{model.y <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Y }\OperatorTok{~}\StringTok{ }\NormalTok{X }\OperatorTok{+}\StringTok{ }\NormalTok{M)}
+\end{Highlighting}
+\end{Shaded}
+
+In our example, it would look like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.m <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(M_stress }\OperatorTok{~}\StringTok{ }\NormalTok{X_mindfulness)}
+\NormalTok{model.y <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Y_happiness }\OperatorTok{~}\StringTok{ }\NormalTok{X_mindfulness }\OperatorTok{+}\StringTok{ }\NormalTok{M_stress)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{mediate}{%
+\subsection{Mediate}\label{mediate}}
+
+Next, we call the \texttt{mediate} function with the following arguments:
+
+\begin{itemize}
+\item
+  \texttt{model.m} = \texttt{model.m}
+\item
+  \texttt{model.y} = \texttt{model.y}
+\item
+  \texttt{sims} = \emph{the number of resamples that you want to use}
+\item
+  \texttt{boot} = \texttt{TRUE}
+\item
+  \texttt{mediator} = \emph{your mediator variable, \textbf{in quotes} }
+\item
+  \texttt{treat} = \emph{your independent variable, \textbf{in quotes} }
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mediation_results <-}\StringTok{ }\KeywordTok{mediate}\NormalTok{(}\DataTypeTok{model.m =}\NormalTok{ model.m,}
+                       \DataTypeTok{model.y =}\NormalTok{ model.y,}
+                       \DataTypeTok{sims =} 
+                       \DataTypeTok{boot =} \OtherTok{TRUE}\NormalTok{,}
+                       \DataTypeTok{mediator =} \StringTok{"  "}\NormalTok{,}
+                       \DataTypeTok{treat =} \StringTok{"  "}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(mediation_results)}
+\end{Highlighting}
+\end{Shaded}
+
+In our example, it would look like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{full_mediation <-}\StringTok{ }\KeywordTok{mediate}\NormalTok{(}\DataTypeTok{model.m =}\NormalTok{ model.m,}
+                       \DataTypeTok{model.y =}\NormalTok{ model.y,}
+                       \DataTypeTok{sims =} \DecValTok{500}\NormalTok{,}
+                       \DataTypeTok{boot =} \OtherTok{TRUE}\NormalTok{,}
+                       \DataTypeTok{mediator =} \StringTok{"M_stress"}\NormalTok{,}
+                       \DataTypeTok{treat =} \StringTok{"X_mindfulness"}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(full_mediation)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{generating-datasets-to-interpret-outcomes}{%
+\section{Generating Datasets to Interpret Outcomes}\label{generating-datasets-to-interpret-outcomes}}
+
+Because there are various possible outcomes of a mediation analysis, it is useful to generate datasets to model and interpret each outcome. The possible results of a mediation analysis include a) full mediation, in which the effect of the independent variable on the dependent variable is completely explained by the mediator variable; b) partial mediation, in which in which the effect of the independent variable on the dependent variable is partially explained by the mediator variable, but the independent variable still has some direct effect on the dependent variable; and c) no mediation.
+
+Let's first look at the results of our running example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(mediation_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Causal Mediation Analysis 
+## 
+## Nonparametric Bootstrap Confidence Intervals with the Percentile Method
+## 
+##                Estimate 95% CI Lower 95% CI Upper p-value
+## ACME             0.0214      -0.0833         0.12    0.87
+## ADE              0.0391      -0.6306         0.69    0.98
+## Total Effect     0.0605      -0.6295         0.69    0.94
+## Prop. Mediated   0.3534      -2.3995         1.52    0.97
+## 
+## Sample Size Used: 100 
+## 
+## 
+## Simulations: 500
+\end{verbatim}
+
+\begin{itemize}
+\item
+  \texttt{ACME} is the Average Causal Mediation Effect, or the \textbf{indirect effect} (ab path)
+\item
+  \texttt{ADE} is the Average Direct Effect, or the \textbf{direct effect} (c' path)
+\item
+  \texttt{Total\ Effect} is the \textbf{total effect} (c path)
+\item
+  Our output also gives us confidence intervals and \emph{p} values for each of these effects
+\end{itemize}
+
+Because this data was generated randomly, it is likely that none of the effects are significant. If we impose a structure on our data when generating our example datasets, we can examine each of the possible outcomes of mediation.
+
+\hypertarget{full-mediation}{%
+\subsection{Full Mediation}\label{full-mediation}}
+
+In the case of full mediation, the relationship between mindfulness (X) and happiness (Y) is completely explained by stress (M).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Full Mediation}
+
+\NormalTok{X_mindfulness <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{50}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{50}\NormalTok{))}
+\NormalTok{Y_happiness <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{25}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{25}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{25}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{25}\NormalTok{))}
+\NormalTok{M_stress  <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{25}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{25}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{25}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{25}\NormalTok{))}
+
+\NormalTok{model.m <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(M_stress }\OperatorTok{~}\StringTok{ }\NormalTok{X_mindfulness)}
+\NormalTok{model.y <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Y_happiness }\OperatorTok{~}\StringTok{ }\NormalTok{X_mindfulness }\OperatorTok{+}\StringTok{ }\NormalTok{M_stress)}
+
+\KeywordTok{library}\NormalTok{(mediation)}
+\NormalTok{full_mediation <-}\StringTok{ }\KeywordTok{mediate}\NormalTok{(}\DataTypeTok{model.m =}\NormalTok{ model.m,}
+                       \DataTypeTok{model.y =}\NormalTok{ model.y,}
+                       \DataTypeTok{sims =} \DecValTok{500}\NormalTok{,}
+                       \DataTypeTok{boot =} \OtherTok{TRUE}\NormalTok{,}
+                       \DataTypeTok{mediator =} \StringTok{"M_stress"}\NormalTok{,}
+                       \DataTypeTok{treat =} \StringTok{"X_mindfulness"}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(full_mediation)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Causal Mediation Analysis 
+## 
+## Nonparametric Bootstrap Confidence Intervals with the Percentile Method
+## 
+##                 Estimate 95% CI Lower 95% CI Upper p-value    
+## ACME            2.00e+00     1.81e+00          2.2  <2e-16 ***
+## ADE            -2.33e-15    -4.07e-15          0.0    0.92    
+## Total Effect    2.00e+00     1.81e+00          2.2  <2e-16 ***
+## Prop. Mediated  1.00e+00     1.00e+00          1.0  <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Sample Size Used: 100 
+## 
+## 
+## Simulations: 500
+\end{verbatim}
+
+In this case, we know we have a full mediation because we have a significant total effect and indirect effect (ACME), but not a direct effect (ADE). The significant total effect tells us that X affects Y. The significant indirect effect tells us that there was a mediating effect of M. The non-significant direct effect tells us that all of the effect of X on Y was explained by M, showing a full mediation.
+
+\hypertarget{partial-mediation}{%
+\subsection{Partial Mediation}\label{partial-mediation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Partial Mediation}
+
+\NormalTok{X_mindfulness <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{50}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{50}\NormalTok{))}
+\NormalTok{Y_happiness <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{25}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{25}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{25}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{25}\NormalTok{))}
+\NormalTok{M_stress  <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{25}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{), }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{25}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{), }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{25}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{), }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{25}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+
+
+\NormalTok{model.m <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(M_stress }\OperatorTok{~}\StringTok{ }\NormalTok{X_mindfulness)}
+\NormalTok{model.y <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Y_happiness }\OperatorTok{~}\StringTok{ }\NormalTok{X_mindfulness }\OperatorTok{+}\StringTok{ }\NormalTok{M_stress)}
+
+\KeywordTok{library}\NormalTok{(mediation)}
+\NormalTok{partial_mediation <-}\StringTok{ }\KeywordTok{mediate}\NormalTok{(}\DataTypeTok{model.m =}\NormalTok{ model.m,}
+                       \DataTypeTok{model.y =}\NormalTok{ model.y,}
+                       \DataTypeTok{sims =} \DecValTok{500}\NormalTok{,}
+                       \DataTypeTok{boot =} \OtherTok{TRUE}\NormalTok{,}
+                       \DataTypeTok{mediator =} \StringTok{"M_stress"}\NormalTok{,}
+                       \DataTypeTok{treat =} \StringTok{"X_mindfulness"}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(partial_mediation)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Causal Mediation Analysis 
+## 
+## Nonparametric Bootstrap Confidence Intervals with the Percentile Method
+## 
+##                Estimate 95% CI Lower 95% CI Upper p-value    
+## ACME              0.400        0.267         0.57  <2e-16 ***
+## ADE               1.600        1.396         1.83  <2e-16 ***
+## Total Effect      2.000        1.819         2.21  <2e-16 ***
+## Prop. Mediated    0.200        0.134         0.28  <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Sample Size Used: 100 
+## 
+## 
+## Simulations: 500
+\end{verbatim}
+
+Here we know we have a partial mediation because we have a significant total effect, indirect effect (ACME), and direct effect (ADE). The significant total effect tells us that X affects Y. The significant indirect effect tells us that there was a mediating effect of M. The significant direct effect tells us that although there was a mediating effect of M, there was still a direct relationship between X and Y, showing a partial mediation.
+
+\hypertarget{no-mediation}{%
+\subsection{No Mediation}\label{no-mediation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# No Mediation}
+
+\NormalTok{X_mindfulness <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{50}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{50}\NormalTok{))}
+\NormalTok{Y_happiness <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{25}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{25}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{25}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{25}\NormalTok{))}
+\NormalTok{M_stress  <-}\StringTok{ }\KeywordTok{runif}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DataTypeTok{min =} \DecValTok{1}\NormalTok{, }\DataTypeTok{max =} \DecValTok{7}\NormalTok{)}
+
+\NormalTok{model.m <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(M_stress }\OperatorTok{~}\StringTok{ }\NormalTok{X_mindfulness)}
+\NormalTok{model.y <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Y_happiness }\OperatorTok{~}\StringTok{ }\NormalTok{X_mindfulness }\OperatorTok{+}\StringTok{ }\NormalTok{M_stress)}
+
+\KeywordTok{library}\NormalTok{(mediation)}
+\NormalTok{no_mediation <-}\StringTok{ }\KeywordTok{mediate}\NormalTok{(}\DataTypeTok{model.m =}\NormalTok{ model.m,}
+                       \DataTypeTok{model.y =}\NormalTok{ model.y,}
+                       \DataTypeTok{sims =} \DecValTok{500}\NormalTok{,}
+                       \DataTypeTok{boot =} \OtherTok{TRUE}\NormalTok{,}
+                       \DataTypeTok{mediator =} \StringTok{"M_stress"}\NormalTok{,}
+                       \DataTypeTok{treat =} \StringTok{"X_mindfulness"}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(no_mediation)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Causal Mediation Analysis 
+## 
+## Nonparametric Bootstrap Confidence Intervals with the Percentile Method
+## 
+##                Estimate 95% CI Lower 95% CI Upper p-value    
+## ACME            -0.0036      -0.0425         0.02    0.76    
+## ADE              2.0036       1.7942         2.22  <2e-16 ***
+## Total Effect     2.0000       1.7952         2.21  <2e-16 ***
+## Prop. Mediated  -0.0018      -0.0224         0.01    0.76    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Sample Size Used: 100 
+## 
+## 
+## Simulations: 500
+\end{verbatim}
+
+Here we know we have no mediation because we have a non-significant indirect effect (ACME), which means that the relationship between X and Y was not at all explained by M.
+
+\hypertarget{a-tutorial-for-using-the-lme-function-from-the-nlme-package.}{%
+\chapter{A tutorial for using the lme function from the nlme package.}\label{a-tutorial-for-using-the-lme-function-from-the-nlme-package.}}
+
+\textbf{Author: Melissa Horger}
+
+\hypertarget{the-nlme-package}{%
+\section{The nlme package}\label{the-nlme-package}}
+
+\textbf{nlme is a package for fitting and comparing linear and nonlinear mixed effects models.}
+
+It let's you specify variance-covariance structures for the residuals and is well suited for repeated measure or longitudinal designs.
+
+\hypertarget{similar-packages}{%
+\subsection{Similar packages}\label{similar-packages}}
+
+One similar package is lme4.
+It allows you to fit outcomes whose distribution is not Gaussian and crossed random effects.
+Some pros include that it stores data more effiently due to the use of sparse matrices and it works well with clustered data sets.
+
+\hypertarget{whats-included-in-nlme}{%
+\subsection{What's included in nlme?}\label{whats-included-in-nlme}}
+
+nlme contains sample data, statistical functions, matrices, and a lattice framework.
+
+\textbf{Examples of sample data}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  MathAchSchool
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A dataset (160x7) that contains school-level demographic data such as student enrollment, academic progress, and SES.
+  \end{itemize}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(nlme)}
+\KeywordTok{print}\NormalTok{(MathAchSchool[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{,])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      School Size   Sector PRACAD DISCLIM HIMINTY MEANSES
+## 1224   1224  842   Public   0.35   1.597       0  -0.428
+## 1288   1288 1855   Public   0.27   0.174       0   0.128
+## 1296   1296 1719   Public   0.32  -0.137       1  -0.420
+## 1308   1308  716 Catholic   0.96  -0.622       0   0.534
+## 1317   1317  455 Catholic   0.95  -1.694       1   0.351
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  BodyWeight
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A data set (176x4) describing the weight of rats over time while consuming different diets.
+  \end{itemize}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(BodyWeight[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{,])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Grouped Data: weight ~ Time | Rat
+##   weight Time Rat Diet
+## 1    240    1   1    1
+## 2    250    8   1    1
+## 3    255   15   1    1
+## 4    260   22   1    1
+## 5    262   29   1    1
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Earthquake
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A dataset (182x5) listing seismic measurements of 23 large earthquakes in western North America between 1940 and 1980
+  \end{itemize}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(Earthquake[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{,])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Grouped Data: accel ~ distance | Quake
+##     Quake Richter distance soil accel
+## 132    20       5      7.5    1 0.264
+## 133    20       5      8.8    1 0.263
+## 134    20       5      8.9    1 0.230
+## 135    20       5      9.4    1 0.147
+## 136    20       5      9.7    1 0.286
+\end{verbatim}
+
+\textbf{Examples of functions}
+1. anova.lme
+- This compares the likelihoods of fitted models. It will produce an AIC and BIC and can be used to compare null and predictive models or models with different predictors and/or interactions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova.lme}\NormalTok{(object, ..., }\DataTypeTok{test=}\OtherTok{TRUE}\NormalTok{,}\DataTypeTok{type =} \StringTok{"sequential/marginal"}\NormalTok{, adjustSigma, Terms, L, verbose)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  corMatrix
+  - A function to generate the correlation matrix of an object/dataset.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{corMatrix}\NormalTok{(object, ...)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  gapply
+  - Applies a function to a distinct set of rows in a data frame.
+  - To use this, the rows must first be identified using the ``groups'' function
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{gapply}\NormalTok{(object, which, FUN, form, level, groups, .)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  lme
+  - We will learn about this function extensively in the following sections
+\end{enumerate}
+
+\hypertarget{using-the-nlme-package}{%
+\subsection{Using the nlme package}\label{using-the-nlme-package}}
+
+\hypertarget{begin-by-installing-the-nlme-package}{%
+\subsubsection{Begin by installing the nlme package}\label{begin-by-installing-the-nlme-package}}
+
+Found on the CRAN repository
+
+Website: \url{https://svn.r-project.org/R-packages/trunk/nlme}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"nlme"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{load-the-package-and-other-relevant-packages}{%
+\subsubsection{Load the package (and other relevant packages)}\label{load-the-package-and-other-relevant-packages}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(nlme)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{the-lme-function}{%
+\section{The lme function}\label{the-lme-function}}
+
+This generic function fits a linear mixed-effects model in the formulation described in Laird and Ware (1982) but allowing for nested random effects. The within-group errors are allowed to be correlated and/or have unequal variances.
+
+\hypertarget{some-important-considerations}{%
+\subsection{Some important considerations}\label{some-important-considerations}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Need repeated measures from a single subject The data may be longitudinal, but they also may not.
+\item
+  Can account for correlations within individuals within the random effects
+\item
+  Uses maximum likelihood estimates
+\end{enumerate}
+
+\hypertarget{the-arguments-for-this-function}{%
+\subsection{The arguments for this function}\label{the-arguments-for-this-function}}
+
+lme(model, data, fixed, random, groups, start, correlation, weights,
+subset, method, na.action, naPattern, control, verbose)
+
+\hypertarget{an-example-does-the-number-of-daily-naps-impact-infant-performance-on-a-thing}{%
+\section{\texorpdfstring{\textbf{An example: Does the number of daily naps impact infant performance on a thing?}}{An example: Does the number of daily naps impact infant performance on a thing?}}\label{an-example-does-the-number-of-daily-naps-impact-infant-performance-on-a-thing}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#creating a data set }
+
+\NormalTok{Subs <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)), }\DecValTok{4}\NormalTok{)}
+
+\NormalTok{Month <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{), }\DecValTok{10}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{), }\DecValTok{10}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{), }\DecValTok{10}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{15}\NormalTok{), }\DecValTok{10}\NormalTok{))}
+
+\NormalTok{Naps <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{), }\DecValTok{10}\NormalTok{), }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{ ,}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{ )}
+
+\NormalTok{Napsfactor <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(Naps)}
+
+\CommentTok{#Let's assume that infants' performance will get better with time. I altered the possible sampling distributions to reflect this. }
+
+\NormalTok{scores <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{), }\KeywordTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{15}\NormalTok{), }\KeywordTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{22}\NormalTok{), }\KeywordTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{30}\NormalTok{))}
+
+
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(Subs, Month, Naps, scores, Napsfactor)}
+
+\CommentTok{#save(dataset,file="horger.RData")}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{load}\NormalTok{(}\StringTok{"data/horger.RData"}\NormalTok{)}
+
+\CommentTok{#Data should be set up in long format and look similar to this. }
+\KeywordTok{print}\NormalTok{(dataset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Subs Month Naps    scores Napsfactor
+## 1     1     1    3  1.204228          3
+## 2     2     1    3  4.215435          3
+## 3     3     1    3  6.530265          3
+## 4     4     1    3  3.651179          3
+## 5     5     1    3  2.085147          3
+## 6     6     1    3  4.913243          3
+## 7     7     1    3  2.683738          3
+## 8     8     1    3  3.372563          3
+## 9     9     1    3  4.621265          3
+## 10   10     1    3  3.105155          3
+## 11    1     5    2 13.572888          2
+## 12    2     5    3 10.021787          3
+## 13    3     5    2 14.754621          2
+## 14    4     5    1 11.818922          1
+## 15    5     5    2 13.203504          2
+## 16    6     5    3 12.327272          3
+## 17    7     5    2 13.829133          2
+## 18    8     5    3  9.144146          3
+## 19    9     5    2  9.209897          2
+## 20   10     5    3  8.146771          3
+## 21    1    10    2 20.521925          2
+## 22    2    10    2 19.207385          2
+## 23    3    10    2 19.908420          2
+## 24    4    10    2 21.929604          2
+## 25    5    10    3 16.036066          3
+## 26    6    10    3 19.170270          3
+## 27    7    10    2 16.097766          2
+## 28    8    10    2 17.480285          2
+## 29    9    10    1 20.111028          1
+## 30   10    10    2 18.278805          2
+## 31    1    15    3 23.089659          3
+## 32    2    15    1 26.585482          1
+## 33    3    15    2 24.839186          2
+## 34    4    15    2 24.917255          2
+## 35    5    15    1 23.046358          1
+## 36    6    15    1 28.955977          1
+## 37    7    15    2 26.056173          2
+## 38    8    15    1 28.870685          1
+## 39    9    15    2 26.720957          2
+## 40   10    15    1 26.898722          1
+\end{verbatim}
+
+\hypertarget{the-experimental-design.}{%
+\subsection{The experimental design.}\label{the-experimental-design.}}
+
+This is a 4x3 within subject design.
+Infants are assessed at 4 time points - 1 month, 5 months, 10 months, and 15 months.
+There are 3 levels of napping - 1, 2, or 3 naps per day.
+
+\hypertarget{data-analysis}{%
+\subsection{Data analysis}\label{data-analysis}}
+
+We will run a conditional growth model because we are including predictors. Subsequent fixed and random effects are now ``conditioned on'' the predictors (age and number of naps).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Conditional growth model}
+\NormalTok{tutorial<-}\KeywordTok{lme}\NormalTok{(scores }\OperatorTok{~}\StringTok{ }\NormalTok{Month }\OperatorTok{*}\StringTok{ }\NormalTok{Naps, }\DataTypeTok{random =} \OperatorTok{~}\StringTok{ }\NormalTok{Month }\OperatorTok{|}\StringTok{ }\NormalTok{Subs, }\DataTypeTok{data=}\NormalTok{dataset)}
+
+
+\CommentTok{#Because we are using a random sample, may need to rerun the scores several times for this piece of code to run effectively}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{lme(model, random, data)}
+
+\textbf{model} - scores \textasciitilde{} Month * Naps
+
+We expect scores will be influenced by how old infants are (Month) and the number of Naps they take per day. There may be an interaction between these predictors.
+
+\textbf{random} - random = \textasciitilde{} Month \textbar{} Subs
+
+Random error comes from the fact that this is a within subjects design. The same infants are assessed at 1 month, 5 months, 10 months, and 15 months.
+
+\textbf{data} - data=dataset
+
+Using the data set we created previously.
+
+\hypertarget{displaying-our-results}{%
+\subsection{Displaying our results}\label{displaying-our-results}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tutorial}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed-effects model fit by REML
+##   Data: dataset 
+##   Log-restricted-likelihood: -81.67538
+##   Fixed: scores ~ Month * Naps 
+## (Intercept)       Month        Naps  Month:Naps 
+##  10.8206754   1.1464573  -2.8094967   0.1105195 
+## 
+## Random effects:
+##  Formula: ~Month | Subs
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev       Corr  
+## (Intercept) 4.728576e-01 (Intr)
+## Month       1.238514e-05 0     
+## Residual    1.732905e+00       
+## 
+## Number of Observations: 40
+## Number of Groups: 10
+\end{verbatim}
+
+We can move the results to a nicer table using the summary function
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#summarize an lme object - our solution}
+\NormalTok{tut <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(tutorial)}
+\NormalTok{tabl =}\StringTok{ }\NormalTok{tut}\OperatorTok{$}\NormalTok{tTable }
+\NormalTok{tabl }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  Value  Std.Error DF   t-value      p-value
+## (Intercept) 10.8206754 2.59927655 27  4.162957 2.872090e-04
+## Month        1.1464573 0.21022323 27  5.453523 9.028044e-06
+## Naps        -2.8094967 0.92823701 27 -3.026702 5.381092e-03
+## Month:Naps   0.1105195 0.08248428 27  1.339886 1.914511e-01
+\end{verbatim}
+
+From this analysis, we would conclude that there is a main effect of age, infants performance improved with age, but there is no effect of number of naps. It was trending in the correct direction as the only negative slope.
+
+\hypertarget{graphing-our-results}{%
+\subsection{Graphing our results}\label{graphing-our-results}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\NormalTok{plot<-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(dataset, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Month, }\DataTypeTok{y=}\NormalTok{scores,  }\DataTypeTok{color=}\NormalTok{Napsfactor, }\DataTypeTok{shape =}\NormalTok{ Napsfactor, }\DataTypeTok{group =}\NormalTok{ Subs), }\KeywordTok{xlim}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{15}\NormalTok{), }\KeywordTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{25}\NormalTok{), }\KeywordTok{xlab}\NormalTok{(Month) ) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{)}
+
+\NormalTok{plot }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{name=}\StringTok{"Age (in months)"}\NormalTok{, }\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{15}\NormalTok{), }\DataTypeTok{breaks =}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{15}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{name=}\StringTok{"Scores"}\NormalTok{, }\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{30}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+This kind of graph allows us to see the developmental trajectory of individual infants. It highlights the fact that there are 2 developmental trends occuring here- Infants' performance on the assessment is improving with time and the average number of naps they take is decreasing with time.
+
+\hypertarget{continuing-our-example-single-main-effect-versus-two-main-effects-or-an-interaction}{%
+\section{Continuing our example: Single main effect versus two main effects or an interaction}\label{continuing-our-example-single-main-effect-versus-two-main-effects-or-an-interaction}}
+
+When making the original data set, I intentionally biased the data to show a developmental curve by increasing the sampling distribution for each age range. I could do something similar to bias our data to support the impact of taking fewer naps
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Create a new data set }
+\NormalTok{Subs <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{)), }\DecValTok{4}\NormalTok{)}
+
+\NormalTok{Month <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{), }\DecValTok{10}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{), }\DecValTok{10}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{), }\DecValTok{10}\NormalTok{), }\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{15}\NormalTok{), }\DecValTok{10}\NormalTok{))}
+
+\NormalTok{Naps <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{), }\DecValTok{10}\NormalTok{), }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{ ,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,  }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{Napsfactor <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(Naps)}
+
+\NormalTok{secondscores <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{), }\KeywordTok{runif}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{),}\KeywordTok{runif}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{17}\NormalTok{), }\KeywordTok{runif}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{), }\KeywordTok{runif}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{14}\NormalTok{, }\DecValTok{22}\NormalTok{), }\KeywordTok{runif}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{), }\KeywordTok{runif}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{23}\NormalTok{), }\KeywordTok{runif}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{22}\NormalTok{, }\DecValTok{27}\NormalTok{), }\KeywordTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{27}\NormalTok{, }\DecValTok{30}\NormalTok{) )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seconddataset <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(Subs, Month, Naps, secondscores, Napsfactor)}
+\CommentTok{#save(seconddataset, file="horger2.RData")}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{load}\NormalTok{(}\StringTok{"data/horger2.Rdata"}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(seconddataset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Subs Month Naps secondscores Napsfactor
+## 1     1     1    3     7.621794          3
+## 2     2     1    3     7.794263          3
+## 3     3     1    3     3.168637          3
+## 4     4     1    3     3.415735          3
+## 5     5     1    3     8.465790          3
+## 6     6     1    3     7.971604          3
+## 7     7     1    3     8.553510          3
+## 8     8     1    3     7.115589          3
+## 9     9     1    3     8.379775          3
+## 10   10     1    3     8.840234          3
+## 11    1     5    3     7.416176          3
+## 12    2     5    3     7.583637          3
+## 13    3     5    3     5.250097          3
+## 14    4     5    3     6.014483          3
+## 15    5     5    3     5.372417          3
+## 16    6     5    2     9.927262          2
+## 17    7     5    2    12.315161          2
+## 18    8     5    2    13.054388          2
+## 19    9     5    2    15.337895          2
+## 20   10     5    2     9.226133          2
+## 21    1    10    3    10.863713          3
+## 22    2    10    3    12.495100          3
+## 23    3    10    3    10.480098          3
+## 24    4    10    2    20.347891          2
+## 25    5    10    2    16.173209          2
+## 26    6    10    2    20.144221          2
+## 27    7    10    2    14.771556          2
+## 28    8    10    2    20.676701          2
+## 29    9    10    1    23.473947          1
+## 30   10    10    1    21.244746          1
+## 31    1    15    2    22.276560          2
+## 32    2    15    2    21.167274          2
+## 33    3    15    2    22.405964          2
+## 34    4    15    2    19.556372          2
+## 35    5    15    2    18.950262          2
+## 36    6    15    1    25.115982          1
+## 37    7    15    1    23.578970          1
+## 38    8    15    1    23.747330          1
+## 39    9    15    1    26.066104          1
+## 40   10    15    1    28.513882          1
+\end{verbatim}
+
+\hypertarget{did-the-manipulation-work}{%
+\subsection{Did the manipulation work?}\label{did-the-manipulation-work}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Summary stats from our first dataset}
+\NormalTok{demos <-}\StringTok{ }\NormalTok{dataset }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{group_by}\NormalTok{(Month, Naps) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_score =} \KeywordTok{mean}\NormalTok{(scores, }\DataTypeTok{na.rm=}\OtherTok{TRUE}\NormalTok{))}
+
+
+
+\CommentTok{#Summary stats from our second dataset}
+\NormalTok{seconddemos <-}\StringTok{ }\NormalTok{seconddataset }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{group_by}\NormalTok{(Month, Naps) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_secondscore =} \KeywordTok{mean}\NormalTok{(secondscores, }\DataTypeTok{na.rm=}\OtherTok{TRUE}\NormalTok{))}
+
+
+\KeywordTok{print}\NormalTok{(demos)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 3
+## # Groups:   Month [4]
+##    Month  Naps mean_score
+##    <dbl> <dbl>      <dbl>
+##  1     1     3       3.64
+##  2     5     1      11.8 
+##  3     5     2      12.9 
+##  4     5     3       9.91
+##  5    10     1      20.1 
+##  6    10     2      19.1 
+##  7    10     3      17.6 
+##  8    15     1      26.9 
+##  9    15     2      25.6 
+## 10    15     3      23.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(seconddemos)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 8 x 3
+## # Groups:   Month [4]
+##   Month  Naps mean_secondscore
+##   <dbl> <dbl>            <dbl>
+## 1     1     3             7.13
+## 2     5     2            12.0 
+## 3     5     3             6.33
+## 4    10     1            22.4 
+## 5    10     2            18.4 
+## 6    10     3            11.3 
+## 7    15     1            25.4 
+## 8    15     2            20.9
+\end{verbatim}
+
+It may or may not because we're still drawing a random sample, but the trend should be clearer than during the first example.
+
+\#\#\#Now run the analysis again
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Run the analysis again }
+
+\NormalTok{secondtutorial <-}\StringTok{ }\KeywordTok{lme}\NormalTok{(secondscores }\OperatorTok{~}\StringTok{ }\NormalTok{Month }\OperatorTok{*}\StringTok{ }\NormalTok{Naps, }\DataTypeTok{random =} \OperatorTok{~}\StringTok{ }\NormalTok{Month }\OperatorTok{|}\StringTok{ }\NormalTok{Subs, }\DataTypeTok{data=}\NormalTok{seconddataset)}
+
+\NormalTok{secondtutorial}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed-effects model fit by REML
+##   Data: seconddataset 
+##   Log-restricted-likelihood: -90.36513
+##   Fixed: secondscores ~ Month * Naps 
+## (Intercept)       Month        Naps  Month:Naps 
+##  16.8803891   1.0208719  -3.7260738  -0.1487096 
+## 
+## Random effects:
+##  Formula: ~Month | Subs
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev       Corr  
+## (Intercept) 1.694427e-04 (Intr)
+## Month       2.301061e-15 0     
+## Residual    2.291816e+00       
+## 
+## Number of Observations: 40
+## Number of Groups: 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Create a table }
+\NormalTok{secondtut<-}\StringTok{ }\KeywordTok{summary}\NormalTok{(secondtutorial)}
+\NormalTok{secondtabl =}\StringTok{ }\NormalTok{secondtut}\OperatorTok{$}\NormalTok{tTable }
+\NormalTok{secondtabl }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  Value Std.Error DF   t-value      p-value
+## (Intercept) 16.8803891 4.0453977 27  4.172739 0.0002798284
+## Month        1.0208719 0.3172138 27  3.218246 0.0033430373
+## Naps        -3.7260738 1.4256854 27 -2.613531 0.0144718579
+## Month:Naps  -0.1487096 0.1227206 27 -1.211774 0.2360974216
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Graph the results }
+\NormalTok{secondplot<-}
+\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(seconddataset, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Month, }\DataTypeTok{y=}\NormalTok{secondscores,  }\DataTypeTok{color=}\NormalTok{Napsfactor, }\DataTypeTok{shape =}\NormalTok{ Napsfactor, }\DataTypeTok{group=}\NormalTok{Subs), }\KeywordTok{xlim}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{15}\NormalTok{), }\KeywordTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{25}\NormalTok{), }\KeywordTok{xlab}\NormalTok{(Month) ) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{( }\DataTypeTok{color=}\StringTok{"grey"}\NormalTok{)}
+
+\NormalTok{secondplot }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{name=}\StringTok{"Age (in months)"}\NormalTok{, }\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{15}\NormalTok{), }\DataTypeTok{breaks =}\NormalTok{ Month) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{name=}\StringTok{"Scores"}\NormalTok{, }\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{30}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-35-1.pdf}
+
+\hypertarget{plot-the-residuals}{%
+\section{Plot the residuals}\label{plot-the-residuals}}
+
+We can check the residuals to judge the fit of our models. The second tutorial should fit better because we set the data up that way.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(tutorial)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(secondtutorial)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-36-2.pdf}
+
+Remember, for a well fitting regression, we want the plot of our residuals to meet the following criteria:
+(1) they're pretty symmetrically distributed
+(2) they're relatively small and
+(3) they don't follow a clear pattern
+
+The second plot seems to meet these qualifications.
+
+\hypertarget{writing-up-our-results}{%
+\section{Writing up our results}\label{writing-up-our-results}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(secondtutorial)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed-effects model fit by REML
+##  Data: seconddataset 
+##        AIC      BIC    logLik
+##   196.7303 209.3984 -90.36513
+## 
+## Random effects:
+##  Formula: ~Month | Subs
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev       Corr  
+## (Intercept) 1.694427e-04 (Intr)
+## Month       2.301061e-15 0     
+## Residual    2.291816e+00       
+## 
+## Fixed effects: secondscores ~ Month * Naps 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 16.880389  4.045398 27  4.172739  0.0003
+## Month        1.020872  0.317214 27  3.218246  0.0033
+## Naps        -3.726074  1.425685 27 -2.613531  0.0145
+## Month:Naps  -0.148710  0.122721 27 -1.211774  0.2361
+##  Correlation: 
+##            (Intr) Month  Naps  
+## Month      -0.935              
+## Naps       -0.985  0.936       
+## Month:Naps  0.818 -0.947 -0.861
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -1.6665261 -0.6414693 -0.1440354  0.8827551  1.7514202 
+## 
+## Number of Observations: 40
+## Number of Groups: 10
+\end{verbatim}
+
+A linear mixed effects model and conditional growth curve analysis was used to analyze infants' scores at 1, 5, 10, and 15 months old. Their scores were modeled with fixed effects of Month and Naps (1, 2, or 3) and random error to account for the within subjects design.There was a significant effect of Month- scores increased with age (Estimate= , SE= , p= ).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Estimate = }
+\NormalTok{secondtabl[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.020872
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#SE = }
+\NormalTok{secondtabl[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3172138
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#p = }
+\NormalTok{secondtabl[}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.003343037
+\end{verbatim}
+
+There was also a significant effect of Naps with fewer naps associated with better scores over time (Estimate= , SE= , p= ).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Estimate = }
+\NormalTok{secondtabl[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -3.726074
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#SE = }
+\NormalTok{secondtabl[}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.425685
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#p = }
+\NormalTok{secondtabl[}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01447186
+\end{verbatim}
+
+The interaction was not significant.
+
+\hypertarget{data-shaping-using-reshape2-and-stats-packages}{%
+\chapter{Data Shaping using Reshape(2) and Stats Packages}\label{data-shaping-using-reshape2-and-stats-packages}}
+
+\textbf{Author: Aira Contreras}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Research data sets can be overwrought with information that may not be of interest to the researcher; on one hand it could be that the researcher is using data sets from experiments or studies that were not conducted directly by them and therefore needs to carefully choose variables, or perhaps there were too many variables collected during the study and a particular analysis only requires a select few. It is also possible that the analysis software is only able to process the data if it is fed into the input in a certain manner. Whatever the limitations are, data shaping is a key step in data analysis and there are many tools available to assist with this task. R programmers have acknowledged the need for CRAN approved packages that aid with this endeavor and since 2003 have created packages such as Reshape to help others. This section will focus on the functionalities of the Reshape2 package distributed in 2012 by Hadley Wickham and the Stats 2001 by the R Core Team.
+
+\hypertarget{different-data-inputs}{%
+\section{Different Data Inputs}\label{different-data-inputs}}
+
+Data input formats, for the purposes of this exercise, exist mainly in 2 forms: \emph{wide format} or \emph{long format}. It is important to understand what format the data is in prior to re-shaping or performing an analysis. This will allow you to correctly reshape the data prior to analysis or input into the software correctly. The next subsections describe the differences between the 2 formats and provide a visual example of the formats.
+
+\hypertarget{long-format}{%
+\subsection{Long Format}\label{long-format}}
+
+Data is described to be in \textbf{long format} when each row represents 1 time point or variable. For example, if an experiment collected information on state population, state mortality, and state income then the output would be the state (e.g.~California) and the variable (e.g.~Income) in the first row, the state (e.g.~California) and and the variable (e.g.~Mortality) in the next row, and so forth until a full data output is created.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#install.packages("reshape2")}
+\CommentTok{#install.packages("dplyr")}
+\KeywordTok{library}\NormalTok{(reshape2)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{SubjectID<-}\DecValTok{1}\OperatorTok{:}\DecValTok{50}
+\NormalTok{df<-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(SubjectID,state.x77)}
+\NormalTok{example<-}\KeywordTok{melt}\NormalTok{(df,}\DataTypeTok{id=}\StringTok{"SubjectID"}\NormalTok{)}
+\NormalTok{ex<-example}\OperatorTok{%>%}\KeywordTok{filter}\NormalTok{(SubjectID}\OperatorTok{==}\DecValTok{1}\NormalTok{)}
+\NormalTok{ex}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   SubjectID   variable    value
+## 1         1 Population  3615.00
+## 2         1     Income  3624.00
+## 3         1 Illiteracy     2.10
+## 4         1   Life.Exp    69.05
+## 5         1     Murder    15.10
+## 6         1    HS.Grad    41.30
+## 7         1      Frost    20.00
+## 8         1       Area 50708.00
+\end{verbatim}
+
+This example demonstrates that all of the rows, which measure a distinct variable with its corresponding value, belong to 1 subject (i.e.~1). This format is useful for analysis of repeated measures experiments in which the same subject may be asked about different benchmarks during the course of the experiment.
+
+\hypertarget{wide-format}{%
+\subsection{Wide Format}\label{wide-format}}
+
+Data is described to be in \textbf{wide format} when each row represents all of the individual variable responses for 1 subjected, separated by column. For example, if an experiment collected information on subjected responses at different intervals then the output would be the subject (e.g.~1) and the responses at each interval in separate columns (e.g.~inter1, inter2, inter3, etc.) in the first row, the next subject (e.g.~2) and the responses at each interval in separate columns (e.g.~inter1, inter2, etc.) in the next row and so fhorth until a full data output is created.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wide <-}\StringTok{ }\KeywordTok{reshape}\NormalTok{(Indometh, }\DataTypeTok{v.names =} \StringTok{"conc"}\NormalTok{, }\DataTypeTok{idvar =} \StringTok{"Subject"}\NormalTok{,}
+                \DataTypeTok{timevar =} \StringTok{"time"}\NormalTok{, }\DataTypeTok{direction =} \StringTok{"wide"}\NormalTok{)}
+\NormalTok{wide[,}\DecValTok{1}\OperatorTok{:}\DecValTok{8}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Subject conc.0.25 conc.0.5 conc.0.75 conc.1 conc.1.25 conc.2 conc.3
+## 1        1      1.50     0.94      0.78   0.48      0.37   0.19   0.12
+## 12       2      2.03     1.63      0.71   0.70      0.64   0.36   0.32
+## 23       3      2.72     1.49      1.16   0.80      0.80   0.39   0.22
+## 34       4      1.85     1.39      1.02   0.89      0.59   0.40   0.16
+## 45       5      2.05     1.04      0.81   0.39      0.30   0.23   0.13
+## 56       6      2.31     1.44      1.03   0.84      0.64   0.42   0.24
+\end{verbatim}
+
+This example demonstrates that all of the rows show a distinct subject with the distinct variable measures in each individual column.
+
+\hypertarget{reshape2-package-functions}{%
+\section{Reshape2 Package Functions}\label{reshape2-package-functions}}
+
+The Reshape2 package contains various functions that helps users place their data into either the \emph{long format} or the \emph{wide format} depending on what is needed by the software being used for analysis. Though there are many functions availalble and it is encouraged that all functions are reviewed (you can do so here: \url{https://cran.r-project.org/web/packages/reshape2/reshape2.pdf}), the primary focus of this section will be on the use of the \textbf{melt()} and \textbf{cast()} functions. For proper use and data reshaping, the functions are ideally used in tandem, though as shown above, they can be used separately (i.e.~only the melt function used for the separation of some data from others).
+
+\hypertarget{melt}{%
+\subsection{melt()}\label{melt}}
+
+As it implies, the melt function strips away variables and/or structures from existing data sets and prepares the data for the cast function (or for analysis). Depending on the type of data that you may have (array, data frame, matrix), \textbf{melt()} should be able to accommodate the breakdown or reshaping of the data. A check for the use of the function called \emph{melt\_check()} is purported to exist, but the documentation on how to use this function is bare and I currently cannot make it run.
+
+\hypertarget{meltmelt.defaultmelt.data.frame}{%
+\subsubsection{melt()/melt.default()/melt.data.frame()}\label{meltmelt.defaultmelt.data.frame}}
+
+The melt function requires the following inputs at minimum to work \emph{melt(data,Subject Name Code Column, Variable Column Names in List Form)}. As is, the function does not remove any missing values (na.rm = FALSE), so if it is necessary to remove missing values from the data set, this should be done prior to the use of melt() or na.rm should be set as equal to \textbf{TRUE}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(airquality)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Ozone Solar.R Wind Temp Month Day
+## 1    41     190  7.4   67     5   1
+## 2    36     118  8.0   72     5   2
+## 3    12     149 12.6   74     5   3
+## 4    18     313 11.5   62     5   4
+## 5    NA      NA 14.3   56     5   5
+## 6    28      NA 14.9   66     5   6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(airquality) <-}\StringTok{ }\KeywordTok{tolower}\NormalTok{(}\KeywordTok{names}\NormalTok{(airquality))}
+\NormalTok{aqm <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(airquality, }\DataTypeTok{id=}\KeywordTok{c}\NormalTok{(}\StringTok{"month"}\NormalTok{, }\StringTok{"day"}\NormalTok{), }\DataTypeTok{na.rm=}\OtherTok{TRUE}\NormalTok{)}
+
+\KeywordTok{head}\NormalTok{(aqm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   month day variable value
+## 1     5   1    ozone    41
+## 2     5   2    ozone    36
+## 3     5   3    ozone    12
+## 4     5   4    ozone    18
+## 6     5   6    ozone    28
+## 7     5   7    ozone    23
+\end{verbatim}
+
+The air quality data set contained 4 measured variables (Ozone, Solar.R, Wind, and Temp) over 2 time metrics (Month, Day). Using melt(), the data set was reshaped in aqm to show Month and Day as the independent variables, with the dependent variables Ozone, Solar R., Wind, and Temp shown as the dependent variables with their corresponding measurments. Note that because we did not specify the measured variable, all of the variables not designated as independent variables were designated as measured variables. In order to select specific measured/dependent variables, it is necessary to specify them as shown in the example below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{aqm2 <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(airquality, }\DataTypeTok{id=}\KeywordTok{c}\NormalTok{(}\StringTok{"month"}\NormalTok{, }\StringTok{"day"}\NormalTok{),}\DataTypeTok{measure.vars =} \StringTok{"ozone"}\NormalTok{, }\DataTypeTok{na.rm=}\OtherTok{TRUE}\NormalTok{)}
+
+\KeywordTok{head}\NormalTok{(aqm2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   month day variable value
+## 1     5   1    ozone    41
+## 2     5   2    ozone    36
+## 3     5   3    ozone    12
+## 4     5   4    ozone    18
+## 6     5   6    ozone    28
+## 7     5   7    ozone    23
+\end{verbatim}
+
+Here, again, the columns are the same as the aqm data set, however, because we specify \emph{ozone} as the measured variable, only ozone will appear in the data set aqm2.
+
+\hypertarget{melt.array}{%
+\subsubsection{melt.array()}\label{melt.array}}
+
+If the data you are working with is presented in an \emph{array} as opposed to a data frame or matrix (meaning that there are a fixed number of values of a sinlge type) then you can use the melt.array() feature.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a <-}\StringTok{ }\KeywordTok{array}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{23}\NormalTok{, }\OtherTok{NA}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{))}
+
+\NormalTok{a[,,}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## , , 1
+## 
+##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6
+## 
+## , , 2
+## 
+##      [,1] [,2] [,3]
+## [1,]    7    9   11
+## [2,]    8   10   12
+\end{verbatim}
+
+The above is an example of a random array that was created with 3 dimensions (row, column, depth).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{melt}\NormalTok{(a)[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Var1 Var2 Var3 value
+## 1     1    1    1     1
+## 2     2    1    1     2
+## 3     1    2    1     3
+## 4     2    2    1     4
+## 5     1    3    1     5
+## 6     2    3    1     6
+## 7     1    1    2     7
+## 8     2    1    2     8
+## 9     1    2    2     9
+## 10    2    2    2    10
+\end{verbatim}
+
+Using the function melt, without any additional indicators will break the data down and out of the current structures that hold them. The first 3 columns represent the location of the data and the fourth column indicates the value in that given location. Based on the data output provided, it can be very easy to get lost or make mistakes. Additional data commands that name the columns may be helpful to keep track of the data as shown below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{melt}\NormalTok{(a, }\DataTypeTok{varnames =} \KeywordTok{c}\NormalTok{(}\StringTok{"X"}\NormalTok{,}\StringTok{"Y"}\NormalTok{,}\StringTok{"Z"}\NormalTok{))[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    X Y Z value
+## 1  1 1 1     1
+## 2  2 1 1     2
+## 3  1 2 1     3
+## 4  2 2 1     4
+## 5  1 3 1     5
+## 6  2 3 1     6
+## 7  1 1 2     7
+## 8  2 1 2     8
+## 9  1 2 2     9
+## 10 2 2 2    10
+\end{verbatim}
+
+\hypertarget{cast}{%
+\subsection{cast()}\label{cast}}
+
+The \textbf{cast()} function is what allows us to shape the data after we have melted it down into the ideal formats that are needed. The options exist to run \emph{dcast()} or \emph{acast()}. As you can imagine, the \textbf{dcast()} function best serves those that are intending to have a data frame or matrix output.
+
+\hypertarget{acast}{%
+\subsubsection{acast()}\label{acast}}
+
+According to the README, the cast function provides outputs in the following format: x\_var+x\_2\textsubscript{y\_var+y\_2}z\_var. Though it may be an easy format to understand, it was not sufficient of an explanation for some. As such, please refer to the example below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{acast}\NormalTok{(aqm, day }\OperatorTok{~}\StringTok{ }\NormalTok{month }\OperatorTok{~}\StringTok{ }\NormalTok{variable)[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{,,}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## , , ozone
+## 
+##     5  6   7   8  9
+## 1  41 NA 135  39 96
+## 2  36 NA  49   9 78
+## 3  12 NA  32  16 73
+## 4  18 NA  NA  78 91
+## 5  NA NA  64  35 47
+## 6  28 NA  40  66 32
+## 7  23 29  77 122 20
+## 8  19 NA  97  89 23
+## 9   8 71  97 110 21
+## 10 NA 39  85  NA 24
+## 
+## , , solar.r
+## 
+##      5   6   7   8   9
+## 1  190 286 269  83 167
+## 2  118 287 248  24 197
+## 3  149 242 236  77 183
+## 4  313 186 101  NA 189
+## 5   NA 220 175  NA  95
+## 6   NA 264 314  NA  92
+## 7  299 127 276 255 252
+## 8   99 273 267 229 220
+## 9   19 291 272 207 230
+## 10 194 323 175 222 259
+\end{verbatim}
+
+As demonstrated from the data output above, the cast() function shaped the data such that the months are the column headers, divided across days in the rows, and then by variable as the overall ``topic''.
+
+It is also possible to cast the data in such a way that the averages are obtained.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{acast}\NormalTok{(aqm, month }\OperatorTok{~}\StringTok{ }\NormalTok{variable, mean, }\DataTypeTok{margins =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          ozone  solar.r      wind     temp    (all)
+## 5     23.61538 181.2963 11.622581 65.54839 68.70696
+## 6     29.44444 190.1667 10.266667 79.10000 87.38384
+## 7     59.11538 216.4839  8.941935 83.90323 93.49748
+## 8     59.96154 171.8571  8.793548 83.96774 79.71207
+## 9     31.44828 167.4333 10.180000 76.90000 71.82689
+## (all) 42.12931 185.9315  9.957516 77.88235 80.05722
+\end{verbatim}
+
+In the above example, the data once again separated by what was indicated (e.g.~month and variable). We have added however, that the mean of these variables for each month be calculated and additionally, by adding the \emph{margins = TRUE} command, we have asked for the means of each row to be included.
+
+Overall, the takeaway for how to use cast should be as follows: acast(melted data set, rowvariablename\textsubscript{columnvariablename}OPTIONALvariableinformationisseparatedby,\ldots{}ANYOTHERCOMMANDS,MARGINS).
+
+\hypertarget{dcast}{%
+\subsubsection{dcast()}\label{dcast}}
+
+Similar to \emph{acast()}, \textbf{dcast()} reforms the data, however, it places it into a data fram or matrix format.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dcast}\NormalTok{(aqm, month }\OperatorTok{~}\StringTok{ }\NormalTok{variable, mean, }\DataTypeTok{margins =} \KeywordTok{c}\NormalTok{(}\StringTok{"month"}\NormalTok{, }\StringTok{"variable"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   month    ozone  solar.r      wind     temp    (all)
+## 1     5 23.61538 181.2963 11.622581 65.54839 68.70696
+## 2     6 29.44444 190.1667 10.266667 79.10000 87.38384
+## 3     7 59.11538 216.4839  8.941935 83.90323 93.49748
+## 4     8 59.96154 171.8571  8.793548 83.96774 79.71207
+## 5     9 31.44828 167.4333 10.180000 76.90000 71.82689
+## 6 (all) 42.12931 185.9315  9.957516 77.88235 80.05722
+\end{verbatim}
+
+To use a different data set, the example below takes data from the ChickWeight set and melts it down and casts it as a data frame that displays only the time (row) and variable (column) and the corresponding means.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(ChickWeight)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Grouped Data: weight ~ Time | Chick
+##   weight Time Chick Diet
+## 1     42    0     1    1
+## 2     51    2     1    1
+## 3     59    4     1    1
+## 4     64    6     1    1
+## 5     76    8     1    1
+## 6     93   10     1    1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(ChickWeight) <-}\StringTok{ }\KeywordTok{tolower}\NormalTok{(}\KeywordTok{names}\NormalTok{(ChickWeight))}
+\NormalTok{chick_m <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(ChickWeight, }\DataTypeTok{id=}\DecValTok{2}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\DataTypeTok{na.rm=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{dcast}\NormalTok{(chick_m, time }\OperatorTok{~}\StringTok{ }\NormalTok{variable, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    time    weight
+## 1     0  41.06000
+## 2     2  49.22000
+## 3     4  59.95918
+## 4     6  74.30612
+## 5     8  91.24490
+## 6    10 107.83673
+## 7    12 129.24490
+## 8    14 143.81250
+## 9    16 168.08511
+## 10   18 190.19149
+## 11   20 209.71739
+## 12   21 218.68889
+\end{verbatim}
+
+\hypertarget{stats-package-functions}{%
+\section{Stats Package Functions}\label{stats-package-functions}}
+
+The Stats package contains various functions that helps users place their data into either the \emph{long format} or the \emph{wide format} depending on what is needed by the software being used for analysis. Though there are many functions availalble and it is encouraged that all functions are reviewed (you can do so here: \url{https://www.rdocumentation.org/packages/stats/versions/3.6.0}), the primary focus of this section will be on the use of the \textbf{reshape()} function.
+
+\hypertarget{reshape}{%
+\subsection{Reshape()}\label{reshape}}
+
+More readily than the melt() and cast() functions, reshape is able to guid the direction of the data as it reshapes and rebuilds the data set as indicated.
+
+The reshape() functions require the basic inputs the melt() function did, with the added input of direction, which indicates whether the dataset should be a long format data set or a wide format dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wide <-}\StringTok{ }\KeywordTok{reshape}\NormalTok{(Indometh, }\DataTypeTok{v.names =} \StringTok{"conc"}\NormalTok{, }\DataTypeTok{idvar =} \StringTok{"Subject"}\NormalTok{,}
+                \DataTypeTok{timevar =} \StringTok{"time"}\NormalTok{, }\DataTypeTok{direction =} \StringTok{"wide"}\NormalTok{)}
+\NormalTok{wide[,}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Subject conc.0.25 conc.0.5 conc.0.75 conc.1
+## 1        1      1.50     0.94      0.78   0.48
+## 12       2      2.03     1.63      0.71   0.70
+## 23       3      2.72     1.49      1.16   0.80
+## 34       4      1.85     1.39      1.02   0.89
+## 45       5      2.05     1.04      0.81   0.39
+## 56       6      2.31     1.44      1.03   0.84
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{state.x77 <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(state.x77)}
+\NormalTok{long <-}\StringTok{ }\KeywordTok{reshape}\NormalTok{(state.x77, }\DataTypeTok{idvar =} \StringTok{"state"}\NormalTok{, }\DataTypeTok{ids =} \KeywordTok{row.names}\NormalTok{(state.x77),}
+                \DataTypeTok{times =} \KeywordTok{names}\NormalTok{(state.x77), }\DataTypeTok{timevar =} \StringTok{"Characteristic"}\NormalTok{,}
+                \DataTypeTok{varying =} \KeywordTok{list}\NormalTok{(}\KeywordTok{names}\NormalTok{(state.x77)), }\DataTypeTok{direction =} \StringTok{"long"}\NormalTok{)}
+\NormalTok{longa<-long}\OperatorTok{%>%}\KeywordTok{filter}\NormalTok{(state}\OperatorTok{==}\StringTok{"Alabama"}\NormalTok{)}
+
+\NormalTok{longa}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Characteristic Population   state
+## 1     Population    3615.00 Alabama
+## 2         Income    3624.00 Alabama
+## 3     Illiteracy       2.10 Alabama
+## 4       Life Exp      69.05 Alabama
+## 5         Murder      15.10 Alabama
+## 6        HS Grad      41.30 Alabama
+## 7          Frost      20.00 Alabama
+## 8           Area   50708.00 Alabama
+\end{verbatim}
+
+\hypertarget{summary}{%
+\section{Summary}\label{summary}}
+
+Data reshaping is important and there are many tools availalbe to assist users in re-formatting the data sets they have available. In addition to the packages discussed above, other packages have been developed by other R users to facilitate this process; the next generation of ReShape can be found in the tidyr package, and other packages like psych, include tools that help reformat data. Additionally with the use of additional packages like dplyr and forcats, additional power is added to the ability of the user to format and reformat as needed.
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+Kabacoff, R. I. (n.d.). Qhick-R: Reshape. Retrieved May 03, 2019, from \url{https://www.statmethods.net/management/reshape.html}
+
+Wickham, H. (2012). reshape2: Flexibly reshape data: a reboot of the reshape package. R package version, 1(2).
+
+Martin, K. G. (n.d.). The Wide and Long Data Format for Repeated Measures Data. Retrieved May 03, 2019, from \url{https://www.theanalysisfactor.com/wide-and-long-data/}
+
+R Core Team (2012). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. ISBN 3-900051-07-0, URL \url{http://www.R-project.org/}
+
+\hypertarget{how-to-annotate-a-graph-using-gg-signif}{%
+\chapter{How to Annotate a Graph Using GG Signif"}\label{how-to-annotate-a-graph-using-gg-signif}}
+
+The \texttt{ggsignif} package is an extension of GGplot, the popular plotting package used for data visualization. GGplot is used by layering graphing, data and visualization components. GGsignif is used as an additional layer to the GGplot packaage that allows for calculation and annotation of statistical significance within graphs.
+
+\#How do you use GGsignif?
+1st: load both packages
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(ggsignif)}
+\end{Highlighting}
+\end{Shaded}
+
+2nd: Plot your data using GGplot2 and add layer `geom\_signif'.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{all.data<-}\StringTok{ }\NormalTok{CO2}
+\KeywordTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{All.data <-}\StringTok{ }\NormalTok{all.data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(Type,Treatment,conc,uptake)}
+
+\KeywordTok{ggplot}\NormalTok{(All.data, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Type,}\DataTypeTok{y=}\NormalTok{uptake,}\DataTypeTok{group=}\NormalTok{Treatment))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{fill=}\StringTok{'#A4A4A4'}\NormalTok{, }\DataTypeTok{color =} \StringTok{"black"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{(}\DataTypeTok{base_size=}\DecValTok{13}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{comparisons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"Quebec"}\NormalTok{,}\StringTok{"Mississippi"}\NormalTok{)),}\DataTypeTok{map_signif_level =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-54-1.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  The first input delineates which values need to be calculated for annotation i.e.~comparison = list(c(here is where enter those values)). `Map\_signif\_level' is used to control whether the output graph contains the actual signficance or stars (***).
+\end{itemize}
+
+\#Advanced Options
+You can also control exactly where the annotations will show up in the output graph.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataf<-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(Group<-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"G1"}\NormalTok{,}\StringTok{"G1"}\NormalTok{,}\StringTok{"G2"}\NormalTok{,}\StringTok{"G2"}\NormalTok{),}
+\NormalTok{                   Subject<-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{,}\StringTok{"B"}\NormalTok{,}\StringTok{"A"}\NormalTok{,}\StringTok{"B"}\NormalTok{),}
+\NormalTok{                   Score<-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{25}\NormalTok{))}
+
+\KeywordTok{ggplot}\NormalTok{(dataf, }\KeywordTok{aes}\NormalTok{(Group,Score))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ Subject), }\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }
+           \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{, }\DataTypeTok{width =} \FloatTok{.5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{y_position =} \KeywordTok{c}\NormalTok{(}\FloatTok{7.3}\NormalTok{,}\FloatTok{25.3}\NormalTok{), }\DataTypeTok{xmin =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\FloatTok{1.8}\NormalTok{), }
+              \DataTypeTok{xmax =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.2}\NormalTok{,}\FloatTok{2.2}\NormalTok{), }\DataTypeTok{annotation =} \KeywordTok{c}\NormalTok{(}\StringTok{"NS"}\NormalTok{,}\StringTok{"**"}\NormalTok{),}
+              \DataTypeTok{tip_length =} \DecValTok{0}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{comparisons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"G1"}\NormalTok{,}\StringTok{"G2"}\NormalTok{)), }\DataTypeTok{y_position =} \DecValTok{28}\NormalTok{,}
+              \DataTypeTok{tip_length =} \DecValTok{0}\NormalTok{, }\DataTypeTok{vjust =} \FloatTok{.1}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{(}\DataTypeTok{base_size=}\DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-55-1.pdf}
+
+\#\#`y\_position'
+- Controls the placement of each individual groups' signficance annotation : y\_position = c(height of first annotation, second annotation height on y-axis).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dataf, }\KeywordTok{aes}\NormalTok{(Group,Score))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ Subject), }\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }
+           \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{, }\DataTypeTok{width =} \FloatTok{.5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{y_position =} \KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{20}\NormalTok{), }\DataTypeTok{xmin =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\FloatTok{1.8}\NormalTok{), }
+              \DataTypeTok{xmax =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.2}\NormalTok{,}\FloatTok{2.2}\NormalTok{), }\DataTypeTok{annotation =} \KeywordTok{c}\NormalTok{(}\StringTok{"NS"}\NormalTok{,}\StringTok{"**"}\NormalTok{),}
+              \DataTypeTok{tip_length =} \DecValTok{0}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{comparisons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"G1"}\NormalTok{,}\StringTok{"G2"}\NormalTok{)), }\DataTypeTok{y_position =} \DecValTok{30}\NormalTok{,}
+              \DataTypeTok{tip_length =} \DecValTok{0}\NormalTok{, }\DataTypeTok{vjust =} \FloatTok{.1}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{(}\DataTypeTok{base_size=}\DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-56-1.pdf}
+
+\hypertarget{xmin-and-xmax}{%
+\section{`xmin' and `xmax'}\label{xmin-and-xmax}}
+
+\begin{itemize}
+\tightlist
+\item
+  The two work together to set the length of the annotation bar where the first number within xmin's paranthesis is the starting point and the first number in xmax is the end. In the first graph xmin = c(.8,1.8) and xmax = c(1.2,2.2), this means the first bar starts on the x-axis at .8 until 1.2 and the second bar's length is from 1.8 to 2.2.
+\item
+  It can also be made shorter or longer:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dataf, }\KeywordTok{aes}\NormalTok{(Group,Score))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ Subject), }\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }
+           \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{, }\DataTypeTok{width =} \FloatTok{.5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{y_position =} \KeywordTok{c}\NormalTok{(}\FloatTok{7.3}\NormalTok{,}\FloatTok{25.3}\NormalTok{), }\DataTypeTok{xmin =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.6}\NormalTok{,}\FloatTok{1.9}\NormalTok{), }
+              \DataTypeTok{xmax =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.4}\NormalTok{,}\FloatTok{2.1}\NormalTok{), }\DataTypeTok{annotation =} \KeywordTok{c}\NormalTok{(}\StringTok{"NS"}\NormalTok{,}\StringTok{"**"}\NormalTok{),}
+              \DataTypeTok{tip_length =} \DecValTok{0}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{comparisons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"G1"}\NormalTok{,}\StringTok{"G2"}\NormalTok{)), }\DataTypeTok{y_position =} \DecValTok{28}\NormalTok{,}
+              \DataTypeTok{tip_length =} \DecValTok{0}\NormalTok{, }\DataTypeTok{vjust =} \FloatTok{.1}\NormalTok{)}\OperatorTok{+}
+\StringTok{    }\KeywordTok{theme_light}\NormalTok{(}\DataTypeTok{base_size=}\DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-57-1.pdf}
+
+\hypertarget{annotation}{%
+\section{`annotation'}\label{annotation}}
+
+\begin{itemize}
+\tightlist
+\item
+  Here is where you type in the desired text or symbol for each bar.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dataf, }\KeywordTok{aes}\NormalTok{(Group,Score))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ Subject), }\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }
+           \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{, }\DataTypeTok{width =} \FloatTok{.5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{y_position =} \KeywordTok{c}\NormalTok{(}\FloatTok{7.3}\NormalTok{,}\FloatTok{25.3}\NormalTok{), }\DataTypeTok{xmin =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\FloatTok{1.8}\NormalTok{), }
+              \DataTypeTok{xmax =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.2}\NormalTok{,}\FloatTok{2.2}\NormalTok{), }\DataTypeTok{annotation =} \KeywordTok{c}\NormalTok{(}\StringTok{"Annotation"}\NormalTok{,}\StringTok{"How i want it"}\NormalTok{),}
+              \DataTypeTok{tip_length =} \DecValTok{0}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{comparisons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"G1"}\NormalTok{,}\StringTok{"G2"}\NormalTok{)), }\DataTypeTok{y_position =} \DecValTok{28}\NormalTok{,}
+              \DataTypeTok{tip_length =} \DecValTok{0}\NormalTok{, }\DataTypeTok{vjust =} \FloatTok{.1}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{(}\DataTypeTok{base_size=}\DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-58-1.pdf}
+
+\hypertarget{tip_length}{%
+\section{`tip\_length'}\label{tip_length}}
+
+\begin{itemize}
+\tightlist
+\item
+  This gives the option to add vertical lines coming down on both ends of annotation bar of varying length.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dataf, }\KeywordTok{aes}\NormalTok{(Group,Score))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ Subject), }\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }
+           \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{, }\DataTypeTok{width =} \FloatTok{.5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{y_position =} \KeywordTok{c}\NormalTok{(}\FloatTok{7.3}\NormalTok{,}\FloatTok{25.3}\NormalTok{), }\DataTypeTok{xmin =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\FloatTok{1.8}\NormalTok{), }
+              \DataTypeTok{xmax =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.2}\NormalTok{,}\FloatTok{2.2}\NormalTok{), }\DataTypeTok{annotation =} \KeywordTok{c}\NormalTok{(}\StringTok{"NS"}\NormalTok{,}\StringTok{"**"}\NormalTok{),}
+              \DataTypeTok{tip_length =} \FloatTok{.1}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{comparisons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"G1"}\NormalTok{,}\StringTok{"G2"}\NormalTok{)), }\DataTypeTok{y_position =} \DecValTok{28}\NormalTok{,}
+              \DataTypeTok{tip_length =} \FloatTok{2.5}\NormalTok{, }\DataTypeTok{vjust =} \FloatTok{.1}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{(}\DataTypeTok{base_size=}\DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-59-1.pdf}
+
+\hypertarget{vjust}{%
+\section{`vjust'}\label{vjust}}
+
+\begin{itemize}
+\tightlist
+\item
+  This option allows user to control placement of the ``0.33'' in the graph.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(dataf, }\KeywordTok{aes}\NormalTok{(Group,Score))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ Subject), }\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }
+           \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{, }\DataTypeTok{width =} \FloatTok{.5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{y_position =} \KeywordTok{c}\NormalTok{(}\FloatTok{7.3}\NormalTok{,}\FloatTok{25.3}\NormalTok{), }\DataTypeTok{xmin =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.8}\NormalTok{,}\FloatTok{1.8}\NormalTok{), }
+              \DataTypeTok{xmax =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.2}\NormalTok{,}\FloatTok{2.2}\NormalTok{), }\DataTypeTok{annotation =} \KeywordTok{c}\NormalTok{(}\StringTok{"NS"}\NormalTok{,}\StringTok{"**"}\NormalTok{),}
+              \DataTypeTok{tip_length =} \DecValTok{0}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_signif}\NormalTok{(}\DataTypeTok{comparisons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"G1"}\NormalTok{,}\StringTok{"G2"}\NormalTok{)), }\DataTypeTok{y_position =} \DecValTok{28}\NormalTok{,}
+              \DataTypeTok{tip_length =} \DecValTok{0}\NormalTok{, }\DataTypeTok{vjust =} \DecValTok{5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_light}\NormalTok{(}\DataTypeTok{base_size=}\DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{7709_bookdown_files/figure-latex/unnamed-chunk-60-1.pdf}
+
+\bibliography{book.bib,packages.bib}
+
+
+\end{document}

@@ -18,6 +18,8 @@ navbar:
     href: MidtermAssignment.html
   - text: Final
     href: FinalProject.html
+  - text: Our Book
+    href: book/docs/index.html
 output_dir: docs
 output:
   html_document:

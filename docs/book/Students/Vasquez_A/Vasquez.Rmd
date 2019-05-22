@@ -1,0 +1,183 @@
+# Forcats tutorial
+
+## Dealing with Catergorical Data
+
+Categorical variables deal with qualitative data and have have an infinite number or values (i.e. hair color, location, ethnicity) verses quantitative data that is on a continuious scale (i.e. 2,3,4). 
+
+
+Although this categorical information is useful, it might be hard to work with. Using a package to organize and manipulate categorical data can help.
+
+### Packages to Work with Categorical Data
+
+Forcats is a package under the Tidyverse universe. However, it is not one of the main packages, so you would need to install forcats from tidyverse
+
+You can install the package a few different ways. 
+
+Install the **forcats** package from [Github](https://github.com/tidyverse/forcats):
+
+Or enter the R code listed below 
+
+```{r, eval=FALSE}
+devtools::install_github("tidyverse/forcats")
+install.packages("forcats")
+```
+
+```{r}
+library(forcats)
+```
+
+## The Different Functions of Forcats
+
+It is important to note a few things before using the Forcats package. First, this package works with categorical data in the form of factors or characters. You can check what type of class your variable is with the function **class()**. To use Forcats, you should change your variable to a factor with the function **as.factor()** or **factor()** or a character with the function **as.character()**.
+
+```{r}
+a<-"hi"
+class(a)
+b<-c(2,3,5)
+class(b)
+c<-as.factor(b)
+class(c)
+
+```
+
+
+
+Second,forcats is a package that is used to do something with you categorical data. When you enter in the specific R code to do something with that data, it will store it into the variable you selected. However, it may be difficult for you to see that what you did with Forcats actually happened. It is useful to also install the package **dplyr** and **ggplot2** to your R studio so you can visualize what you have done with your data
+```{r}
+
+library(dplyr)
+library(ggplot2)
+```
+
+
+
+###1. Recoding a Factor
+
+If you have categorical variables/factors, you can change the name or identity of that factor.
+
+Use the **fct_recode()**
+```{r}
+#Using data in r (airquality)
+library(dplyr)
+library(forcats)
+
+# Take a look at the data
+glimpse(airquality)
+
+# The column month is listed as an integer so lets change it to a factor
+airquality$Month <- factor(airquality$Month)
+
+levels(airquality$Month)
+
+# Now we can recode the factors into the categorical names of the months
+
+airquality$Month <- fct_recode(airquality$Month, May = '5', June = '6', July = '7', Aug = '8', Sept = '9')
+
+glimpse(airquality$Month)
+```
+
+
+###2. Reversing the order of the Factors
+
+If you have categorical variables/factors in one order you can reverse that order.
+
+Use **fct_rev()**
+```{r}
+library(ggplot2)
+#You will reverse the original order of the factors
+ggplot(airquality, aes(fct_rev(Month), Temp)) +
+  geom_boxplot(aes(fill = Month)) +
+  labs(x = "Month") +
+  ggtitle(label = "Plot with The X-axis Reversed")
+```
+
+
+###3. Releveling a Factor
+
+If you want to change the location or level of your factor.
+
+Use **fct_relevel()**
+```{r}
+#You will see the order of the factor months has changed from the orginal order
+airquality$Month <- fct_relevel(airquality$Month, 'Sept', 'July', 'May', 'Aug', 'June')
+
+levels(airquality$Month)
+
+ggplot(airquality, aes(Month, Temp)) +
+  geom_boxplot(aes(fill = Month)) +
+  ggtitle(label = "Order of 'Month' has changed")
+```
+
+
+
+###4.Combining Levels of a Factor
+
+If you have too many levels of a factor, you can combine some of them to an "other" category and choose to display only a certain number of the levels you want.
+
+Use **fct_lump()**
+
+```{r}
+library(dplyr)
+
+#You will lump the  category skin color into 5 levels and then the remaining will be in "other"
+starwars %>%
+  mutate(skin_color = fct_lump(skin_color, n = 5)) %>%
+  count(skin_color, sort = TRUE)
+```
+
+###5.Randomly Reordering a Factor
+
+If you don't want the order your factors are in but don't know what order you want, you can randomly choose the order of your factors.
+
+
+Use **fct_shuffle()**
+
+```{r}
+# You will see a random order of the factor eye color
+Randomized <- starwars$eye_color %>%
+  fct_shuffle()
+
+levels(Randomized)
+```
+
+###6.Reordering a Factor
+
+Lastly, you can reorder your factors by using another variable.
+
+Use **fct_reorder()**
+```{r}
+
+#First you will lump how many levels of the factor eyecolor you want
+library(forcats)
+library(dplyr)
+glimpse(starwars)
+
+avg_mass_eye_color <- starwars %>%
+  mutate(eye_color = fct_lump(eye_color, n = 6)) %>%
+  group_by(eye_color) %>%
+  summarise(mean_mass = mean(mass, na.rm = TRUE))
+
+```
+```{r}
+library(ggplot2)
+
+#Then you will reorder the factor by it's mean mass from least to most
+avg_mass_eye_color %>%
+  mutate(eye_color = fct_reorder(eye_color, mean_mass)) %>%
+  ggplot(aes(x = eye_color, y = mean_mass)) + 
+  geom_col()
+```
+
+
+If you want to try these out for yourself, there are many different data sources that R provides for you to practice on. My favorite is the starwars data, but listed in my examples is also airquality data.
+
+Below are some links to tutorials that I used to compromise this tutorial. I hope you have found it useful and feel free to now use this link as a tutorial for working with categorical data.
+
+Happy coding!
+
+
+[link to factors chapter reference](https://r4ds.had.co.nz/factors.html)
+
+[link to explaination of factors in forcats tutorial](https://rpubs.com/tictacjoe/forcats_tutorial)
+
+[link to basic things to do with forcats tutorial](https://forcats.tidyverse.org/articles/forcats.html)

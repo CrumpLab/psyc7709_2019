@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 13 Knitr | PSYC 7709: Using R for Reproducible Research</title>
+  <meta name="description" content="Student contributed chapters about various R packages">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 13 Knitr | PSYC 7709: Using R for Reproducible Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Student contributed chapters about various R packages" />
+  <meta name="github-repo" content="CrumpLab/OER_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 Knitr | PSYC 7709: Using R for Reproducible Research" />
+  
+  <meta name="twitter:description" content="Student contributed chapters about various R packages" />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="animal-tracking-with-trajr.html">
+<link rel="next" href="creating-your-own-html-widget.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79429674-2');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PSYC 7709: Using R for Reproducible Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="bootstrapped-mediation-tutorial.html"><a href="bootstrapped-mediation-tutorial.html"><i class="fa fa-check"></i><b>2</b> Bootstrapped Mediation Tutorial</a></li>
+<li class="chapter" data-level="3" data-path="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><a href="a-tutorial-for-using-the-lme-function-from-the-nlme-package-.html"><i class="fa fa-check"></i><b>3</b> A tutorial for using the lme function from the nlme package.</a></li>
+<li class="chapter" data-level="4" data-path="data-shaping-using-reshape2-and-stats-packages.html"><a href="data-shaping-using-reshape2-and-stats-packages.html"><i class="fa fa-check"></i><b>4</b> Data Shaping using Reshape(2) and Stats Packages</a></li>
+<li class="chapter" data-level="5" data-path="how-to-annotate-a-graph-using-gg-signif.html"><a href="how-to-annotate-a-graph-using-gg-signif.html"><i class="fa fa-check"></i><b>5</b> How to Annotate a Graph Using GG Signif"</a></li>
+<li class="chapter" data-level="6" data-path="leaflet-package.html"><a href="leaflet-package.html"><i class="fa fa-check"></i><b>6</b> Leaflet Package</a></li>
+<li class="chapter" data-level="7" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>7</b> ggplot2</a></li>
+<li class="chapter" data-level="8" data-path="forcats-tutorial.html"><a href="forcats-tutorial.html"><i class="fa fa-check"></i><b>8</b> Forcats tutorial</a></li>
+<li class="chapter" data-level="9" data-path="sf-simple-features-tutorial.html"><a href="sf-simple-features-tutorial.html"><i class="fa fa-check"></i><b>9</b> SF simple features tutorial</a></li>
+<li class="chapter" data-level="10" data-path="psych-package.html"><a href="psych-package.html"><i class="fa fa-check"></i><b>10</b> “psych” Package</a></li>
+<li class="chapter" data-level="11" data-path="imager-tutorial.html"><a href="imager-tutorial.html"><i class="fa fa-check"></i><b>11</b> Imager Tutorial</a></li>
+<li class="chapter" data-level="12" data-path="animal-tracking-with-trajr.html"><a href="animal-tracking-with-trajr.html"><i class="fa fa-check"></i><b>12</b> Animal Tracking with TRAJR</a></li>
+<li class="chapter" data-level="13" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>13</b> Knitr</a></li>
+<li class="chapter" data-level="14" data-path="creating-your-own-html-widget.html"><a href="creating-your-own-html-widget.html"><i class="fa fa-check"></i><b>14</b> Creating your own html widget</a></li>
+<li class="chapter" data-level="15" data-path="network-analysis-tutorial.html"><a href="network-analysis-tutorial.html"><i class="fa fa-check"></i><b>15</b> Network Analysis tutorial</a></li>
+<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PSYC 7709: Using R for Reproducible Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="knitr" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> Knitr</h1>
+<p><strong>Author: Annie Vo</strong></p>
+<div id="knitr-basics" class="section level2">
+<h2><span class="header-section-number">13.1</span> Knitr Basics</h2>
+<p>Knitr is a package that can generate dynamic web-based reports in R Markdown. R Markdown consists of three elements: YAML, text and code chunks. Knitr evaluates and then executes the code listed in each code chunk. Knitr then creates a new markdown file that includes the R code and its output. It is recommended to use Knitr in R Markdown in the R Studio program because its functions are built into the user interface. Knitr can be summoned in a code chunk in two ways,</p>
+<p>As with all other downloaded packages, Knitr can be used with the library function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr) </code></pre>
+<p>Additionally, knitr has the ability to be used in this way:</p>
+<p>knitr::</p>
+</div>
+<div id="knit-button" class="section level2">
+<h2><span class="header-section-number">13.2</span> “Knit” Button</h2>
+<p>It’s an abbreviated version of the Knitr function that applies to each individual code chunk. RStudio includes the “Knit” button that allows you to view your progress, code chunk by code chunk by rendering an instant preview of the code chunk output. This also automatically saves your progress and will indicate whether there are problems with the code in the code chunk.</p>
+</div>
+<div id="code-chunk-options" class="section level2">
+<h2><span class="header-section-number">13.3</span> Code Chunk Options</h2>
+<p>Knitr works directly with R Markdown by executing all the code chunks in the file. It is of note that although code chunks do not need to be named, it may be useful to name them so that they are easy to locate if an error occurs. Each code chunk must have a unique name (if it is named).
+To name a code chunk, the name must be placed in the initial line of the code chunk.
+An unnamed code chunk looks like this,</p>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">```{r}</span>
+<span class="bn">```</span></code></pre>
+<p>And a named code chunk looks like this,</p>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">```{r chunk_name}</span>
+<span class="bn">```</span></code></pre>
+<p>All code is then placed between the named (or unnamed) code line and the final three backticks like this,</p>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">```{r simulate_data}</span>
+<span class="bn">x &lt;-rnorm(100)</span>
+<span class="bn">```</span></code></pre>
+<p>Since an R Markdown document with knitr will often include several chunks of code, it may be useful to alter some of the code chunks to speed up processing time. Also, a code chunk can be altered to hide code or its output as well as other combinations of visibility. As with naming the code chunk, all other additional code chunk altering commands will be noted in the initial line.
+For example, echo=FALSE makes it so that the code of that chunk will not be shown in the final document while still displaying the output,</p>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">```{r chunk_name, echo=FALSE}</span>
+<span class="bn">```</span></code></pre>
+<p>Another command is to use results=“hide” to hide the results of the output while still displaying the code,</p>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">```{r chunk_name, results=&#39;hide&#39;}</span>
+<span class="bn">```</span></code></pre>
+<p>There is also the option to use include=FALSE which will process the chunk without displaying the code nor its outputs in the final document,</p>
+<pre class="sourceCode markdown"><code class="sourceCode markdown"><span class="bn">```{r chunk_name, include=FALSE}</span>
+<span class="bn">```</span></code></pre>
+<p>There are several other code chunk options that allow you to manipulate graphing data, add images, create animation, code in other languages and many more.</p>
+</div>
+<div id="reproducible-research" class="section level2">
+<h2><span class="header-section-number">13.4</span> Reproducible Research</h2>
+<p>When research is reproduced, it is important that all notes, graphs, methods and all other details are clearly listed to be performed accurately. Generally, the process of organizing these materials require accessing several different computing systems (software, graphs, animation etc.) and text. It can be tedious, difficult and riddled with mistakes to attempt to locate and organize these elements one by one.
+Knitr makes this process much easier by allowing the user to input text directly, access old text from outdated software, access data, graphs, html etc. and place all of these elements in one file.</p>
+<p>By using code in Knitr, pdfs, Word documents, slide presentations, web pages and other document formats that are used in collaborative science, different pieces of information can be organized in one file. Each line of code can be directly linked to the original source so that adjustments to content can be made easily and transparently. Knitr does the challenging work of processing other computing systems and interfaces to create a timeless, easy to read and interpret, output.</p>
+</div>
+<div id="references-2" class="section level2">
+<h2><span class="header-section-number">13.5</span> References</h2>
+<p><a href="https://yihui.name/knitr/" class="uri">https://yihui.name/knitr/</a></p>
+<p><a href="https://kbroman.org/knitr_knutshell/pages/Rmarkdown.html" class="uri">https://kbroman.org/knitr_knutshell/pages/Rmarkdown.html</a></p>
+<p><a href="https://sachsmc.github.io/knit-git-markr-guide/knitr/knit.html" class="uri">https://sachsmc.github.io/knit-git-markr-guide/knitr/knit.html</a></p>
+<p><a href="https://en.m.wikipedia.org/wiki/Knitr" class="uri">https://en.m.wikipedia.org/wiki/Knitr</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="animal-tracking-with-trajr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="creating-your-own-html-widget.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/13-Vo.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["7709_bookdown.pdf", "7709_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+# Data Shaping using Reshape(2) and Stats Packages
+
+**Author: Aira Contreras**
+
+## Introduction
+
+Research data sets can be overwrought with information that may not be of interest to the researcher; on one hand it could be that the researcher is using data sets from experiments or studies that were not conducted directly by them and therefore needs to carefully choose variables, or perhaps there were too many variables collected during the study and a particular analysis only requires a select few. It is also possible that the analysis software is only able to process the data if it is fed into the input in a certain manner. Whatever the limitations are, data shaping is a key step in data analysis and there are many tools available to assist with this task. R programmers have acknowledged the need for CRAN approved packages that aid with this endeavor and since 2003 have created packages such as Reshape to help others. This section will focus on the functionalities of the Reshape2 package distributed in 2012 by Hadley Wickham and the Stats 2001 by the R Core Team.
+
+## Different Data Inputs
+
+Data input formats, for the purposes of this exercise, exist mainly in 2 forms: _wide format_ or _long format_. It is important to understand what format the data is in prior to re-shaping or performing an analysis. This will allow you to correctly reshape the data prior to analysis or input into the software correctly. The next subsections describe the differences between the 2 formats and provide a visual example of the formats. 
+
+### Long Format
+
+Data is described to be in **long format** when each row represents 1 time point or variable. For example, if an experiment collected information on state population, state mortality, and state income then the output would be the state (e.g. California) and the variable (e.g. Income) in the first row, the state (e.g. California) and and the variable (e.g. Mortality) in the next row, and so forth until a full data output is created. 
+
+
+```{r, message=FALSE}
+#install.packages("reshape2")
+#install.packages("dplyr")
+library(reshape2)
+library(dplyr)
+
+SubjectID<-1:50
+df<- data.frame(SubjectID,state.x77)
+example<-melt(df,id="SubjectID")
+ex<-example%>%filter(SubjectID==1)
+ex
+
+```
+
+
+This example demonstrates that all of the rows, which measure a distinct variable with its corresponding value, belong to 1 subject (i.e. 1). This format is useful for analysis of repeated measures experiments in which the same subject may be asked about different benchmarks during the course of the experiment. 
+
+### Wide Format
+
+Data is described to be in **wide format** when each row represents all of the individual variable responses for 1 subjected, separated by column. For example, if an experiment collected information on subjected responses at different intervals then the output would be the subject (e.g. 1) and the responses at each interval in separate columns (e.g. inter1, inter2, inter3, etc.) in the first row, the next subject (e.g. 2) and the responses at each interval in separate columns (e.g. inter1, inter2, etc.) in the next row and so fhorth until a full data output is created. 
+
+```{r}
+
+wide <- reshape(Indometh, v.names = "conc", idvar = "Subject",
+                timevar = "time", direction = "wide")
+wide[,1:8]
+
+```
+
+This example demonstrates that all of the rows show a distinct subject with the distinct variable measures in each individual column. 
+
+## Reshape2 Package Functions
+
+The Reshape2 package contains various functions that helps users place their data into either the _long format_ or the _wide format_ depending on what is needed by the software being used for analysis. Though there are many functions availalble and it is encouraged that all functions are reviewed (you can do so here: <https://cran.r-project.org/web/packages/reshape2/reshape2.pdf>), the primary focus of this section will be on the use of the **melt()** and **cast()** functions. For proper use and data reshaping, the functions are ideally used in tandem, though as shown above, they can be used separately (i.e. only the melt function used for the separation of some data from others).
+
+### melt()
+
+As it implies, the melt function strips away variables and/or structures from existing data sets and prepares the data for the cast function (or for analysis). Depending on the type of data that you may have (array, data frame, matrix), **melt()** should be able to accommodate the breakdown or reshaping of the data. A check for the use of the function called _melt_check()_ is purported to exist, but the documentation on how to use this function is bare and I currently cannot make it run.
+
+#### melt()/melt.default()/melt.data.frame()
+
+The melt function requires the following inputs at minimum to work _melt(data,Subject Name Code Column, Variable Column Names in List Form)_. As is, the function does not remove any missing values (na.rm = FALSE), so if it is necessary to remove missing values from the data set, this should be done prior to the use of melt() or na.rm should be set as equal to **TRUE**.
+
+```{r}
+head(airquality)
+
+names(airquality) <- tolower(names(airquality))
+aqm <- melt(airquality, id=c("month", "day"), na.rm=TRUE)
+
+head(aqm)
+```
+
+The air quality data set contained 4 measured variables (Ozone, Solar.R, Wind, and Temp) over 2 time metrics (Month, Day). Using melt(), the data set was reshaped in aqm to show Month and Day as the independent variables, with the dependent variables Ozone, Solar R., Wind, and Temp  shown as the dependent variables with their corresponding measurments. Note that because we did not specify the measured variable, all of the variables not designated as independent variables were designated as measured variables. In order to select specific measured/dependent variables, it is necessary to specify them as shown in the example below. 
+
+```{r}
+aqm2 <- melt(airquality, id=c("month", "day"),measure.vars = "ozone", na.rm=TRUE)
+
+head(aqm2)
+```
+
+Here, again, the columns are the same as the aqm data set, however, because we specify _ozone_ as the measured variable, only ozone will appear in the data set aqm2. 
+
+
+#### melt.array()
+
+If the data you are working with is presented in an _array_ as opposed to a data frame or matrix (meaning that there are a fixed number of values of a sinlge type) then you can use the melt.array() feature.
+
+```{r}
+a <- array(c(1:23, NA), c(2,3,4))
+
+a[,,1:2]
+
+```
+
+The above is an example of a random array that was created with 3 dimensions (row, column, depth). 
+
+
+```{r}
+melt(a)[1:10,]
+```
+
+Using the function melt, without any additional indicators will break the data down and out of the current structures that hold them. The first 3 columns represent the location of the data and the fourth column indicates the value in that given location. Based on the data output provided, it can be very easy to get lost or make mistakes. Additional data commands that name the columns may be helpful to keep track of the data as shown below. 
+
+```{r}
+melt(a, varnames = c("X","Y","Z"))[1:10,]
+```
+
+### cast()
+
+The **cast()** function is what allows us to shape the data after we have melted it down into the ideal formats that are needed. The options exist to run _dcast()_ or _acast()_. As you can imagine, the **dcast()** function best serves those that are intending to have a data frame or matrix output.
+
+#### acast()
+
+According to the README, the cast function provides outputs in the following format: x_var+x_2~y_var+y_2~z_var. Though it may be an easy format to understand, it was not sufficient of an explanation for some. As such, please refer to the example below. 
+
+```{r}
+
+acast(aqm, day ~ month ~ variable)[1:10,,1:2]
+
+```
+
+As demonstrated from the data output above, the cast() function shaped the data such that the months are the column headers, divided across days in the rows, and then by variable as the overall "topic". 
+
+It is also possible to cast the data in such a way that the averages are obtained.
+
+```{r}
+acast(aqm, month ~ variable, mean, margins = TRUE)
+```
+
+In the above example, the data once again separated by what was indicated (e.g. month and variable). We have added however, that the mean of these variables for each month be calculated and additionally, by adding the _margins = TRUE_ command, we have asked for the means of each row to be included. 
+
+Overall, the takeaway for how to use cast should be as follows: acast(melted data set, rowvariablename~columnvariablename~OPTIONALvariableinformationisseparatedby,...ANYOTHERCOMMANDS,MARGINS).
+
+#### dcast()
+
+Similar to _acast()_, **dcast()** reforms the data, however, it places it into a data fram or matrix format.
+```{r}
+dcast(aqm, month ~ variable, mean, margins = c("month", "variable"))
+```
+
+To use a different data set, the example below takes data from the ChickWeight set and melts it down and casts it as a data frame that displays only the time (row) and variable (column) and the corresponding means. 
+
+```{r}
+head(ChickWeight)
+names(ChickWeight) <- tolower(names(ChickWeight))
+chick_m <- melt(ChickWeight, id=2:4, na.rm=TRUE)
+dcast(chick_m, time ~ variable, mean)
+```
+
+
+## Stats Package Functions
+
+The Stats package contains various functions that helps users place their data into either the _long format_ or the _wide format_ depending on what is needed by the software being used for analysis. Though there are many functions availalble and it is encouraged that all functions are reviewed (you can do so here: <https://www.rdocumentation.org/packages/stats/versions/3.6.0>), the primary focus of this section will be on the use of the **reshape()** function. 
+
+### Reshape()
+More readily than the melt() and cast() functions, reshape is able to guid the direction of the data as it reshapes and rebuilds the data set as indicated. 
+
+The reshape() functions require the basic inputs the melt() function did, with the added input of direction, which indicates whether the dataset should be a long format data set or a wide format dataset. 
+
+```{r}
+
+wide <- reshape(Indometh, v.names = "conc", idvar = "Subject",
+                timevar = "time", direction = "wide")
+wide[,1:5]
+
+```
+
+```{r}
+
+state.x77 <- as.data.frame(state.x77)
+long <- reshape(state.x77, idvar = "state", ids = row.names(state.x77),
+                times = names(state.x77), timevar = "Characteristic",
+                varying = list(names(state.x77)), direction = "long")
+longa<-long%>%filter(state=="Alabama")
+
+longa
+```
+
+
+
+## Summary
+
+Data reshaping is important and there are many tools availalbe to assist users in re-formatting the data sets they have available. In addition to the packages discussed above, other packages have been developed by other R users to facilitate this process; the next generation of ReShape can be found in the tidyr package, and other packages like psych, include tools that help reformat data. Additionally with the use of additional packages like dplyr and forcats, additional power is added to the ability of the user to format and reformat as needed.
+
+
+## References
+
+Kabacoff, R. I. (n.d.). Qhick-R: Reshape. Retrieved May 03, 2019, from https://www.statmethods.net/management/reshape.html
+
+Wickham, H. (2012). reshape2: Flexibly reshape data: a reboot of the reshape package. R package version, 1(2).
+
+Martin, K. G. (n.d.). The Wide and Long Data Format for Repeated Measures Data. Retrieved May 03, 2019, from https://www.theanalysisfactor.com/wide-and-long-data/
+
+R Core Team (2012). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. ISBN 3-900051-07-0, URL http://www.R-project.org/

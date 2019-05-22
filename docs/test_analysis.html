@@ -309,6 +309,9 @@ $(document).ready(function () {
 <li>
   <a href="FinalProject.html">Final</a>
 </li>
+<li>
+  <a href="book/docs/index.html">Our Book</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -334,14 +337,12 @@ $(document).ready(function () {
 </div>
 <div id="load-data" class="section level1">
 <h1>Load data</h1>
-<pre class="r"><code>library(data.table)</code></pre>
-<pre><code>## Warning: package &#39;data.table&#39; was built under R version 3.4.4</code></pre>
-<pre class="r"><code>stroop_data &lt;- fread(&quot;data/stroopDataV2.csv&quot;)</code></pre>
+<pre class="r"><code>library(data.table)
+stroop_data &lt;- fread(&quot;data/stroopDataV2.csv&quot;)</code></pre>
 </div>
 <div id="run-analysis" class="section level1">
 <h1>run analysis</h1>
 <pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.4.4</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:data.table&#39;:
@@ -394,7 +395,11 @@ summary(aov_out)</code></pre>
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>library(ggplot2)</code></pre>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.4.4</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang</code></pre>
 <pre class="r"><code>plot_df &lt;- subject_means %&gt;%
             group_by(condition,congruency) %&gt;%
             summarize(all_mean_rt = mean(mean_rt),

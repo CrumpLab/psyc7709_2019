@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Open tools for writing open interactive textbooks (and more)</title>
+  <meta name="description" content="A tutorial and working resources for writing open-source textbooks using open-source tools">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Open tools for writing open interactive textbooks (and more)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A tutorial and working resources for writing open-source textbooks using open-source tools" />
+  <meta name="github-repo" content="CrumpLab/OER_bookdown" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Open tools for writing open interactive textbooks (and more)" />
+  
+  <meta name="twitter:description" content="A tutorial and working resources for writing open-source textbooks using open-source tools" />
+  
+
+<meta name="author" content="Matthew Crump">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="github-1.html">
+<link rel="next" href="zotero-1.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79429674-2');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Open tools for writing open interactive textbooks (and more)</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>1</b> Overview</a><ul>
+<li class="chapter" data-level="1.1" data-path="overview.html"><a href="overview.html#open-online-educational-resources-oers"><i class="fa fa-check"></i><b>1.1</b> Open online educational resources (OERs)</a></li>
+<li class="chapter" data-level="1.2" data-path="overview.html"><a href="overview.html#what-is-this-tutorial"><i class="fa fa-check"></i><b>1.2</b> What is this tutorial?</a></li>
+<li class="chapter" data-level="1.3" data-path="overview.html"><a href="overview.html#can-i-see-an-example-of-what-you-are-talking-about"><i class="fa fa-check"></i><b>1.3</b> Can I see an example of what you are talking about?</a></li>
+<li class="chapter" data-level="1.4" data-path="overview.html"><a href="overview.html#the-toolbox-what-do-i-need-to-download"><i class="fa fa-check"></i><b>1.4</b> The toolbox (what do I need to download)</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="overview.html"><a href="overview.html#r"><i class="fa fa-check"></i><b>1.4.1</b> R</a></li>
+<li class="chapter" data-level="1.4.2" data-path="overview.html"><a href="overview.html#r-studio"><i class="fa fa-check"></i><b>1.4.2</b> R-studio</a></li>
+<li class="chapter" data-level="1.4.3" data-path="overview.html"><a href="overview.html#markdown-and-r-markdown"><i class="fa fa-check"></i><b>1.4.3</b> Markdown and R Markdown</a></li>
+<li class="chapter" data-level="1.4.4" data-path="overview.html"><a href="overview.html#bookdown"><i class="fa fa-check"></i><b>1.4.4</b> Bookdown</a></li>
+<li class="chapter" data-level="1.4.5" data-path="overview.html"><a href="overview.html#github"><i class="fa fa-check"></i><b>1.4.5</b> Github</a></li>
+<li class="chapter" data-level="1.4.6" data-path="overview.html"><a href="overview.html#hypothes.is"><i class="fa fa-check"></i><b>1.4.6</b> Hypothes.is</a></li>
+<li class="chapter" data-level="1.4.7" data-path="overview.html"><a href="overview.html#hypothesisr"><i class="fa fa-check"></i><b>1.4.7</b> hypothesisr</a></li>
+<li class="chapter" data-level="1.4.8" data-path="overview.html"><a href="overview.html#zotero"><i class="fa fa-check"></i><b>1.4.8</b> Zotero</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="overview.html"><a href="overview.html#quickstart"><i class="fa fa-check"></i><b>1.5</b> Quickstart</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="overview.html"><a href="overview.html#download-all-the-programs-and-set-up-needed-accounts"><i class="fa fa-check"></i><b>1.5.1</b> Download all the programs, and set-up needed accounts</a></li>
+<li class="chapter" data-level="1.5.2" data-path="overview.html"><a href="overview.html#create-a-github-repository"><i class="fa fa-check"></i><b>1.5.2</b> Create a Github repository</a></li>
+<li class="chapter" data-level="1.5.3" data-path="overview.html"><a href="overview.html#copy-and-compile-this-repository"><i class="fa fa-check"></i><b>1.5.3</b> Copy and compile this repository</a></li>
+<li class="chapter" data-level="1.5.4" data-path="overview.html"><a href="overview.html#serve-your-book-on-the-web-using-github-pages"><i class="fa fa-check"></i><b>1.5.4</b> Serve your book on the web using github pages</a></li>
+<li class="chapter" data-level="1.5.5" data-path="overview.html"><a href="overview.html#make-your-own-book"><i class="fa fa-check"></i><b>1.5.5</b> Make your own book</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="overview.html"><a href="overview.html#description-of-files-in-this-repository"><i class="fa fa-check"></i><b>1.6</b> Description of Files in this Repository</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-r-studio-and-rmarkdown.html"><a href="r-r-studio-and-rmarkdown.html"><i class="fa fa-check"></i><b>2</b> R, R-studio, and RMarkdown</a><ul>
+<li class="chapter" data-level="2.1" data-path="r-r-studio-and-rmarkdown.html"><a href="r-r-studio-and-rmarkdown.html#quick-start-steps"><i class="fa fa-check"></i><b>2.1</b> Quick start steps</a></li>
+<li class="chapter" data-level="2.2" data-path="r-r-studio-and-rmarkdown.html"><a href="r-r-studio-and-rmarkdown.html#r-markdown"><i class="fa fa-check"></i><b>2.2</b> R Markdown</a></li>
+<li class="chapter" data-level="2.3" data-path="r-r-studio-and-rmarkdown.html"><a href="r-r-studio-and-rmarkdown.html#r-markdown-tips"><i class="fa fa-check"></i><b>2.3</b> R Markdown tips</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="r-r-studio-and-rmarkdown.html"><a href="r-r-studio-and-rmarkdown.html#inserting-graphics"><i class="fa fa-check"></i><b>2.3.1</b> Inserting Graphics</a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-r-studio-and-rmarkdown.html"><a href="r-r-studio-and-rmarkdown.html#inserting-references"><i class="fa fa-check"></i><b>2.3.2</b> Inserting References</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-r-studio-and-rmarkdown.html"><a href="r-r-studio-and-rmarkdown.html#links-for-using-r-markdown"><i class="fa fa-check"></i><b>2.3.3</b> Links for using R Markdown</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bookdown-1.html"><a href="bookdown-1.html"><i class="fa fa-check"></i><b>3</b> Bookdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="bookdown-1.html"><a href="bookdown-1.html#r-packages-and-installing-bookdown"><i class="fa fa-check"></i><b>3.1</b> R Packages and installing Bookdown</a></li>
+<li class="chapter" data-level="3.2" data-path="bookdown-1.html"><a href="bookdown-1.html#using-bookdown"><i class="fa fa-check"></i><b>3.2</b> Using Bookdown</a></li>
+<li class="chapter" data-level="3.3" data-path="bookdown-1.html"><a href="bookdown-1.html#compiling-this-tutorial-using-bookdown."><i class="fa fa-check"></i><b>3.3</b> Compiling this tutorial using bookdown.</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="github-1.html"><a href="github-1.html"><i class="fa fa-check"></i><b>4</b> Github</a><ul>
+<li class="chapter" data-level="4.1" data-path="github-1.html"><a href="github-1.html#getting-started"><i class="fa fa-check"></i><b>4.1</b> Getting Started</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="github-1.html"><a href="github-1.html#make-an-account-with-github"><i class="fa fa-check"></i><b>4.1.1</b> Make an account with Github</a></li>
+<li class="chapter" data-level="4.1.2" data-path="github-1.html"><a href="github-1.html#install-github-desktop"><i class="fa fa-check"></i><b>4.1.2</b> Install Github Desktop</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="github-1.html"><a href="github-1.html#repository-workflow"><i class="fa fa-check"></i><b>4.2</b> Repository workflow</a></li>
+<li class="chapter" data-level="4.3" data-path="github-1.html"><a href="github-1.html#creating-a-new-repository-on-github.com"><i class="fa fa-check"></i><b>4.3</b> Creating a new repository on Github.com</a></li>
+<li class="chapter" data-level="4.4" data-path="github-1.html"><a href="github-1.html#cloning-a-copy-on-your-computer"><i class="fa fa-check"></i><b>4.4</b> Cloning a copy on your computer</a></li>
+<li class="chapter" data-level="4.5" data-path="github-1.html"><a href="github-1.html#make-changes-to-the-repository"><i class="fa fa-check"></i><b>4.5</b> Make changes to the repository</a></li>
+<li class="chapter" data-level="4.6" data-path="github-1.html"><a href="github-1.html#update-the-online-github-repository"><i class="fa fa-check"></i><b>4.6</b> Update the online github repository</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html"><i class="fa fa-check"></i><b>5</b> Hypothes.is</a><ul>
+<li class="chapter" data-level="5.1" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html#a-case-study-example"><i class="fa fa-check"></i><b>5.1</b> A case study example</a></li>
+<li class="chapter" data-level="5.2" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html#hypothesisr-1"><i class="fa fa-check"></i><b>5.2</b> hypothesisr</a></li>
+<li class="chapter" data-level="5.3" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html#hypothesis-explorer"><i class="fa fa-check"></i><b>5.3</b> Hypothesis Explorer</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html#web-based-version"><i class="fa fa-check"></i><b>5.3.1</b> Web-based version</a></li>
+<li class="chapter" data-level="5.3.2" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html#running-the-app-locally"><i class="fa fa-check"></i><b>5.3.2</b> Running the app locally</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html#downloading-annotations"><i class="fa fa-check"></i><b>5.4</b> Downloading annotations</a></li>
+<li class="chapter" data-level="5.5" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html#viewing-the-annotations-search-and-subset-the-database"><i class="fa fa-check"></i><b>5.5</b> Viewing the annotations Search and subset the database</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html#viewing-all-the-variables-in-the-database"><i class="fa fa-check"></i><b>5.5.1</b> Viewing all the variables in the database</a></li>
+<li class="chapter" data-level="5.5.2" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html#subsetting-the-data"><i class="fa fa-check"></i><b>5.5.2</b> Subsetting the data</a></li>
+<li class="chapter" data-level="5.5.3" data-path="hypothes-is-1.html"><a href="hypothes-is-1.html#voting-feature"><i class="fa fa-check"></i><b>5.5.3</b> Voting feature</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="zotero-1.html"><a href="zotero-1.html"><i class="fa fa-check"></i><b>6</b> Zotero</a><ul>
+<li class="chapter" data-level="6.1" data-path="zotero-1.html"><a href="zotero-1.html#getting-started-1"><i class="fa fa-check"></i><b>6.1</b> Getting Started</a></li>
+<li class="chapter" data-level="6.2" data-path="zotero-1.html"><a href="zotero-1.html#populating-zotero-with-references"><i class="fa fa-check"></i><b>6.2</b> Populating Zotero with references</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="zotero-1.html"><a href="zotero-1.html#drag-and-drop-.pdfs"><i class="fa fa-check"></i><b>6.2.1</b> Drag and Drop .pdfs</a></li>
+<li class="chapter" data-level="6.2.2" data-path="zotero-1.html"><a href="zotero-1.html#import-citations-and-pdfs-from-the-web"><i class="fa fa-check"></i><b>6.2.2</b> Import citations and pdfs from the web</a></li>
+<li class="chapter" data-level="6.2.3" data-path="zotero-1.html"><a href="zotero-1.html#a-note-of-caution"><i class="fa fa-check"></i><b>6.2.3</b> A note of caution</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="zotero-1.html"><a href="zotero-1.html#generating-a-.bib-file"><i class="fa fa-check"></i><b>6.3</b> Generating a .bib file</a></li>
+<li class="chapter" data-level="6.4" data-path="zotero-1.html"><a href="zotero-1.html#citing-references-in-an-rmarkdown-file"><i class="fa fa-check"></i><b>6.4</b> Citing references in an RMarkdown file</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="zotero-1.html"><a href="zotero-1.html#cite-while-you-write"><i class="fa fa-check"></i><b>6.4.1</b> Cite while you write</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="shiny.html"><a href="shiny.html"><i class="fa fa-check"></i><b>7</b> Shiny</a><ul>
+<li class="chapter" data-level="7.1" data-path="shiny.html"><a href="shiny.html#sharing-shiny-apps"><i class="fa fa-check"></i><b>7.1</b> Sharing Shiny Apps</a></li>
+<li class="chapter" data-level="7.2" data-path="shiny.html"><a href="shiny.html#a-minimal-working-example-using-heroku"><i class="fa fa-check"></i><b>7.2</b> A minimal working example using Heroku</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Open tools for writing open interactive textbooks (and more)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="hypothes.is-1" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Hypothes.is</h1>
+<p><a href="https://web.hypothes.is">Hypothes.is</a> is a web-browser add-on for annotating the web via inline commenting. This allows anyone to select a snippet of text in a web-browser and then post a comment about the selected text. Annotations can be made publicly or privately. All public annotations can be viewed by anyone else running hypothesis on the same website. Using Hypothesis with your web-book allows you to engage students in interacting with the textbook by allowing them to contribute to content generation (by posting new content), or content revision (by tagging sections in need of revision).</p>
+<p>If you publish your bookdown book as a webpage, then you anyone with Hypothes.is can use it to annotate the textbook.</p>
+<div id="a-case-study-example" class="section level2">
+<h2><span class="header-section-number">5.1</span> A case study example</h2>
+<p>I recently compiled a <a href="http://crumplab.github.io/ResearchMethods/">Research Methods in Psychology textbook</a> using the tools described in this tutorial. The landing page describes how Hypothes.is can be used in conjunction with the textbook.</p>
+<p>In class I assigned students the task of downloading Hypothes.is, creating a Hypothes.is account, and then throughout the course gave them various assignments where they were responsible for annotating parts of the textbook.</p>
+<p>For example, in one assignment I had students annotate sections of the textbook that were in need of improvement. This allows students to participate in content revision as they read the textbook. Other assignments could include focused online discussion about textbook content using annotations, or using annotations as a way for students to add content to the textbook.</p>
+</div>
+<div id="hypothesisr-1" class="section level2">
+<h2><span class="header-section-number">5.2</span> hypothesisr</h2>
+<p><a href="https://github.com/mdlincoln/hypothesisr">hypothesisr</a> is an r package for scraping annotation data collected through the hypothesis app. All public annotations submitted through hypothesis to any website are publically available for download. As a result, the hypothesisr package can be used to download and process the annotations submitted to your website.</p>
+</div>
+<div id="hypothesis-explorer" class="section level2">
+<h2><span class="header-section-number">5.3</span> Hypothesis Explorer</h2>
+<p>As a part of this project, we have created a Shiny app that conveniently displays and manipulates hypothesis annotation databases in a website. The Shiny app is located in this github repository, <a href="https://github.com/CrumpLab/hypothesis_explorer" class="uri">https://github.com/CrumpLab/hypothesis_explorer</a></p>
+<div id="web-based-version" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Web-based version</h3>
+<p>A web-based version of the app can be accessed here: <a href="https://hypothesis-explorer.herokuapp.com" class="uri">https://hypothesis-explorer.herokuapp.com</a>. Note the website currently times out after 55 seconds of inactivity. Reload the page to restart the app. This web-version is currently in beta testing.</p>
+</div>
+<div id="running-the-app-locally" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Running the app locally</h3>
+<p>To run this app you need to have R and R-Studio installed on your computer. You will also need to have downloaded the Shiny and hypothesisr packages. You can run the app by either of the following methods</p>
+<ol style="list-style-type: decimal">
+<li><p>You can download the hypothesis_explorer repository as a .zip file, then open the server.r, or ui.r files in R-studio and click run-app</p></li>
+<li><p>You can have R-studio automatically download and the run app using by entering the following in the command line</p></li>
+</ol>
+<p><code>shiny::runGitHub('hypothesis_explorer', 'CrumpLab')</code></p>
+</div>
+</div>
+<div id="downloading-annotations" class="section level2">
+<h2><span class="header-section-number">5.4</span> Downloading annotations</h2>
+<p>The Hypothesis Explorer app currently implements two main functions: <strong>downloading</strong> and <strong>displaying/searching</strong> parts of the publicly avialable Hypothes.is annotation database.</p>
+<p><strong>Download the annotation database associated with a website</strong>: Type in the name of the website in the search bar. To see an example, enter “crumplab” into the website search and click the download button.</p>
+<p><strong>NOTE OF CAUTION</strong> We use the hypothesisr package to scrape parts of the entire Hypothes.is annotation database. As a result, there are some nuances in searching for particular websites that may cause you to accidentally download all of the annotations to a global domain rather than to a particular website.</p>
+<p>For example, I have two web-books published on my github domain, these are:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://www.crumplab.github.io/ResearchMethods" class="uri">https://www.crumplab.github.io/ResearchMethods</a></li>
+<li><a href="https://www.crumplab.github.io/programmingforpsych" class="uri">https://www.crumplab.github.io/programmingforpsych</a></li>
+</ol>
+<p>I am interested in using the Shiny app to look at only the annotations associated with these two websites. Using “crumplab” as the website will download all of the annotations associated with all subdomains on the site, so it will download annotations for both textbooks. On the other hand, including global domain information by searching “crumplab.github.io” will cause an attempt to download all annotations associated with the entire github domain, which will cause the Shiny app to crash.</p>
+</div>
+<div id="viewing-the-annotations-search-and-subset-the-database" class="section level2">
+<h2><span class="header-section-number">5.5</span> Viewing the annotations Search and subset the database</h2>
+<p>Hypothesis explorer should automatically download any annotations associated with the website that you entered. At the moment, we have only tested this for websites built with github pages.</p>
+<p>After the annotation database has been downloaded the two viewable tabs “Summary”, and “Data” will be autopopulated. The Summary tab gives an overview of the top annotated documents, pages, tags and users. The Data tab presents the entire database.</p>
+<div id="viewing-all-the-variables-in-the-database" class="section level3">
+<h3><span class="header-section-number">5.5.1</span> Viewing all the variables in the database</h3>
+<p>The left-hand panel includes a “Variables (in Data View)” text box. Click into the box to see all of the names of each variable (column names) in the database. Clicking one of the variable names will add it to the list, and automatically display the content of that column in the database viewer. Likewise, deleting variable names will hide those columns from being displayed.</p>
+</div>
+<div id="subsetting-the-data" class="section level3">
+<h3><span class="header-section-number">5.5.2</span> Subsetting the data</h3>
+<p>For quickly collapsing aspects of the data by row information, we have four subsetting operations, for displaying only annotations associated with particular documents (e.g., entire books), pages (chapters within a book), tags (associated with each annotation), and users.</p>
+</div>
+<div id="voting-feature" class="section level3">
+<h3><span class="header-section-number">5.5.3</span> Voting feature</h3>
+<p>When a user submits an annotation, other users can post comments underneath the annotation. For example, if a student highlights a section of the textbook and comments that this section should be improved, another student could reply to the original comment. We have implemented a rudimentary comment voting system using these features of hypothes.is. For example, up/down style voting can be implemented by instructing users to vote by using the reply feature. Specifically, up votes can be registered by replying with a numeric value of 1, and down votes can be registered by replying with a numeric value of -1.</p>
+<p>Hypothesis Explorer automatically looks for any child posts that contain 1s or -1s, counts the total vote for each parent comment, and then displays the count in a column variable called “votes”.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="github-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="zotero-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-Hypothesis.Rmd",
+"text": "Edit"
+},
+"download": ["OER_bookdown.pdf", "OER_bookdown.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

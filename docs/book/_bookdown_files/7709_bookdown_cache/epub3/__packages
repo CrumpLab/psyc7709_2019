@@ -1,0 +1,12 @@
+base
+ggplot2
+MASS
+Matrix
+mvtnorm
+sandwich
+mediation
+nlme
+dplyr
+knitr
+reshape2
+ggsignif
