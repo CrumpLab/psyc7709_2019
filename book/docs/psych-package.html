@@ -33,7 +33,7 @@
   
 <link rel="prev" href="sf-simple-features-tutorial.html">
 <link rel="next" href="imager-tutorial.html">
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.2.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -55,6 +55,14 @@
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<link href="libs/handsontable-6.1.1/handsontable.full.min.css" rel="stylesheet" />
+<script src="libs/handsontable-6.1.1/handsontable.full.min.js"></script>
+<script src="libs/handsontable-6.1.1/all.min.js"></script>
+<script src="libs/numbro.languages-2.0.6/languages.min.js"></script>
+<script src="libs/chroma-1.3.3/chroma.min.js"></script>
+<script src="libs/sparkline-2.1.2/jquery.sparkline.min.js"></script>
+<link href="libs/rhandsontable-0.3.7/rhandsontable.css" rel="stylesheet" />
+<script src="libs/rhandsontable-binding-0.3.7/rhandsontable.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
 <script>
@@ -167,7 +175,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>13</b> Knitr</a></li>
 <li class="chapter" data-level="14" data-path="creating-your-own-html-widget.html"><a href="creating-your-own-html-widget.html"><i class="fa fa-check"></i><b>14</b> Creating your own html widget</a></li>
 <li class="chapter" data-level="15" data-path="network-analysis-tutorial.html"><a href="network-analysis-tutorial.html"><i class="fa fa-check"></i><b>15</b> Network Analysis tutorial</a></li>
-<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="16" data-path="rhandsontable-package.html"><a href="rhandsontable-package.html"><i class="fa fa-check"></i><b>16</b> Rhandsontable Package</a></li>
+<li class="chapter" data-level="" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -190,125 +199,250 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="psych-package" class="section level1">
 <h1><span class="header-section-number">Chapter 10</span> “psych” Package</h1>
+<p><strong>Author:</strong> Zoren Degtyarev</p>
 <div id="procedures-for-psychological-psychometric-and-personality-research" class="section level2">
 <h2><span class="header-section-number">10.1</span> Procedures for Psychological, Psychometric, and Personality Research</h2>
 </div>
 <div id="introduction-3" class="section level2">
 <h2><span class="header-section-number">10.2</span> Introduction</h2>
-<p>Package “psych” is considered an all-purpose toolbox, used for psychometric theory experimental psychology and study of
-personality theory. Several of the “psych” functions are provided to support a book on psychometric theory as well as publications in personality research. “psych” package includes a multitude of functions.
-The package is predominantly used for multivariate analysis and scale construction utilizing factor analysis, principle component analysis, cluster analysis and reliability analysis. The package also run basic descriptive statistics. It also contains statistics for between as well as within group statistics and can analyze the data at multiple levels, including factor analysis and correlations.</p>
-<p>One of many useful functions included in the package is a function for simulating and testing particular item and test structures. Several functions serve as a useful front end for structural equation modeling. The package also includes graphical displays of path diagrams, factor analysis and structural equation models are created using basic graphics. For more information, see the <a href="https://personalityproject.org/r" class="uri">https://personalityproject.org/r</a> web page</p>
+<p>A sim.anova is a simulation function that falls under an all incompasing package called “psych.” The sim.anova function enables one to simulate a three way ANOVA and generate a matrix design which will include three independent variables (independent variable 1,2 and 3). The simulated independent variables can have different number of levels as well as effect sizes for every main effect as well as interaction. The sim.anova function can also simulate one or multiple dependent variables. Since psychological research requires lots of time as well as resources, the sim.anova function is a very useful tool that enables a researcher to simulate and inspect data prior to conducting an actual experiment. In this tutorial I will demonstrate how to generate an analysis of variance with three independent variables, I will also demonstrate how to produce an output of an ANOVA table, and lastly how to use a ggplot2 package to plot the means.</p>
 </div>
-<div id="functions-for-generating-simulated-data" class="section level2">
-<h2><span class="header-section-number">10.3</span> Functions for generating simulated data</h2>
-<p>There are numerous functions included in the package for the sole purpose of generating simulated data. The package includes the following functions:</p>
-<ul>
-<li><p>sim The basic simulation functions</p></li>
-<li><p>sim.anova Used to generate 3 independent variables and 1 or more dependent variables for demonstrating ANOVA and lm designs</p></li>
-<li><p>sim.circ Generate a two dimensional circumplex item structure</p></li>
-<li><p>sim.item Generate a two dimensional simple structure with particular item characteristics</p></li>
-<li><p>sim.congeneric Generate a one factor congeneric reliability structure</p></li>
-<li><p>sim.minor Simulate nfact major and nvar/2 minor factors</p></li>
-<li><p>sim.structural Generate a multifactorial structural model</p></li>
-<li><p>sim.irt Generate data for a 1, 2, 3 or 4 parameter logistic model</p></li>
-<li><p>sim.VSS Generate simulated data for the factor model</p></li>
-<li><p>phi.demo Create artificial data matrices for teaching purposes</p></li>
-<li><p>sim.hierarchical Generate simulated correlation matrices with hierarchical or any structure</p></li>
-<li><p>sim.spherical Generate three dimensional spherical data (generalization of circumplex to 3 space)</p></li>
-</ul>
-<p>When teaching or studying basic statistics it is very beneficial to Simulate a 3 way balanced ANOVA or linear model, with or without repeated measures. Description For teaching basic statistics, it is useful to be capable of generating various illustrations fitting for analysis of variance or simple linear models. A function sim.anova, which enables one to simulate a 3-way ANOVA or linear model, either with repeated measures or without repeated measures. What sim.anova will be able to do is to generate the design matrix that includes three independent variables (IV1, IV2, IV3). The independent variables can include any random number of levels and effect sizes for each main effect and interaction.</p>
-<p>Independent variables can be specified as either continuous or categorical as well as have linear or quadratic effects. Using a specified model, one can generate either a single dependent variable or multiple (within subject) dependent variables. “The repeated measures are assumed to be tau equivalent with a specified reliability.”</p>
-<div id="example-of-usage" class="section level3">
-<h3><span class="header-section-number">10.3.1</span> Example of Usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sim.anova</span>(<span class="dt">es1 =</span> <span class="dv">0</span>, <span class="dt">es2 =</span> <span class="dv">0</span>, <span class="dt">es3 =</span> <span class="dv">0</span>, <span class="dt">es12 =</span> <span class="dv">0</span>, <span class="dt">es13 =</span> <span class="dv">0</span>, <span class="dt">es23 =</span> <span class="dv">0</span>, <span class="dt">es123 =</span> <span class="dv">0</span>, <span class="dt">es11=</span><span class="dv">0</span>,<span class="dt">es22=</span><span class="dv">0</span>, <span class="dt">es33=</span><span class="dv">0</span>,<span class="dt">n =</span> <span class="dv">2</span>,<span class="dt">n1 =</span> <span class="dv">2</span>, <span class="dt">n2 =</span> <span class="dv">2</span>, <span class="dt">n3 =</span> <span class="dv">2</span>, <span class="dt">within=</span><span class="ot">NULL</span>,<span class="dt">r=</span>.<span class="dv">8</span>,<span class="dt">factors=</span><span class="ot">TRUE</span>,<span class="dt">center =</span> <span class="ot">TRUE</span>,<span class="dt">std=</span><span class="ot">TRUE</span>)</code></pre>
-<p>In the above example the arguments are as follows:</p>
-<ul>
-<li>es1 - Effect size of IV1</li>
-<li>es2 - Effect size of IV2</li>
-<li>es3 - Effect size of IV3</li>
-<li>es12 - Effect size of the IV1 x IV2 interaction</li>
-<li>es13 - Effect size of the IV1 x IV3 interaction</li>
-<li>es23 - Effect size of the IV2 x IV3 interaction</li>
-<li>es123 - Effect size of the IV1 x IV2 * IV3 interaction</li>
-<li>es11 - Effect size of the quadratric term of IV1</li>
-<li>es22 - Effect size of the quadratric term of IV2</li>
-<li>es33 - Effect size of the quadratric term of IV3</li>
-<li>n - Sample size per cell (if all variables are categorical) or (if at least one variable is continuous), the total sample size</li>
-<li>n1 - Number of levels of IV1 (0) if continuous</li>
-<li>n2 - Number of levels of IV2</li>
-<li>n3 - Number of levels of IV3 within if not NULL, then within should be a vector of the means of any repeated measures.</li>
-<li>r - the correlation between the repeated measures (if they exist). This can be thought of as the reliability of the measures.</li>
-<li>factors - report the IVs as factors rather than numeric</li>
-<li>center - center=TRUE provides orthogonal contrasts, center=FALSE adds the minimum value + 1 to all contrasts</li>
-<li>std - Standardize the effect sizes by standardizing the IVs</li>
-</ul>
+<div id="install-psych" class="section level2">
+<h2><span class="header-section-number">10.3</span> Install (“psych”)</h2>
+<p>The first step to simulating data is to make sure that you have installed a “psych” package. This can be done in the packages window.</p>
+<div id="creating-simulated-data-for-three-way-anova" class="section level3">
+<h3><span class="header-section-number">10.3.1</span> Creating simulated data for three way ANOVA</h3>
+<p>The fist step in creating a simulated data for 3-way ANOVA is to create a data frame function (data.df), this is where your sim.anova function will be placed (data.df &lt;- sim.anova). Since the sim.anova function can contain different arguments such as the effect size as well as different levels of independent variables, the first step is to identify these different arguments. The effect sizes are identified as “es1” “es2” and es3 for the effect size of the first, second and third independent variable. The argument n stands for the sample size in each cell. The argument n1, n2 and n3 stand for numbers of levels in the independent variables one, two and three. By default the sim.anova function sets the effect sizes to zero, and levels in each independent variables to 2. All simulations will be a between subject designs. If you are interested in the</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(psych)
+data.df &lt;-<span class="st"> </span><span class="kw">sim.anova</span>()  
+<span class="kw">describe</span>(data.df)</code></pre>
+<pre><code>##      vars  n mean   sd median trimmed  mad   min  max range skew kurtosis
+## IV1*    1 16  1.5 0.52   1.50    1.50 0.74  1.00 2.00  1.00  0.0    -2.12
+## IV2*    2 16  1.5 0.52   1.50    1.50 0.74  1.00 2.00  1.00  0.0    -2.12
+## IV3*    3 16  1.5 0.52   1.50    1.50 0.74  1.00 2.00  1.00  0.0    -2.12
+## DV      4 16  0.0 1.07   0.13   -0.03 1.05 -1.64 2.07  3.71  0.1    -1.15
+##        se
+## IV1* 0.13
+## IV2* 0.13
+## IV3* 0.13
+## DV   0.27</code></pre>
+<p>In the above example we generated a 3 way ANOVA, where by default all of the effect sizes are zero for all independent variables and by default there are 2 levels in each independent variable. Also by default the sample size per cell is 2, since there are a total of 8 cells the n=16 as seen above.</p>
+<pre class="sourceCode r"><code class="sourceCode r">data.df &lt;-<span class="st"> </span><span class="kw">sim.anova</span>(<span class="dt">es1=</span><span class="dv">1</span>, <span class="dt">es2 =</span> <span class="dv">0</span>, <span class="dt">es3 =</span> <span class="dv">3</span>)  
+<span class="kw">describe</span>(data.df)</code></pre>
+<pre><code>##      vars  n mean   sd median trimmed  mad   min  max range skew kurtosis
+## IV1*    1 16 1.50 0.52   1.50    1.50 0.74  1.00 2.00  1.00 0.00    -2.12
+## IV2*    2 16 1.50 0.52   1.50    1.50 0.74  1.00 2.00  1.00 0.00    -2.12
+## IV3*    3 16 1.50 0.52   1.50    1.50 0.74  1.00 2.00  1.00 0.00    -2.12
+## DV      4 16 0.04 3.21  -0.32    0.04 3.50 -5.32 5.45 10.77 0.12    -1.32
+##        se
+## IV1* 0.13
+## IV2* 0.13
+## IV3* 0.13
+## DV   0.80</code></pre>
+<p>In the above example we manipulated the effect sizes for independent variabl 1,2 and 3</p>
+<pre class="sourceCode r"><code class="sourceCode r">data.df &lt;-<span class="st"> </span><span class="kw">sim.anova</span>(<span class="dt">es1=</span><span class="dv">1</span>, <span class="dt">es2 =</span> <span class="dv">0</span>, <span class="dt">es3 =</span> <span class="dv">3</span>, <span class="dt">es12 =</span> <span class="dv">2</span>, <span class="dt">es13 =</span> <span class="dv">2</span>)  
+<span class="kw">describe</span>(data.df)</code></pre>
+<pre><code>##      vars  n  mean   sd median trimmed  mad   min  max range skew kurtosis
+## IV1*    1 16  1.50 0.52   1.50    1.50 0.74  1.00 2.00  1.00 0.00    -2.12
+## IV2*    2 16  1.50 0.52   1.50    1.50 0.74  1.00 2.00  1.00 0.00    -2.12
+## IV3*    3 16  1.50 0.52   1.50    1.50 0.74  1.00 2.00  1.00 0.00    -2.12
+## DV      4 16 -0.38 4.41  -0.41   -0.54 4.24 -6.99 8.43 15.42 0.39    -0.89
+##        se
+## IV1* 0.13
+## IV2* 0.13
+## IV3* 0.13
+## DV   1.10</code></pre>
+<p>In the above example we also manipulated the effect sizes of the interaction between independent variable 1 and 2 (es12), as well as the effect size for interaction between IV1 and IV2</p>
+<pre class="sourceCode r"><code class="sourceCode r">data.df &lt;-<span class="st"> </span><span class="kw">sim.anova</span>(<span class="dt">es1=</span><span class="dv">1</span>, <span class="dt">es2 =</span> <span class="dv">0</span>, <span class="dt">es3 =</span> <span class="dv">3</span>, <span class="dt">es12 =</span> <span class="dv">2</span>, <span class="dt">es13 =</span> <span class="dv">2</span>, <span class="dt">n=</span><span class="dv">3</span>)  
+<span class="kw">describe</span>(data.df)</code></pre>
+<pre><code>##      vars  n  mean   sd median trimmed  mad   min  max range skew kurtosis
+## IV1*    1 24  1.50 0.51   1.50    1.50 0.74  1.00 2.00  1.00  0.0    -2.08
+## IV2*    2 24  1.50 0.51   1.50    1.50 0.74  1.00 2.00  1.00  0.0    -2.08
+## IV3*    3 24  1.50 0.51   1.50    1.50 0.74  1.00 2.00  1.00  0.0    -2.08
+## DV      4 24 -0.13 4.13  -0.11   -0.27 4.70 -6.58 7.64 14.22  0.3    -0.96
+##        se
+## IV1* 0.10
+## IV2* 0.10
+## IV3* 0.10
+## DV   0.84</code></pre>
+<p>The above example was manipulated to have a cell sample size equal to 3 (n=3)</p>
+<pre class="sourceCode r"><code class="sourceCode r">data.df &lt;-<span class="st"> </span><span class="kw">sim.anova</span>(<span class="dt">es1=</span><span class="dv">1</span>, <span class="dt">es2 =</span> <span class="dv">0</span>, <span class="dt">es3 =</span> <span class="dv">3</span>, <span class="dt">es12 =</span> <span class="fl">.5</span>, <span class="dt">es13 =</span> <span class="dv">2</span>, <span class="dt">n1=</span><span class="dv">3</span>, <span class="dt">n2=</span><span class="dv">4</span>, <span class="dt">n3=</span><span class="dv">5</span>)  
+<span class="kw">describe</span>(data.df)</code></pre>
+<pre><code>##      vars   n mean   sd median trimmed  mad   min   max range skew
+## IV1*    1 120 2.00 0.82   2.00    2.00 1.48  1.00  3.00  2.00 0.00
+## IV2*    2 120 2.50 1.12   2.50    2.50 1.48  1.00  4.00  3.00 0.00
+## IV3*    3 120 3.00 1.42   3.00    3.00 1.48  1.00  5.00  4.00 0.00
+## DV      4 120 0.13 3.99  -0.31   -0.06 3.33 -8.01 10.46 18.47 0.46
+##      kurtosis   se
+## IV1*    -1.52 0.07
+## IV2*    -1.39 0.10
+## IV3*    -1.33 0.13
+## DV      -0.06 0.36</code></pre>
+<p>By manipulating the levels in each independent variable in the above example to n1=3, n2=4, n3=5; we can see that the sample size in each independent variable increased to 120.</p>
 </div>
-<div id="details" class="section level3">
-<h3><span class="header-section-number">10.3.2</span> Details</h3>
-<p>The function is used to generate a simple simulation for teaching about ANOVA, regression and reliability. A variety of
-demonstrations of the relation between anova and lm can be generated.</p>
-<p>The function’s default is to generate categorical IVs (factors). When using more than two levels of an IV, it will show
-the difference between the linear model and anova in terms of the comparisons made.</p>
-<p>The within vector can be used to add related equivalent dependent variables. These will have intercorrelations (reliabilities) of r and means as specified as values of within.</p>
-<p>To establish the effect of centered versus non-centering, make factors = center=FALSE. The default is to center the IVs. The lower order effects will be incorrect given the higher order interaction terms if you will not center the IV’s.</p>
-<p>Value</p>
-<p>y.df is a data.frame of the 3 IV values as well as the DV values.</p>
-<p>IV1 … IV3 – are independent variables from 1 … 3</p>
-<p>DV - If there is a single dependent variable</p>
-<p>DV.1 … DV.n - If you are specifying within, then the n within subject dependent variables</p>
-<p>See also a general set of simulation functions in the psych package sim</p>
 </div>
-<div id="lets-look-at-an-example-of-simulated-data-below" class="section level3">
-<h3><span class="header-section-number">10.3.3</span> Let’s look at an example of simulated data below</h3>
-<p>First load the package “psych” through library() if you have not done so</p>
-<pre><code>set.seed(42) data.df &lt;- sim.anova(es1=1,es2=.5,es13=1) # this piece of code is designed for one main effect and one 
-
-interaction 
-
-describe(data.df) pairs.panels(data.df) #show how the design variables are orthogonal 
-
-# 
-summary(lm(DV~IV1*IV2*IV3,data=data.df)) 
-
-summary(aov(DV~IV1*IV2*IV3,data=data.df)) 
-
-set.seed(42) 
-
-# here we are demonstrating the effect of not centering the data on the regression 
-
-data.df &lt;- sim.anova(es1=1,es2=.5,es13=1,center=FALSE) # describe(data.df) 
-
-# 
-
-#this example is not correct, because the IVs are not centered summary(lm(DV~IV1*IV2*IV3,data=data.df)) 
-
-summary(aov(DV~IV1*IV2*IV3,data=data.df)) #compare with the lm model 
-
-#now inspect multiple levels and quadratic terms 
-
-set.seed(42) 
-
-data.df &lt;- sim.anova(es1=1,es13=1,n2=3,n3=4,es22=1) 
-
-summary(lm(DV~IV1*IV2*IV3,data=data.df)) 
-
-summary(aov(DV~IV1*IV2*IV3,data=data.df)) 
-
-pairs.panels(data.df) 
-
-# 
-
-data.df &lt;- sim.anova(es1=1,es2=-.5,within=c(-1,0,1),n=10) pairs.panels(data.df)
-</code></pre>
+<div id="producing-an-anova-table" class="section level2">
+<h2><span class="header-section-number">10.4</span> Producing an ANOVA table</h2>
+<p>It is very useful to see the results of the 3 way ANOVA simulation in the table. To do so in the code below we will create an ANOVA tabble by using the “aov” or the “lm” function.
+Let’s take a look at an example below</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">aov</span>(DV<span class="op">~</span>IV1<span class="op">*</span>IV2<span class="op">*</span>IV3,<span class="dt">data=</span>data.df)) </code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## IV1          2  108.6   54.31  62.895 1.88e-15 ***
+## IV2          3    0.8    0.27   0.317 0.812892    
+## IV3          4 1201.0  300.24 347.710  &lt; 2e-16 ***
+## IV1:IV2      6   26.3    4.38   5.077 0.000286 ***
+## IV1:IV3      8  469.1   58.64  67.910  &lt; 2e-16 ***
+## IV2:IV3     12   12.8    1.07   1.237 0.280408    
+## IV1:IV2:IV3 24   21.1    0.88   1.017 0.461067    
+## Residuals   60   51.8    0.86                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>In the above example we first incorporated a “summary” function, which is used to generate summaries of various statistical models, the “aov” function enables one to generate a succinc description of the ANOVA table which includes degrees of freedom, sum of squares, mean squares, F values, and the probabilities of the F values. The table summary is very usefull as one can inspect which independent variables as well as interactions are statistically significant.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">lm</span>(DV<span class="op">~</span>IV1<span class="op">*</span>IV2<span class="op">*</span>IV3,<span class="dt">data=</span>data.df)) <span class="co">#compare with the aov model</span></code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DV ~ IV1 * IV2 * IV3, data = data.df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.6560 -0.3548  0.0000  0.3548  1.6560 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      -1.66427    0.65707  -2.533 0.013946 *  
+## IV10             -3.49814    0.92923  -3.765 0.000382 ***
+## IV11             -5.90623    0.92923  -6.356 3.10e-08 ***
+## IV2-1            -0.80378    0.92923  -0.865 0.390488    
+## IV21              0.20407    0.92923   0.220 0.826916    
+## IV23             -1.21676    0.92923  -1.309 0.195382    
+## IV3-1             0.26894    0.92923   0.289 0.773253    
+## IV30              1.44410    0.92923   1.554 0.125427    
+## IV31              1.96471    0.92923   2.114 0.038651 *  
+## IV32              1.38202    0.92923   1.487 0.142179    
+## IV10:IV2-1        0.86154    1.31413   0.656 0.514593    
+## IV11:IV2-1        1.36088    1.31413   1.036 0.304558    
+## IV10:IV21         1.60769    1.31413   1.223 0.225968    
+## IV11:IV21         0.03478    1.31413   0.026 0.978971    
+## IV10:IV23         1.63626    1.31413   1.245 0.217927    
+## IV11:IV23         3.84153    1.31413   2.923 0.004880 ** 
+## IV10:IV3-1        3.48285    1.31413   2.650 0.010268 *  
+## IV11:IV3-1        4.12221    1.31413   3.137 0.002646 ** 
+## IV10:IV30         3.58240    1.31413   2.726 0.008389 ** 
+## IV11:IV30         7.80727    1.31413   5.941 1.54e-07 ***
+## IV10:IV31         6.12665    1.31413   4.662 1.79e-05 ***
+## IV11:IV31        10.25065    1.31413   7.800 1.07e-10 ***
+## IV10:IV32         8.54586    1.31413   6.503 1.75e-08 ***
+## IV11:IV32        14.29862    1.31413  10.881 7.95e-16 ***
+## IV2-1:IV3-1       1.30243    1.31413   0.991 0.325620    
+## IV21:IV3-1       -0.80996    1.31413  -0.616 0.539997    
+## IV23:IV3-1       -0.46193    1.31413  -0.352 0.726438    
+## IV2-1:IV30        1.45008    1.31413   1.103 0.274237    
+## IV21:IV30        -1.72755    1.31413  -1.315 0.193650    
+## IV23:IV30         1.12272    1.31413   0.854 0.396316    
+## IV2-1:IV31       -0.43237    1.31413  -0.329 0.743290    
+## IV21:IV31        -0.52972    1.31413  -0.403 0.688314    
+## IV23:IV31        -0.40268    1.31413  -0.306 0.760345    
+## IV2-1:IV32        1.83402    1.31413   1.396 0.167975    
+## IV21:IV32        -0.45365    1.31413  -0.345 0.731145    
+## IV23:IV32         0.15269    1.31413   0.116 0.907891    
+## IV10:IV2-1:IV3-1 -2.25221    1.85847  -1.212 0.230315    
+## IV11:IV2-1:IV3-1 -1.30386    1.85847  -0.702 0.485655    
+## IV10:IV21:IV3-1  -0.94391    1.85847  -0.508 0.613387    
+## IV11:IV21:IV3-1   1.63604    1.85847   0.880 0.382199    
+## IV10:IV23:IV3-1  -1.62986    1.85847  -0.877 0.383990    
+## IV11:IV23:IV3-1  -1.96050    1.85847  -1.055 0.295701    
+## IV10:IV2-1:IV30  -1.20641    1.85847  -0.649 0.518725    
+## IV11:IV2-1:IV30  -1.52705    1.85847  -0.822 0.414518    
+## IV10:IV21:IV30    0.78631    1.85847   0.423 0.673739    
+## IV11:IV21:IV30    1.34731    1.85847   0.725 0.471297    
+## IV10:IV23:IV30   -0.83140    1.85847  -0.447 0.656228    
+## IV11:IV23:IV30   -3.86763    1.85847  -2.081 0.041702 *  
+## IV10:IV2-1:IV31  -1.23386    1.85847  -0.664 0.509290    
+## IV11:IV2-1:IV31   0.59493    1.85847   0.320 0.749992    
+## IV10:IV21:IV31   -1.36971    1.85847  -0.737 0.463989    
+## IV11:IV21:IV31    0.09510    1.85847   0.051 0.959360    
+## IV10:IV23:IV31   -0.65619    1.85847  -0.353 0.725264    
+## IV11:IV23:IV31   -0.16497    1.85847  -0.089 0.929561    
+## IV10:IV2-1:IV32  -2.43409    1.85847  -1.310 0.195280    
+## IV11:IV2-1:IV32  -3.01053    1.85847  -1.620 0.110499    
+## IV10:IV21:IV32   -0.98478    1.85847  -0.530 0.598145    
+## IV11:IV21:IV32    1.23285    1.85847   0.663 0.509634    
+## IV10:IV23:IV32   -0.49529    1.85847  -0.267 0.790763    
+## IV11:IV23:IV32   -0.45313    1.85847  -0.244 0.808202    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9292 on 60 degrees of freedom
+## Multiple R-squared:  0.9726, Adjusted R-squared:  0.9457 
+## F-statistic: 36.11 on 59 and 60 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The “aov” function is not the only function to generate an ANOVA table. The “aov” function is a subset of an “lm” function. As seen in the above example the “lm” function gives more comprehensive breakdown of the the 3 way anova simulation.</p>
 </div>
+<div id="graphing-the-means-of-using-ggplot2-function" class="section level2">
+<h2><span class="header-section-number">10.5</span> Graphing the means of using ggplot2 function</h2>
+<p>ggplot2 function is a very usefull function as it enabbles one to visualize your data. The examples below will illustrate how to graph the means of the independent variables.</p>
+<p>The first step in graphing the means is to first isolate the column under the title “mean”. To do we have to use the “describe” function, which summarizes basic statistics. By using square brackets [,] we can isolate the exact column in our data frame. In the example below we are interested in means which fall under the 3rd column. by using [,3] we are able to isolate the 3rd column</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">describe</span>(data.df)[,<span class="dv">3</span>]</code></pre>
+<pre><code>##  
+## 
+##  NA  Variables      13  Observations
+## ---------------------------------------------------------------------------</code></pre>
+<pre><code>## Error: $ operator is invalid for atomic vectors</code></pre>
+<p>The example above illustrates the generated means. The next step is to insert the means into a new variable, in the example below that variable is “means_variable”</p>
+<pre class="sourceCode r"><code class="sourceCode r">means_variable &lt;-<span class="st"> </span><span class="kw">describe</span>(data.df)[,<span class="dv">3</span>]</code></pre>
+<p>The example above created our new variable with the independent variable means as well as dependent variable mean, and is stored in the ’Global Environment</p>
+<p>In the next step we are ready to graph the means using the ggplot2 function. The first step is to install the ggplot2 package. This can be accomplished by either installing the ggplot2 in the “Packages” tab on your right or by using install.packages(“ggplot2”) function. Installing the ggplot2 can also be done by using the function install.packages(“tidyverse”), both functions will install the package for you.</p>
+<p>As seen in the example below your line of code should always start with library(ggplot2)</p>
+<p>The next step is to encode your vactor as a factor,in the example below, it is c(“IV1”,“IV2”,“IV3”,“DV”), followed by putting this factor into a new function, in the example below called “variables”.</p>
+<p>Next, a new variable “Means” has to be created. This function will hold the means that were isolated earlier in the data frame and put in the function “means_variable”</p>
+<p>Finally the variable plot_df is created in order to hold your data frame with IV’s and DV: “data.frame”</p>
+<p>Now we are ready to plot the basic bar graph by using ggplot function, used to declare your input data frame which includes a set of plot common aesthetics to be graphed. The hight of the bars, position and color of your bars and outline of the bars can be modified to your specifiations.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+variables &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;IV1&quot;</span>,<span class="st">&quot;IV2&quot;</span>,<span class="st">&quot;IV3&quot;</span>,<span class="st">&quot;DV&quot;</span>))) 
+Means &lt;-<span class="st"> </span>means_variable
+
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(variables,
+                  
+                      Means)</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE, stringsAsFactors = stringsAsFactors): cannot coerce class &#39;&quot;describe&quot;&#39; to a data.frame</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># basic bar graph</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>variables,<span class="dt">y=</span>Means, 
+                   ))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, 
+           <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>,
+           <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</code></pre>
+<pre><code>## Error in ggplot(plot_df, aes(x = variables, y = Means, )): object &#39;plot_df&#39; not found</code></pre>
+<p>THe above example shows a basic bar graph of the IV’s and DV of the simulated ANOVA</p>
+<div id="another-way-to-graph-the-means-is-to-pull-the-actual-numerical-means-from-the-means_variable" class="section level3">
+<h3><span class="header-section-number">10.5.1</span> Another way to graph the means is to pull the actual numerical means from the “means_variable”</h3>
+<p>In the example below the numerical mean values are manually inserted into the “Means” variable</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+variables &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;IV1&quot;</span>,<span class="st">&quot;IV2&quot;</span>,<span class="st">&quot;IV3&quot;</span>,<span class="st">&quot;DV&quot;</span>))) 
+Means &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="fl">2.5</span>, <span class="dv">3</span>, <span class="fl">-0.107</span>)
+
+plot_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(variables,
+                  
+                      Means)
+
+<span class="co"># basic bar graph</span>
+
+<span class="kw">ggplot</span>(plot_df, <span class="kw">aes</span>(<span class="dt">x=</span>variables,<span class="dt">y=</span>Means, <span class="co"># aestetics definition has gotten </span>
+                   <span class="co"># color=factor_two))+  # color here means the border collor</span>
+                   ))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, 
+           <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>,
+           <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</code></pre>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+</div>
+</div>
+<div id="summary-1" class="section level2">
+<h2><span class="header-section-number">10.6</span> Summary</h2>
+<p>sim.anova is part of an all encompasing package called “psych”. It is a very useful function in psychological research, used for simulating a 3 way ANOVA with an arbitrary amounts of sample sizes, effect sizes as well as levels in each independent variable. In addition this function, the simulated data can be used to create an ANOVA table using an “aov” or “lm” function. Furthermore, by using the ggplot2 function the statistical data such as the means of the variables can be depicted graphically.</p>
 </div>
 <div id="citations" class="section level2">
-<h2><span class="header-section-number">10.4</span> Citations</h2>
-<p>J. Cohen (1982) Set correlation as a general multivariate data-analytic method. Multivariate Behavioral Research, 17(3):301-341.</p>
-<p>J. Cohen, P. Cohen, S.G. West, and L.S. Aiken. (2003) Applied multiple regression/correlation analysis for the behavioral sciences. L. Erlbaum Associates, Mahwah, N.J., 3rd ed edition.</p>
-<p>H. Hotelling. (1936) Relations between two sets of variates. Biometrika 28(3/4):321-377. E.Cramer and W. A. Nicewander (1979) Some symmetric, invariant measures of multivariate association. Psychometrika, 44:43-54.</p>
-<p>V. D. R. Guide Jr. and M. Ketokivim (2015) Notes from the Editors: Redefining some methodological criteria for the journal. Journal of Operations Management. 37. v-viii</p>
+<h2><span class="header-section-number">10.7</span> Citations</h2>
+<p>Revelle, W. (n.d.). Psych. Retrieved June 24, 2019, from <a href="https://www.rdocumentation.org/packages/psych/versions/1.8.12/topics/sim.anova" class="uri">https://www.rdocumentation.org/packages/psych/versions/1.8.12/topics/sim.anova</a></p>
+<p>Wickham H (2016). ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York. ISBN 978-3-319-24277-4, <a href="http://ggplot2.org" class="uri">http://ggplot2.org</a>.</p>
 
 </div>
 </div>
@@ -348,7 +482,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/10-Degtyarev_Z.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/10-Degtyarev.Rmd",
 "text": "Edit"
 },
 "history": {
