@@ -28,9 +28,15 @@ library(ggplot2)
 knitr::include_graphics("OER.png")
 ```
 
-Crump, Matthew J. C. (2018). Open tools for writing open interactive textbooks (and more). 
+**Citation**
 
-This is a tutorial and set of working examples for creating web-based textbooks using a collection of open-source tools.
+Crump, M. J. C. (Ed.). (2019). PSYC 7709: Using R for Reproducible Research. CC BY-SA 4.0.
+
+**License CC BY-SA 4.0 license**
+
+The book is released under a creative commons [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license. This means that this book can be reused, remixed, retained, revised and redistributed (including commercially) as long as appropriate credit is given to the authors. If you remix, or modify the original version of this open textbook, you must redistribute all versions of this open textbook under the same license - CC BY-SA 4.0.
+
+
 
 **License CC BY-SA 4.0 license**
 
