@@ -88,9 +88,9 @@ d. Throughout this course you will likely have many questions about how to solve
 Due date: M Feb 11th
 
 a. Continue adding to your "R Basics" page to document progress in solving [programming challenges](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). Upload link to website showing progress. Students to should attempt all of the simple programming challenges, and begin working on the harder problems. As you complete each problem it is a good idea to try and be creative by solving the problem in different ways. So, it is ok to have multiple solutions for each problem.
-b. **New**: The new assignment for this week is to learn about existing functions in R, these are called R intrinsics. I have created an assignment worksheet with instructions, [https://crumplab.github.io/psyc7709/Presentations/RInstrinsics.html](https://crumplab.github.io/psyc7709/Presentations/RInstrinsics.html). The assignment contains a list of existing functions. Your task is to create a page on your website. Then, copy the list of functions from the assignment. For each function, you will write a brief description (only needs to be a sentence) of what it does, and then you will write a code chunk demonstrating that you can use the function. This will help you become familiar with existing functions that you can use. If you get stuck and are unable to figure out what a function does, post your question on the github issues tab for this course [https://github.com/CrumpLab/psyc7709/issues](https://github.com/CrumpLab/psyc7709/issues).
+b. **New**: The new assignment for this week is to learn about existing functions in R, these are called R intrinsics. I have created an assignment worksheet with instructions, [https://crumplab.github.io/psyc7709_2019/Presentations/RInstrinsics.html](https://crumplab.github.io/psyc7709_2019/Presentations/RInstrinsics.html). The assignment contains a list of existing functions. Your task is to create a page on your website. Then, copy the list of functions from the assignment. For each function, you will write a brief description (only needs to be a sentence) of what it does, and then you will write a code chunk demonstrating that you can use the function. This will help you become familiar with existing functions that you can use. If you get stuck and are unable to figure out what a function does, post your question on the github issues tab for this course [https://github.com/CrumpLab/psyc7709/issues](https://github.com/CrumpLab/psyc7709/issues).
 
-tips: I added a video showing how to [add a new page to your R markdown website](https://crumplab.github.io/psyc7709/Videos.html#add_a_page_to_website)
+tips: I added a video showing how to [add a new page to your R markdown website](https://crumplab.github.io/psyc7709_2019/Videos.html#add_a_page_to_website)
 
 
 ---
@@ -115,13 +115,13 @@ Due date: M Feb 25th
 
 a. Last week to document progress in solving [programming challenges](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). Upload link to website showing progress. Students should attempt and solve as many of the harder problems as they can.
 
-b. Create and share an R package containing custom functions on github. Follow the instructions in the [R package assignment](https://crumplab.github.io/psyc7709/Presentations/RPackages.html) that we will discuss in class. Upload the link to your new github repository containing your R package to blackboard.
+b. Create and share an R package containing custom functions on github. Follow the instructions in the [R package assignment](https://crumplab.github.io/psyc7709_2019/Presentations/RPackages.html) that we will discuss in class. Upload the link to your new github repository containing your R package to blackboard.
 
-tips: I added a video showing how to [create a new R package and publish it to github.com](https://crumplab.github.io/psyc7709/Videos.html#publish_r_package_to_github)
+tips: I added a video showing how to [create a new R package and publish it to github.com](https://crumplab.github.io/psyc7709_2019/Videos.html#publish_r_package_to_github)
 
-c. **NEW** this an addition to your assignment not discussed in class. The assignment instructions are in the [github assignment](https://crumplab.github.io/psyc7709/Presentations/Github.html) document. This assignment gives you more practice using github features. You will be forking a repo, adding to the code, then making a pull-request to have your new changes be incorporated into the master repository. Also, you will be able to see other students solutions to two of the harder programming problems.
+c. **NEW** this an addition to your assignment not discussed in class. The assignment instructions are in the [github assignment](https://crumplab.github.io/psyc7709_2019/Presentations/Github.html) document. This assignment gives you more practice using github features. You will be forking a repo, adding to the code, then making a pull-request to have your new changes be incorporated into the master repository. Also, you will be able to see other students solutions to two of the harder programming problems.
 
-tips: I added a video showing how to [fork and make a pull request](https://crumplab.github.io/psyc7709/Videos.html#fork_a_repo_and_make_a_pull_request)
+tips: I added a video showing how to [fork and make a pull request](https://crumplab.github.io/psyc7709_2019/Videos.html#fork_a_repo_and_make_a_pull_request)
 
 ---
 
@@ -140,7 +140,7 @@ tips: I added a video showing how to [fork and make a pull request](https://crum
 
 #### Assignment 4 (Data-Vis)
 
-Your assignment is to practice making graphs in ggplot2. [Click this link to see the assignment instructions](https://crumplab.github.io/psyc7709/Presentations/DataVis.html). You will be making a new R markdown page documenting your code for making graphs in the assignment. Load this page onto your website, then submit the link to the page on blackboard.
+Your assignment is to practice making graphs in ggplot2. [Click this link to see the assignment instructions](https://crumplab.github.io/psyc7709_2019/Presentations/DataVis.html). You will be making a new R markdown page documenting your code for making graphs in the assignment. Load this page onto your website, then submit the link to the page on blackboard.
 
 Due date: M Mar 4th
 
@@ -166,10 +166,10 @@ We had a snow day for this class. Here is a short video tutorial to help you get
 
 #### Assignment 5 (Data-Wrangling)
 
-1. [Class notes on Data-wrangling](https://crumplab.github.io/psyc7709/Presentations/DataWrangling.html)
-2. [Example R Markdown analysis report](https://crumplab.github.io/psyc7709/Presentations/DataWrangleExampleStroop.html)
-3. [Your Rmarkdown Assignment](https://crumplab.github.io/psyc7709/Presentations/DataWrangleFlanker_student.Rmd) This links to the .rmd file, that you can use as a template to complete the assignment. Using this template file, create a new page on your website, and submit the link
-4. [Answer sheet for assignment](https://crumplab.github.io/psyc7709/Presentations/DataWrangleFlanker.html) You can use this to check your work. If you don't get the same numbers, then one of us did something wrong.
+1. [Class notes on Data-wrangling](https://crumplab.github.io/psyc7709_2019/Presentations/DataWrangling.html)
+2. [Example R Markdown analysis report](https://crumplab.github.io/psyc7709_2019/Presentations/DataWrangleExampleStroop.html)
+3. [Your Rmarkdown Assignment](https://crumplab.github.io/psyc7709_2019/Presentations/DataWrangleFlanker_student.Rmd) This links to the .rmd file, that you can use as a template to complete the assignment. Using this template file, create a new page on your website, and submit the link
+4. [Answer sheet for assignment](https://crumplab.github.io/psyc7709_2019/Presentations/DataWrangleFlanker.html) You can use this to check your work. If you don't get the same numbers, then one of us did something wrong.
 
 Due date: M Mar 18th
 
@@ -185,14 +185,14 @@ Due date: M Mar 18th
 
 #### Readings and Resources
 
-1. [Class notes on Statistics](https://crumplab.github.io/psyc7709/Presentations/Statistics.html)
+1. [Class notes on Statistics](https://crumplab.github.io/psyc7709_2019/Presentations/Statistics.html)
 2. [Matthew Crump's, Programming for Psychologists, chapter 5](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html)
 
 #### Assignment 6 (Stats)
 
-- [Statistics Assignment](https://crumplab.github.io/psyc7709/Presentations/StatisticsAssignment.html), due M Mar 25th
+- [Statistics Assignment](https://crumplab.github.io/psyc7709_2019/Presentations/StatisticsAssignment.html), due M Mar 25th
   - This assignment asks you to simulate the null hypothesis in various ways using R.
-- The [midterm project](https://crumplab.github.io/psyc7709/MidtermAssignment.html) begins this week (due aprill 8th)
+- The [midterm project](https://crumplab.github.io/psyc7709_2019/MidtermAssignment.html) begins this week (due aprill 8th)
 
 ---
 
@@ -205,12 +205,12 @@ Due date: M Mar 18th
 
 #### Readings and Resources
 
-1. [Installing papaja](https://crumplab.github.io/psyc7709/Presentations/papaja.html)
+1. [Installing papaja](https://crumplab.github.io/psyc7709_2019/Presentations/papaja.html)
 2. [Frederick Aust & Marius Barth's papaja package: Reproducible APA manuscripts with R Markdown](https://crsh.github.io/papaja_man/)
 
 #### Midterm Assignment (due M April 8th)
 
-[midterm project](https://crumplab.github.io/psyc7709/MidtermAssignment.html)
+[midterm project](https://crumplab.github.io/psyc7709_2019/MidtermAssignment.html)
 
 - part 1: Reproducible Report
 - part 2: Convert to APA-style report using papaja
@@ -225,12 +225,12 @@ Due date: M Mar 18th
 
 #### Readings and Resources
 
-1. [Class notes on simulation](https://crumplab.github.io/psyc7709/Presentations/Simulation.html)
+1. [Class notes on simulation](https://crumplab.github.io/psyc7709_2019/Presentations/Simulation.html)
 2. [Matthew Crump's, Programming for Psychologists, chapter 5](https://crumplab.github.io/programmingforpsych/simulating-and-analyzing-data-in-r.html)
 
 #### Midterm Assignment (due M April 8th)
 
-[midterm project](https://crumplab.github.io/psyc7709/MidtermAssignment.html)
+[midterm project](https://crumplab.github.io/psyc7709_2019/MidtermAssignment.html)
 
 - part 3: Simulation based power anlaysis
 
@@ -244,7 +244,7 @@ Due date: M Mar 18th
 
 #### Readings and Resources
 
-1. [Class Notes on Shiny](https://crumplab.github.io/psyc7709/Presentations/Shiny_tutorial.html)
+1. [Class Notes on Shiny](https://crumplab.github.io/psyc7709_2019/Presentations/Shiny_tutorial.html)
 2. [R shiny tutorials](https://shiny.rstudio.com/tutorial/#written-tutorials)
 
 #### Assignment 7 (Shiny)
@@ -265,7 +265,7 @@ Due date: M Apr 15th
 
 #### Readings and Resources
 
-1. [Class notes on optimization](https://crumplab.github.io/psyc7709/Presentations/Optimization.html)
+1. [Class notes on optimization](https://crumplab.github.io/psyc7709_2019/Presentations/Optimization.html)
 2. [Hadley Wickham's, Advanced R, profiling chapter](http://adv-r.had.co.nz/Profiling.html)
 
 
@@ -303,7 +303,7 @@ Paper due date: M May 20th
 
 1. [R markdown slide presentations tutorial](https://rmarkdown.rstudio.com/lesson-11.html)
 2. [Yihui Xie, J. J. Allaire, & Garrett Grolemund's "R Markdown: The Definitive guide", Chapter 7](https://bookdown.org/yihui/rmarkdown/xaringan.html)
-3. [example presentation](https://crumplab.github.io/psyc7709/FinalPresentation/RPackagePresentation.html#1)
+3. [example presentation](https://crumplab.github.io/psyc7709_2019/FinalPresentation/RPackagePresentation.html#1)
 
 #### Final Project
 

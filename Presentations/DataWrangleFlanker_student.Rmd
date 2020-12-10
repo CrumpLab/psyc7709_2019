@@ -27,7 +27,7 @@ The data for this assignment come from a flanker task where participants respond
 
 I will help you with some sample code that compiles all of the text files in a single long format data frame.
 
-The data is contained in this .zip file: [FlankerData.zip](https://crumplab.github.io/psyc7709/Presentations/FlankerData.zip)
+The data is contained in this .zip file: [FlankerData.zip](https://crumplab.github.io/psyc7709_2019/Presentations/FlankerData.zip)
 
 The code chunk below assumes that you have placed the folder FlankerData into your R project folder. 
 
