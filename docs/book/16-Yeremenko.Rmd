@@ -1,0 +1,92 @@
+# Rhandsontable Package
+
+**Author:** Maxim Yeremenko
+
+
+
+`rhandsontable` is a package that creates a grid for your data and displays in a table.
+
+Install rhandsontable and activate it.
+
+```{r}
+library(rhandsontable)
+```
+
+Let's create an example.We need to create a dataframe and then rhandsontable will transform a dataframe into table.
+
+## Basic table
+
+```{r}
+DF = data.frame(Participant = 1:10,
+                Results = rnorm(10))
+
+rhandsontable(DF)
+```
+
+## More columns
+
+WE can make it larger by eding more columns of different types. It is possible to have numeric, logical, or character data typy. Logical values will appear as checkboxes. For example, we want to know if our participants have cats, and if yes, when did they get it. Making the header of the column TRUE will make a checkbox in every cell of that column, and  use the code from example to make dropdown menue with to select the date. 
+
+
+```{r}
+DF = data.frame(Participant = 1:10,
+                Results1 = rnorm(10),
+                Cats= TRUE,
+                Date = seq(from = Sys.Date(), by = "days", length.out = 10))
+
+rhandsontable(DF)
+```
+
+## Read only tables
+
+We can make the table read only, without ability to make changes in it. It is also possible to make specific rows and columns, and even cells read only, leaving the rest editable. Using readOnly=TRUE will make the whole table read only. Using hot_col,and hot_rows, hot_cell commands, we can specify which cells and rows we want to be read only.
+
+```{r}
+DF = data.frame(Participant = 1:10,
+                Results = rnorm(10),
+                Cats= TRUE,
+                Date = seq(from = Sys.Date(), by = "days", length.out = 10))
+
+rhandsontable(DF,readOnly=TRUE)
+```
+
+```{r}
+DF = data.frame(Participant = 1:10,
+                Results = rnorm(10),
+                Cats= TRUE,
+                Date = seq(from = Sys.Date(), by = "days", length.out = 10),
+                stringsAsFactors = FALSE)
+
+rhandsontable(DF) %>%
+              hot_col("Participant", readOnly = TRUE)%>%
+              hot_row(c(1), readOnly =TRUE)%>%
+              hot_cell(7, "Date", readOnly =TRUE)
+```
+
+## Resizing
+
+We can also resize the table if we need to. We can resize the whole table, rows, or columns. For table we simply need to adjust width and height of the DF; use hot_cols and hot_rows with colWidths and rowHeights ,respectively, to change dimensions of rows and columns.
+
+```{r}
+DF = data.frame(Participant = 1:10,
+                Results = rnorm(10),
+                Cats= TRUE,
+                Date = seq(from = Sys.Date(), by = "days", length.out = 10),
+                stringsAsFactors = FALSE)
+
+rhandsontable(DF, width = 475, height = 475) %>%
+              hot_col("Participant", readOnly = TRUE)%>%
+              hot_row(c(1), readOnly =TRUE)%>%
+              hot_cell(7, "Date", readOnly =TRUE)%>%
+              hot_cols(colWidths = 100)%>%
+              hot_rows(rowHeights=50)
+```
+
+
+## References
+
+https://handsontable.com/docs/7.0.3/tutorial-introduction.html
+
+https://cran.r-project.org/web/packages/rhandsontable/rhandsontable.pdf
+
+

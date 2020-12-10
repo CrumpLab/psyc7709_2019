@@ -27,7 +27,7 @@ This repository contains two .rmd files. One for the fizzbuzz problem, and one f
 
 I created a video tutorial you can follow that outlines all the steps.
 
-[Forking and making a pull request](https://crumplab.github.io/psyc7709/Videos.html#fork_a_repo_and_make_a_pull_request)
+[Forking and making a pull request](https://crumplab.github.io/psyc7709_2019/Videos.html#fork_a_repo_and_make_a_pull_request)
 
 ### Outline of steps
 

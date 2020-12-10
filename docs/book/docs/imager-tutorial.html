@@ -33,7 +33,7 @@
   
 <link rel="prev" href="psych-package.html">
 <link rel="next" href="animal-tracking-with-trajr.html">
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.2.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -55,6 +55,14 @@
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<link href="libs/handsontable-6.1.1/handsontable.full.min.css" rel="stylesheet" />
+<script src="libs/handsontable-6.1.1/handsontable.full.min.js"></script>
+<script src="libs/handsontable-6.1.1/all.min.js"></script>
+<script src="libs/numbro.languages-2.0.6/languages.min.js"></script>
+<script src="libs/chroma-1.3.3/chroma.min.js"></script>
+<script src="libs/sparkline-2.1.2/jquery.sparkline.min.js"></script>
+<link href="libs/rhandsontable-0.3.7/rhandsontable.css" rel="stylesheet" />
+<script src="libs/rhandsontable-binding-0.3.7/rhandsontable.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79429674-2"></script>
 <script>
@@ -167,7 +175,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13" data-path="knitr.html"><a href="knitr.html"><i class="fa fa-check"></i><b>13</b> Knitr</a></li>
 <li class="chapter" data-level="14" data-path="creating-your-own-html-widget.html"><a href="creating-your-own-html-widget.html"><i class="fa fa-check"></i><b>14</b> Creating your own html widget</a></li>
 <li class="chapter" data-level="15" data-path="network-analysis-tutorial.html"><a href="network-analysis-tutorial.html"><i class="fa fa-check"></i><b>15</b> Network Analysis tutorial</a></li>
-<li class="chapter" data-level="" data-path="references-4.html"><a href="references-4.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="16" data-path="rhandsontable-package.html"><a href="rhandsontable-package.html"><i class="fa fa-check"></i><b>16</b> Rhandsontable Package</a></li>
+<li class="chapter" data-level="" data-path="references-5.html"><a href="references-5.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -206,7 +215,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">11.1.2</span> Pre-loaded images</h3>
 <p>Imager has a pre-loaded image called “boats”. You can use this image to investigate a number of interesting features of imager. Firstly, in order to view the image as an image you must use the “plot” call.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(boats)</code></pre>
-<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-102-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-112-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The image is only displayed as an picture using the plot call because on the back end of R Studio, the image is saved as an array of numbers, called an imager-array. You can get some basic information about the image by simply calling the image. However, as you see this does not result in a picture being displayed.</p>
 <pre class="sourceCode r"><code class="sourceCode r">boats</code></pre>
 <pre><code>## Image. Width: 256 pix Height: 384 pix Depth: 1 Colour channels: 3</code></pre>
@@ -222,26 +231,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">layout</span>(<span class="kw">t</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>))
 <span class="kw">plot</span>(boats,<span class="dt">rescale=</span><span class="ot">FALSE</span>)
 <span class="kw">plot</span>(boats<span class="op">/</span><span class="dv">2</span>,<span class="dt">rescale=</span><span class="ot">FALSE</span>)</code></pre>
-<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-105-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-115-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="changing-the-color-scheme-of-an-image" class="section level3">
 <h3><span class="header-section-number">11.1.4</span> Changing the color scheme of an image</h3>
 <p>Within the “plot”" call, you can also change the color scheme of the image. “rgb” defines the order of the colors and their corresponding numeric value. You are able to change this order using a function displayed below. This function, replaces red with green, and green with red and leaves blue the same. Then, included in the “plots” call, you can define a specific “colourscale”" that you have previously defined. Once again including “re-scale” will ensure that the resulting plot is not re-scaled to the original.</p>
 <pre class="sourceCode r"><code class="sourceCode r">cscale &lt;-<span class="st"> </span><span class="cf">function</span>(r,g,b) <span class="kw">rgb</span>(b,r,g)
 <span class="kw">plot</span>(boats,<span class="dt">colourscale=</span>cscale,<span class="dt">rescale=</span><span class="ot">FALSE</span>)</code></pre>
-<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-106-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-116-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="loading-your-own-images" class="section level3">
 <h3><span class="header-section-number">11.1.5</span> Loading Your Own Images</h3>
 <p>You are also able to load and edit your own images in imager. You can do this by using the “load.image” call. You can load images directly from the web using the URL. You can also load images from your computer. Saving them in the same project and specific folder you are using will make the call much simpler. As you can see below, I saved the image “horses” as a jpeg (ending in .jpg) in the folder that I also had my .rmd file.</p>
 <pre class="sourceCode r"><code class="sourceCode r">horses &lt;-<span class="st"> </span><span class="kw">load.image</span>(<span class="st">&quot;horses.jpg&quot;</span>)
 <span class="kw">plot</span>(horses)</code></pre>
-<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-107-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-117-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>You can perform similar math manipulations using the image that you loaded.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">layout</span>(<span class="kw">t</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>))
 <span class="kw">plot</span>(horses,<span class="dt">rescale=</span><span class="ot">FALSE</span>)
 <span class="kw">plot</span>(horses<span class="op">/</span><span class="dv">5</span>,<span class="dt">rescale=</span><span class="ot">FALSE</span>)</code></pre>
-<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-108-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="7709_bookdown_files/figure-html/unnamed-chunk-118-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="other-things-you-can-do-in-imager" class="section level2">
