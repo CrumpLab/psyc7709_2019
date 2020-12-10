@@ -1,5 +1,5 @@
 --- 
-title: "PSYC 7709: Using R for Reproducible Research"
+title: "Using R for Reproducible Research: Student contributed tutorials"
 author: "Matthew Crump"
 date: "2018: Last compiled `r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -28,11 +28,11 @@ library(ggplot2)
 knitr::include_graphics("OER.png")
 ```
 
-These chapters were written by students in PSYC 7709: Using R for Reproducible research in Spring 2019. Each chapter is part of a final project involving writing a tutorial about an R package. 
+These chapters were written by students in PSYC 7709: Using R for Reproducible research in Spring 2019 @ Brooklyn College of CUNY, as a final project to write a tutorial about an R package. 
 
 **Citation**
 
-Crump, M. J. C. (Ed.). (2019). PSYC 7709: Using R for Reproducible Research. CC BY-SA 4.0.
+Abdelrahman, K., Contreras, A., Degtyarev, Z., Deng, J., Foster, J., Franz, A., Funderburk, T., Horger, M., Kravitz, J., Lakshin A., Manigat, M., Trois, R., Vasquez, A., Vo, A., Wilson, N., and Yeremenko, M. (2019). Using R for Reproducible Research: Student Contributed Tutorials. (M. J. C. Crump, Ed.). 
 
 **License CC BY-SA 4.0 license**
 
